@@ -10,6 +10,8 @@
 		D77958EA25B05C9700A7A44A /* CompassSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77958E025B05C9600A7A44A /* CompassSDK.framework */; };
 		D77958EF25B05C9700A7A44A /* CompassSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77958EE25B05C9700A7A44A /* CompassSDKTests.swift */; };
 		D77958F125B05C9700A7A44A /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D77958E325B05C9600A7A44A /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D779590025B064F800A7A44A /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77958FF25B064F800A7A44A /* CompassTracker.swift */; };
+		D779590425B0653500A7A44A /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779590325B0653500A7A44A /* SendTik.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		D77958E925B05C9700A7A44A /* CompassSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CompassSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D77958EE25B05C9700A7A44A /* CompassSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassSDKTests.swift; sourceTree = "<group>"; };
 		D77958F025B05C9700A7A44A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77958FF25B064F800A7A44A /* CompassTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTracker.swift; sourceTree = "<group>"; };
+		D779590325B0653500A7A44A /* SendTik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTik.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				D77958E325B05C9600A7A44A /* CompassSDK.h */,
 				D77958E425B05C9600A7A44A /* Info.plist */,
+				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
+				D779590325B0653500A7A44A /* SendTik.swift */,
 			);
 			path = CompassSDK;
 			sourceTree = "<group>";
@@ -147,6 +153,7 @@
 				TargetAttributes = {
 					D77958DF25B05C9600A7A44A = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 					D77958E825B05C9700A7A44A = {
 						CreatedOnToolsVersion = 12.2;
@@ -194,6 +201,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D779590425B0653500A7A44A /* SendTik.swift in Sources */,
+				D779590025B064F800A7A44A /* CompassTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +350,9 @@
 		D77958F525B05C9700A7A44A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202101141204;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P4JD844FL5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -357,6 +368,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.CompassSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,7 +377,9 @@
 		D77958F625B05C9700A7A44A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202101141204;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P4JD844FL5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -389,6 +403,7 @@
 		D77958F825B05C9700A7A44A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P4JD844FL5;
 				INFOPLIST_FILE = CompassSDKTests/Info.plist;
@@ -407,6 +422,7 @@
 		D77958F925B05C9700A7A44A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P4JD844FL5;
 				INFOPLIST_FILE = CompassSDKTests/Info.plist;
