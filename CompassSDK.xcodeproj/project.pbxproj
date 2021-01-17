@@ -12,6 +12,12 @@
 		D77958F125B05C9700A7A44A /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D77958E325B05C9600A7A44A /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D779590025B064F800A7A44A /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77958FF25B064F800A7A44A /* CompassTracker.swift */; };
 		D779590425B0653500A7A44A /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779590325B0653500A7A44A /* SendTik.swift */; };
+		D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559425B49BB200CC2BCE /* Bundle.swift */; };
+		D7D4559925B49F9400CC2BCE /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559825B49F9400CC2BCE /* CompassStorage.swift */; };
+		D7D4559D25B4A10900CC2BCE /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559C25B4A10900CC2BCE /* TikOperation.swift */; };
+		D7D455A125B4A28C00CC2BCE /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */; };
+		D7D455CB25B4A6FF00CC2BCE /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */; };
+		D7D455CF25B4A72600CC2BCE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455CE25B4A72600CC2BCE /* Codable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +39,12 @@
 		D77958F025B05C9700A7A44A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D77958FF25B064F800A7A44A /* CompassTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTracker.swift; sourceTree = "<group>"; };
 		D779590325B0653500A7A44A /* SendTik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTik.swift; sourceTree = "<group>"; };
+		D7D4559425B49BB200CC2BCE /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		D7D4559825B49F9400CC2BCE /* CompassStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassStorage.swift; sourceTree = "<group>"; };
+		D7D4559C25B4A10900CC2BCE /* TikOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikOperation.swift; sourceTree = "<group>"; };
+		D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
+		D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListStorage.swift; sourceTree = "<group>"; };
+		D7D455CE25B4A72600CC2BCE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +91,12 @@
 				D77958E425B05C9600A7A44A /* Info.plist */,
 				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
 				D779590325B0653500A7A44A /* SendTik.swift */,
+				D7D4559425B49BB200CC2BCE /* Bundle.swift */,
+				D7D4559825B49F9400CC2BCE /* CompassStorage.swift */,
+				D7D4559C25B4A10900CC2BCE /* TikOperation.swift */,
+				D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */,
+				D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */,
+				D7D455CE25B4A72600CC2BCE /* Codable.swift */,
 			);
 			path = CompassSDK;
 			sourceTree = "<group>";
@@ -201,7 +219,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D4559D25B4A10900CC2BCE /* TikOperation.swift in Sources */,
+				D7D455A125B4A28C00CC2BCE /* TrackInfo.swift in Sources */,
+				D7D455CF25B4A72600CC2BCE /* Codable.swift in Sources */,
+				D7D455CB25B4A6FF00CC2BCE /* PListStorage.swift in Sources */,
 				D779590425B0653500A7A44A /* SendTik.swift in Sources */,
+				D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */,
+				D7D4559925B49F9400CC2BCE /* CompassStorage.swift in Sources */,
 				D779590025B064F800A7A44A /* CompassTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,42 +7,38 @@
 
 import Foundation
 
-protocol CompassTracking: class {
-    func startPageView(pageName: String)
+public struct CompassUser: Codable {
+    let userId: String
+    let userType: String
+    
+    public init(userId: String, userType: String) {
+        self.userId = userId
+        self.userType = userType
+    }
 }
 
-class TikOperation: Operation {
-    private let params: [String: CustomStringConvertible]
-    private let dispatchDate: Date
-    private let tikUseCase: SendTikCuseCase
+public struct CompassConversionEvent: Codable {
+    let name: String
+    let params: [String: String]?
     
-    init(params: [String: CustomStringConvertible], dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik()) {
+    public init(name: String, params: [String: String]? = nil) {
+        self.name = name
         self.params = params
-        self.dispatchDate = dispatchDate
-        self.tikUseCase = tikUseCase
-    }
-    
-    private var timer: Timer?
-    private var task: URLSessionDataTask?
-    
-    override func main() {
-        guard !isCancelled else {return}
-        var finalParams = params.mapValues({String(describing: $0)})
-        finalParams["date"] = String(describing: dispatchDate)
-        timer = Timer.init(fire: dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
-            self?.task = self?.tikUseCase.tik(params: finalParams)
-        })
-        timer?.fire()
-    }
-    
-    override func cancel() {
-        timer?.invalidate()
-        task?.cancel()
     }
 }
 
-class CompassTracker: CompassTracking {
-    private let sendTik: SendTikCuseCase
+public protocol CompassTracking: class {
+    func startPageView(pageName: String)
+    func stopTracking()
+    func identify(user: CompassUser)
+    func track(conversion: CompassConversionEvent)
+}
+
+public class CompassTracker {
+    public static let shared = CompassTracker()
+    
+    private let bundle: Bundle
+    private let storage: CompassStorage
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -52,37 +48,80 @@ class CompassTracker: CompassTracking {
         return queue
     }()
     
-    private lazy var queue = DispatchQueue(label: "com.compass.sdk.tik.queue", qos: .utility)
+    private lazy var accountId: String? = {
+        bundle.compassAccountId
+    }()
     
-    init(sendTik: SendTikCuseCase = SendTik()) {
-        self.sendTik = sendTik
+    private lazy var endpoint: String? = {
+        bundle.compassEndpoint
+    }()
+    
+    private init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
+        self.bundle = bundle
+        self.storage = storage
+        trackInfo.accountId = accountId
     }
     
-    private var deadline: Double = 0
-    private var tik = 0
-    
-    func startPageView(pageName: String) {
-        restart()
-        doTik(pageName: pageName)
-    }
-    
-    private func doTik(pageName: String) {
-        let params: [String: CustomStringConvertible] = ["tik": tik, "url": pageName]
-        let dispatchDate = Date(timeIntervalSinceNow: deadline)
-        operationQueue.addOperation(TikOperation(params: params, dispatchDate: dispatchDate))
-        queue.asyncAfter(deadline: .now() + deadline) {
-            self.doTik(pageName: pageName)
+    private var deadline: Double {
+        switch trackInfo.tik {
+        case 0..<2: return 5
+        case 2: return 10
+        case 3..<20: return 15
+        default: return 20
         }
-        tik = tik + 1
-        deadline = Double(tik) * 2.0
+    }
+    
+    private var finishObserver: NSKeyValueObservation?
+    
+    private var trackInfo = TrackInfo()
+}
+
+extension CompassTracker: CompassTracking {
+    public func identify(user: CompassUser) {
+        self.trackInfo.user = user
+    }
+    
+    public func startPageView(pageName: String) {
+        trackInfo.pagesViewed += 1
+        restart(pageName: pageName)
+        doTik()
+    }
+    
+    public func stopTracking() {
+        restart(pageName: nil)
+    }
+    
+    public func track(conversion: CompassConversionEvent) {
+        trackInfo.conversions.append(conversion)
     }
 }
 
 private extension CompassTracker {
+    var hasCorrectSetUp: Bool {
+        accountId != nil && endpoint != nil
+    }
     
-    func restart() {
+    func doTik() {
+        guard trackInfo.pageUrl != nil else {return}
+        let dispatchDate = Date(timeIntervalSinceNow: deadline)
+        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate)
+        observeFinish(for: operation)
+        operationQueue.addOperation(operation)
+        trackInfo.tik = trackInfo.tik + 1
+    }
+    
+    func observeFinish(for operation: Operation) {
+        finishObserver = operation.observe(\Operation.isFinished, options: .new) { (operation, change) in
+            guard !operation.isCancelled, operation.isFinished else {return}
+            self.doTik()
+        }
+    }
+    
+    func restart(pageName: String?) {
+        trackInfo.conversions = [CompassConversionEvent]()
+        finishObserver = nil
         operationQueue.cancelAllOperations()
-        deadline = 0
-        tik = 0
+        trackInfo.tik = 0
+        trackInfo.pageUrl = pageName
     }
 }
