@@ -37,11 +37,12 @@ class TikOperation: Operation {
     override var isExecuting: Bool {runing}
     
     override func start() {
-        guard !isCancelled, let finalParams = try? JSONEncoder().encode(trackInfo) else {return}
+        guard !isCancelled else {return}
         runing = true
+        let data = trackInfo.data
         timer = Timer(fire: dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
             self?.timer?.invalidate()
-            self?.task = self?.tikUseCase.tik(data: finalParams)
+            self?.task = self?.tikUseCase.tik(data: data)
             self?.runing = false
         })
         RunLoop.current.add(timer!, forMode: .common)

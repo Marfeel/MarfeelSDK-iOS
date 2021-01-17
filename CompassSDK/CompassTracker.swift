@@ -59,7 +59,9 @@ public class CompassTracker {
     private init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
         self.bundle = bundle
         self.storage = storage
+        storage.addVisit()
         trackInfo.accountId = accountId
+        trackInfo.fisrtVisitDate = storage.firstVisit
     }
     
     private var deadline: Double {
@@ -83,6 +85,7 @@ extension CompassTracker: CompassTracking {
     
     public func startPageView(pageName: String) {
         trackInfo.pagesViewed += 1
+        trackInfo.startPageDate = Date()
         restart(pageName: pageName)
         doTik()
     }
@@ -104,6 +107,7 @@ private extension CompassTracker {
     func doTik() {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)
+        trackInfo.currentDate = dispatchDate
         let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate)
         observeFinish(for: operation)
         operationQueue.addOperation(operation)
