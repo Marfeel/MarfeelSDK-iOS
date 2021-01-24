@@ -23,7 +23,8 @@ struct TrackInfo: Codable {
             pageId = "p",
             compassVersion = "v",
             sessionId = "s",
-            landingPage = "r"
+            landingPage = "r",
+            scrollPercent = "sc"
     }
     
     var pageUrl: String? {
@@ -74,6 +75,8 @@ struct TrackInfo: Codable {
     }
     
     var compassVersion: String?
+    
+    var scrollPercent: Float?
     
     private var pagesViewed = 0 {
         didSet {

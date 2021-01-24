@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct CompassUser: Codable {
     let userId: String
@@ -29,6 +30,7 @@ public struct CompassConversionEvent: Codable {
 
 public protocol CompassTracking: class {
     func startPageView(pageName: String)
+    func startPageView(pageName: String, scrollView: UIScrollView?)
     func stopTracking()
     func identify(user: CompassUser)
     func track(conversion: CompassConversionEvent)
@@ -82,11 +84,36 @@ public class CompassTracker {
     private var finishObserver: NSKeyValueObservation?
     
     private var trackInfo = TrackInfo()
+    
+    private var scrollView: UIScrollView?
+}
+
+extension CompassTracker: ScrollPercentProvider {
+    func getScrollPercent(_ completion: @escaping (Float?) -> ()) {
+        guard  let scrollView = scrollView else {
+            completion(nil)
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let offset = scrollView.contentOffset.y
+            let scrolledDistance = offset + scrollView.contentInset.top
+            let percent = max(0, Float(min(1, scrolledDistance / scrollView.contentSize.height)))
+            DispatchQueue.global(qos: .utility).async {
+                completion(percent)
+            }
+        }
+    }
 }
 
 extension CompassTracker: CompassTracking {
     public func identify(user: CompassUser) {
         self.trackInfo.user = user
+    }
+    
+    public func startPageView(pageName: String, scrollView: UIScrollView?) {
+        self.scrollView = scrollView
+        startPageView(pageName: pageName)
     }
     
     public func startPageView(pageName: String) {
@@ -96,6 +123,7 @@ extension CompassTracker: CompassTracking {
     
     public func stopTracking() {
         restart(pageName: nil)
+        scrollView = nil
     }
     
     public func track(conversion: CompassConversionEvent) {
@@ -112,7 +140,7 @@ private extension CompassTracker {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)
         trackInfo.currentDate = dispatchDate
-        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate)
+        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self)
         observeFinish(for: operation)
         operationQueue.addOperation(operation)
         trackInfo.tik = trackInfo.tik + 1

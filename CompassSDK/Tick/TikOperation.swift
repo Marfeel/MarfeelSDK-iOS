@@ -7,15 +7,21 @@
 
 import Foundation
 
+protocol ScrollPercentProvider: class {
+    func getScrollPercent(_ completion: @escaping (Float?) -> ())
+}
+
 class TikOperation: Operation {
     private let trackInfo: TrackInfo
     private let dispatchDate: Date
     private let tikUseCase: SendTikCuseCase
+    private weak var scrollPercentProvider: ScrollPercentProvider?
     
-    init(trackInfo: TrackInfo, dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik()) {
+    init(trackInfo: TrackInfo, dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik(), scrollPercentProvider: ScrollPercentProvider?) {
         self.trackInfo = trackInfo
         self.dispatchDate = dispatchDate
         self.tikUseCase = tikUseCase
+        self.scrollPercentProvider = scrollPercentProvider
     }
     
     private var timer: Timer?
@@ -39,13 +45,21 @@ class TikOperation: Operation {
     override func start() {
         guard !isCancelled else {return}
         runing = true
-        let data = trackInfo.data
-        timer = Timer(fire: dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
-            self?.timer?.invalidate()
-            self?.task = self?.tikUseCase.tik(data: data)
-            self?.runing = false
+        
+        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
+            self?.getScrollPercent { (scrollPercent) in
+                var finalTrackInfo = self?.trackInfo
+                finalTrackInfo?.scrollPercent = scrollPercent
+                let data = finalTrackInfo?.data
+                if let data = data {
+                    self?.task = self?.tikUseCase.tik(data: data)
+                }
+                self?.timer?.invalidate()
+                self?.runing = false
+            }
         })
-        RunLoop.current.add(timer!, forMode: .common)
+        
+        RunLoop.current.add(self.timer!, forMode: .common)
         RunLoop.current.run()
     }
     
@@ -53,5 +67,14 @@ class TikOperation: Operation {
         timer?.invalidate()
         task?.cancel()
         runing = false
+    }
+    
+    private func getScrollPercent(_ completion: @escaping (Float?) -> ()) {
+        guard let scrollPercentProvider = scrollPercentProvider else {
+            completion(nil)
+            return
+        }
+        
+        scrollPercentProvider.getScrollPercent(completion)
     }
 }
