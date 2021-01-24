@@ -56,14 +56,18 @@ public class CompassTracker {
         bundle.compassEndpoint
     }()
     
-    private init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
+    private lazy var compassVersion: String? = {
+        bundle.compassVersion
+    }()
+    
+    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
         self.bundle = bundle
         self.storage = storage
         storage.addVisit()
         trackInfo.accountId = accountId
         trackInfo.fisrtVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
-        trackInfo.compassVersion = bundle.compassVersion
+        trackInfo.compassVersion = compassVersion
     }
     
     private var deadline: Double {
@@ -86,8 +90,6 @@ extension CompassTracker: CompassTracking {
     }
     
     public func startPageView(pageName: String) {
-        trackInfo.pagesViewed += 1
-        trackInfo.startPageDate = Date()
         restart(pageName: pageName)
         doTik()
     }
@@ -127,7 +129,6 @@ private extension CompassTracker {
         trackInfo.conversions = [CompassConversionEvent]()
         finishObserver = nil
         operationQueue.cancelAllOperations()
-        trackInfo.tik = 0
         trackInfo.pageUrl = pageName
     }
 }

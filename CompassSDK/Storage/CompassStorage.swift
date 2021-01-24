@@ -20,12 +20,14 @@ class PListCompassStorage: PListStorage {
         var user: CompassUser?
         var firstVisit: Date?
         var lastVisit: Date?
+        
+        static var empty: Model {.init(numVisits: 0, user: nil, firstVisit: nil, lastVisit: nil)}
     }
     
     let filename = "CompassPersistence"
     
     init() {
-        self.model = load()
+        self.model = load() ?? .empty
     }
     
     private var model: Model? {
@@ -34,11 +36,15 @@ class PListCompassStorage: PListStorage {
             persist(values: model)
         }
     }
+    
+    var previousVisit: Date?
 }
 
 extension PListCompassStorage: CompassStorage {
     func addVisit() {
         model?.numVisits += 1
+        previousVisit = model?.lastVisit
+        model?.lastVisit = Date()
     }
     
     var user: CompassUser? {
@@ -48,10 +54,6 @@ extension PListCompassStorage: CompassStorage {
         set {
             model?.user = newValue
         }
-    }
-    
-    var previousVisit: Date? {
-        model?.lastVisit //TODO
     }
     
     var firstVisit: Date {

@@ -42,7 +42,7 @@ class SendTik: SendTikCuseCase {
         return task
     }
     
-    private lazy var endpoint: String? = bundle.compassEndpoint
+    private lazy var endpoint: String? = bundle.compassEndpoint ?? "http://localhost:3000/"
 }
 
 private extension SendTik {

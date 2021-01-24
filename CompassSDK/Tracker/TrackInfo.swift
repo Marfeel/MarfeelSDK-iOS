@@ -22,7 +22,8 @@ struct TrackInfo: Codable {
             currentVisitTimeStamp = "t",
             pageId = "p",
             compassVersion = "v",
-            sessionId = "s"
+            sessionId = "s",
+            landingPage = "r"
     }
     
     var pageUrl: String? {
@@ -32,12 +33,15 @@ struct TrackInfo: Codable {
                 return
             }
             pageId = UUID().uuidString
+            tik = 0
+            pagesViewed += 1
+            startPageDate = Date()
         }
     }
     var accountId: String?
     var tik = 0
     var conversions = [CompassConversionEvent]()
-    var startPageDate: Date? {
+    private var startPageDate: Date? {
         didSet {
             startPageTimeStamp = startPageDate?.timeStamp
         }
@@ -71,7 +75,13 @@ struct TrackInfo: Codable {
     
     var compassVersion: String?
     
-    var pagesViewed = 0
+    private var pagesViewed = 0 {
+        didSet {
+            if pagesViewed == 1 {
+                landingPage = pageUrl
+            }
+        }
+    }
     
     private var pageId: String?
     private var userId: String?
@@ -86,6 +96,7 @@ struct TrackInfo: Codable {
     private var currentVisitTimeStamp: Int?
     private var visitDuration: Int?
     private var sessionId: String?
+    private var landingPage: String?
 }
 
 extension TrackInfo {
