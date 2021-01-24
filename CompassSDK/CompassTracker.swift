@@ -62,6 +62,8 @@ public class CompassTracker {
         storage.addVisit()
         trackInfo.accountId = accountId
         trackInfo.fisrtVisitDate = storage.firstVisit
+        trackInfo.currentVisitDate = Date()
+        trackInfo.compassVersion = bundle.compassVersion
     }
     
     private var deadline: Double {

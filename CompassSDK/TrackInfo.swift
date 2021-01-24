@@ -18,7 +18,11 @@ struct TrackInfo: Codable {
             startPageTimeStamp = "ps",
             firstVisitTimeStamp = "fv",
             currentTimeStamp = "n",
-            visitDuration = "l"
+            visitDuration = "l",
+            currentVisitTimeStamp = "t",
+            pageId = "p",
+            compassVersion = "v",
+            sessionId = "s"
     }
     
     var pageUrl: String? {
@@ -51,12 +55,22 @@ struct TrackInfo: Codable {
         }
     }
     
+    var currentVisitDate: Date? {
+        didSet {
+            currentVisitTimeStamp = currentVisitDate?.timeStamp
+            sessionId = UUID().uuidString
+        }
+    }
+    
     var user: CompassUser? {
         didSet {
             userId = user?.userId
             userType = user?.userType ?? "0"
         }
     }
+    
+    var compassVersion: String?
+    
     var pagesViewed = 0
     
     private var pageId: String?
@@ -69,11 +83,13 @@ struct TrackInfo: Codable {
             visitDuration = (currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0)
         }
     }
+    private var currentVisitTimeStamp: Int?
     private var visitDuration: Int?
+    private var sessionId: String?
 }
 
 extension TrackInfo {
     var data: Data {
-        try! self.encode()!
+        self.encode()!
     }
 }
