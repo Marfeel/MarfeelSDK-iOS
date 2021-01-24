@@ -93,6 +93,43 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D70E237725BDA70B00BA3C38 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D7D4559425B49BB200CC2BCE /* Bundle.swift */,
+				D7D455D225B4B86700CC2BCE /* Date.swift */,
+				D7D455CE25B4A72600CC2BCE /* Codable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D70E237825BDA71B00BA3C38 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D7D4559825B49F9400CC2BCE /* CompassStorage.swift */,
+				D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		D70E237D25BDA77500BA3C38 /* Tick */ = {
+			isa = PBXGroup;
+			children = (
+				D7D4559C25B4A10900CC2BCE /* TikOperation.swift */,
+				D779590325B0653500A7A44A /* SendTik.swift */,
+			);
+			path = Tick;
+			sourceTree = "<group>";
+		};
+		D70E237E25BDA78500BA3C38 /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
+				D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */,
+			);
+			path = Tracker;
+			sourceTree = "<group>";
+		};
 		D77958D625B05C9600A7A44A = {
 			isa = PBXGroup;
 			children = (
@@ -118,17 +155,12 @@
 		D77958E225B05C9600A7A44A /* CompassSDK */ = {
 			isa = PBXGroup;
 			children = (
+				D70E237E25BDA78500BA3C38 /* Tracker */,
+				D70E237D25BDA77500BA3C38 /* Tick */,
+				D70E237825BDA71B00BA3C38 /* Storage */,
+				D70E237725BDA70B00BA3C38 /* Extensions */,
 				D77958E325B05C9600A7A44A /* CompassSDK.h */,
 				D77958E425B05C9600A7A44A /* Info.plist */,
-				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
-				D779590325B0653500A7A44A /* SendTik.swift */,
-				D7D4559425B49BB200CC2BCE /* Bundle.swift */,
-				D7D4559825B49F9400CC2BCE /* CompassStorage.swift */,
-				D7D4559C25B4A10900CC2BCE /* TikOperation.swift */,
-				D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */,
-				D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */,
-				D7D455CE25B4A72600CC2BCE /* Codable.swift */,
-				D7D455D225B4B86700CC2BCE /* Date.swift */,
 			);
 			path = CompassSDK;
 			sourceTree = "<group>";
