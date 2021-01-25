@@ -24,15 +24,20 @@ struct TrackInfo: Codable {
             compassVersion = "v",
             sessionId = "s",
             landingPage = "r",
-            scrollPercent = "sc"
+            scrollPercent = "sc",
+            previosPageUrl = "pp",
+            canonical = "c",
+            siteUserId = "sui"
     }
     
     var pageUrl: String? {
         didSet {
+            canonical = pageUrl
             guard pageUrl != nil else {
                 pageId = nil
                 return
             }
+            previosPageUrl = oldValue
             pageId = UUID().uuidString
             tik = 0
             pagesViewed += 1
@@ -74,6 +79,8 @@ struct TrackInfo: Codable {
         }
     }
     
+    var siteUserId: String?
+    
     var compassVersion: String?
     
     var scrollPercent: Float?
@@ -100,6 +107,8 @@ struct TrackInfo: Codable {
     private var visitDuration: Int?
     private var sessionId: String?
     private var landingPage: String?
+    private var previosPageUrl: String?
+    private var canonical: String?
 }
 
 extension TrackInfo {

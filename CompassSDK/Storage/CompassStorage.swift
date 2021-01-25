@@ -9,7 +9,8 @@ import Foundation
 
 protocol CompassStorage {
     func addVisit()
-    var user: CompassUser? {get set}
+    var suid: String {get}
+    var userId: String? {get set}
     var previousVisit: Date? {get}
     var firstVisit: Date {get}
 }
@@ -17,11 +18,12 @@ protocol CompassStorage {
 class PListCompassStorage: PListStorage {
     struct Model: Codable {
         var numVisits: Int
-        var user: CompassUser?
+        var userId: String?
+        var suid: String?
         var firstVisit: Date?
         var lastVisit: Date?
         
-        static var empty: Model {.init(numVisits: 0, user: nil, firstVisit: nil, lastVisit: nil)}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil)}
     }
     
     let filename = "CompassPersistence"
@@ -41,19 +43,30 @@ class PListCompassStorage: PListStorage {
 }
 
 extension PListCompassStorage: CompassStorage {
+    var suid: String {
+        guard let suid = model?.suid else {
+            let suid = UUID().uuidString
+            model?.suid = suid
+            return suid
+        }
+        
+        return suid
+    }
+    
+    var userId: String? {
+        get {
+            model?.userId
+        }
+        
+        set {
+            model?.userId = newValue
+        }
+    }
+    
     func addVisit() {
         model?.numVisits += 1
         previousVisit = model?.lastVisit
         model?.lastVisit = Date()
-    }
-    
-    var user: CompassUser? {
-        get {
-            model?.user
-        }
-        set {
-            model?.user = newValue
-        }
     }
     
     var firstVisit: Date {

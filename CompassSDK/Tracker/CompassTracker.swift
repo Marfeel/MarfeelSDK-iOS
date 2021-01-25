@@ -58,9 +58,7 @@ public class CompassTracker {
         bundle.compassEndpoint
     }()
     
-    private lazy var compassVersion: String? = {
-        bundle.compassVersion
-    }()
+    private let compassVersion = "2.0"
     
     init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
         self.bundle = bundle
@@ -70,6 +68,7 @@ public class CompassTracker {
         trackInfo.fisrtVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
         trackInfo.compassVersion = compassVersion
+        trackInfo.siteUserId = storage.suid
     }
     
     private var deadline: Double {
