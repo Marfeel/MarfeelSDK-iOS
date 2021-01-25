@@ -33,11 +33,13 @@ struct TrackInfo: Codable {
     var pageUrl: String? {
         didSet {
             canonical = pageUrl
+            if let oldValue = oldValue {
+                previosPageUrl = oldValue
+            }
             guard pageUrl != nil else {
                 pageId = nil
                 return
             }
-            previosPageUrl = oldValue
             pageId = UUID().uuidString
             tik = 0
             pagesViewed += 1

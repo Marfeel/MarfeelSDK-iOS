@@ -29,8 +29,8 @@ public struct CompassConversionEvent: Codable {
 }
 
 public protocol CompassTracking: class {
-    func startPageView(pageName: String)
-    func startPageView(pageName: String, scrollView: UIScrollView?)
+    func startPageView(url: URL)
+    func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
     func identify(user: CompassUser)
     func track(conversion: CompassConversionEvent)
@@ -110,13 +110,13 @@ extension CompassTracker: CompassTracking {
         self.trackInfo.user = user
     }
     
-    public func startPageView(pageName: String, scrollView: UIScrollView?) {
+    public func startPageView(url: URL, scrollView: UIScrollView?) {
         self.scrollView = scrollView
-        startPageView(pageName: pageName)
+        startPageView(url: url)
     }
     
-    public func startPageView(pageName: String) {
-        restart(pageName: pageName)
+    public func startPageView(url: URL) {
+        restart(pageName: url.absoluteString)
         doTik()
     }
     
