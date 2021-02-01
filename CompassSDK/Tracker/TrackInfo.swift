@@ -70,22 +70,14 @@ struct TrackInfo: Codable {
     var currentVisitDate: Date? {
         didSet {
             currentVisitTimeStamp = currentVisitDate?.timeStamp
-            sessionId = UUID().uuidString
-        }
-    }
-    
-    var user: CompassUser? {
-        didSet {
-            userId = user?.userId
-            userType = user?.userType ?? "0"
         }
     }
     
     var siteUserId: String?
-    
     var compassVersion: String?
-    
     var scrollPercent: Float?
+    var userId: String?
+    var userType: UserType?
     
     private var pagesViewed = 0 {
         didSet {
@@ -96,8 +88,6 @@ struct TrackInfo: Codable {
     }
     
     private var pageId: String?
-    private var userId: String?
-    private var userType: String?
     private var startPageTimeStamp: Int?
     private var firstVisitTimeStamp: Int?
     private var currentTimeStamp: Int? {
@@ -107,7 +97,7 @@ struct TrackInfo: Codable {
     }
     private var currentVisitTimeStamp: Int?
     private var visitDuration: Int?
-    private var sessionId: String?
+    var sessionId: String?
     private var landingPage: String?
     private var previosPageUrl: String?
     private var canonical: String?

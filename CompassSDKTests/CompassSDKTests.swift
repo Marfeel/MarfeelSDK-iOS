@@ -16,10 +16,11 @@ class CompassSDKTests: XCTestCase {
     func testShouldSendTik() {
         let sut = CompassTracker.shared
         let expectation = XCTestExpectation()
-        sut.identify(user: .init(userId: "testUser1", userType: "0"))
-        sut.startPageView(pageName: "Test ONE")
+        sut.setUserId("testUser1")
+        sut.setUserType(.logged)
+        sut.startPageView(url: URL(string: "http://localhost/test1")!)
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-            sut.startPageView(pageName: "Test TWO")
+            sut.startPageView(url: URL(string: "http://localhost/test2")!)
         })
         
         wait(for: [expectation], timeout: 40)

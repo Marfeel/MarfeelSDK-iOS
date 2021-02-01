@@ -8,14 +8,8 @@
 import Foundation
 import UIKit
 
-public struct CompassUser: Codable {
-    let userId: String
-    let userType: String
-    
-    public init(userId: String, userType: String) {
-        self.userId = userId
-        self.userType = userType
-    }
+public enum UserType: String, Codable {
+    case logged, paid
 }
 
 public struct CompassConversionEvent: Codable {
@@ -32,7 +26,8 @@ public protocol CompassTracking: class {
     func startPageView(url: URL)
     func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
-    func identify(user: CompassUser)
+    func setUserId(_ userId: String?)
+    func setUserType(_ userType: UserType?)
     func track(conversion: CompassConversionEvent)
 }
 
@@ -69,6 +64,7 @@ public class CompassTracker {
         trackInfo.currentVisitDate = Date()
         trackInfo.compassVersion = compassVersion
         trackInfo.siteUserId = storage.suid
+        trackInfo.sessionId = storage.sessionId
     }
     
     private var deadline: Double {
@@ -106,8 +102,12 @@ extension CompassTracker: ScrollPercentProvider {
 }
 
 extension CompassTracker: CompassTracking {
-    public func identify(user: CompassUser) {
-        self.trackInfo.user = user
+    public func setUserId(_ userId: String?) {
+        trackInfo.userId = userId
+    }
+    
+    public func setUserType(_ userType: UserType?) {
+        trackInfo.userType = userType
     }
     
     public func startPageView(url: URL, scrollView: UIScrollView?) {

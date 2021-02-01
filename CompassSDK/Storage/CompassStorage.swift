@@ -13,6 +13,7 @@ protocol CompassStorage {
     var userId: String? {get set}
     var previousVisit: Date? {get}
     var firstVisit: Date {get}
+    var sessionId: String {get}
 }
 
 class PListCompassStorage: PListStorage {
@@ -22,6 +23,8 @@ class PListCompassStorage: PListStorage {
         var suid: String?
         var firstVisit: Date?
         var lastVisit: Date?
+        var sessionId: String?
+        var sessionExpirationDate: Date?
         
         static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil)}
     }
@@ -43,6 +46,18 @@ class PListCompassStorage: PListStorage {
 }
 
 extension PListCompassStorage: CompassStorage {
+    var sessionId: String {
+        guard let sessionId = model?.sessionId, let expirationDate = model?.sessionExpirationDate, Date() < expirationDate else {
+            let sessionId = UUID().uuidString
+            model?.sessionId = sessionId
+            model?.sessionExpirationDate = Date().adding(minutes: 30)
+            return sessionId
+        }
+        
+        model?.sessionExpirationDate = Date().adding(minutes: 30)
+        return sessionId
+    }
+    
     var suid: String {
         guard let suid = model?.suid else {
             let suid = UUID().uuidString
@@ -78,6 +93,4 @@ extension PListCompassStorage: CompassStorage {
         
         return firstVisit
     }
-    
-    
 }
