@@ -12,23 +12,13 @@ public enum UserType: String, Codable {
     case logged, paid
 }
 
-public struct CompassConversionEvent: Codable {
-    let name: String
-    let params: [String: String]?
-    
-    public init(name: String, params: [String: String]? = nil) {
-        self.name = name
-        self.params = params
-    }
-}
-
 public protocol CompassTracking: class {
     func startPageView(url: URL)
     func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
     func setUserId(_ userId: String?)
     func setUserType(_ userType: UserType?)
-    func track(conversion: CompassConversionEvent)
+    func track(conversion: String)
 }
 
 public class CompassTracker {
@@ -81,6 +71,8 @@ public class CompassTracker {
     private var trackInfo = TrackInfo()
     
     private var scrollView: UIScrollView?
+    
+    private var newConversions = [String]()
 }
 
 extension CompassTracker: ScrollPercentProvider {
@@ -125,8 +117,15 @@ extension CompassTracker: CompassTracking {
         scrollView = nil
     }
     
-    public func track(conversion: CompassConversionEvent) {
-        trackInfo.conversions.append(conversion)
+    public func track(conversion: String) {
+        newConversions.append(conversion)
+    }
+}
+
+extension CompassTracker: ConversionsProvider {
+    func getConversions(_ completion: @escaping ([String]) -> ()) {
+        completion(newConversions)
+        newConversions = [String]()
     }
 }
 
@@ -139,7 +138,7 @@ private extension CompassTracker {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)
         trackInfo.currentDate = dispatchDate
-        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self)
+        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self, conversionsProvider: self)
         observeFinish(for: operation)
         operationQueue.addOperation(operation)
         trackInfo.tik = trackInfo.tik + 1
@@ -153,7 +152,6 @@ private extension CompassTracker {
     }
     
     func restart(pageName: String?) {
-        trackInfo.conversions = [CompassConversionEvent]()
         finishObserver = nil
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName

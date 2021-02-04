@@ -19,8 +19,10 @@ class CompassSDKTests: XCTestCase {
         sut.setUserId("testUser1")
         sut.setUserType(.logged)
         sut.startPageView(url: URL(string: "http://localhost/test1")!)
+        sut.track(conversion: "First conversion")
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
             sut.startPageView(url: URL(string: "http://localhost/test2")!)
+            sut.track(conversion: "Second conversion")
         })
         
         wait(for: [expectation], timeout: 40)

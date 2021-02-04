@@ -27,7 +27,8 @@ struct TrackInfo: Codable {
             scrollPercent = "sc",
             previosPageUrl = "pp",
             canonical = "c",
-            siteUserId = "sui"
+            siteUserId = "sui",
+            conversions = "conv"
     }
     
     var pageUrl: String? {
@@ -48,7 +49,7 @@ struct TrackInfo: Codable {
     }
     var accountId: String?
     var tik = 0
-    var conversions = [CompassConversionEvent]()
+    var conversions: [String]?
     private var startPageDate: Date? {
         didSet {
             startPageTimeStamp = startPageDate?.timeStamp

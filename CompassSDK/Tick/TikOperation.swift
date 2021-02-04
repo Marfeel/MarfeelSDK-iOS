@@ -11,17 +11,24 @@ protocol ScrollPercentProvider: class {
     func getScrollPercent(_ completion: @escaping (Float?) -> ())
 }
 
+protocol ConversionsProvider: class {
+    func getConversions(_ completion: @escaping ([String]) -> ())
+}
+
+
 class TikOperation: Operation {
     private let trackInfo: TrackInfo
     private let dispatchDate: Date
     private let tikUseCase: SendTikCuseCase
     private weak var scrollPercentProvider: ScrollPercentProvider?
+    private weak var conversionsProvider: ConversionsProvider?
     
-    init(trackInfo: TrackInfo, dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik(), scrollPercentProvider: ScrollPercentProvider?) {
+    init(trackInfo: TrackInfo, dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik(), scrollPercentProvider: ScrollPercentProvider?, conversionsProvider: ConversionsProvider?) {
         self.trackInfo = trackInfo
         self.dispatchDate = dispatchDate
         self.tikUseCase = tikUseCase
         self.scrollPercentProvider = scrollPercentProvider
+        self.conversionsProvider = conversionsProvider
     }
     
     private var timer: Timer?
@@ -48,14 +55,18 @@ class TikOperation: Operation {
         
         self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
             self?.getScrollPercent { (scrollPercent) in
-                var finalTrackInfo = self?.trackInfo
-                finalTrackInfo?.scrollPercent = scrollPercent
-                let data = finalTrackInfo?.data
-                if let data = data {
-                    self?.task = self?.tikUseCase.tik(data: data)
-                }
-                self?.timer?.invalidate()
-                self?.runing = false
+                self?.getConversions({ (conversions) in
+                    var finalTrackInfo = self?.trackInfo
+                    finalTrackInfo?.scrollPercent = scrollPercent
+                    finalTrackInfo?.conversions = conversions
+                    let data = finalTrackInfo?.data
+                    if let data = data {
+                        self?.task = self?.tikUseCase.tik(data: data)
+                    }
+                    self?.timer?.invalidate()
+                    self?.runing = false
+                })
+                
             }
         })
         
@@ -76,5 +87,14 @@ class TikOperation: Operation {
         }
         
         scrollPercentProvider.getScrollPercent(completion)
+    }
+    
+    private func getConversions(_ completion: @escaping ([String]) -> ()) {
+        guard let conversionsProvider = conversionsProvider else {
+            completion([])
+            return
+        }
+        
+        conversionsProvider.getConversions(completion)
     }
 }
