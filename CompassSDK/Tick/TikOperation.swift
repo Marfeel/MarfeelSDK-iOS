@@ -58,10 +58,10 @@ class TikOperation: Operation {
                 self?.getConversions({ (conversions) in
                     var finalTrackInfo = self?.trackInfo
                     finalTrackInfo?.scrollPercent = scrollPercent
-                    finalTrackInfo?.conversions = conversions
-                    let data = finalTrackInfo?.data
+                    finalTrackInfo?.conversions = conversions.isEmpty ? nil : conversions
+                    let data = finalTrackInfo?.params
                     if let data = data {
-                        self?.task = self?.tikUseCase.tik(data: data)
+                        self?.task = self?.tikUseCase.tik(params: data)
                     }
                     self?.timer?.invalidate()
                     self?.runing = false

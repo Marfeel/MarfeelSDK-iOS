@@ -13,7 +13,7 @@ struct TrackInfo: Codable {
             pageUrl = "url",
             accountId = "ac",
             tik = "a",
-            userId = "u",
+            userId = "sui",
             userType = "ut",
             startPageTimeStamp = "ps",
             firstVisitTimeStamp = "fv",
@@ -27,8 +27,8 @@ struct TrackInfo: Codable {
             scrollPercent = "sc",
             previosPageUrl = "pp",
             canonical = "c",
-            siteUserId = "sui",
-            conversions = "conv"
+            siteUserId = "u",
+            implodedConversions = "conv"
     }
     
     var pageUrl: String? {
@@ -47,9 +47,14 @@ struct TrackInfo: Codable {
             startPageDate = Date()
         }
     }
-    var accountId: String?
+    var accountId: Int?
     var tik = 0
-    var conversions: [String]?
+    var conversions: [String]? {
+        didSet {
+            implodedConversions = conversions?.joined(separator: ",")
+        }
+    }
+    
     private var startPageDate: Date? {
         didSet {
             startPageTimeStamp = startPageDate?.timeStamp
@@ -89,22 +94,27 @@ struct TrackInfo: Codable {
     }
     
     private var pageId: String?
-    private var startPageTimeStamp: Int?
-    private var firstVisitTimeStamp: Int?
-    private var currentTimeStamp: Int? {
+    private var startPageTimeStamp: Int64?
+    private var firstVisitTimeStamp: Int64?
+    private var currentTimeStamp: Int64? {
         didSet {
-            visitDuration = (currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0)
+            visitDuration = Int64(((currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0)) / 1000)
         }
     }
-    private var currentVisitTimeStamp: Int?
-    private var visitDuration: Int?
+    private var currentVisitTimeStamp: Int64?
+    private var visitDuration: Int64?
     var sessionId: String?
     private var landingPage: String?
     private var previosPageUrl: String?
     private var canonical: String?
+    private var implodedConversions: String?
 }
 
 extension TrackInfo {
+    var params: [String: Any] {
+        self.jsonEncode()!
+    }
+    
     var data: Data {
         self.encode()!
     }

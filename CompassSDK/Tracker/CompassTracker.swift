@@ -16,6 +16,7 @@ public protocol CompassTracking: class {
     func startPageView(url: URL)
     func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
+    func getRCV(_ completion: @escaping (Int?) -> ())
     func setUserId(_ userId: String?)
     func setUserType(_ userType: UserType?)
     func track(conversion: String)
@@ -35,7 +36,7 @@ public class CompassTracker {
         return queue
     }()
     
-    private lazy var accountId: String? = {
+    private lazy var accountId: Int? = {
         bundle.compassAccountId
     }()
     
@@ -87,7 +88,7 @@ extension CompassTracker: ScrollPercentProvider {
             let scrolledDistance = offset + scrollView.contentInset.top
             let percent = max(0, Float(min(1, scrolledDistance / scrollView.contentSize.height)))
             DispatchQueue.global(qos: .utility).async {
-                completion(percent)
+                completion((percent * 100).rounded())
             }
         }
     }
@@ -96,6 +97,10 @@ extension CompassTracker: ScrollPercentProvider {
 extension CompassTracker: CompassTracking {
     public func setUserId(_ userId: String?) {
         trackInfo.userId = userId
+    }
+    
+    public func getRCV(_ completion: @escaping (Int?) -> ()) {
+        completion(nil)
     }
     
     public func setUserType(_ userType: UserType?) {
