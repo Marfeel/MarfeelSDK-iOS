@@ -16,7 +16,7 @@ public protocol CompassTracking: class {
     func startPageView(url: URL)
     func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
-    func getRCV(_ completion: @escaping (Int?) -> ())
+    func getRFV(_ completion: @escaping (String?) -> ())
     func setUserId(_ userId: String?)
     func setUserType(_ userType: UserType?)
     func track(conversion: String)
@@ -99,7 +99,7 @@ extension CompassTracker: CompassTracking {
         trackInfo.userId = userId
     }
     
-    public func getRCV(_ completion: @escaping (Int?) -> ()) {
+    public func getRFV(_ completion: @escaping (String?) -> ()) {
         completion(nil)
     }
     

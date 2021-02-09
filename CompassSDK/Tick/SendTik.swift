@@ -15,12 +15,12 @@ protocol SendTikCuseCase {
 
 class SendTik: SendTikCuseCase {
     private let session: URLSession
-    private let bundle: Bundle
+    private let compassEndpoint: String?
     private let application: UIApplication
     
-    init(session: URLSession = .shared, bundle: Bundle = .main, application: UIApplication = .shared) {
+    init(session: URLSession = .shared, compassEndpoint: String? = Bundle.main.compassEndpoint, application: UIApplication = .shared) {
         self.session = session
-        self.bundle = bundle
+        self.compassEndpoint = compassEndpoint
         self.application = application
     }
     
@@ -37,7 +37,10 @@ class SendTik: SendTikCuseCase {
         return task(from: request)
     }
     
-    private lazy var endpoint: String? = bundle.compassEndpoint ?? "http://localhost:3000/"
+    private var endpoint: URL? {
+        guard let compassEndpoint = compassEndpoint, let url = URL(string: compassEndpoint) else {return nil}
+        return url.appendingPathComponent("ingest.php")
+    }
 }
 
 private extension SendTik {
@@ -57,8 +60,8 @@ private extension SendTik {
     }
     
     func buildRequest(data: Data) -> URLRequest? {
-        guard let endpoint = endpoint, let url = URL(string: endpoint) else {return nil}
-        var request = URLRequest(url: url)
+        guard let endpoint = endpoint else {return nil}
+        var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.httpBody = data
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -66,8 +69,8 @@ private extension SendTik {
     }
     
     func buildRequest(params: [String: Any]) -> URLRequest? {
-        guard let endpoint = endpoint, let url = URL(string: endpoint), let params = params as? [String: CustomStringConvertible] else {return nil}
-        var request = URLRequest(url: url)
+        guard let endpoint = endpoint, let params = params as? [String: CustomStringConvertible] else {return nil}
+        var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.encodeParameters(parameters: params)
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

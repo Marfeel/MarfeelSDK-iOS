@@ -23,6 +23,8 @@
 		D7D455CB25B4A6FF00CC2BCE /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */; };
 		D7D455CF25B4A72600CC2BCE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455CE25B4A72600CC2BCE /* Codable.swift */; };
 		D7D455D325B4B86700CC2BCE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D455D225B4B86700CC2BCE /* Date.swift */; };
+		D7E6D45F25D1589B002749A3 /* GetRFV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6D45E25D1589B002749A3 /* GetRFV.swift */; };
+		D7E6D46525D15AC2002749A3 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6D46425D15AC2002749A3 /* URLRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		D7D455CA25B4A6FE00CC2BCE /* PListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListStorage.swift; sourceTree = "<group>"; };
 		D7D455CE25B4A72600CC2BCE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		D7D455D225B4B86700CC2BCE /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		D7E6D45E25D1589B002749A3 /* GetRFV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRFV.swift; sourceTree = "<group>"; };
+		D7E6D46425D15AC2002749A3 /* URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 		D70E237725BDA70B00BA3C38 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D7E6D46425D15AC2002749A3 /* URLRequest.swift */,
 				D7D4559425B49BB200CC2BCE /* Bundle.swift */,
 				D7D455D225B4B86700CC2BCE /* Date.swift */,
 				D7D455CE25B4A72600CC2BCE /* Codable.swift */,
@@ -155,6 +160,7 @@
 		D77958E225B05C9600A7A44A /* CompassSDK */ = {
 			isa = PBXGroup;
 			children = (
+				D7E6D45D25D1588C002749A3 /* RCV */,
 				D70E237E25BDA78500BA3C38 /* Tracker */,
 				D70E237D25BDA77500BA3C38 /* Tick */,
 				D70E237825BDA71B00BA3C38 /* Storage */,
@@ -172,6 +178,14 @@
 				D77958F025B05C9700A7A44A /* Info.plist */,
 			);
 			path = CompassSDKTests;
+			sourceTree = "<group>";
+		};
+		D7E6D45D25D1588C002749A3 /* RCV */ = {
+			isa = PBXGroup;
+			children = (
+				D7E6D45E25D1589B002749A3 /* GetRFV.swift */,
+			);
+			path = RCV;
 			sourceTree = "<group>";
 		};
 		E63EB02E7A3DC32A5C6B1EC1 /* Frameworks */ = {
@@ -345,10 +359,12 @@
 			files = (
 				D7D4559D25B4A10900CC2BCE /* TikOperation.swift in Sources */,
 				D7D455A125B4A28C00CC2BCE /* TrackInfo.swift in Sources */,
+				D7E6D45F25D1589B002749A3 /* GetRFV.swift in Sources */,
 				D7D455CF25B4A72600CC2BCE /* Codable.swift in Sources */,
 				D7D455CB25B4A6FF00CC2BCE /* PListStorage.swift in Sources */,
 				D779590425B0653500A7A44A /* SendTik.swift in Sources */,
 				D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */,
+				D7E6D46525D15AC2002749A3 /* URLRequest.swift in Sources */,
 				D7D4559925B49F9400CC2BCE /* CompassStorage.swift in Sources */,
 				D7D455D325B4B86700CC2BCE /* Date.swift in Sources */,
 				D779590025B064F800A7A44A /* CompassTracker.swift in Sources */,
