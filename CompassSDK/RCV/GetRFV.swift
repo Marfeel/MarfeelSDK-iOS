@@ -12,7 +12,7 @@ protocol GetRFVUseCase {
 }
 
 enum GetRFVError: Error {
-    case unableToBuildRCVRequest, unableToParseResponse
+    case unableToBuildRequest, unableToParseResponse
 }
 
 struct RFVResponse: Codable {
@@ -37,7 +37,7 @@ class GetRFV {
 extension GetRFV: GetRFVUseCase {
     func fetch(userId: String, account: Int, _ completion: @escaping (String?, Error?) -> ()) {
         guard let request = buildRequest(userId: userId, account: account) else {
-            completion(nil, GetRFVError.unableToBuildRCVRequest)
+            completion(nil, GetRFVError.unableToBuildRequest)
             return
         }
         
