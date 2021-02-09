@@ -8,12 +8,46 @@
 import XCTest
 @testable import CompassSDK
 
+class MockOperation: Operation {
+    private let trackInfo: TrackInfo
+    
+    init(trackInfo: TrackInfo) {
+        self.trackInfo = trackInfo
+    }
+    
+    private var runing: Bool = false {
+        didSet {
+            willChangeValue(forKey: "isFinished")
+            willChangeValue(forKey: "isExecuting")
+            didChangeValue(forKey: "isFinished")
+            didChangeValue(forKey: "isExecuting")
+        }
+    }
+    
+    override var isAsynchronous: Bool {true}
+    
+    override var isFinished: Bool {!runing}
+    
+    override var isExecuting: Bool {runing}
+    
+    override func start() {
+        print(trackInfo)
+        runing = false
+    }
+}
+
+class MockedOperationProvider: TikOperationFactory {
+    func buildOperation(trackInfo: TrackInfo, dispatchDate: Date, scrollPercentProvider: ScrollPercentProvider?, conversionsProvider: ConversionsProvider?) -> Operation {
+        MockOperation(trackInfo: trackInfo)
+    }
+}
+
 class CompassSDKTests: XCTestCase {
     
     var timer: Timer?
 
     func testShouldSendTik() {
-        let sut = CompassTracker(bundle: Bundle.init(for: CompassSDKTests.self))
+        let sut = CompassTracker(tikOperationFactory: MockedOperationProvider())
         let expectation = XCTestExpectation()
         sut.setUserId("testUser1")
         sut.setUserType(.logged)

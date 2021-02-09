@@ -27,6 +27,7 @@ public class CompassTracker {
     
     private let bundle: Bundle
     private let storage: CompassStorage
+    private let tikOperationFactory: TikOperationFactory
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -46,9 +47,10 @@ public class CompassTracker {
     
     private let compassVersion = "2.0"
     
-    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage()) {
+    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider()) {
         self.bundle = bundle
         self.storage = storage
+        self.tikOperationFactory = tikOperationFactory
         storage.addVisit()
         trackInfo.accountId = accountId
         trackInfo.fisrtVisitDate = storage.firstVisit
@@ -143,7 +145,7 @@ private extension CompassTracker {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)
         trackInfo.currentDate = dispatchDate
-        let operation = TikOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self, conversionsProvider: self)
+        let operation = tikOperationFactory.buildOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self, conversionsProvider: self)
         observeFinish(for: operation)
         operationQueue.addOperation(operation)
         trackInfo.tik = trackInfo.tik + 1
