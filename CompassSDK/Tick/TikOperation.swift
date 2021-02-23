@@ -32,7 +32,6 @@ class TikOperation: Operation {
     }
     
     private var timer: Timer?
-    private var task: URLSessionDataTask?
     
     private var runing: Bool = false {
         didSet {
@@ -61,7 +60,7 @@ class TikOperation: Operation {
                     finalTrackInfo?.conversions = conversions.isEmpty ? nil : conversions
                     let data = finalTrackInfo?.params
                     if let data = data {
-                        self?.task = self?.tikUseCase.tik(params: data)
+                        self?.tikUseCase.tik(params: data)
                     }
                     self?.timer?.invalidate()
                     self?.runing = false
@@ -76,7 +75,6 @@ class TikOperation: Operation {
     
     override func cancel() {
         timer?.invalidate()
-        task?.cancel()
         runing = false
     }
     

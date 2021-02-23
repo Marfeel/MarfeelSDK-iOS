@@ -9,5 +9,11 @@ import Foundation
 
 extension Bundle {
     var compassAccountId: Int? {object(forInfoDictionaryKey: "COMPASS_ACCOUNT_ID") as? Int}
-    var compassEndpoint: String? {object(forInfoDictionaryKey: "COMPASS_ENDPOINT") as? String}
+    
+    var compassEndpoint: URL? {
+        guard let urlString = object(forInfoDictionaryKey: "COMPASS_ENDPOINT") as? String else {
+            return nil
+        }
+        return URL(string: urlString)
+    }
 }

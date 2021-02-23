@@ -41,10 +41,6 @@ public class CompassTracker {
         bundle.compassAccountId
     }()
     
-    private lazy var endpoint: String? = {
-        bundle.compassEndpoint
-    }()
-    
     private let compassVersion = "2.0"
     
     init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider()) {
@@ -137,10 +133,6 @@ extension CompassTracker: ConversionsProvider {
 }
 
 private extension CompassTracker {
-    var hasCorrectSetUp: Bool {
-        accountId != nil && endpoint != nil
-    }
-    
     func doTik() {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)

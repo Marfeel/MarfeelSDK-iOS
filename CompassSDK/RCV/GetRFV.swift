@@ -11,59 +11,39 @@ protocol GetRFVUseCase {
     func fetch(userId: String, account: Int, _ completion: @escaping (String?, Error?) -> ())
 }
 
-enum GetRFVError: Error {
-    case unableToBuildRequest, unableToParseResponse
-}
-
 struct RFVResponse: Codable {
     let rfv: String?
 }
 
-class GetRFV {
-    private let compassEndpoint: String?
-    private let session: URLSession
-    
-    init(compassEndpoint: String? = Bundle.main.compassEndpoint, session: URLSession = .shared) {
-        self.compassEndpoint = compassEndpoint
-        self.session = session
+struct GetRFVApiCall: ApiCall {
+    let userId: String
+    let account: Int
+    let baseUrl: URL?
+    let path: String = "data.php"
+    var params: [String : Any] {
+        ["u": userId, "ac": account]
     }
     
-    private var endpoint: URL? {
-        guard let compassEndpoint = compassEndpoint, let compassURL = URL(string: compassEndpoint) else {return nil}
-        return compassURL.appendingPathComponent("data.php")
+    init(userId: String, account: Int, baseUrl: URL? = Bundle.main.compassEndpoint) {
+        self.userId = userId
+        self.account = account
+        self.baseUrl = baseUrl
+    }
+}
+
+class GetRFV {
+    private let apiRouter: ApiRouting
+    
+    init(apiRouter: ApiRouting = ApiRouter()) {
+        self.apiRouter = apiRouter
     }
 }
 
 extension GetRFV: GetRFVUseCase {
     func fetch(userId: String, account: Int, _ completion: @escaping (String?, Error?) -> ()) {
-        guard let request = buildRequest(userId: userId, account: account) else {
-            completion(nil, GetRFVError.unableToBuildRequest)
-            return
+        let apiCall = GetRFVApiCall(userId: userId, account: account)
+        apiRouter.request(from: apiCall) { (rfv: RFVResponse?, error: Error?) in
+            completion(rfv?.rfv, error)
         }
-        
-        session.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let rfv = RFVResponse.decode(from: data) else {
-                completion(nil, GetRFVError.unableToParseResponse)
-                return
-            }
-            
-            completion(rfv.rfv, nil)
-        }.resume()
-    }
-}
-
-private extension GetRFV {
-    private func buildRequest(userId: String, account: Int) -> URLRequest? {
-        guard let url = endpoint else {return nil}
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.encodeParameters(parameters: ["u": userId, "ac": account])
-        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        return request
     }
 }

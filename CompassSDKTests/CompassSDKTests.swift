@@ -62,7 +62,7 @@ class CompassSDKTests: XCTestCase {
     }
 
     func testShouldFetchRFV() {
-        let sut = GetRFV(compassEndpoint: "https://events.newsroom.bi/")
+        let sut = GetRFV()
         let expectation = XCTestExpectation()
         sut.fetch(userId: UUID().uuidString, account: 0) { (rfv, error) in
             guard error == nil else {
