@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				D704E2D325D2DCCE006517D2 /* Communications */,
-				D7E6D45D25D1588C002749A3 /* RCV */,
+				D7E6D45D25D1588C002749A3 /* RFV */,
 				D70E237E25BDA78500BA3C38 /* Tracker */,
 				D70E237D25BDA77500BA3C38 /* Tick */,
 				D70E237825BDA71B00BA3C38 /* Storage */,
@@ -194,12 +194,12 @@
 			path = CompassSDKTests;
 			sourceTree = "<group>";
 		};
-		D7E6D45D25D1588C002749A3 /* RCV */ = {
+		D7E6D45D25D1588C002749A3 /* RFV */ = {
 			isa = PBXGroup;
 			children = (
 				D7E6D45E25D1589B002749A3 /* GetRFV.swift */,
 			);
-			path = RCV;
+			path = RFV;
 			sourceTree = "<group>";
 		};
 		E63EB02E7A3DC32A5C6B1EC1 /* Frameworks */ = {
