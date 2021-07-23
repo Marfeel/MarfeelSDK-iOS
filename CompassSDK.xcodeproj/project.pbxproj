@@ -18,6 +18,7 @@
 		D77958F125B05C9700A7A44A /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D77958E325B05C9600A7A44A /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D779590025B064F800A7A44A /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77958FF25B064F800A7A44A /* CompassTracker.swift */; };
 		D779590425B0653500A7A44A /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779590325B0653500A7A44A /* SendTik.swift */; };
+		D7CE8DD426AADCC900F36F4B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D7CE8DD326AADCC900F36F4B /* README.md */; };
 		D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559425B49BB200CC2BCE /* Bundle.swift */; };
 		D7D4559925B49F9400CC2BCE /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559825B49F9400CC2BCE /* CompassStorage.swift */; };
 		D7D4559D25B4A10900CC2BCE /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D4559C25B4A10900CC2BCE /* TikOperation.swift */; };
@@ -58,6 +59,7 @@
 		D77958F025B05C9700A7A44A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D77958FF25B064F800A7A44A /* CompassTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTracker.swift; sourceTree = "<group>"; };
 		D779590325B0653500A7A44A /* SendTik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTik.swift; sourceTree = "<group>"; };
+		D7CE8DD326AADCC900F36F4B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D7D4559425B49BB200CC2BCE /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		D7D4559825B49F9400CC2BCE /* CompassStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassStorage.swift; sourceTree = "<group>"; };
 		D7D4559C25B4A10900CC2BCE /* TikOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikOperation.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		D77958D625B05C9600A7A44A = {
 			isa = PBXGroup;
 			children = (
+				D7CE8DD326AADCC900F36F4B /* README.md */,
 				D70E236D25BDA0DA00BA3C38 /* CompassSDK.podspec */,
 				D70E236E25BDA0DA00BA3C38 /* Podfile */,
 				D77958E225B05C9600A7A44A /* CompassSDK */,
@@ -305,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7CE8DD426AADCC900F36F4B /* README.md in Resources */,
 				D70E237025BDA0DA00BA3C38 /* Podfile in Resources */,
 				D70E236F25BDA0DA00BA3C38 /* CompassSDK.podspec in Resources */,
 			);
@@ -547,7 +551,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.CompassSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -576,7 +580,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.CompassSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

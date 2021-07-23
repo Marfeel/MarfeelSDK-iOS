@@ -12,7 +12,7 @@ public enum UserType: String, Codable {
     case logged, paid
 }
 
-public protocol CompassTracking: class {
+public protocol CompassTracking: AnyObject {
     func startPageView(url: URL)
     func startPageView(url: URL, scrollView: UIScrollView?)
     func stopTracking()
@@ -28,6 +28,7 @@ public class CompassTracker {
     private let bundle: Bundle
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
+    private let getRFV: GetRFVUseCase
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -43,10 +44,11 @@ public class CompassTracker {
     
     private let compassVersion = "2.0"
     
-    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider()) {
+    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
         self.bundle = bundle
         self.storage = storage
         self.tikOperationFactory = tikOperationFactory
+        self.getRFV = getRFV
         storage.addVisit()
         trackInfo.accountId = accountId
         trackInfo.fisrtVisitDate = storage.firstVisit
@@ -98,7 +100,13 @@ extension CompassTracker: CompassTracking {
     }
     
     public func getRFV(_ completion: @escaping (String?) -> ()) {
-        completion(nil)
+        guard let userId = trackInfo.userId, let accountId = accountId else {
+            completion(nil)
+            return
+        }
+        getRFV.fetch(userId: userId, account: accountId) { rfv, _ in
+            completion(rfv)
+        }
     }
     
     public func setUserType(_ userType: UserType?) {
