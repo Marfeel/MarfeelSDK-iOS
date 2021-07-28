@@ -25,7 +25,7 @@ Para utilizar la librería debe añadir la cuenta y el endpoint que le ha prove�
 <key>COMPASS_ACCOUNT_ID</key>
 <integer>0</integer>
 <key>COMPASS_ENDPOINT</key>
-<string>http://events.newsroom.bi/</string>
+<string>https://events.newsroom.bi/</string>
 ```
 
 Indicando en el campo COMPASS_ACCOUNT_ID su identificador de cuenta, y en COMPASS_ENDPOIT el endpoint que le han proporcionado.
