@@ -93,7 +93,7 @@ struct TrackInfo: Codable {
     private var firstVisitTimeStamp: Int64?
     private var currentTimeStamp: Int64? {
         didSet {
-            visitDuration = Int64(((currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0)) / 1000)
+            visitDuration = Int64((currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0))
         }
     }
     private var currentVisitTimeStamp: Int64?
