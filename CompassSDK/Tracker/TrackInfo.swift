@@ -23,7 +23,6 @@ struct TrackInfo: Codable {
             pageId = "p",
             compassVersion = "v",
             sessionId = "s",
-            landingPage = "r",
             scrollPercent = "sc",
             previosPageUrl = "pp",
             canonical = "c",
@@ -87,13 +86,7 @@ struct TrackInfo: Codable {
     var userType: UserType?
     let pageType = 3
     
-    private var pagesViewed = 0 {
-        didSet {
-            if pagesViewed == 1 {
-                landingPage = pageUrl
-            }
-        }
-    }
+    private var pagesViewed = 0
     
     private var pageId: String?
     private var startPageTimeStamp: Int64?
@@ -106,7 +99,6 @@ struct TrackInfo: Codable {
     private var currentVisitTimeStamp: Int64?
     private var visitDuration: Int64?
     var sessionId: String?
-    private var landingPage: String?
     private var previosPageUrl: String?
     private var canonical: String?
     private var implodedConversions: String?
