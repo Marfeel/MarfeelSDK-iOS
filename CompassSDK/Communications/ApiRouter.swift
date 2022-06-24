@@ -24,7 +24,7 @@ extension ApiCall {
     }
 }
 
-protocol ApiRouting: class {
+protocol ApiRouting: AnyObject {
     func request<T>(from apiCall: ApiCall, _ completion: @escaping (T?, Error?) -> ()) where T: Decodable
     func call(from apiCall: ApiCall, _ completion: @escaping (Error?) -> ())
 }

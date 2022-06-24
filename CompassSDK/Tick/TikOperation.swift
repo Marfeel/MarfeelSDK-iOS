@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ScrollPercentProvider: class {
+protocol ScrollPercentProvider: AnyObject {
     func getScrollPercent(_ completion: @escaping (Float?) -> ())
 }
 
-protocol ConversionsProvider: class {
+protocol ConversionsProvider: AnyObject {
     func getConversions(_ completion: @escaping ([String]) -> ())
 }
 
