@@ -14,11 +14,12 @@ protocol SendTikCuseCase {
 
 struct TikApiCall: ApiCall {
     let path: String = "ingest.php"
-    let params: [String : Any] = [:]
+    let params: [String : Any]
     let baseUrl: URL?
     
-    init(baseUrl: URL? = Bundle.main.compassEndpoint) {
+    init(baseUrl: URL? = Bundle.main.compassEndpoint, params: [String : Any]) {
         self.baseUrl = baseUrl
+        self.params = params
     }
 }
 
@@ -39,7 +40,7 @@ class SendTik: SendTikCuseCase {
             self.application.endBackgroundTask(backgroundIdentifier)
             self.backgroundIdentifier = .invalid
         }
-        let apiCall = TikApiCall()
+        let apiCall = TikApiCall(params: params)
         apiRouter.call(from: apiCall) { (error) in
             guard let backgroundIdentifier = self.backgroundIdentifier else {return}
             self.application.endBackgroundTask(backgroundIdentifier)
