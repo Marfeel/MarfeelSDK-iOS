@@ -28,7 +28,8 @@ struct TrackInfo: Codable {
             previosPageUrl = "pp",
             canonical = "c",
             siteUserId = "u",
-            implodedConversions = "conv"
+            implodedConversions = "conv",
+            pageType
     }
     
     var pageUrl: String? {
@@ -84,6 +85,7 @@ struct TrackInfo: Codable {
     var scrollPercent: Float?
     var userId: String?
     var userType: UserType?
+    let pageType = 3
     
     private var pagesViewed = 0 {
         didSet {

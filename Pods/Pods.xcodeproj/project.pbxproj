@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0451C4B214F21175F63BE3599FC6BC85 /* Pods-CompassSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC365222D3E2F3B68B78210347A112B0 /* Pods-CompassSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		151E65E538D00918803543CCF0A2990B /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CABFCDF8CAF5F2B36F2074E0846DCB /* Pods-CompassSDK-CompassSDKTests-dummy.m */; };
-		9CD5E71D5D99CCFBB47A342E334B3BEA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		BEAC7CB51FF04DB22A43673A453F3D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		E13077882C4610B2C2FA8B6E494CE720 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CB87AA71C9393E8F4FDAB5A39BF4FFA /* Pods-CompassSDK-CompassSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F3259104A252B2C7A912F146E95A8A49 /* Pods-CompassSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E88FD5F22CE9DEDFE49A802C2969E1F /* Pods-CompassSDK-dummy.m */; };
+		24696FFDA024D0B5A78BB2486D1C0644 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		3C2846E6520607669B86EEA801DCFB51 /* Pods-CompassSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC365222D3E2F3B68B78210347A112B0 /* Pods-CompassSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B62E359E018BCA56DAF66EFECA68C3E /* Pods-CompassSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E88FD5F22CE9DEDFE49A802C2969E1F /* Pods-CompassSDK-dummy.m */; };
+		8A84B8DFBA9650A6C669190DCAB39178 /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CABFCDF8CAF5F2B36F2074E0846DCB /* Pods-CompassSDK-CompassSDKTests-dummy.m */; };
+		C422759CB829F03B066013F099B2FEA3 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CB87AA71C9393E8F4FDAB5A39BF4FFA /* Pods-CompassSDK-CompassSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6BD1F4E2CEADD401C8B2884F84CA621 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		121D89BF80EC22BE17834919CBBEC48C /* Pods_CompassSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CompassSDK.framework; path = "Pods-CompassSDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		121D89BF80EC22BE17834919CBBEC48C /* Pods-CompassSDK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK"; path = Pods_CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CB87AA71C9393E8F4FDAB5A39BF4FFA /* Pods-CompassSDK-CompassSDKTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CompassSDK-CompassSDKTests-umbrella.h"; sourceTree = "<group>"; };
 		1F48CEE38FA987CEB7220A7C622C4636 /* Pods-CompassSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-Info.plist"; sourceTree = "<group>"; };
 		428FDC86B3EB6D5BEADFDB9C3867BF3C /* Pods-CompassSDK-CompassSDKTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-Info.plist"; sourceTree = "<group>"; };
@@ -29,7 +29,7 @@
 		A9425AE03A830CD366451D4D09FF243B /* Pods-CompassSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		B514EAFB0D04B27F6FA4E2AEEC23E720 /* Pods-CompassSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-acknowledgements.plist"; sourceTree = "<group>"; };
 		B7992EBB22409CC278D4EB2CDD7F059F /* Pods-CompassSDK-CompassSDKTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CompassSDK-CompassSDKTests.modulemap"; sourceTree = "<group>"; };
-		C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods_CompassSDK_CompassSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CompassSDK_CompassSDKTests.framework; path = "Pods-CompassSDK-CompassSDKTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods-CompassSDK-CompassSDKTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK-CompassSDKTests"; path = Pods_CompassSDK_CompassSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D54D5E3BBD22AF69A384240563F2A773 /* Pods-CompassSDK-CompassSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		E1D6030B9B2BA20F1DF182F162A80186 /* Pods-CompassSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.release.xcconfig"; sourceTree = "<group>"; };
 		E20B553C0DBDBFB9BA6A5C128ECEB220 /* Pods-CompassSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CompassSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -39,30 +39,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6D835B5DD10A969BE52D9F289370D753 /* Frameworks */ = {
+		1F99651259FE98F0BEAD7CBBF59A2094 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEAC7CB51FF04DB22A43673A453F3D1F /* Foundation.framework in Frameworks */,
+				F6BD1F4E2CEADD401C8B2884F84CA621 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC17F1551B48C5B6B34FF6E7AF128FD3 /* Frameworks */ = {
+		7EEB939A1E8CBEBC5EB1581016E6C7B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CD5E71D5D99CCFBB47A342E334B3BEA /* Foundation.framework in Frameworks */,
+				24696FFDA024D0B5A78BB2486D1C0644 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D73EC7F1AB918C198B1CA5D2140670D /* Products */ = {
+		26C6AA87385A3DE6F3D8B61E0CC415B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				121D89BF80EC22BE17834919CBBEC48C /* Pods_CompassSDK.framework */,
-				C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods_CompassSDK_CompassSDKTests.framework */,
+				121D89BF80EC22BE17834919CBBEC48C /* Pods-CompassSDK */,
+				C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods-CompassSDK-CompassSDKTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,7 +105,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				4D73EC7F1AB918C198B1CA5D2140670D /* Products */,
+				26C6AA87385A3DE6F3D8B61E0CC415B1 /* Products */,
 				A3869123182951E0199CF2B7A1DB5E61 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -137,19 +137,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		398EF27F6E45C38D44CAFEBFDF438D15 /* Headers */ = {
+		1362582E56AE52B8EB5873FD30A9AC65 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E13077882C4610B2C2FA8B6E494CE720 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */,
+				3C2846E6520607669B86EEA801DCFB51 /* Pods-CompassSDK-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8FA4FF94ECF0FEFE538F221EF6A46CF2 /* Headers */ = {
+		68F6E533B7A1964FFA72375454B2BEDA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0451C4B214F21175F63BE3599FC6BC85 /* Pods-CompassSDK-umbrella.h in Headers */,
+				C422759CB829F03B066013F099B2FEA3 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,38 +158,38 @@
 /* Begin PBXNativeTarget section */
 		919F65DBFB38E48F307D9C12609CC870 /* Pods-CompassSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F862954FE10554EB8A9F0DFBA69F90AC /* Build configuration list for PBXNativeTarget "Pods-CompassSDK" */;
+			buildConfigurationList = D56BDA4294B4EB02FC4FFCE4039526DB /* Build configuration list for PBXNativeTarget "Pods-CompassSDK" */;
 			buildPhases = (
-				8FA4FF94ECF0FEFE538F221EF6A46CF2 /* Headers */,
-				B159C2363B5E0991F79EA90842BEF389 /* Sources */,
-				6D835B5DD10A969BE52D9F289370D753 /* Frameworks */,
-				522523FC220174F213A3FCE8D6203937 /* Resources */,
+				1362582E56AE52B8EB5873FD30A9AC65 /* Headers */,
+				7452E55F452EAEE6D871E748F5C8A5C9 /* Sources */,
+				1F99651259FE98F0BEAD7CBBF59A2094 /* Frameworks */,
+				03E65F4B2254411BFA041B9F8363A0BC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Pods-CompassSDK";
-			productName = "Pods-CompassSDK";
-			productReference = 121D89BF80EC22BE17834919CBBEC48C /* Pods_CompassSDK.framework */;
+			productName = Pods_CompassSDK;
+			productReference = 121D89BF80EC22BE17834919CBBEC48C /* Pods-CompassSDK */;
 			productType = "com.apple.product-type.framework";
 		};
 		9382624FACE62ABBF58A94549E4EEE07 /* Pods-CompassSDK-CompassSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3521EF1E695FAC968BCDA5E98F911570 /* Build configuration list for PBXNativeTarget "Pods-CompassSDK-CompassSDKTests" */;
+			buildConfigurationList = C7619E1A3325CD6978D077E93B2E75DE /* Build configuration list for PBXNativeTarget "Pods-CompassSDK-CompassSDKTests" */;
 			buildPhases = (
-				398EF27F6E45C38D44CAFEBFDF438D15 /* Headers */,
-				82641ED8AFEF1B3DC4ECA1E7BDC579C0 /* Sources */,
-				FC17F1551B48C5B6B34FF6E7AF128FD3 /* Frameworks */,
-				0275FECD4EF34474F985E0D5F2C15FB3 /* Resources */,
+				68F6E533B7A1964FFA72375454B2BEDA /* Headers */,
+				3E6B677DC42C539CEDA893512962CAEF /* Sources */,
+				7EEB939A1E8CBEBC5EB1581016E6C7B5 /* Frameworks */,
+				276E046D172E9E9F75B8033BDE4B6185 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Pods-CompassSDK-CompassSDKTests";
-			productName = "Pods-CompassSDK-CompassSDKTests";
-			productReference = C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods_CompassSDK_CompassSDKTests.framework */;
+			productName = Pods_CompassSDK_CompassSDKTests;
+			productReference = C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods-CompassSDK-CompassSDKTests */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -198,19 +198,19 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 4D73EC7F1AB918C198B1CA5D2140670D /* Products */;
+			productRefGroup = 26C6AA87385A3DE6F3D8B61E0CC415B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -221,14 +221,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0275FECD4EF34474F985E0D5F2C15FB3 /* Resources */ = {
+		03E65F4B2254411BFA041B9F8363A0BC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		522523FC220174F213A3FCE8D6203937 /* Resources */ = {
+		276E046D172E9E9F75B8033BDE4B6185 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,28 +238,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		82641ED8AFEF1B3DC4ECA1E7BDC579C0 /* Sources */ = {
+		3E6B677DC42C539CEDA893512962CAEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				151E65E538D00918803543CCF0A2990B /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */,
+				8A84B8DFBA9650A6C669190DCAB39178 /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B159C2363B5E0991F79EA90842BEF389 /* Sources */ = {
+		7452E55F452EAEE6D871E748F5C8A5C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3259104A252B2C7A912F146E95A8A49 /* Pods-CompassSDK-dummy.m in Sources */,
+				7B62E359E018BCA56DAF66EFECA68C3E /* Pods-CompassSDK-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		14E773B68A31E4DA4BB09033CDF356DD /* Debug */ = {
+		0604E8E7D0E27E2B6880604CACE49F9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70BE896C4AEF7CEF3BFD3FDD9F37036D /* Pods-CompassSDK-CompassSDKTests.debug.xcconfig */;
+			baseConfigurationReference = A9425AE03A830CD366451D4D09FF243B /* Pods-CompassSDK.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -271,16 +271,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -294,7 +294,7 @@
 			};
 			name = Debug;
 		};
-		33C6B70657142CFC54FB5B299E7A3C1E /* Release */ = {
+		7B257982B905AB8F682082F103759AA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1D6030B9B2BA20F1DF182F162A80186 /* Pods-CompassSDK.release.xcconfig */;
 			buildSettings = {
@@ -310,7 +310,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +332,7 @@
 			};
 			name = Release;
 		};
-		5B82FA55F6A12DBC8196D07B0C1EEB40 /* Release */ = {
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -382,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -394,7 +394,7 @@
 			};
 			name = Release;
 		};
-		6C6178559BD9074C26E073DF5769DB42 /* Debug */ = {
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -447,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -460,7 +460,44 @@
 			};
 			name = Debug;
 		};
-		B8FE18A75CCB18E325E330BF1C1EC8A5 /* Release */ = {
+		F321C4184C70A6885F6C40AE239DF9AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70BE896C4AEF7CEF3BFD3FDD9F37036D /* Pods-CompassSDK-CompassSDKTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FB0852BA7B07449B09CE21AB1629A8C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52652170BAFA2C68EEBFBC76D5976F3A /* Pods-CompassSDK-CompassSDKTests.release.xcconfig */;
 			buildSettings = {
@@ -476,7 +513,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -498,69 +535,32 @@
 			};
 			name = Release;
 		};
-		D3929B466CB1CE97C824776179021781 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9425AE03A830CD366451D4D09FF243B /* Pods-CompassSDK.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3521EF1E695FAC968BCDA5E98F911570 /* Build configuration list for PBXNativeTarget "Pods-CompassSDK-CompassSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14E773B68A31E4DA4BB09033CDF356DD /* Debug */,
-				B8FE18A75CCB18E325E330BF1C1EC8A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6C6178559BD9074C26E073DF5769DB42 /* Debug */,
-				5B82FA55F6A12DBC8196D07B0C1EEB40 /* Release */,
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F862954FE10554EB8A9F0DFBA69F90AC /* Build configuration list for PBXNativeTarget "Pods-CompassSDK" */ = {
+		C7619E1A3325CD6978D077E93B2E75DE /* Build configuration list for PBXNativeTarget "Pods-CompassSDK-CompassSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D3929B466CB1CE97C824776179021781 /* Debug */,
-				33C6B70657142CFC54FB5B299E7A3C1E /* Release */,
+				F321C4184C70A6885F6C40AE239DF9AF /* Debug */,
+				FB0852BA7B07449B09CE21AB1629A8C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D56BDA4294B4EB02FC4FFCE4039526DB /* Build configuration list for PBXNativeTarget "Pods-CompassSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0604E8E7D0E27E2B6880604CACE49F9C /* Debug */,
+				7B257982B905AB8F682082F103759AA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
