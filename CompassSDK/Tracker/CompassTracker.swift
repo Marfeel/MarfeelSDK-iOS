@@ -8,11 +8,43 @@
 import Foundation
 import UIKit
 
-public enum UserType: Int, Codable {
-    case unknown = 0
-    case anonymous = 1
-    case logged = 2
-    case paid = 3
+public enum UserType {
+    case custom(Int)
+    case unknown, anonymous, logged, paid
+}
+
+extension UserType: RawRepresentable, Codable {
+    public typealias RawValue = Int
+
+    public init?(rawValue: Int) {
+        switch rawValue {
+            case 0:
+                self = .unknown
+            case 1:
+                self = .anonymous
+            case 2:
+                self = .logged
+            case 3:
+                self = .paid
+            default:
+                self = .custom(rawValue)
+        }
+    }
+    
+    public var rawValue: Int {
+        switch self {
+            case .unknown:
+              return 0
+            case .anonymous:
+              return 1
+            case .logged:
+              return 2
+            case .paid:
+              return 3
+            case .custom(let customValue):
+              return customValue
+        }
+    }
 }
 
 public protocol CompassTracking: AnyObject {

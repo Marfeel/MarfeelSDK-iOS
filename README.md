@@ -77,9 +77,15 @@ tracker.setSiteUserId({USER_ID})
 Adicionalmente, puede indicar el tipo de usuario, actualmente la librería permite los tipos logged (para usuarios registrados) y paid (para usuarios de pago). Para indicar el tipo de usuario use el método setUserType.
 
 ```swift
-tracker.setUserType(.logged)
+tracker.setUserType(.unknwon)
+
+tracker.setUserType(.anonymous)
 
 tracker.setUserType(.paid)
+
+tracker.setUserType(.logged)
+
+tracker.setUserType(.custom(9))
 ```
 
 Es recomendable que indique el identificador y el tipo de usuario antes de realizar el primer tracking.

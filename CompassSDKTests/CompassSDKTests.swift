@@ -50,7 +50,7 @@ class CompassSDKTests: XCTestCase {
         let sut = CompassTracker(tikOperationFactory: MockedOperationProvider())
         let expectation = XCTestExpectation()
         sut.setSiteUserId("testUser1")
-        sut.setUserType(.logged)
+        sut.setUserType(.custom(9))
         sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
         sut.trackConversion(conversion: "First conversion")
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
