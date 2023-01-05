@@ -13,7 +13,7 @@ struct TrackInfo: Codable {
             pageUrl = "url",
             accountId = "ac",
             tik = "a",
-            userId = "sui",
+            siteUserId = "sui",
             userType = "ut",
             startPageTimeStamp = "ps",
             firstVisitTimeStamp = "fv",
@@ -26,11 +26,11 @@ struct TrackInfo: Codable {
             scrollPercent = "sc",
             previosPageUrl = "pp",
             canonical = "c",
-            siteUserId = "u",
+            userId = "u",
             implodedConversions = "conv",
             pageType
     }
-    
+
     var pageUrl: String? {
         didSet {
             canonical = pageUrl
@@ -54,40 +54,40 @@ struct TrackInfo: Codable {
             implodedConversions = conversions?.joined(separator: ",")
         }
     }
-    
+
     private var startPageDate: Date? {
         didSet {
             startPageTimeStamp = startPageDate?.timeStamp
         }
     }
-    
+
     var fisrtVisitDate: Date? {
         didSet {
             firstVisitTimeStamp = fisrtVisitDate?.timeStamp
         }
     }
-    
+
     var currentDate: Date? {
         didSet {
             currentTimeStamp = currentDate?.timeStamp
         }
     }
-    
+
     var currentVisitDate: Date? {
         didSet {
             currentVisitTimeStamp = currentVisitDate?.timeStamp
         }
     }
-    
+
     var siteUserId: String?
     var compassVersion: String?
     var scrollPercent: Float?
     var userId: String?
     var userType: UserType?
     let pageType = 3
-    
+
     private var pagesViewed = 0
-    
+
     private var pageId: String?
     private var startPageTimeStamp: Int64?
     private var firstVisitTimeStamp: Int64?
@@ -108,7 +108,7 @@ extension TrackInfo {
     var params: [String: Any] {
         self.jsonEncode()!
     }
-    
+
     var data: Data {
         self.encode()!
     }

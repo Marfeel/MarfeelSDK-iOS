@@ -8,28 +8,39 @@
 import Foundation
 import UIKit
 
-public enum UserType: String, Codable {
-    case logged, paid
+public enum UserType: Int, Codable {
+    case unknown = 0
+    case anonymous = 1
+    case logged = 2
+    case paid = 3
 }
 
 public protocol CompassTracking: AnyObject {
+    @available(*, deprecated, renamed: "trackNewPage")
     func startPageView(url: URL)
+    @available(*, deprecated, renamed: "trackNewPage")
     func startPageView(url: URL, scrollView: UIScrollView?)
+    func trackNewPage(url: URL)
+    func trackNewPage(url: URL, scrollView: UIScrollView?)
     func stopTracking()
     func getRFV(_ completion: @escaping (String?) -> ())
+    @available(*, deprecated, renamed: "setSiteUserId")
     func setUserId(_ userId: String?)
+    func setSiteUserId(_ userId: String?)
     func setUserType(_ userType: UserType?)
+    @available(*, deprecated, renamed: "trackConversion")
     func track(conversion: String)
+    func trackConversion(conversion: String)
 }
 
 public class CompassTracker {
     public static let shared = CompassTracker()
-    
+
     private let bundle: Bundle
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
-    
+
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.qualityOfService = .utility
@@ -37,13 +48,13 @@ public class CompassTracker {
         queue.name = "com.compass.sdk.operation.queue"
         return queue
     }()
-    
+
     private lazy var accountId: Int? = {
         bundle.compassAccountId
     }()
-    
+
     private let compassVersion = "2.0"
-    
+
     init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
         self.bundle = bundle
         self.storage = storage
@@ -54,10 +65,10 @@ public class CompassTracker {
         trackInfo.fisrtVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
         trackInfo.compassVersion = compassVersion
-        trackInfo.siteUserId = storage.suid
+        trackInfo.userId = storage.userId
         trackInfo.sessionId = storage.sessionId
     }
-    
+
     private var deadline: Double {
         switch trackInfo.tik {
         case 0..<2: return 5
@@ -66,13 +77,13 @@ public class CompassTracker {
         default: return 20
         }
     }
-    
+
     private var finishObserver: NSKeyValueObservation?
-    
+
     private var trackInfo = TrackInfo()
-    
+
     private var scrollView: UIScrollView?
-    
+
     private var newConversions = [String]()
 }
 
@@ -82,7 +93,7 @@ extension CompassTracker: ScrollPercentProvider {
             completion(nil)
             return
         }
-        
+
         DispatchQueue.main.async {
             let offset = scrollView.contentOffset.y
             let scrolledDistance = offset + scrollView.contentInset.top
@@ -95,10 +106,15 @@ extension CompassTracker: ScrollPercentProvider {
 }
 
 extension CompassTracker: CompassTracking {
+    @available(*, deprecated, renamed: "setSiteUserId")
     public func setUserId(_ userId: String?) {
-        trackInfo.userId = userId
+        setSiteUserId(userId)
     }
-    
+
+    public func setSiteUserId(_ userId: String?) {
+        trackInfo.siteUserId = userId
+    }
+
     public func getRFV(_ completion: @escaping (String?) -> ()) {
         guard let userId = trackInfo.userId, let accountId = accountId else {
             completion(nil)
@@ -108,27 +124,42 @@ extension CompassTracker: CompassTracking {
             completion(rfv)
         }
     }
-    
+
     public func setUserType(_ userType: UserType?) {
         trackInfo.userType = userType
     }
-    
+
+    @available(*, deprecated, renamed: "trackNewPage")
     public func startPageView(url: URL, scrollView: UIScrollView?) {
-        self.scrollView = scrollView
-        startPageView(url: url)
+        trackNewPage(url: url, scrollView: scrollView)
     }
-    
+
+    @available(*, deprecated, renamed: "trackNewPage")
     public func startPageView(url: URL) {
+        trackNewPage(url: url)
+    }
+
+    public func trackNewPage(url: URL, scrollView: UIScrollView?) {
+        self.scrollView = scrollView
+        self.trackNewPage(url: url)
+    }
+
+    public func trackNewPage(url: URL) {
         restart(pageName: url.absoluteString)
         doTik()
     }
-    
+
     public func stopTracking() {
         restart(pageName: nil)
         scrollView = nil
     }
-    
+
+    @available(*, deprecated, renamed: "trackConversion")
     public func track(conversion: String) {
+        trackConversion(conversion: conversion)
+    }
+
+    public func trackConversion(conversion: String) {
         newConversions.append(conversion)
     }
 }
@@ -150,14 +181,14 @@ private extension CompassTracker {
         operationQueue.addOperation(operation)
         trackInfo.tik = trackInfo.tik + 1
     }
-    
+
     func observeFinish(for operation: Operation) {
         finishObserver = operation.observe(\Operation.isFinished, options: .new) { (operation, change) in
             guard !operation.isCancelled, operation.isFinished else {return}
             self.doTik()
         }
     }
-    
+
     func restart(pageName: String?) {
         finishObserver = nil
         operationQueue.cancelAllOperations()
