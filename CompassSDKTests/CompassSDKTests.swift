@@ -31,7 +31,7 @@ class MockOperation: Operation {
     override var isExecuting: Bool {runing}
     
     override func start() {
-        print(trackInfo)
+        print(trackInfo.jsonEncode())
         runing = false
     }
 }
@@ -49,13 +49,13 @@ class CompassSDKTests: XCTestCase {
     func testShouldSendTik() {
         let sut = CompassTracker(tikOperationFactory: MockedOperationProvider())
         let expectation = XCTestExpectation()
-        sut.setUserId("testUser1")
-        sut.setUserType(.logged)
-        sut.startPageView(url: URL(string: "http://localhost/test1")!)
-        sut.track(conversion: "First conversion")
+        sut.setSiteUserId("testUser1")
+        sut.setUserType(.custom(9))
+        sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
+        sut.trackConversion(conversion: "First conversion")
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-            sut.startPageView(url: URL(string: "http://localhost/test2")!)
-            sut.track(conversion: "Second conversion")
+            sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
+            sut.trackConversion(conversion: "Second conversion")
         })
         
         wait(for: [expectation], timeout: 40)

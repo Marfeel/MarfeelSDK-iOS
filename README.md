@@ -46,13 +46,13 @@ let tracker = CompassTracker.shared
 
 ### Tracking de páginas
 
-CompassTracker se encarga automáticamente de controlar el tiempo que el usuario se mantiene en una página. Para indicar que comience el tracking de una página concreta use el método startPageView, indicando la url de la página.
+CompassTracker se encarga automáticamente de controlar el tiempo que el usuario se mantiene en una página. Para indicar que comience el tracking de una página concreta use el método trackNewPage, indicando la url de la página.
 
 ```swift
-tracker.startPageView(url: {URL})
+tracker.trackNewPage(url: {URL})
 ```
 
-CompassTracker continuará registrando el tiempo de permanencia en la página hasta que se llame de nuevo a startPageView con una url diferente. O bien si el desarrollador lo indica mediante el método stopTracking()
+CompassTracker continuará registrando el tiempo de permanencia en la página hasta que se llame de nuevo a trackNewPage con una url diferente. O bien si el desarrollador lo indica mediante el método stopTracking()
 
 ```swift
 tracker.stopTracking()
@@ -60,26 +60,32 @@ tracker.stopTracking()
 
 ### Control del scroll
 
-Si quiere que el sistema registre el porcentaje de scroll que el usuario ha hecho en la página, indique en el método startPageView el UIScrollView en el que se está mostrando el contenido al usuario.
+Si quiere que el sistema registre el porcentaje de scroll que el usuario ha hecho en la página, indique en el método trackNewPage el UIScrollView en el que se está mostrando el contenido al usuario.
 
 ```swift
-tracker.startPageView(url: {URL}, scrollView: {UIScrollView}})
+tracker.trackNewPage(url: {URL}, scrollView: {UIScrollView}})
 ```
 
 ### Identificación de usuario
 
-Para asociar al usuario de la aplicación con los registros generados por la librería, utilice el método setUserId, indicando el identificador del usuario en su plataforma.
+Para asociar al usuario de la aplicación con los registros generados por la librería, utilice el método setSiteUserId, indicando el identificador del usuario en su plataforma.
 
 ```swift
-tracker.setUserId({USER_ID})
+tracker.setSiteUserId({USER_ID})
 ```
 
 Adicionalmente, puede indicar el tipo de usuario, actualmente la librería permite los tipos logged (para usuarios registrados) y paid (para usuarios de pago). Para indicar el tipo de usuario use el método setUserType.
 
 ```swift
-tracker.setUserType(.logged)
+tracker.setUserType(.unknwon)
+
+tracker.setUserType(.anonymous)
 
 tracker.setUserType(.paid)
+
+tracker.setUserType(.logged)
+
+tracker.setUserType(.custom(9))
 ```
 
 Es recomendable que indique el identificador y el tipo de usuario antes de realizar el primer tracking.
@@ -96,8 +102,8 @@ tracker.getRFV { rfv in
 
 ### Tracking de conversiones
 
-Si quiere indicar una conversión, puede llamar en cualquier momento al método track(conversion: String).
+Si quiere indicar una conversión, puede llamar en cualquier momento al método trackConversion(conversion: String).
 
 ```swift
-tracker.track(conversion: "{CONVERSION}"
+tracker.trackConversion(conversion: "{CONVERSION}"
 ```

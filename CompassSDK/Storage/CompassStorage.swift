@@ -9,8 +9,8 @@ import Foundation
 
 protocol CompassStorage {
     func addVisit()
-    var suid: String {get}
-    var userId: String? {get set}
+    var suid: String? {get set}
+    var userId: String {get}
     var previousVisit: Date? {get}
     var firstVisit: Date {get}
     var sessionId: String {get}
@@ -25,23 +25,23 @@ class PListCompassStorage: PListStorage {
         var lastVisit: Date?
         var sessionId: String?
         var sessionExpirationDate: Date?
-        
+
         static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil)}
     }
-    
-    let filename = "CompassPersistence"
-    
+
+    let filename = "CompassPersistenceV2"
+
     init() {
         self.model = load() ?? .empty
     }
-    
+
     private var model: Model? {
         didSet {
             guard let model = model else {return}
             persist(values: model)
         }
     }
-    
+
     var previousVisit: Date?
 }
 
@@ -53,44 +53,46 @@ extension PListCompassStorage: CompassStorage {
             model?.sessionExpirationDate = Date().adding(minutes: 30)
             return sessionId
         }
-        
+
         model?.sessionExpirationDate = Date().adding(minutes: 30)
         return sessionId
     }
-    
-    var suid: String {
-        guard let suid = model?.suid else {
-            let suid = UUID().uuidString
-            model?.suid = suid
-            return suid
-        }
-        
-        return suid
-    }
-    
-    var userId: String? {
+
+    var suid: String? {
         get {
-            model?.userId
+            model?.suid
         }
-        
+
         set {
-            model?.userId = newValue
+            model?.suid = newValue
         }
     }
-    
+
+    var userId: String {
+        guard let userId = model?.userId else {
+            let userId = UUID().uuidString
+
+            model?.userId = userId
+
+            return userId
+        }
+
+        return userId
+    }
+
     func addVisit() {
         model?.numVisits += 1
         previousVisit = model?.lastVisit
         model?.lastVisit = Date()
     }
-    
+
     var firstVisit: Date {
         guard let firstVisit = model?.firstVisit else {
             let date = Date()
             model?.firstVisit = date
             return date
         }
-        
+
         return firstVisit
     }
 }
