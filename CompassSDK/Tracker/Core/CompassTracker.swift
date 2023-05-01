@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+private let TIK_PATH = "ingest.php"
+
 public enum UserType {
     case custom(Int)
     case unknown, anonymous, logged, paid
@@ -55,7 +57,7 @@ public protocol CompassTracking: AnyObject {
     func trackNewPage(url: URL)
     func trackNewPage(url: URL, scrollView: UIScrollView?)
     func stopTracking()
-    func getRFV(_ completion: @escaping (String?) -> ())
+    func getRFV(_ completion: @escaping (Rfv?) -> ())
     @available(*, deprecated, renamed: "setSiteUserId")
     func setUserId(_ userId: String?)
     func setSiteUserId(_ userId: String?)
@@ -65,27 +67,24 @@ public protocol CompassTracking: AnyObject {
     func trackConversion(conversion: String)
 }
 
-public class CompassTracker {
-    public static let shared = CompassTracker()
+public class CompassTracker: Tracker {
+    public static let shared: CompassTracker = CompassTracker()
 
     private let bundle: Bundle
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
-
-    private lazy var operationQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.qualityOfService = .utility
-        queue.maxConcurrentOperationCount = 1
-        queue.name = "com.compass.sdk.operation.queue"
-        return queue
-    }()
+//    private lazy var operationQueue: OperationQueue = {
+//        let queue = OperationQueue()
+//        queue.qualityOfService = .utility
+//        queue.maxConcurrentOperationCount = 1
+//        queue.name = "com.compass.sdk.ingest.operation.queue"
+//        return queue
+//    }()
 
     private lazy var accountId: Int? = {
         bundle.compassAccountId
     }()
-
-    private let compassVersion = "2.0"
 
     init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
         self.bundle = bundle
@@ -93,12 +92,16 @@ public class CompassTracker {
         self.tikOperationFactory = tikOperationFactory
         self.getRFV = getRFV
         storage.addVisit()
-        trackInfo.accountId = accountId
-        trackInfo.fisrtVisitDate = storage.firstVisit
+
+        super.init(queueName: "com.compass.sdk.ingest.operation.queue")
+
+        trackInfo.firstVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
-        trackInfo.compassVersion = compassVersion
+        trackInfo.compassVersion = bundle.compassVersion
         trackInfo.userId = storage.userId
         trackInfo.sessionId = storage.sessionId
+        
+        trackInfo.accountId = accountId
     }
 
     private var deadline: Double {
@@ -110,9 +113,9 @@ public class CompassTracker {
         }
     }
 
-    private var finishObserver: NSKeyValueObservation?
+//    private var finishObserver: NSKeyValueObservation?
 
-    private var trackInfo = TrackInfo()
+    internal var trackInfo = IngestTrackInfo()
 
     private var scrollView: UIScrollView?
 
@@ -147,7 +150,7 @@ extension CompassTracker: CompassTracking {
         trackInfo.siteUserId = userId
     }
 
-    public func getRFV(_ completion: @escaping (String?) -> ()) {
+    public func getRFV(_ completion: @escaping (Rfv?) -> ()) {
         guard let userId = trackInfo.userId, let accountId = accountId else {
             completion(nil)
             return
@@ -208,21 +211,42 @@ private extension CompassTracker {
         guard trackInfo.pageUrl != nil else {return}
         let dispatchDate = Date(timeIntervalSinceNow: deadline)
         trackInfo.currentDate = dispatchDate
-        let operation = tikOperationFactory.buildOperation(trackInfo: trackInfo, dispatchDate: dispatchDate, scrollPercentProvider: self, conversionsProvider: self)
-        observeFinish(for: operation)
-        operationQueue.addOperation(operation)
-        trackInfo.tik = trackInfo.tik + 1
-    }
-
-    func observeFinish(for operation: Operation) {
-        finishObserver = operation.observe(\Operation.isFinished, options: .new) { (operation, change) in
-            guard !operation.isCancelled, operation.isFinished else {return}
+        let operation = tikOperationFactory.buildOperation(
+            dataBuilder: { [self] (completion) in
+                getScrollPercent { (scrollPercent) in
+                    getConversions { (conversions) in
+                        var finalTrackInfo = self.trackInfo
+                     
+                        finalTrackInfo.scrollPercent = scrollPercent
+                        finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
+                        
+                        completion(finalTrackInfo)
+                   }
+                }
+                
+                return nil
+            },
+            dispatchDate: dispatchDate,
+            path: TIK_PATH,
+            contentType: ContentType.FORM
+        )
+        observeFinish(for: operation) { [self] in
+            trackInfo.tik = trackInfo.tik + 1
             self.doTik()
         }
+        operationQueue.addOperation(operation)
     }
 
+//    func observeFinish(for operation: Operation) {
+//        finishObserver = operation.observe(\Operation.isFinished, options: .new) { [self] (operation, change) in
+//            guard !operation.isCancelled, operation.isFinished else {return}
+//            trackInfo.tik = trackInfo.tik + 1
+//            self.doTik()
+//        }
+//    }
+//
     func restart(pageName: String?) {
-        finishObserver = nil
+        stopObserving()
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
     }

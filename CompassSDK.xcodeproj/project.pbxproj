@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490E10D929FB875200D4EACB /* IngestTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10D829FB875200D4EACB /* IngestTrackInfo.swift */; };
+		490E10DD29FB879100D4EACB /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */; };
+		490E10E729FFEBB900D4EACB /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10E629FFEBB900D4EACB /* AbstractTracker.swift */; };
+		490E10ED2A000CCB00D4EACB /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10EC2A000CCB00D4EACB /* Rfv.swift */; };
+		4960742329F9864000EF49BD /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742229F9864000EF49BD /* CompassTrackerMultimedia.swift */; };
+		4960742729F986DF00EF49BD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742629F986DF00EF49BD /* Event.swift */; };
+		4960742B29FA88B500EF49BD /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742A29FA88B500EF49BD /* MultimediaMetadata.swift */; };
+		4960742F29FA8D0B00EF49BD /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742E29FA8D0B00EF49BD /* Type.swift */; };
+		4960743329FA954200EF49BD /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743229FA954200EF49BD /* MultimediaItem.swift */; };
+		4960743729FA9ACE00EF49BD /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */; };
 		8708808975A1F437B5B1BFB4 /* Pods_CompassSDK_CompassSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100E312D8108F5F25BD32BC3 /* Pods_CompassSDK_CompassSDKTests.framework */; };
 		9EDD1B45CD00D0422FA813CC /* Pods_CompassSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82623FE3DD6624740A8474AD /* Pods_CompassSDK.framework */; };
 		D704E28425D29597006517D2 /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704E28325D29597006517D2 /* TikOperationFactory.swift */; };
@@ -43,6 +53,16 @@
 /* Begin PBXFileReference section */
 		100E312D8108F5F25BD32BC3 /* Pods_CompassSDK_CompassSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompassSDK_CompassSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		432D2BE5D71C8785A9566AEE /* Pods-CompassSDK-CompassSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompassSDK-CompassSDKTests.release.xcconfig"; path = "Target Support Files/Pods-CompassSDK-CompassSDKTests/Pods-CompassSDK-CompassSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		490E10D829FB875200D4EACB /* IngestTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngestTrackInfo.swift; sourceTree = "<group>"; };
+		490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaTrackInfo.swift; sourceTree = "<group>"; };
+		490E10E629FFEBB900D4EACB /* AbstractTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTracker.swift; sourceTree = "<group>"; };
+		490E10EC2A000CCB00D4EACB /* Rfv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rfv.swift; sourceTree = "<group>"; };
+		4960742229F9864000EF49BD /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
+		4960742629F986DF00EF49BD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		4960742A29FA88B500EF49BD /* MultimediaMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaMetadata.swift; sourceTree = "<group>"; };
+		4960742E29FA8D0B00EF49BD /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		4960743229FA954200EF49BD /* MultimediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaItem.swift; sourceTree = "<group>"; };
+		4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
 		82623FE3DD6624740A8474AD /* Pods_CompassSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B6673D2B3E0CE844519003 /* Pods-CompassSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompassSDK.release.xcconfig"; path = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK.release.xcconfig"; sourceTree = "<group>"; };
 		B77BDA62DF0722287AE884CE /* Pods-CompassSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompassSDK.debug.xcconfig"; path = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +112,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		490E10D129FB85A600D4EACB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
+				490E10D829FB875200D4EACB /* IngestTrackInfo.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4960742129F985C800EF49BD /* Multimedia */ = {
+			isa = PBXGroup;
+			children = (
+				4960742229F9864000EF49BD /* CompassTrackerMultimedia.swift */,
+				4960742629F986DF00EF49BD /* Event.swift */,
+				4960742A29FA88B500EF49BD /* MultimediaMetadata.swift */,
+				4960742E29FA8D0B00EF49BD /* Type.swift */,
+				4960743229FA954200EF49BD /* MultimediaItem.swift */,
+				4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */,
+				490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */,
+			);
+			path = Multimedia;
+			sourceTree = "<group>";
+		};
 		B634B87B91F2CC0DB328E336 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,8 +187,10 @@
 		D70E237E25BDA78500BA3C38 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				D77958FF25B064F800A7A44A /* CompassTracker.swift */,
+				490E10D129FB85A600D4EACB /* Core */,
+				4960742129F985C800EF49BD /* Multimedia */,
 				D7D455A025B4A28C00CC2BCE /* TrackInfo.swift */,
+				490E10E629FFEBB900D4EACB /* AbstractTracker.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -201,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				D7E6D45E25D1589B002749A3 /* GetRFV.swift */,
+				490E10EC2A000CCB00D4EACB /* Rfv.swift */,
 			);
 			path = RFV;
 			sourceTree = "<group>";
@@ -376,18 +422,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7D4559D25B4A10900CC2BCE /* TikOperation.swift in Sources */,
+				4960743329FA954200EF49BD /* MultimediaItem.swift in Sources */,
 				D704E28425D29597006517D2 /* TikOperationFactory.swift in Sources */,
 				D7D455A125B4A28C00CC2BCE /* TrackInfo.swift in Sources */,
+				490E10E729FFEBB900D4EACB /* AbstractTracker.swift in Sources */,
+				4960742F29FA8D0B00EF49BD /* Type.swift in Sources */,
 				D7E6D45F25D1589B002749A3 /* GetRFV.swift in Sources */,
+				4960742729F986DF00EF49BD /* Event.swift in Sources */,
+				490E10DD29FB879100D4EACB /* MultimediaTrackInfo.swift in Sources */,
+				490E10D929FB875200D4EACB /* IngestTrackInfo.swift in Sources */,
 				D7D455CF25B4A72600CC2BCE /* Codable.swift in Sources */,
 				D7D455CB25B4A6FF00CC2BCE /* PListStorage.swift in Sources */,
+				4960742329F9864000EF49BD /* CompassTrackerMultimedia.swift in Sources */,
+				490E10ED2A000CCB00D4EACB /* Rfv.swift in Sources */,
 				D779590425B0653500A7A44A /* SendTik.swift in Sources */,
 				D704E2D525D2DCED006517D2 /* ApiRouter.swift in Sources */,
 				D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */,
 				D7E6D46525D15AC2002749A3 /* URLRequest.swift in Sources */,
+				4960743729FA9ACE00EF49BD /* PlaybackInfo.swift in Sources */,
 				D7D4559925B49F9400CC2BCE /* CompassStorage.swift in Sources */,
 				D7D455D325B4B86700CC2BCE /* Date.swift in Sources */,
 				D779590025B064F800A7A44A /* CompassTracker.swift in Sources */,
+				4960742B29FA88B500EF49BD /* MultimediaMetadata.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

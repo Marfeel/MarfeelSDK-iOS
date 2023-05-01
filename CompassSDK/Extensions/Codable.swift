@@ -44,4 +44,12 @@ extension Encodable {
         let encoder = JSONEncoder()
         return try? encoder.encode(self)
     }
+    
+    var params: [String: Any] {
+        self.jsonEncode()!
+    }
+    
+    var data: Data {
+        self.encode()!
+    }
 }
