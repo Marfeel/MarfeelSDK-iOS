@@ -77,6 +77,7 @@ private extension CompassTrackerMultimedia {
             return
         }
         let tik = tiksInProgress[id]!.tik
+        let item = items[id]!
         
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
@@ -87,7 +88,7 @@ private extension CompassTrackerMultimedia {
                     completion(MultimediaTrackInfo(
                         trackInfo: trackInfo,
                         rfv: rfv,
-                        item: items[id],
+                        item: item,
                         tik: tik
                     ))
                 }

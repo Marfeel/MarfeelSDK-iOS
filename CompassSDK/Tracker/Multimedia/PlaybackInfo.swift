@@ -21,7 +21,6 @@ public struct PlaybackInfo: Encodable {
         case started = "s"
         case adsStarted = "a"
         case adsLength = "ap"
-        
     }
     
     var ads: [Int] = []

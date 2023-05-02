@@ -11,6 +11,8 @@
 		490E10DD29FB879100D4EACB /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */; };
 		490E10E729FFEBB900D4EACB /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10E629FFEBB900D4EACB /* AbstractTracker.swift */; };
 		490E10ED2A000CCB00D4EACB /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490E10EC2A000CCB00D4EACB /* Rfv.swift */; };
+		4923C9932A012BE50036CE77 /* CompassSDKMultimediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9922A012BE50036CE77 /* CompassSDKMultimediaTests.swift */; };
+		4923C9972A012FB60036CE77 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9962A012FB60036CE77 /* Mocks.swift */; };
 		4960742329F9864000EF49BD /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742229F9864000EF49BD /* CompassTrackerMultimedia.swift */; };
 		4960742729F986DF00EF49BD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742629F986DF00EF49BD /* Event.swift */; };
 		4960742B29FA88B500EF49BD /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742A29FA88B500EF49BD /* MultimediaMetadata.swift */; };
@@ -57,6 +59,8 @@
 		490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaTrackInfo.swift; sourceTree = "<group>"; };
 		490E10E629FFEBB900D4EACB /* AbstractTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTracker.swift; sourceTree = "<group>"; };
 		490E10EC2A000CCB00D4EACB /* Rfv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rfv.swift; sourceTree = "<group>"; };
+		4923C9922A012BE50036CE77 /* CompassSDKMultimediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassSDKMultimediaTests.swift; sourceTree = "<group>"; };
+		4923C9962A012FB60036CE77 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		4960742229F9864000EF49BD /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
 		4960742629F986DF00EF49BD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4960742A29FA88B500EF49BD /* MultimediaMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaMetadata.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 			children = (
 				D77958EE25B05C9700A7A44A /* CompassSDKTests.swift */,
 				D77958F025B05C9700A7A44A /* Info.plist */,
+				4923C9922A012BE50036CE77 /* CompassSDKMultimediaTests.swift */,
+				4923C9962A012FB60036CE77 /* Mocks.swift */,
 			);
 			path = CompassSDKTests;
 			sourceTree = "<group>";
@@ -451,7 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4923C9932A012BE50036CE77 /* CompassSDKMultimediaTests.swift in Sources */,
 				D77958EF25B05C9700A7A44A /* CompassSDKTests.swift in Sources */,
+				4923C9972A012FB60036CE77 /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

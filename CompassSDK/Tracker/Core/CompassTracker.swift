@@ -74,14 +74,7 @@ public class CompassTracker: Tracker {
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
-//    private lazy var operationQueue: OperationQueue = {
-//        let queue = OperationQueue()
-//        queue.qualityOfService = .utility
-//        queue.maxConcurrentOperationCount = 1
-//        queue.name = "com.compass.sdk.ingest.operation.queue"
-//        return queue
-//    }()
-
+    
     private lazy var accountId: Int? = {
         bundle.compassAccountId
     }()
@@ -112,9 +105,7 @@ public class CompassTracker: Tracker {
         default: return 20
         }
     }
-
-//    private var finishObserver: NSKeyValueObservation?
-
+    
     internal var trackInfo = IngestTrackInfo()
 
     private var scrollView: UIScrollView?
@@ -237,14 +228,6 @@ private extension CompassTracker {
         operationQueue.addOperation(operation)
     }
 
-//    func observeFinish(for operation: Operation) {
-//        finishObserver = operation.observe(\Operation.isFinished, options: .new) { [self] (operation, change) in
-//            guard !operation.isCancelled, operation.isFinished else {return}
-//            trackInfo.tik = trackInfo.tik + 1
-//            self.doTik()
-//        }
-//    }
-//
     func restart(pageName: String?) {
         stopObserving()
         operationQueue.cancelAllOperations()

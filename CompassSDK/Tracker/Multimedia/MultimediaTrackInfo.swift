@@ -12,14 +12,14 @@ struct MultimediaTrackInfo: Encodable {
         case tik = "a"
     }
     
-    var trackInfo: TrackInfo!
+    var trackInfo: TrackInfo
     var rfv: Rfv?
-    let item: MultimediaItem!
+    let item: MultimediaItem
     var tik = 0
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
+        
         try trackInfo.encode(to: encoder)
         try rfv?.encode(to: encoder)
         try item.encode(to: encoder)
