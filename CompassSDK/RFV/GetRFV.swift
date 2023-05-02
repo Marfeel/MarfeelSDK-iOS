@@ -39,6 +39,7 @@ class GetRFV {
 extension GetRFV: GetRFVUseCase {
     func fetch(userId: String, account: Int, _ completion: @escaping (Rfv?, Error?) -> ()) {
         let apiCall = GetRFVApiCall(userId: userId, account: account)
+        
         apiRouter.request(from: apiCall) { (rfv: Rfv?, error: Error?) in
             completion(rfv, error)
         }

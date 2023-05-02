@@ -8,11 +8,15 @@
 import XCTest
 @testable import CompassSDK
 
+fileprivate typealias Expectation = (IngestTrackInfo) -> ()
+
 class MockOperation: Operation {
-    private let trackInfo: TrackInfo
-    
-    init(trackInfo: TrackInfo) {
-        self.trackInfo = trackInfo
+    private let dataBuilder: DataBuilder
+    private let expectation: Expectation?
+
+    fileprivate init(dataBuilder: @escaping DataBuilder, expectation: Expectation?) {
+        self.dataBuilder = dataBuilder
+        self.expectation =  expectation
     }
     
     private var runing: Bool = false {
@@ -31,15 +35,64 @@ class MockOperation: Operation {
     override var isExecuting: Bool {runing}
     
     override func start() {
-        print(trackInfo.jsonEncode())
-        runing = false
+        let onData = { [self] (data: Encodable) in
+            print(data.jsonEncode()!)
+            runing = false
+            
+            expectation?(data as! IngestTrackInfo)
+        }
+        let data = dataBuilder(onData)
+        
+        guard data != nil else {
+            return
+        }
+        
+        onData(data!)
     }
 }
 
 class MockedOperationProvider: TikOperationFactory {
-    func buildOperation(trackInfo: TrackInfo, dispatchDate: Date, scrollPercentProvider: ScrollPercentProvider?, conversionsProvider: ConversionsProvider?) -> Operation {
-        MockOperation(trackInfo: trackInfo)
+    fileprivate var expectation: Expectation?
+    
+    fileprivate init(expectation: Expectation?) {
+        self.expectation = expectation
     }
+    
+    func buildOperation(dataBuilder: @escaping DataBuilder, dispatchDate: Date, path: String?, contentType: ContentType?) -> Operation {
+        MockOperation(dataBuilder: dataBuilder, expectation: expectation)
+    }
+}
+
+class MockStorage: CompassStorage {
+    func addVisit() {
+    }
+    
+    var userId = "userIdFromStorage"
+    var sessionId = "sessionIdFromStorage"
+    var suid: String? = "suidFromStorage"
+    var firstVisit = Date()
+    var lastVisit: Date? = nil
+    var previousVisit: Date? = nil
+    var sessionExpirationDate:Date? = nil
+    
+    init() {}
+}
+
+class MockApiRouter: ApiRouting {
+    var expect: (ApiCall) -> ()
+    
+    init(expect: @escaping (ApiCall) -> ()) {
+        self.expect = expect
+    }
+    
+    func request<T>(from apiCall: ApiCall, _ completion: @escaping (T?, Error?) -> ()) where T : Decodable {
+        expect(apiCall)
+        
+        let rfv = try? JSONDecoder().decode(T.self, from: "{\"rfv\": 1.1, \"r\": 1, \"f\": 2, \"v\": 3}".data(using: .utf8)!)
+        completion(rfv, nil)
+    }
+    
+    func call(from apiCall: ApiCall, _ completion: @escaping (Error?) -> ()) {}
 }
 
 class CompassSDKTests: XCTestCase {
@@ -47,33 +100,65 @@ class CompassSDKTests: XCTestCase {
     var timer: Timer?
 
     func testShouldSendTik() {
-        let sut = CompassTracker(tikOperationFactory: MockedOperationProvider())
-        let expectation = XCTestExpectation()
+        var expectation = XCTestExpectation()
+                
+        let operationProvider = MockedOperationProvider(expectation: { (data: IngestTrackInfo) in
+            XCTAssertEqual(data.pageUrl, "http://localhost/test1")
+            XCTAssertEqual(data.siteUserId, "testUser1")
+            XCTAssertEqual(data.userType?.rawValue, 9)
+            XCTAssertEqual(data.userId, "userIdFromStorage")
+            XCTAssertEqual(data.sessionId, "sessionIdFromStorage")
+
+            expectation.fulfill()
+        })
+        let sut = CompassTracker(storage: MockStorage(), tikOperationFactory: operationProvider)
         sut.setSiteUserId("testUser1")
         sut.setUserType(.custom(9))
         sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
-        sut.trackConversion(conversion: "First conversion")
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-            sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
-            sut.trackConversion(conversion: "Second conversion")
-        })
         
-        wait(for: [expectation], timeout: 40)
+        wait(for: [expectation], timeout: 5)
+        
+        expectation = XCTestExpectation()
+        operationProvider.expectation = { (data) in
+            XCTAssertEqual(data.conversions, ["First conversion", "Second conversion"])
+            XCTAssertEqual(data.pageUrl, "http://localhost/test2")
+            XCTAssertEqual(data.siteUserId, "testUser1")
+            XCTAssertEqual(data.userType?.rawValue, 9)
+            XCTAssertEqual(data.userId, "userIdFromStorage")
+            XCTAssertEqual(data.sessionId, "sessionIdFromStorage")
+
+            expectation.fulfill()
+        }
+
+        sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
+        sut.trackConversion(conversion: "First conversion")
+        sut.trackConversion(conversion: "Second conversion")
+        
+        wait(for: [expectation], timeout: 5)
     }
 
     func testShouldFetchRFV() {
-        let sut = GetRFV()
         let expectation = XCTestExpectation()
-        sut.fetch(userId: UUID().uuidString, account: 0) { (rfv, error) in
+        let sut = GetRFV(apiRouter: MockApiRouter(expect: {(apiCall) in
+            XCTAssertEqual(apiCall.path, "data.php")
+            XCTAssertEqual(apiCall.type.rawValue, ContentType.FORM.rawValue)
+            XCTAssertEqual(apiCall.params["u"] as! String, "uuid")
+            XCTAssertEqual(apiCall.params["ac"] as! Int, 0)
+        }))
+        sut.fetch(userId: "uuid", account: 0) { (rfv, error) in
             guard error == nil else {
                 XCTFail()
                 return
             }
             
-            XCTAssertNotNil(rfv)
+            XCTAssertEqual(rfv?.rfv, 1.1)
+            XCTAssertEqual(rfv?.r, 1)
+            XCTAssertEqual(rfv?.f, 2)
+            XCTAssertEqual(rfv?.v, 3)
+            
             expectation.fulfill()
             print(rfv)
         }
-        wait(for: [expectation], timeout: 40)
+        wait(for: [expectation], timeout: 5)
     }
 }
