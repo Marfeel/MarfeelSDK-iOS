@@ -232,5 +232,6 @@ private extension CompassTracker {
         stopObserving()
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
+        CompassTrackerMultimedia.shared.reset()
     }
 }
