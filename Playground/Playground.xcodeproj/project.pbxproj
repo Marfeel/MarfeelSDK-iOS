@@ -19,7 +19,7 @@
 		4923C9CA2A0195870036CE77 /* BlogPostCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9C92A0195870036CE77 /* BlogPostCardList.swift */; };
 		4923C9CD2A01962D0036CE77 /* BlogPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CC2A01962D0036CE77 /* BlogPostView.swift */; };
 		4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CF2A0196820036CE77 /* AllPostsView.swift */; };
-		49DAD3172A02568D00B25852 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 49DAD3162A02568D00B25852 /* YouTubeiOSPlayerHelper */; };
+		49DAD3192A025D3300B25852 /* YoutubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DAD3182A025D3300B25852 /* YoutubeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +36,7 @@
 		4923C9C92A0195870036CE77 /* BlogPostCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCardList.swift; sourceTree = "<group>"; };
 		4923C9CC2A01962D0036CE77 /* BlogPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostView.swift; sourceTree = "<group>"; };
 		4923C9CF2A0196820036CE77 /* AllPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostsView.swift; sourceTree = "<group>"; };
+		49DAD3182A025D3300B25852 /* YoutubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +45,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4923C9C12A0192950036CE77 /* SDWebImageSwiftUI in Frameworks */,
-				49DAD3172A02568D00B25852 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +82,7 @@
 				4923C9C92A0195870036CE77 /* BlogPostCardList.swift */,
 				4923C9CC2A01962D0036CE77 /* BlogPostView.swift */,
 				4923C9CF2A0196820036CE77 /* AllPostsView.swift */,
+				49DAD3182A025D3300B25852 /* YoutubeView.swift */,
 			);
 			path = Playground;
 			sourceTree = "<group>";
@@ -112,7 +113,6 @@
 			name = Playground;
 			packageProductDependencies = (
 				4923C9C02A0192950036CE77 /* SDWebImageSwiftUI */,
-				49DAD3162A02568D00B25852 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Playground;
 			productReference = 4923C9A42A0190D40036CE77 /* Playground.app */;
@@ -143,7 +143,6 @@
 			mainGroup = 4923C99B2A0190D40036CE77;
 			packageReferences = (
 				4923C9BF2A0192950036CE77 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				49DAD3152A02568D00B25852 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 4923C9A52A0190D40036CE77 /* Products */;
 			projectDirPath = "";
@@ -177,6 +176,7 @@
 				4923C9BD2A0191A30036CE77 /* BlogPostCard.swift in Sources */,
 				4923C9CA2A0195870036CE77 /* BlogPostCardList.swift in Sources */,
 				4923C9BA2A01917B0036CE77 /* HexColorExtension.swift in Sources */,
+				49DAD3192A025D3300B25852 /* YoutubeView.swift in Sources */,
 				4923C9A82A0190D40036CE77 /* PlaygroundApp.swift in Sources */,
 				4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */,
 				4923C9C72A0193CE0036CE77 /* BlogPostStore.swift in Sources */,
@@ -376,14 +376,6 @@
 				minimumVersion = 2.2.3;
 			};
 		};
-		49DAD3152A02568D00B25852 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -391,11 +383,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4923C9BF2A0192950036CE77 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
-		};
-		49DAD3162A02568D00B25852 /* YouTubeiOSPlayerHelper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 49DAD3152A02568D00B25852 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
-			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

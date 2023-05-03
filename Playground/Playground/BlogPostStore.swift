@@ -24,7 +24,8 @@ class BlogPostsStore: ObservableObject {
                 Unless you're a 20 year old guitarist from Seattle. It's a grunge thing. Well, there's a problem sir, he's got a gun! When I get out of here... I'm gonna have you fired.
             """,
             featured: true,
-            url: "http://dev.marfeel.co/2022/11/25/article-with-video-html5/"
+            url: "http://dev.marfeel.co/2022/11/25/article-with-video-html5/",
+            videoId: "eeiOGg17YNQ"
         ),
         BlogPost(
             title: "Post 2 Title",
@@ -57,7 +58,8 @@ class BlogPostsStore: ObservableObject {
                 Put the bunny, back in the box... That's funny, my name's Roger... Two Rogers don't make a right. People don't throw things at me any more. Maybe because I carry a bow around.
             """,
             featured: false,
-            url: "http://dev.marfeel.co/2022/07/29/corrupti-sit-vero-asperiores-ratione-non-velit/"
+            url: "http://dev.marfeel.co/2022/07/29/corrupti-sit-vero-asperiores-ratione-non-velit/",
+            videoId: "d-6Iqnp2Ja8"
         ),
         BlogPost(
             title: "Post 4 Title",

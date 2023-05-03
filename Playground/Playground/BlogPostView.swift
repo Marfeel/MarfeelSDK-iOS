@@ -42,6 +42,13 @@ struct BlogPostView: View {
                             .foregroundColor(Color.primary.opacity(0.9))
                             .padding(.bottom, 25)
                             .frame(maxWidth: .infinity)
+                        
+                        if let videoId = blogPost.videoId {
+                            YouTubeView(videoId: videoId)
+                                .frame(height: 300)
+                                .frame(maxWidth: UIScreen.main.bounds.width)
+                                .padding()
+                        }
                     }
                     .padding(.horizontal, 20)
 
