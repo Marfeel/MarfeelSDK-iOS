@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4923C9A82A0190D40036CE77 /* PlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9A72A0190D40036CE77 /* PlaygroundApp.swift */; };
 		4923C9AA2A0190D40036CE77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9A92A0190D40036CE77 /* ContentView.swift */; };
-		4923C9AC2A0190D50036CE77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4923C9AB2A0190D50036CE77 /* Assets.xcassets */; };
 		4923C9AF2A0190D50036CE77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4923C9AE2A0190D50036CE77 /* Preview Assets.xcassets */; };
 		4923C9BA2A01917B0036CE77 /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9B92A01917B0036CE77 /* HexColorExtension.swift */; };
 		4923C9BD2A0191A30036CE77 /* BlogPostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9BC2A0191A30036CE77 /* BlogPostCard.swift */; };
@@ -20,13 +19,30 @@
 		4923C9CD2A01962D0036CE77 /* BlogPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CC2A01962D0036CE77 /* BlogPostView.swift */; };
 		4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CF2A0196820036CE77 /* AllPostsView.swift */; };
 		49DAD3192A025D3300B25852 /* YoutubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DAD3182A025D3300B25852 /* YoutubeView.swift */; };
+		49DAD32A2A0268B500B25852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD3292A0268B500B25852 /* Assets.xcassets */; };
+		49DAD32C2A02690400B25852 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD32B2A02690400B25852 /* Preview Assets.xcassets */; };
+		49DAD32F2A026A0300B25852 /* CompassSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DAD32E2A026A0300B25852 /* CompassSDK.framework */; };
+		49DAD3302A026A0300B25852 /* CompassSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49DAD32E2A026A0300B25852 /* CompassSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		49DAD3312A026A0300B25852 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				49DAD3302A026A0300B25852 /* CompassSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4923C9A42A0190D40036CE77 /* Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4923C9A72A0190D40036CE77 /* PlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundApp.swift; sourceTree = "<group>"; };
 		4923C9A92A0190D40036CE77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4923C9AB2A0190D50036CE77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4923C9AE2A0190D50036CE77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4923C9B02A0190D50036CE77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4923C9B92A01917B0036CE77 /* HexColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
@@ -37,6 +53,9 @@
 		4923C9CC2A01962D0036CE77 /* BlogPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostView.swift; sourceTree = "<group>"; };
 		4923C9CF2A0196820036CE77 /* AllPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostsView.swift; sourceTree = "<group>"; };
 		49DAD3182A025D3300B25852 /* YoutubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeView.swift; sourceTree = "<group>"; };
+		49DAD3292A0268B500B25852 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49DAD32B2A02690400B25852 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		49DAD32E2A026A0300B25852 /* CompassSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DAD32F2A026A0300B25852 /* CompassSDK.framework in Frameworks */,
 				4923C9C12A0192950036CE77 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +76,7 @@
 			children = (
 				4923C9A62A0190D40036CE77 /* Playground */,
 				4923C9A52A0190D40036CE77 /* Products */,
+				49DAD32D2A026A0300B25852 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,9 +91,9 @@
 		4923C9A62A0190D40036CE77 /* Playground */ = {
 			isa = PBXGroup;
 			children = (
+				49DAD3292A0268B500B25852 /* Assets.xcassets */,
 				4923C9A72A0190D40036CE77 /* PlaygroundApp.swift */,
 				4923C9A92A0190D40036CE77 /* ContentView.swift */,
-				4923C9AB2A0190D50036CE77 /* Assets.xcassets */,
 				4923C9B02A0190D50036CE77 /* Info.plist */,
 				4923C9AD2A0190D50036CE77 /* Preview Content */,
 				4923C9B92A01917B0036CE77 /* HexColorExtension.swift */,
@@ -90,9 +111,18 @@
 		4923C9AD2A0190D50036CE77 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				49DAD32B2A02690400B25852 /* Preview Assets.xcassets */,
 				4923C9AE2A0190D50036CE77 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		49DAD32D2A026A0300B25852 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49DAD32E2A026A0300B25852 /* CompassSDK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +135,7 @@
 				4923C9A02A0190D40036CE77 /* Sources */,
 				4923C9A12A0190D40036CE77 /* Frameworks */,
 				4923C9A22A0190D40036CE77 /* Resources */,
+				49DAD3312A026A0300B25852 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -158,8 +189,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DAD32A2A0268B500B25852 /* Assets.xcassets in Resources */,
+				49DAD32C2A02690400B25852 /* Preview Assets.xcassets in Resources */,
 				4923C9AF2A0190D50036CE77 /* Preview Assets.xcassets in Resources */,
-				4923C9AC2A0190D50036CE77 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -292,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -311,7 +343,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Playground/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Playground/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +364,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Playground/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Playground/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

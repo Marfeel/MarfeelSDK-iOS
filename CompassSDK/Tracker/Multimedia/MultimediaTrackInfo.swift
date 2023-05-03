@@ -23,6 +23,6 @@ struct MultimediaTrackInfo: Encodable {
         try trackInfo.encode(to: encoder)
         try rfv?.encode(to: encoder)
         try item.encode(to: encoder)
-        try container.encode(tik, forKey: .tik)
+        try container.encodeIfPresent(tik, forKey: .tik)
     }
 }

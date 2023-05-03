@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CompassSDK
 
 struct AllPosts: View {
     @EnvironmentObject var store: BlogPostsStore
@@ -22,5 +23,8 @@ struct AllPosts: View {
             .navigationTitle("All blog posts")
             .listStyle(InsetListStyle())
         }
+        .onAppear(perform: {
+            CompassTracker.shared.trackNewPage(url: URL(string: "https://dev.marfeel.co")!)
+        })
     }
 }

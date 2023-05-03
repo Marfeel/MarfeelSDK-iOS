@@ -79,16 +79,16 @@ public struct PlaybackInfo: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(ads, forKey: .ads)
-        try container.encode(maxPlayTime, forKey: .maxPlayTime)
-        try container.encode(play, forKey: .play)
-        try container.encode(pause, forKey: .pause)
-        try container.encode(mute, forKey: .mute)
-        try container.encode(unmute, forKey: .unmute)
-        try container.encode(backScreen, forKey: .backScreen)
-        try container.encode(fullScreen, forKey: .fullScreen)
-        try container.encode(started, forKey: .started)
-        try container.encode(adsStarted, forKey: .adsStarted)
-        try container.encode(adsLength, forKey: .adsLength)
+        try container.encodeIfPresent(ads, forKey: .ads)
+        try container.encodeIfPresent(maxPlayTime, forKey: .maxPlayTime)
+        try container.encodeIfPresent(play, forKey: .play)
+        try container.encodeIfPresent(pause, forKey: .pause)
+        try container.encodeIfPresent(mute, forKey: .mute)
+        try container.encodeIfPresent(unmute, forKey: .unmute)
+        try container.encodeIfPresent(backScreen, forKey: .backScreen)
+        try container.encodeIfPresent(fullScreen, forKey: .fullScreen)
+        try container.encodeIfPresent(started, forKey: .started)
+        try container.encodeIfPresent(adsStarted, forKey: .adsStarted)
+        try container.encodeIfPresent(adsLength, forKey: .adsLength)
     }
 }

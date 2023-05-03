@@ -17,5 +17,6 @@ struct YouTubeView: UIViewRepresentable {
         guard let demoURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else { return }
         uiView.scrollView.isScrollEnabled = false
         uiView.load(URLRequest(url: demoURL))
+        uiView.
     }
 }

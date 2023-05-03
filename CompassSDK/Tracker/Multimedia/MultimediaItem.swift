@@ -56,10 +56,10 @@ public class MultimediaItem: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try metadata.encode(to: encoder)
-        try container.encode(provider, forKey: .provider)
-        try container.encode(providerId, forKey: .provider)
-        try container.encode(type.rawValue, forKey: .type)
-        try container.encode(imp, forKey: .imp)
-        try container.encode(playbackInfo, forKey: .playbackInfo)
+        try container.encodeIfPresent(provider, forKey: .provider)
+        try container.encodeIfPresent(providerId, forKey: .provider)
+        try container.encodeIfPresent(type.rawValue, forKey: .type)
+        try container.encodeIfPresent(imp, forKey: .imp)
+        try container.encodeIfPresent(playbackInfo, forKey: .playbackInfo)
     }
 }

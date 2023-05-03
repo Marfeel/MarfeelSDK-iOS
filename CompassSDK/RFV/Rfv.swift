@@ -39,9 +39,9 @@ public struct Rfv: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: EncodingKeys.self)
         
-        try container.encode(rfv, forKey: .rfv)
-        try container.encode(r, forKey: .r)
-        try container.encode(f, forKey: .f)
-        try container.encode(v, forKey: .v)
+        try container.encodeIfPresent(rfv, forKey: .rfv)
+        try container.encodeIfPresent(r, forKey: .r)
+        try container.encodeIfPresent(f, forKey: .f)
+        try container.encodeIfPresent(v, forKey: .v)
     }
 }

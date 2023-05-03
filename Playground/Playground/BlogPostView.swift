@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import CompassSDK
 
 struct BlogPostView: View {
     
@@ -59,5 +60,8 @@ struct BlogPostView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear(perform: {
+            CompassTracker.shared.trackNewPage(url: URL(string: blogPost.url)!)
+        })
     }
 }

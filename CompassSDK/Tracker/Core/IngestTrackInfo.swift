@@ -30,10 +30,10 @@ struct IngestTrackInfo: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try trackInfo.encode(to: encoder)
-        try container.encode(tik, forKey: .tik)
-        try container.encode(visitDuration, forKey: .visitDuration)
-        try container.encode(scrollPercent, forKey: .scrollPercent)
-        try container.encode(implodedConversions, forKey: .implodedConversions)
+        try container.encodeIfPresent(tik, forKey: .tik)
+        try container.encodeIfPresent(visitDuration, forKey: .visitDuration)
+        try container.encodeIfPresent(scrollPercent, forKey: .scrollPercent)
+        try container.encodeIfPresent(implodedConversions, forKey: .implodedConversions)
     }
 }
 
