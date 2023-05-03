@@ -16,7 +16,7 @@ struct BlogPost: Identifiable {
     var blogpost: String
     var featured = false
     var url: String
-    var videoId: String?
+    var videoId: String
 }
 
 var articleList: [BlogPost] = []

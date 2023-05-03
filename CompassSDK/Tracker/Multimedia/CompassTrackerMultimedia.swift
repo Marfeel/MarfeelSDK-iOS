@@ -78,7 +78,7 @@ private extension CompassTrackerMultimedia {
         }
         let tik = tiksInProgress[id]!.tik
         let item = items[id]!
-        
+        tiksInProgress[id]!.scheduled = true
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
                 getCachedRfv {

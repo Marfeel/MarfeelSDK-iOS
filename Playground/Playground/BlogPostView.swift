@@ -8,10 +8,19 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import CompassSDK
+import YouTubePlayerKit
+import Combine
 
 struct BlogPostView: View {
-    
     var blogPost: BlogPost
+    
+    @State var isVideoInitialized = false
+    private var videoPlayer: YouTubePlayer
+    
+    init(blogPost: BlogPost) {
+        self.blogPost = blogPost
+        self.videoPlayer = YouTubePlayer(stringLiteral: "https://youtube.com/watch?v=\(blogPost.videoId)")
+    }
     
     var body: some View {
         ZStack {
@@ -43,13 +52,7 @@ struct BlogPostView: View {
                             .foregroundColor(Color.primary.opacity(0.9))
                             .padding(.bottom, 25)
                             .frame(maxWidth: .infinity)
-                        
-                        if let videoId = blogPost.videoId {
-                            YouTubeView(videoId: videoId)
-                                .frame(height: 300)
-                                .frame(maxWidth: UIScreen.main.bounds.width)
-                                .padding()
-                        }
+                        YouTubePlayerView(videoPlayer)
                     }
                     .padding(.horizontal, 20)
 
@@ -63,5 +66,64 @@ struct BlogPostView: View {
         .onAppear(perform: {
             CompassTracker.shared.trackNewPage(url: URL(string: blogPost.url)!)
         })
+        .onReceive(videoPlayer.playbackStatePublisher) { state in
+            guard isVideoInitialized else {
+                return
+            }
+            
+            switch state {
+            case .playing:
+                videoPlayer.getCurrentTime {
+                    time in
+                    do {
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get()))
+                    } catch {}
+                }
+            case .paused:
+                videoPlayer.getCurrentTime {
+                    time in
+                    do {
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PAUSE, eventTime: Int(try time.get()))
+                    } catch {}
+                }
+            case .ended:
+                videoPlayer.getCurrentTime {
+                    time in
+                    do {
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .END, eventTime: Int(try time.get()))
+                    } catch {}
+                }
+            default:
+                break
+            }
+        }
+        .onReceive(videoPlayer.durationPublisher) { time in
+            guard !isVideoInitialized else {
+                return
+            }
+            CompassTrackerMultimedia.shared.initializeItem(
+                id: blogPost.videoId,
+                provider: "youtube",
+                providerId: blogPost.videoId,
+                type: .VIDEO,
+                metadata: MultimediaMetadata.init(
+                    title: "title",
+                    description: "description",
+                    url: URL(string: "https://youtube.com/watch?v=\(blogPost.videoId)"),
+                    authors: "authors",
+                    duration: Int(time)
+                )
+            )
+            videoPlayer.getCurrentTime {
+                time in
+                do {
+                    CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get()))
+                } catch {}
+            }
+            self.isVideoInitialized = true
+        }
+        .onReceive(videoPlayer.currentTimePublisher()) { time in
+            CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .UPDATE_CURRENT_TIME, eventTime: Int(time))
+        }
     }
 }

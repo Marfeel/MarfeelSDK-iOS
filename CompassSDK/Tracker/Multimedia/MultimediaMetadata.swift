@@ -25,27 +25,26 @@ public struct MultimediaMetadata: Codable {
     var url: String?
     var thumbnail: String?
     var authors: String?
-    var publishTime: String?
+    var publishTime: Int64?
     var duration: Int?
     
-    // TODO: check if this is necessary
-    init(
+    public init(
         isLive: Bool = false,
-        title: String?,
-        description: String?,
-        url: String?,
-        thumbnail: String?,
-        authors: String?,
-        publishTime: String?,
-        duration: Int?
+        title: String? = nil,
+        description: String? = nil,
+        url: URL? = nil,
+        thumbnail: URL? = nil,
+        authors: String? = nil,
+        publishTime: Date? = nil,
+        duration: Int? = nil
     ) {
         self.isLive = isLive
         self.title = title
         self.description = description
-        self.url = url
-        self.thumbnail = thumbnail
+        self.url = url?.absoluteString
+        self.thumbnail = thumbnail?.absoluteString
         self.authors = authors
-        self.publishTime = publishTime
+        self.publishTime = publishTime?.timeStamp
         self.duration = duration
     }
 }

@@ -42,7 +42,8 @@ class BlogPostsStore: ObservableObject {
 
             """,
             featured: false,
-            url: "http://dev.marfeel.co/2022/07/29/hola-1/"
+            url: "http://dev.marfeel.co/2022/07/29/hola-1/",
+            videoId: "d-6Iqnp2Ja8"
         ),
         BlogPost(
             title: "Post 3 Title",
@@ -76,7 +77,8 @@ class BlogPostsStore: ObservableObject {
 
             """,
             featured: false,
-            url: "http://dev.marfeel.co/2022/06/28/consectetur-consequuntur-quis-nobis-quia/"
+            url: "http://dev.marfeel.co/2022/06/28/consectetur-consequuntur-quis-nobis-quia/",
+            videoId: "eeiOGg17YNQ"
         )
     ]
 }
