@@ -16,6 +16,11 @@ protocol CompassStorage {
     var sessionId: String {get}
 }
 
+enum Store: String {
+    case v1 = "CompassPersistence"
+    case v2 = "CompassPersistenceV2"
+}
+
 class PListCompassStorage: PListStorage {
     struct Model: Codable {
         var numVisits: Int
@@ -29,16 +34,28 @@ class PListCompassStorage: PListStorage {
         static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil)}
     }
 
-    let filename = "CompassPersistenceV2"
-
     init() {
-        self.model = load() ?? .empty
+        self.model = loadModel() ?? .empty
+    }
+    
+    private func loadModel() -> Model? {
+        if let modelV2 = load(Store.v2.rawValue) {
+            return modelV2
+        }
+        
+        guard var modelV1 = load(Store.v1.rawValue) else {
+            return nil
+        }
+                
+        (modelV1.userId, modelV1.suid) = (modelV1.suid, modelV1.userId)
+        
+        return modelV1
     }
 
     private var model: Model? {
         didSet {
             guard let model = model else {return}
-            persist(values: model)
+            persist(filename: Store.v2.rawValue, values: model)
         }
     }
 

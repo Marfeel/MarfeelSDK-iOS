@@ -14,21 +14,28 @@ protocol ScrollPercentProvider: AnyObject {
 protocol ConversionsProvider: AnyObject {
     func getConversions(_ completion: @escaping ([String]) -> ())
 }
-
+typealias DataBuilderCompletion = (_ res: Encodable) -> Void
+typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Encodable?
 
 class TikOperation: Operation {
-    private let trackInfo: TrackInfo
+    private let dataBuilder: DataBuilder
     private let dispatchDate: Date
     private let tikUseCase: SendTikCuseCase
-    private weak var scrollPercentProvider: ScrollPercentProvider?
-    private weak var conversionsProvider: ConversionsProvider?
+    private let path: String
+    private let contentType: ContentType
     
-    init(trackInfo: TrackInfo, dispatchDate: Date, tikUseCase: SendTikCuseCase = SendTik(), scrollPercentProvider: ScrollPercentProvider?, conversionsProvider: ConversionsProvider?) {
-        self.trackInfo = trackInfo
+    init(
+        dataBuilder: @escaping DataBuilder,
+        dispatchDate: Date,
+        tikUseCase: SendTikCuseCase = SendTik(),
+        path: String?,
+        contentType: ContentType?
+    ) {
+        self.dataBuilder = dataBuilder
         self.dispatchDate = dispatchDate
         self.tikUseCase = tikUseCase
-        self.scrollPercentProvider = scrollPercentProvider
-        self.conversionsProvider = conversionsProvider
+        self.path = path ?? ""
+        self.contentType = contentType ?? ContentType.JSON
     }
     
     private var timer: Timer?
@@ -52,20 +59,20 @@ class TikOperation: Operation {
         guard !isCancelled else {return}
         runing = true
         
-        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
-            self?.getScrollPercent { (scrollPercent) in
-                self?.getConversions({ (conversions) in
-                    var finalTrackInfo = self?.trackInfo
-                    finalTrackInfo?.scrollPercent = scrollPercent
-                    finalTrackInfo?.conversions = conversions.isEmpty ? nil : conversions
-                    let data = finalTrackInfo?.params
-                    if let data = data {
-                        self?.tikUseCase.tik(params: data)
-                    }
-                    self?.timer?.invalidate()
-                    self?.runing = false
-                })
-                
+        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [self] (timer) in
+            let track = { (data: Encodable?) in
+                let params = data?.params
+               
+                if let params = params {
+                    tikUseCase.tik(path: path, type: contentType, params: params)
+                }
+                timer.invalidate()
+                runing = false
+            }
+            let data = dataBuilder(track)
+            
+            if data != nil {
+                track(data)
             }
         })
         
@@ -76,23 +83,5 @@ class TikOperation: Operation {
     override func cancel() {
         timer?.invalidate()
         runing = false
-    }
-    
-    private func getScrollPercent(_ completion: @escaping (Float?) -> ()) {
-        guard let scrollPercentProvider = scrollPercentProvider else {
-            completion(nil)
-            return
-        }
-        
-        scrollPercentProvider.getScrollPercent(completion)
-    }
-    
-    private func getConversions(_ completion: @escaping ([String]) -> ()) {
-        guard let conversionsProvider = conversionsProvider else {
-            completion([])
-            return
-        }
-        
-        conversionsProvider.getConversions(completion)
     }
 }

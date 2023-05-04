@@ -8,11 +8,7 @@
 import Foundation
 
 protocol GetRFVUseCase {
-    func fetch(userId: String, account: Int, _ completion: @escaping (String?, Error?) -> ())
-}
-
-struct RFVResponse: Codable {
-    let rfv: String?
+    func fetch(userId: String, account: Int, _ completion: @escaping (Rfv?, Error?) -> ())
 }
 
 struct GetRFVApiCall: ApiCall {
@@ -20,6 +16,7 @@ struct GetRFVApiCall: ApiCall {
     let account: Int
     let baseUrl: URL?
     let path: String = "data.php"
+    let type: ContentType = ContentType.FORM
     var params: [String : Any] {
         ["u": userId, "ac": account]
     }
@@ -40,10 +37,11 @@ class GetRFV {
 }
 
 extension GetRFV: GetRFVUseCase {
-    func fetch(userId: String, account: Int, _ completion: @escaping (String?, Error?) -> ()) {
+    func fetch(userId: String, account: Int, _ completion: @escaping (Rfv?, Error?) -> ()) {
         let apiCall = GetRFVApiCall(userId: userId, account: account)
-        apiRouter.request(from: apiCall) { (rfv: RFVResponse?, error: Error?) in
-            completion(rfv?.rfv, error)
+        
+        apiRouter.request(from: apiCall) { (rfv: Rfv?, error: Error?) in
+            completion(rfv, error)
         }
     }
 }

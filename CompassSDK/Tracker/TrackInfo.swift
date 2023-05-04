@@ -6,34 +6,28 @@
 //
 
 import Foundation
-
-struct TrackInfo: Codable {
-    private enum CodingKeys : String, CodingKey {
-        case
-            pageUrl = "url",
-            accountId = "ac",
-            tik = "a",
-            siteUserId = "sui",
-            userType = "ut",
-            startPageTimeStamp = "ps",
-            firstVisitTimeStamp = "fv",
-            currentTimeStamp = "n",
-            visitDuration = "l",
-            currentVisitTimeStamp = "t",
-            pageId = "p",
-            compassVersion = "v",
-            sessionId = "s",
-            scrollPercent = "sc",
-            previosPageUrl = "pp",
-            canonical = "c",
-            userId = "u",
-            implodedConversions = "conv",
-            pageType
+    
+struct TrackInfo: Encodable {
+    enum CodingKeys : String, CodingKey {
+        case pageUrl = "url"
+        case accountId = "ac"
+        case siteUserId = "sui"
+        case userType = "ut"
+        case startPageTimeStamp = "ps"
+        case firstVisitTimeStamp = "fv"
+        case currentTimeStamp = "n"
+        case currentVisitTimeStamp = "t"
+        case pageId = "p"
+        case compassVersion = "v"
+        case sessionId = "s"
+        case previosPageUrl = "pp"
+        case canonical = "c"
+        case userId = "u"
+        case pageType
     }
 
     var pageUrl: String? {
         didSet {
-            canonical = pageUrl
             if let oldValue = oldValue {
                 previosPageUrl = oldValue
             }
@@ -42,74 +36,55 @@ struct TrackInfo: Codable {
                 return
             }
             pageId = UUID().uuidString
-            tik = 0
             pagesViewed += 1
             startPageDate = Date()
         }
     }
     var accountId: Int?
-    var tik = 0
-    var conversions: [String]? {
-        didSet {
-            implodedConversions = conversions?.joined(separator: ",")
-        }
-    }
-
-    private var startPageDate: Date? {
-        didSet {
-            startPageTimeStamp = startPageDate?.timeStamp
-        }
-    }
-
-    var fisrtVisitDate: Date? {
-        didSet {
-            firstVisitTimeStamp = fisrtVisitDate?.timeStamp
-        }
-    }
-
-    var currentDate: Date? {
-        didSet {
-            currentTimeStamp = currentDate?.timeStamp
-        }
-    }
-
-    var currentVisitDate: Date? {
-        didSet {
-            currentVisitTimeStamp = currentVisitDate?.timeStamp
-        }
-    }
-
+    var firstVisitDate: Date?
+    var currentDate: Date?
+    var currentVisitDate: Date?
     var siteUserId: String?
     var compassVersion: String?
-    var scrollPercent: Float?
     var userId: String?
     var userType: UserType?
     let pageType = 3
-
-    private var pagesViewed = 0
-
-    private var pageId: String?
-    private var startPageTimeStamp: Int64?
-    private var firstVisitTimeStamp: Int64?
-    private var currentTimeStamp: Int64? {
-        didSet {
-            visitDuration = Int64((currentTimeStamp ?? 0) - (startPageTimeStamp ?? 0))
-        }
+    var startPageTimeStamp: Int64? {
+        return startPageDate?.timeStamp
     }
-    private var currentVisitTimeStamp: Int64?
-    private var visitDuration: Int64?
+    var firstVisitTimeStamp: Int64? {
+        return firstVisitDate?.timeStamp
+    }
+    var currentTimeStamp: Int64? {
+        return currentDate?.timeStamp
+    }
+    var currentVisitTimeStamp: Int64? {
+        return currentVisitDate?.timeStamp
+    }
+    var canonical: String? {
+        return pageUrl
+    }
     var sessionId: String?
+    private var pagesViewed = 0
+    private var pageId: String?
     private var previosPageUrl: String?
-    private var canonical: String?
-    private var implodedConversions: String?
-}
-
-extension TrackInfo {
-    var params: [String: Any] {
-        self.jsonEncode()!
-    }
-
-    var data: Data {
-        self.encode()!
+    private var startPageDate: Date?
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encodeIfPresent(pageUrl, forKey: .pageUrl)
+        try container.encodeIfPresent(accountId, forKey: .accountId)
+        try container.encodeIfPresent(siteUserId, forKey: .siteUserId)
+        try container.encodeIfPresent(userType, forKey: .userType)
+        try container.encodeIfPresent(startPageTimeStamp, forKey: .startPageTimeStamp)
+        try container.encodeIfPresent(firstVisitTimeStamp, forKey: .firstVisitTimeStamp)
+        try container.encodeIfPresent(pageId, forKey: .pageId)
+        try container.encodeIfPresent(compassVersion, forKey: .compassVersion)
+        try container.encodeIfPresent(sessionId, forKey: .sessionId)
+        try container.encodeIfPresent(previosPageUrl, forKey: .previosPageUrl)
+        try container.encodeIfPresent(canonical, forKey: .canonical)
+        try container.encodeIfPresent(userId, forKey: .userId)
+        try container.encodeIfPresent(pageType, forKey: .pageType)
     }
 }

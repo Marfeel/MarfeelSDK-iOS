@@ -9,17 +9,20 @@ import Foundation
 import UIKit
 
 protocol SendTikCuseCase {
-    func tik(params: [String: Any])
+    func tik(path: String, type: ContentType, params: [String: Any])
 }
 
 struct TikApiCall: ApiCall {
-    let path: String = "ingest.php"
+    let path: String
     let params: [String : Any]
     let baseUrl: URL?
+    let type: ContentType
     
-    init(baseUrl: URL? = Bundle.main.compassEndpoint, params: [String : Any]) {
+    init(baseUrl: URL? = Bundle.main.compassEndpoint, params: [String : Any], path: String, type: ContentType) {
         self.baseUrl = baseUrl
         self.params = params
+        self.path = path
+        self.type = type
     }
 }
 
@@ -34,13 +37,13 @@ class SendTik: SendTikCuseCase {
     
     private var backgroundIdentifier: UIBackgroundTaskIdentifier?
     
-    func tik(params: [String: Any]) {
+    func tik(path: String, type: ContentType, params: [String: Any]) {
         backgroundIdentifier = application.beginBackgroundTask {
             guard let backgroundIdentifier = self.backgroundIdentifier else {return}
             self.application.endBackgroundTask(backgroundIdentifier)
             self.backgroundIdentifier = .invalid
         }
-        let apiCall = TikApiCall(params: params)
+        let apiCall = TikApiCall(params: params, path: path, type: type)
         apiRouter.call(from: apiCall) { (error) in
             guard let backgroundIdentifier = self.backgroundIdentifier else {return}
             self.application.endBackgroundTask(backgroundIdentifier)
