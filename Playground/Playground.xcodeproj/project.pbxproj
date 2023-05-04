@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093DB3A83982453576127E36 /* Pods_Playground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5502AEB8F817862966AAB0 /* Pods_Playground.framework */; };
 		4923C9A82A0190D40036CE77 /* PlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9A72A0190D40036CE77 /* PlaygroundApp.swift */; };
 		4923C9AA2A0190D40036CE77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9A92A0190D40036CE77 /* ContentView.swift */; };
 		4923C9AF2A0190D50036CE77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4923C9AE2A0190D50036CE77 /* Preview Assets.xcassets */; };
@@ -20,26 +21,12 @@
 		4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CF2A0196820036CE77 /* AllPostsView.swift */; };
 		49DAD32A2A0268B500B25852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD3292A0268B500B25852 /* Assets.xcassets */; };
 		49DAD32C2A02690400B25852 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD32B2A02690400B25852 /* Preview Assets.xcassets */; };
-		49DAD32F2A026A0300B25852 /* CompassSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DAD32E2A026A0300B25852 /* CompassSDK.framework */; };
-		49DAD3302A026A0300B25852 /* CompassSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49DAD32E2A026A0300B25852 /* CompassSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		49DAD3342A027AB600B25852 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49DAD3332A027AB600B25852 /* YouTubePlayerKit */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		49DAD3312A026A0300B25852 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				49DAD3302A026A0300B25852 /* CompassSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		2A5502AEB8F817862966AAB0 /* Pods_Playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FE992ECEEC1DB317DB3470F /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.debug.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
 		4923C9A42A0190D40036CE77 /* Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4923C9A72A0190D40036CE77 /* PlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundApp.swift; sourceTree = "<group>"; };
 		4923C9A92A0190D40036CE77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,7 +41,7 @@
 		4923C9CF2A0196820036CE77 /* AllPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostsView.swift; sourceTree = "<group>"; };
 		49DAD3292A0268B500B25852 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DAD32B2A02690400B25852 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		49DAD32E2A026A0300B25852 /* CompassSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1CE4CCAA7A3151832892079 /* Pods-Playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.release.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,21 +49,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49DAD32F2A026A0300B25852 /* CompassSDK.framework in Frameworks */,
 				4923C9C12A0192950036CE77 /* SDWebImageSwiftUI in Frameworks */,
 				49DAD3342A027AB600B25852 /* YouTubePlayerKit in Frameworks */,
+				093DB3A83982453576127E36 /* Pods_Playground.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37334396DB120AF13918C18B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3FE992ECEEC1DB317DB3470F /* Pods-Playground.debug.xcconfig */,
+				E1CE4CCAA7A3151832892079 /* Pods-Playground.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		4923C99B2A0190D40036CE77 = {
 			isa = PBXGroup;
 			children = (
 				4923C9A62A0190D40036CE77 /* Playground */,
 				4923C9A52A0190D40036CE77 /* Products */,
 				49DAD32D2A026A0300B25852 /* Frameworks */,
+				37334396DB120AF13918C18B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,7 +117,7 @@
 		49DAD32D2A026A0300B25852 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				49DAD32E2A026A0300B25852 /* CompassSDK.framework */,
+				2A5502AEB8F817862966AAB0 /* Pods_Playground.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -131,10 +129,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4923C9B32A0190D50036CE77 /* Build configuration list for PBXNativeTarget "Playground" */;
 			buildPhases = (
+				575750049FD991A541E28221 /* [CP] Check Pods Manifest.lock */,
 				4923C9A02A0190D40036CE77 /* Sources */,
 				4923C9A12A0190D40036CE77 /* Frameworks */,
 				4923C9A22A0190D40036CE77 /* Resources */,
-				49DAD3312A026A0300B25852 /* Embed Frameworks */,
+				EAF52DA370F3ACCB8893AA0F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,6 +196,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		575750049FD991A541E28221 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Playground-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAF52DA370F3ACCB8893AA0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Playground/Pods-Playground-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Playground/Pods-Playground-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Playground/Pods-Playground-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4923C9A02A0190D40036CE77 /* Sources */ = {
@@ -336,6 +377,7 @@
 		};
 		4923C9B42A0190D50036CE77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE992ECEEC1DB317DB3470F /* Pods-Playground.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -357,6 +399,7 @@
 		};
 		4923C9B52A0190D50036CE77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1CE4CCAA7A3151832892079 /* Pods-Playground.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
