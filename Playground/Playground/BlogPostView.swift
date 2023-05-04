@@ -7,9 +7,9 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-import CompassSDK
 import YouTubePlayerKit
 import Combine
+import MarfeelSDK_iOS
 
 struct BlogPostView: View {
     var blogPost: BlogPost

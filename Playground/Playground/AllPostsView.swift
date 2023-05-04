@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CompassSDK
+import MarfeelSDK_iOS
 
 struct AllPosts: View {
     @EnvironmentObject var store: BlogPostsStore
