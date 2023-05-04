@@ -60,7 +60,7 @@ class TikOperation: Operation {
         runing = true
         
         self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [self] (timer) in
-            let track = { (data: Encodable?) in
+            let track = { [self] (data: Encodable?) in
                 let params = data?.params
                
                 if let params = params {

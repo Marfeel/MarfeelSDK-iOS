@@ -204,7 +204,7 @@ private extension CompassTracker {
         trackInfo.currentDate = dispatchDate
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
-                getScrollPercent { (scrollPercent) in
+                getScrollPercent { [self] (scrollPercent) in
                     getConversions { (conversions) in
                         var finalTrackInfo = self.trackInfo
                      
