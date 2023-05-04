@@ -19,6 +19,6 @@ workspace 'CompassSDK'
     # Comment the next line if you don't want to use dynamic frameworks
     use_frameworks!
 
-    pod 'MarfeelSDK-iOS', '~> 2.1.0'
-    #pod 'MarfeelSDK-iOS', :path => '.'
+    #pod 'MarfeelSDK-iOS', '~> 2.1.0'
+    pod 'MarfeelSDK-iOS', :path => '.'
   end
