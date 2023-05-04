@@ -57,7 +57,7 @@ public class MultimediaItem: Encodable {
         
         try metadata.encode(to: encoder)
         try container.encodeIfPresent(provider, forKey: .provider)
-        try container.encodeIfPresent(providerId, forKey: .provider)
+        try container.encodeIfPresent(providerId, forKey: .providerId)
         try container.encodeIfPresent(type.rawValue, forKey: .type)
         try container.encodeIfPresent(imp, forKey: .imp)
         try container.encodeIfPresent(playbackInfo, forKey: .playbackInfo)

@@ -50,10 +50,10 @@ class CompassSDKMultimediaTests: XCTestCase {
             metadata: MultimediaMetadata(
                 title: "test-title",
                 description: "test-description",
-                url: "test-url",
-                thumbnail: "test-thumbnail",
+                url: URL(string: "https://test-url"),
+                thumbnail: URL(string: "https://test-thumbnail"),
                 authors: "test-authors",
-                publishTime: "test-publishTime",
+                publishTime: Date(timeIntervalSince1970: 1683188830288),
                 duration: 123456
             )
         )
@@ -82,11 +82,15 @@ class CompassSDKMultimediaTests: XCTestCase {
         XCTAssertEqual(multimediaData.item.type.rawValue, "video")
         XCTAssertEqual(
             String(decoding: multimediaData.item.playbackInfo.encode()!, as: UTF8.self),
-            "{\"unmute\":[50],\"mute\":[40],\"ap\":2,\"mp\":123456,\"ads\":[60,65],\"fscr\":[],\"bscr\":[],\"a\":true,\"pause\":[20,70,123456],\"s\":true,\"play\":[10,30]}"
+            """
+            {"mp":123456,"a":1,"bscr":[],"fscr":[],"s":1,"unmute":[50],"ap":2,"e":1,"pause":[20,70,123456],"mute":[40],"play":[10,30],"ads":[60,65]}
+            """
         )
         XCTAssertEqual(
             String(decoding: multimediaData.item.metadata.encode()!, as: UTF8.self),
-            "{\"m_d\":\"test-description\",\"m_th\":\"test-thumbnail\",\"m_ti\":\"test-title\",\"m_il\":false,\"m_pt\":\"test-publishTime\",\"m_l\":123456,\"m_u\":\"test-url\",\"m_a\":\"test-authors\"}"
+            """
+            {"m_d":"test-description","m_th":"https:\\/\\/test-thumbnail","m_ti":"test-title","m_il":false,"m_pt":1683188830288,"m_l":123456,"m_u":"https:\\/\\/test-url","m_a":"test-authors"}
+            """
         )
     }
 }

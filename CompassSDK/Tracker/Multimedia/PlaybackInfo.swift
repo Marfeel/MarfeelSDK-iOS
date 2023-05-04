@@ -87,8 +87,15 @@ public struct PlaybackInfo: Encodable {
         try container.encodeIfPresent(unmute, forKey: .unmute)
         try container.encodeIfPresent(backScreen, forKey: .backScreen)
         try container.encodeIfPresent(fullScreen, forKey: .fullScreen)
-        try container.encodeIfPresent(started, forKey: .started)
-        try container.encodeIfPresent(adsStarted, forKey: .adsStarted)
+        try container.encodeIfPresent(started.intValue, forKey: .started)
+        try container.encodeIfPresent(ended.intValue, forKey: .ended)
+        try container.encodeIfPresent(adsStarted.intValue, forKey: .adsStarted)
         try container.encodeIfPresent(adsLength, forKey: .adsLength)
+    }
+}
+
+private extension Bool {
+    var intValue: Int {
+        return self ? 1 : 0
     }
 }
