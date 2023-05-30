@@ -17,5 +17,5 @@ extension Bundle {
         return URL(string: urlString)
     }
     
-    var compassVersion: String { "2.1.0" }
+    var compassVersion: String { "0.1" }
 }
