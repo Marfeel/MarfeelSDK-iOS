@@ -23,6 +23,9 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(ingestData.userType?.rawValue, 9)
             XCTAssertEqual(ingestData.userId, "userIdFromStorage")
             XCTAssertEqual(ingestData.sessionId, "sessionIdFromStorage")
+            XCTAssertEqual(ingestData.sessionVars, ["session": "var"])
+            XCTAssertEqual(ingestData.userVars, ["user": "var"])
+            XCTAssertEqual(ingestData.pageVars, ["page": "var"])
 
             expectation.fulfill()
         })
@@ -30,7 +33,8 @@ class CompassSDKTests: XCTestCase {
         sut.setSiteUserId("testUser1")
         sut.setUserType(.custom(9))
         sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
-        
+        sut.setPageVar(name: "page", value: "var")
+
         wait(for: [expectation], timeout: 5)
         
         expectation = XCTestExpectation()
@@ -43,6 +47,9 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(ingestData.userType?.rawValue, 9)
             XCTAssertEqual(ingestData.userId, "userIdFromStorage")
             XCTAssertEqual(ingestData.sessionId, "sessionIdFromStorage")
+            XCTAssertEqual(ingestData.sessionVars, ["session": "var"])
+            XCTAssertEqual(ingestData.userVars, ["user": "var"])
+            XCTAssertEqual(ingestData.pageVars, [String: String]())
 
             expectation.fulfill()
         }

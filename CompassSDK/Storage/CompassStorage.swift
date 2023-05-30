@@ -14,6 +14,10 @@ protocol CompassStorage {
     var previousVisit: Date? {get}
     var firstVisit: Date {get}
     var sessionId: String {get}
+    var sessionVars: Vars { get }
+    var userVars: Vars { get }
+    func addSessionVar(name: String, value: String)
+    func addUserVar(name: String, value: String)
 }
 
 enum Store: String {
@@ -30,8 +34,10 @@ class PListCompassStorage: PListStorage {
         var lastVisit: Date?
         var sessionId: String?
         var sessionExpirationDate: Date?
+        var userVars: Vars?
+        var sessionVars: Vars?
 
-        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil)}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars())}
     }
 
     init() {
@@ -96,13 +102,45 @@ extension PListCompassStorage: CompassStorage {
 
         return userId
     }
+    
+    var sessionVars: Vars {
+        guard let vars = model?.sessionVars, let expirationDate = model?.sessionExpirationDate, Date() < expirationDate else {
+            return Vars()
+        }
+
+        return vars
+    }
+    
+    var userVars: Vars {
+        guard let vars = model?.userVars else {
+            return Vars()
+        }
+
+        return vars
+    }
 
     func addVisit() {
         model?.numVisits += 1
         previousVisit = model?.lastVisit
         model?.lastVisit = Date()
     }
+    
+    func addSessionVar(name: String, value: String) {
+        if model?.sessionVars == nil {
+            model?.sessionVars = Vars()
+        }
+        
+        model?.sessionVars?[name] = value
+    }
 
+    func addUserVar(name: String, value: String) {
+        if model?.userVars == nil {
+            model?.userVars = Vars()
+        }
+        
+        model?.userVars?[name] = value
+    }
+    
     var firstVisit: Date {
         guard let firstVisit = model?.firstVisit else {
             let date = Date()
@@ -113,3 +151,4 @@ extension PListCompassStorage: CompassStorage {
         return firstVisit
     }
 }
+        

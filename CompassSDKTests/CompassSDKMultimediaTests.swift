@@ -29,6 +29,9 @@ class CompassSDKMultimediaTests: XCTestCase {
         compassTracker.setSiteUserId("testUser1")
         compassTracker.setUserType(.custom(9))
         compassTracker.trackNewPage(url: URL(string: "http://localhost/test1")!)
+        compassTracker.setSessionVar(name: "session", value: "var")
+        compassTracker.setPageVar(name: "page", value: "var")
+        compassTracker.setUserVar(name: "user", value: "var")
         
         var multimediaData:MultimediaTrackInfo!
         let compassTrackerMultimedia = CompassTrackerMultimedia(
@@ -76,6 +79,9 @@ class CompassSDKMultimediaTests: XCTestCase {
         XCTAssertEqual(multimediaData.trackInfo.userType?.rawValue, 9)
         XCTAssertEqual(multimediaData.trackInfo.userId, "userIdFromStorage")
         XCTAssertEqual(multimediaData.trackInfo.sessionId, "sessionIdFromStorage")
+        XCTAssertEqual(multimediaData.trackInfo.sessionVars, ["session": "var"])
+        XCTAssertEqual(multimediaData.trackInfo.userVars, ["user": "var"])
+        XCTAssertEqual(multimediaData.trackInfo.pageVars, ["page": "var"])
         XCTAssertEqual(multimediaData.item.id, "test-id")
         XCTAssertEqual(multimediaData.item.provider, "test-provider")
         XCTAssertEqual(multimediaData.item.providerId, "test-provider-id")

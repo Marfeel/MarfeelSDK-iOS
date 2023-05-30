@@ -24,6 +24,9 @@ struct AllPosts: View {
             .listStyle(InsetListStyle())
         }
         .onAppear(perform: {
+            CompassTracker.shared.setUserType(.logged)
+            CompassTracker.shared.setSessionVar(name: "lolo", value: "lola")
+            CompassTracker.shared.setUserVar(name: "hihi", value: "haha")
             CompassTracker.shared.trackNewPage(url: URL(string: "https://dev.marfeel.co")!)
         })
     }

@@ -67,6 +67,16 @@ class MockedOperationProvider: TikOperationFactory {
 }
 
 class MockStorage: CompassStorage {
+    var sessionVars = ["session": "var"]
+    
+    var userVars = ["user": "var"]
+    
+    func addSessionVar(name: String, value: String) {
+    }
+    
+    func addUserVar(name: String, value: String) {
+    }
+    
     func addVisit() {
     }
     

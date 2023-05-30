@@ -65,6 +65,9 @@ public protocol CompassTracking: AnyObject {
     @available(*, deprecated, renamed: "trackConversion")
     func track(conversion: String)
     func trackConversion(conversion: String)
+    func setPageVar(name: String, value: String)
+    func setSessionVar(name: String, value: String)
+    func setUserVar(name: String, value: String)
 }
 
 public class CompassTracker: Tracker {
@@ -106,11 +109,13 @@ public class CompassTracker: Tracker {
         }
     }
     
-    internal var trackInfo = IngestTrackInfo()
+    private var trackInfo = IngestTrackInfo()
 
     private var scrollView: UIScrollView?
 
     private var newConversions = [String]()
+    
+    private var pageVars = [String: String]()
 }
 
 extension CompassTracker: ScrollPercentProvider {
@@ -188,12 +193,48 @@ extension CompassTracker: CompassTracking {
     public func trackConversion(conversion: String) {
         newConversions.append(conversion)
     }
+    
+    public func setPageVar(name: String, value: String) {
+        pageVars[name] = value
+    }
+    
+    public func setSessionVar(name: String, value: String) {
+        storage.addSessionVar(name: name, value: value)
+    }
+    
+    public func setUserVar(name: String, value: String) {
+        storage.addUserVar(name: name, value: value)
+    }
 }
 
 extension CompassTracker: ConversionsProvider {
     func getConversions(_ completion: @escaping ([String]) -> ()) {
         completion(newConversions)
         newConversions = [String]()
+    }
+}
+
+internal extension CompassTracker {
+    func getTrackingData(_ completion: @escaping (IngestTrackInfo) -> ()) {
+        getScrollPercent { [self] (scrollPercent) in
+            getConversions { [self] (conversions) in
+                var finalTrackInfo = self.trackInfo
+             
+                finalTrackInfo.scrollPercent = scrollPercent
+                finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
+                finalTrackInfo.userVars = storage.userVars
+                finalTrackInfo.sessionVars = storage.sessionVars
+                finalTrackInfo.pageVars = pageVars
+                
+                completion(finalTrackInfo)
+           }
+        }
+    }
+    
+    func getCommonTrackingData(_ completion: @escaping (TrackInfo) -> ()) {
+        getTrackingData { (ingestTrackInfo) in
+            completion(ingestTrackInfo.core)
+        }
     }
 }
 
@@ -204,16 +245,7 @@ private extension CompassTracker {
         trackInfo.currentDate = dispatchDate
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
-                getScrollPercent { [self] (scrollPercent) in
-                    getConversions { (conversions) in
-                        var finalTrackInfo = self.trackInfo
-                     
-                        finalTrackInfo.scrollPercent = scrollPercent
-                        finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
-                        
-                        completion(finalTrackInfo)
-                   }
-                }
+                getTrackingData(completion)
                 
                 return nil
             },
@@ -232,6 +264,7 @@ private extension CompassTracker {
         stopObserving()
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
+        pageVars.removeAll()
         CompassTrackerMultimedia.shared.reset()
     }
 }
