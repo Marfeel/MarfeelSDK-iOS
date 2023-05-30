@@ -68,6 +68,9 @@ public protocol CompassTracking: AnyObject {
     func setPageVar(name: String, value: String)
     func setSessionVar(name: String, value: String)
     func setUserVar(name: String, value: String)
+    func setUserSegment(_ name: String)
+    func removeUserSegment(_ name: String)
+    func clearUserSegments()
 }
 
 public class CompassTracker: Tracker {
@@ -205,6 +208,18 @@ extension CompassTracker: CompassTracking {
     public func setUserVar(name: String, value: String) {
         storage.addUserVar(name: name, value: value)
     }
+    
+    public func setUserSegment(_ name: String) {
+        storage.addUserSegment(name)
+    }
+    
+    public func removeUserSegment(_ name: String) {
+        storage.removeUserSegment(name)
+    }
+    
+    public func clearUserSegments() {
+        storage.clearUserSegments()
+    }
 }
 
 extension CompassTracker: ConversionsProvider {
@@ -225,6 +240,7 @@ internal extension CompassTracker {
                 finalTrackInfo.userVars = storage.userVars
                 finalTrackInfo.sessionVars = storage.sessionVars
                 finalTrackInfo.pageVars = pageVars
+                finalTrackInfo.userSegments = storage.userSegments
                 
                 completion(finalTrackInfo)
            }

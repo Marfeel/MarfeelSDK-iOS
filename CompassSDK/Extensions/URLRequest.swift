@@ -27,6 +27,8 @@ extension URLRequest {
             
             if let arr = value as? [[String]] {
                 description = arr.description
+            } else if let arr = value as? [String] {
+                description = arr.description
             }
             
             return "\(key)=\(self.percentEscapeString(description))"

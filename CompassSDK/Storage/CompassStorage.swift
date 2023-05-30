@@ -16,8 +16,12 @@ protocol CompassStorage {
     var sessionId: String {get}
     var sessionVars: Vars { get }
     var userVars: Vars { get }
+    var userSegments: [String] { get }
     func addSessionVar(name: String, value: String)
     func addUserVar(name: String, value: String)
+    func addUserSegment(_ name: String)
+    func removeUserSegment(_ name: String)
+    func clearUserSegments()
 }
 
 enum Store: String {
@@ -36,8 +40,9 @@ class PListCompassStorage: PListStorage {
         var sessionExpirationDate: Date?
         var userVars: Vars?
         var sessionVars: Vars?
+        var userSegments: [String]?
 
-        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars())}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [])}
     }
 
     init() {
@@ -118,6 +123,14 @@ extension PListCompassStorage: CompassStorage {
 
         return vars
     }
+    
+    var userSegments: [String] {
+        guard let segments = model?.userSegments else {
+            return []
+        }
+
+        return segments
+    }
 
     func addVisit() {
         model?.numVisits += 1
@@ -139,6 +152,26 @@ extension PListCompassStorage: CompassStorage {
         }
         
         model?.userVars?[name] = value
+    }
+    
+    func addUserSegment(_ name: String) {
+        if model?.userSegments == nil {
+            model?.userSegments = []
+        }
+        
+        if (model?.userSegments?.contains(name) ?? true) {
+            return
+        }
+        
+        model?.userSegments?.append(name)
+    }
+    
+    func removeUserSegment(_ name: String) {
+        model?.userSegments?.removeAll{ $0 == name }
+    }
+    
+    func clearUserSegments() {
+        model?.userSegments?.removeAll()
     }
     
     var firstVisit: Date {

@@ -161,4 +161,13 @@ extension IngestTrackInfo {
             trackInfo.sessionVars
         }
     }
+    
+    var userSegments: [String]? {
+        set {
+            trackInfo.userSegments = newValue
+        }
+        get {
+            trackInfo.userSegments
+        }
+    }
 }

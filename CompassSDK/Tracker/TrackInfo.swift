@@ -29,6 +29,7 @@ struct TrackInfo: Encodable {
         case pageVars = "pvar"
         case userVars = "uvar"
         case sessionVars = "svar"
+        case userSegments = "useg"
     }
 
     var pageUrl: String? {
@@ -78,6 +79,7 @@ struct TrackInfo: Encodable {
     var userVars: Vars?
     var sessionVars: Vars?
     var pageVars: Vars?
+    var userSegments: [String]?
     
     private func dicToArray(_ vars: Vars?) -> [[String]] {
         if (vars == nil) {
@@ -106,5 +108,6 @@ struct TrackInfo: Encodable {
         try container.encodeIfPresent(dicToArray(userVars), forKey: .userVars)
         try container.encodeIfPresent(dicToArray(pageVars), forKey: .pageVars)
         try container.encodeIfPresent(dicToArray(sessionVars), forKey: .sessionVars)
+        try container.encodeIfPresent(userSegments, forKey: .userSegments)
     }
 }

@@ -71,6 +71,8 @@ class MockStorage: CompassStorage {
     
     var userVars = ["user": "var"]
     
+    var userSegments = ["segment1", "segment2"]
+    
     func addSessionVar(name: String, value: String) {
     }
     
@@ -78,6 +80,15 @@ class MockStorage: CompassStorage {
     }
     
     func addVisit() {
+    }
+    
+    func addUserSegment(_ name: String) {
+    }
+    
+    func removeUserSegment(_ name: String) {
+    }
+    
+    func clearUserSegments() {
     }
     
     var userId = "userIdFromStorage"

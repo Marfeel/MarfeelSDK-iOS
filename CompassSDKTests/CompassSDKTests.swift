@@ -26,6 +26,7 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(ingestData.sessionVars, ["session": "var"])
             XCTAssertEqual(ingestData.userVars, ["user": "var"])
             XCTAssertEqual(ingestData.pageVars, ["page": "var"])
+            XCTAssertEqual(ingestData.userSegments, ["segment1", "segment2"])
 
             expectation.fulfill()
         })
@@ -50,6 +51,7 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(ingestData.sessionVars, ["session": "var"])
             XCTAssertEqual(ingestData.userVars, ["user": "var"])
             XCTAssertEqual(ingestData.pageVars, [String: String]())
+            XCTAssertEqual(ingestData.userSegments, ["segment1", "segment2"])
 
             expectation.fulfill()
         }
