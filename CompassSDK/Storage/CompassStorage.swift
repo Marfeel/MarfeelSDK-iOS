@@ -20,6 +20,7 @@ protocol CompassStorage {
     func addSessionVar(name: String, value: String)
     func addUserVar(name: String, value: String)
     func addUserSegment(_ name: String)
+    func addUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
 }
@@ -164,6 +165,10 @@ extension PListCompassStorage: CompassStorage {
         }
         
         model?.userSegments?.append(name)
+    }
+    
+    func addUserSegments(_ segments: [String]) {
+        model?.userSegments = segments
     }
     
     func removeUserSegment(_ name: String) {
