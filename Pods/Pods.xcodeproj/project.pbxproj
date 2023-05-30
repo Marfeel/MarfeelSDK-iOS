@@ -7,46 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		010C9B0BBEE5A587F71EE3888965158E /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFEE6AE79E2D987490CF6DCBE1BC35E /* SendTik.swift */; };
-		11F7DA02461D81BB2B1B8079E37515F7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A12874DC9EE16032DD5E281C4DF72B /* Event.swift */; };
+		0DB079DE44B527426496584CF28EB9CE /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E834566426631C9A6AA8B1125F6C0ECE /* ApiRouter.swift */; };
 		1A0BBBF59D62DA98CA7D4A9FE1DAA5CD /* Pods-Playground-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0A1B19F8388CA9BF317BAB0B93D2FC /* Pods-Playground-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		20B24FAFCC00D951D22DBBFF2FE135E8 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DA36C5C75337809252961F306F6CB /* URLRequest.swift */; };
 		24696FFDA024D0B5A78BB2486D1C0644 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		284B3C17041D84955AF6D4923599A60D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		28B481507438D1A3DFB51773B8BCEBB0 /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9591F3A5910AD508D52BF5CFD1911EE /* Rfv.swift */; };
 		2B84B68D6DACDA00FD963AC365A7E022 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		2E64F5D8764C0400AC785C652C01AEC8 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E84D9EAEA1CA7DF9673F08A7C623C5 /* ApiRouter.swift */; };
-		2F59F1514D33434207595B9D21287E71 /* IngestTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FDC38DD3E87F491A8E059E56C892DD /* IngestTrackInfo.swift */; };
+		2EC7A2251C7F7E3B147C05BB05DF090B /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602320C7783451627F8CD189113EB70A /* PlaybackInfo.swift */; };
 		3C2846E6520607669B86EEA801DCFB51 /* Pods-CompassSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C6EDFEEA9FC9B22FD45AB21C95453126 /* Pods-CompassSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3DDB3C875C37915B1D0D9E657A599522 /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 801790D069E929AFB8BD6EE7A2B77E48 /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51B3BD1025F83F033489C2A6C02BF570 /* MarfeelSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E5CAC610E6462F9F40F76E7E29B719 /* MarfeelSDK-iOS-dummy.m */; };
-		54340FA71DA62FC93EAF2F1A1988CF6A /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32E007725129C029786C3804BCC6274 /* CompassStorage.swift */; };
-		55DC03C51F16595EDA7BF66F4F06D7C2 /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C14C5C67C314C7B06E26105F96825E /* TikOperation.swift */; };
-		5FB6323804C439C669BF12C1F1D9303A /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF556C6C3F5D6D141E58FA4CAA6A434 /* AbstractTracker.swift */; };
-		661493AA21DB44D6B595D7FE0768746B /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF75158E8298442458C89A9660B0A67F /* Codable.swift */; };
-		7409B0026646A2A6D23833E3C4BA166C /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D91B00226BBA7F33D30602325E0BC /* MultimediaItem.swift */; };
+		3DDB3C875C37915B1D0D9E657A599522 /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 17BB881A20514A528882E3CB0DE1973F /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		41EFE710BE68C342DBE37006C72886DC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B084519F34F414221B6B807E4B69FB2 /* Bundle.swift */; };
+		52C49CD916929ACB28A678431F162B82 /* IngestTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4B9F65C941E7FFB902754988102BF /* IngestTrackInfo.swift */; };
+		55EDE328ACBFA5068F2CD855DC439DCB /* GetRFV.swift in Sources */ = {isa = PBXBuildFile; fileRef = C308F91151FE61578B54889726BCC3B6 /* GetRFV.swift */; };
+		5FACD31F69757D1F01733D9A09AA0F89 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4E6199F30EE4BE4A1EDBC0AB38CDB /* Type.swift */; };
+		63AB9FCBF545AFD4357E59C707EA7612 /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E069D9B2BCEB4CEBE02FD8A3E1F67 /* CompassTracker.swift */; };
+		644947EA1500A7FF3A35083B0E95458C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E101A4587C97647C878C5A4A45283E86 /* Date.swift */; };
+		6E86CE18AD43F5202F20C4DEAE50D80F /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE696A2CEC180AE1EEA20AC863A4BF85 /* TrackInfo.swift */; };
+		77672EF539595D7769966C355F93A3D8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2750118CE251A991584479A86193A6 /* Event.swift */; };
 		7B62E359E018BCA56DAF66EFECA68C3E /* Pods-CompassSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BC2FA90305C8800DF47AB4212A4B86 /* Pods-CompassSDK-dummy.m */; };
-		853C54A4DF7030EFD8E21DFE8801EAF9 /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B567C063A3D191DB0CBACDB929AD0C /* CompassTracker.swift */; };
+		7E0CDAA8255707C5A19FD21D4A341E9A /* MarfeelSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A4E271340ABB6976706289135B21FC /* MarfeelSDK-iOS-dummy.m */; };
+		8381EBB90B00E87B6869B64F6AFAE735 /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A7EEA8682ACB91DCD9891DC3C28B60 /* Rfv.swift */; };
 		8A84B8DFBA9650A6C669190DCAB39178 /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D546D43852FE9F293CE228D0CBFD57B0 /* Pods-CompassSDK-CompassSDKTests-dummy.m */; };
-		951748203A9B732C7E6FDE834F367C67 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DCF0E7C8CDB39D916DD2EA8F24FFE2 /* TrackInfo.swift */; };
-		A06136127249A0E8E9C669A9C91E9F59 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D76CAD238412880E110712B4F665F45 /* Bundle.swift */; };
-		A2CDAB6728D0286972F2FB775E721BE9 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123687EE59195100A633003D47613DA2 /* Date.swift */; };
-		A2E16EA1CF7511FF45CBBB667BC850E0 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CAF890138365AB214D67269D372BE9 /* Type.swift */; };
-		A3A2B55D48E790FCB3AC2E1A86A65D10 /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791250956F23E83048E1348FF20CFB06 /* MultimediaTrackInfo.swift */; };
-		A58E8A06A9A46751F3ADC309D48E697A /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D0F0AEF6DC4A86A4F805BA8794272D /* CompassTrackerMultimedia.swift */; };
-		A9D8AC168EFB1329FA834C812E85B43A /* MarfeelSDK-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1160F2E28D0000C54CB45DFE156D28 /* MarfeelSDK-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAA369A6B12BB4663C73EEF1FECFBBE0 /* GetRFV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00E306E33402371ACF0C67D23D4F37E /* GetRFV.swift */; };
-		C3A10AEC3ADF6768A2A2E4453E9172DC /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D11FA23504B31683D4A30FBB1E33E9 /* TikOperationFactory.swift */; };
+		90C0A8C879DDBE6B3F0E79B1A448D393 /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9660218E5CD94E3B677D9A671307F195 /* CompassTrackerMultimedia.swift */; };
+		98CE13599490C4FCA1D065BB6D72013D /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13346F2E320C3FBA75FFE85034E1921 /* MultimediaItem.swift */; };
+		9993BB36F74353FA1FC374C411C9412C /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC1B796D328D521B13299541790D1 /* URLRequest.swift */; };
+		A3A1EF519A9A042611DD805F166AAA90 /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3980669EC63E388524C7456AC5373 /* TikOperationFactory.swift */; };
+		A9D8AC168EFB1329FA834C812E85B43A /* MarfeelSDK-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E16A3DA734222415100FF2D8E1F7600 /* MarfeelSDK-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFBB80EC36B826383345EBF48F13F2FF /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D928E619C927AEC0AE39E72D38B0B3E2 /* AbstractTracker.swift */; };
+		B31CAA2484FC56F09E8182E7BD2AAD55 /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3A14070B991597132865CEF574691B /* TikOperation.swift */; };
+		C15FAB161CE96D4025E8F00789ECA23D /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CD09D430F0FCCA387AA3B5982A00C /* CompassStorage.swift */; };
 		C422759CB829F03B066013F099B2FEA3 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B2384C9AB675AC48FA42DABC995EA22A /* Pods-CompassSDK-CompassSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C69ABFA2E3DFC525F81D559045CBCFF9 /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CE5EB99A649CE7F5426204204D1CCB /* MultimediaMetadata.swift */; };
+		CA06DE38CFD7E997ACDA75B7E491AE60 /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F3CC01E5841DDD6F33EE7E9A5C2A /* MultimediaMetadata.swift */; };
 		D20F16AA0C7B347BBA475CFF33FEA079 /* Pods-Playground-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C69DA08B15285F9048CAD91D2A024037 /* Pods-Playground-dummy.m */; };
-		E642EC251865DDB3CE98A0DA50149D91 /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2865997B60078BC9277865C5703F4C74 /* PListStorage.swift */; };
-		E8ECE0E94D668F92523701796006C4AE /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB256764A6DCC882914C6BB388476A8 /* PlaybackInfo.swift */; };
+		D31479B824B5DD73E37A4A502A45500A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9241FE3A64625BAF1DBA2175220162F /* Codable.swift */; };
+		E2E0E567577E545BD097CAD7916EED8F /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE7977924A12C51D2702AE5248D353 /* MultimediaTrackInfo.swift */; };
+		E485CD566FB7CDE2378A2328022F64EB /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ACDDEB7CDC0E9BFF7C7B55799B1317 /* SendTik.swift */; };
+		F51DD67EE80BEE7AED22DA5BB7E61904 /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF90D275BA5239BDD9365C74BDAB08 /* PListStorage.swift */; };
 		F6BD1F4E2CEADD401C8B2884F84CA621 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C800C5ED87810DFFB2BCD0C7EE54CA58 /* PBXContainerItemProxy */ = {
+		E63689901448C58E7F3C46472BF97D82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -56,68 +56,71 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00AAC1B796D328D521B13299541790D1 /* URLRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		11EE30F890448786348A28985D6B420A /* Pods-CompassSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-Info.plist"; sourceTree = "<group>"; };
 		121D89BF80EC22BE17834919CBBEC48C /* Pods-CompassSDK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK"; path = Pods_CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		123687EE59195100A633003D47613DA2 /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Date.swift; path = CompassSDK/Extensions/Date.swift; sourceTree = "<group>"; };
+		17BB881A20514A528882E3CB0DE1973F /* CompassSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CompassSDK.h; path = CompassSDK/CompassSDK.h; sourceTree = "<group>"; };
 		19D3B284F6E05501161EBB21321CDC05 /* Pods-CompassSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CompassSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1B084519F34F414221B6B807E4B69FB2 /* Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		26C3980669EC63E388524C7456AC5373 /* TikOperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TikOperationFactory.swift; sourceTree = "<group>"; };
 		27B074E68C4C5B1DB50F12EDEF0B45C3 /* Pods-Playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Playground.release.xcconfig"; sourceTree = "<group>"; };
-		2865997B60078BC9277865C5703F4C74 /* PListStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PListStorage.swift; path = CompassSDK/Storage/PListStorage.swift; sourceTree = "<group>"; };
 		2C9CB4E010EA5C478480AFD7960F3974 /* Pods-CompassSDK-CompassSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK-CompassSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		35DCF0E7C8CDB39D916DD2EA8F24FFE2 /* TrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TrackInfo.swift; path = CompassSDK/Tracker/TrackInfo.swift; sourceTree = "<group>"; };
-		368E4BFAE14195AB1C969218A6A14804 /* MarfeelSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		36ACDDEB7CDC0E9BFF7C7B55799B1317 /* SendTik.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SendTik.swift; sourceTree = "<group>"; };
 		3733C70FFFCC078D28A0BA3315140C38 /* Pods-Playground-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Playground-Info.plist"; sourceTree = "<group>"; };
-		489DA36C5C75337809252961F306F6CB /* URLRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLRequest.swift; path = CompassSDK/Extensions/URLRequest.swift; sourceTree = "<group>"; };
-		49B39D4FCE90925725EE727587797433 /* MarfeelSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "MarfeelSDK-iOS.modulemap"; sourceTree = "<group>"; };
-		49FDC38DD3E87F491A8E059E56C892DD /* IngestTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IngestTrackInfo.swift; path = CompassSDK/Tracker/Core/IngestTrackInfo.swift; sourceTree = "<group>"; };
+		39A7EEA8682ACB91DCD9891DC3C28B60 /* Rfv.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Rfv.swift; sourceTree = "<group>"; };
+		409D022D42DA5CF8B74DA10EDDE89B26 /* MarfeelSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "MarfeelSDK-iOS.modulemap"; sourceTree = "<group>"; };
+		47FF14ED91B8ADA169C73C18798BA441 /* MarfeelSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		487D5480FF9D37EB9BA2EED89575CE47 /* MarfeelSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		54A4E271340ABB6976706289135B21FC /* MarfeelSDK-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarfeelSDK-iOS-dummy.m"; sourceTree = "<group>"; };
+		580CD09D430F0FCCA387AA3B5982A00C /* CompassStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassStorage.swift; sourceTree = "<group>"; };
+		5D49AAF14F563E8D445DF11B3D10EE43 /* MarfeelSDK-iOS.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "MarfeelSDK-iOS.podspec"; sourceTree = "<group>"; tabWidth = 2; };
 		5D76D5F95984629A2228EEE2B4D6675A /* Pods-CompassSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		5EFEE6AE79E2D987490CF6DCBE1BC35E /* SendTik.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SendTik.swift; path = CompassSDK/Tick/SendTik.swift; sourceTree = "<group>"; };
+		5E16A3DA734222415100FF2D8E1F7600 /* MarfeelSDK-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-umbrella.h"; sourceTree = "<group>"; };
 		5F168D7A9984B72D6851C66DD80F852C /* MarfeelSDK-iOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "MarfeelSDK-iOS"; path = MarfeelSDK_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F2D2823E7475B9EB43A5476C94755AA /* MarfeelSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		61E5CAC610E6462F9F40F76E7E29B719 /* MarfeelSDK-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarfeelSDK-iOS-dummy.m"; sourceTree = "<group>"; };
-		61F740CEF2632AFB103183D99DFBDAD1 /* MarfeelSDK-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-prefix.pch"; sourceTree = "<group>"; };
-		68E84D9EAEA1CA7DF9673F08A7C623C5 /* ApiRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApiRouter.swift; path = CompassSDK/Communications/ApiRouter.swift; sourceTree = "<group>"; };
+		602320C7783451627F8CD189113EB70A /* PlaybackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		62CF90D275BA5239BDD9365C74BDAB08 /* PListStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PListStorage.swift; sourceTree = "<group>"; };
 		6A8033549A17DA4B55C21FEC24DA1C98 /* Pods-CompassSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-acknowledgements.plist"; sourceTree = "<group>"; };
+		6E0E069D9B2BCEB4CEBE02FD8A3E1F67 /* CompassTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassTracker.swift; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		791250956F23E83048E1348FF20CFB06 /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaTrackInfo.swift; path = CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift; sourceTree = "<group>"; };
+		741362B516D74F488E1AA52EAB12C76D /* MarfeelSDK-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-prefix.pch"; sourceTree = "<group>"; };
 		7AE67FA85F08027C69B02A5EE591C8B5 /* Pods-CompassSDK-CompassSDKTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CompassSDK-CompassSDKTests.modulemap"; sourceTree = "<group>"; };
 		7B6049C0EF4193F639C9D0FE1DA791E3 /* Pods-Playground-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Playground-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7D76CAD238412880E110712B4F665F45 /* Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = CompassSDK/Extensions/Bundle.swift; sourceTree = "<group>"; };
-		801790D069E929AFB8BD6EE7A2B77E48 /* CompassSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CompassSDK.h; path = CompassSDK/CompassSDK.h; sourceTree = "<group>"; };
-		820D91B00226BBA7F33D30602325E0BC /* MultimediaItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaItem.swift; path = CompassSDK/Tracker/Multimedia/MultimediaItem.swift; sourceTree = "<group>"; };
+		7CC4B9F65C941E7FFB902754988102BF /* IngestTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IngestTrackInfo.swift; sourceTree = "<group>"; };
+		80FE7977924A12C51D2702AE5248D353 /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaTrackInfo.swift; sourceTree = "<group>"; };
 		836E05CBF8571FDA83B185194FA09E15 /* Pods-Playground */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Playground"; path = Pods_Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		87D11FA23504B31683D4A30FBB1E33E9 /* TikOperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TikOperationFactory.swift; path = CompassSDK/Tick/TikOperationFactory.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A5CE5EB99A649CE7F5426204204D1CCB /* MultimediaMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaMetadata.swift; path = CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift; sourceTree = "<group>"; };
+		83E6F3CC01E5841DDD6F33EE7E9A5C2A /* MultimediaMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaMetadata.swift; sourceTree = "<group>"; };
+		8EA4E6199F30EE4BE4A1EDBC0AB38CDB /* Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		94D47D1CA0AAD31F47143692AB5C12B2 /* MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
+		9660218E5CD94E3B677D9A671307F195 /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F2750118CE251A991584479A86193A6 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A6E834BA1D4021EBFF590A0E25212FE9 /* Pods-CompassSDK-CompassSDKTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-Info.plist"; sourceTree = "<group>"; };
-		AEF556C6C3F5D6D141E58FA4CAA6A434 /* AbstractTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbstractTracker.swift; path = CompassSDK/Tracker/AbstractTracker.swift; sourceTree = "<group>"; };
 		B2384C9AB675AC48FA42DABC995EA22A /* Pods-CompassSDK-CompassSDKTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CompassSDK-CompassSDKTests-umbrella.h"; sourceTree = "<group>"; };
 		B6B926B0F188178A6BB0B2E21A83674C /* Pods-Playground-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Playground-acknowledgements.plist"; sourceTree = "<group>"; };
-		B7CAF890138365AB214D67269D372BE9 /* Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Type.swift; path = CompassSDK/Tracker/Multimedia/Type.swift; sourceTree = "<group>"; };
 		B88EE55A84BF74614F4A73D39619B04A /* Pods-CompassSDK-CompassSDKTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CompassSDK-CompassSDKTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BE696A2CEC180AE1EEA20AC863A4BF85 /* TrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
 		BF0A1B19F8388CA9BF317BAB0B93D2FC /* Pods-Playground-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Playground-umbrella.h"; sourceTree = "<group>"; };
+		C308F91151FE61578B54889726BCC3B6 /* GetRFV.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GetRFV.swift; sourceTree = "<group>"; };
 		C4DB3B2130B9B66DD0B33E952E8D893A /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
 		C69DA08B15285F9048CAD91D2A024037 /* Pods-Playground-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Playground-dummy.m"; sourceTree = "<group>"; };
 		C6EDFEEA9FC9B22FD45AB21C95453126 /* Pods-CompassSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CompassSDK-umbrella.h"; sourceTree = "<group>"; };
 		C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods-CompassSDK-CompassSDKTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK-CompassSDKTests"; path = Pods_CompassSDK_CompassSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C89A86A584D178242A0A0D1FE065B065 /* MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
 		CB136E0F72F1F2D523D974FDE2F7379E /* Pods-CompassSDK-CompassSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK-CompassSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDA9E2601106109B1C7EC988755513F9 /* Pods-CompassSDK-CompassSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		CDB256764A6DCC882914C6BB388476A8 /* PlaybackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlaybackInfo.swift; path = CompassSDK/Tracker/Multimedia/PlaybackInfo.swift; sourceTree = "<group>"; };
-		D2B567C063A3D191DB0CBACDB929AD0C /* CompassTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassTracker.swift; path = CompassSDK/Tracker/Core/CompassTracker.swift; sourceTree = "<group>"; };
 		D546D43852FE9F293CE228D0CBFD57B0 /* Pods-CompassSDK-CompassSDKTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CompassSDK-CompassSDKTests-dummy.m"; sourceTree = "<group>"; };
-		D6A12874DC9EE16032DD5E281C4DF72B /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = CompassSDK/Tracker/Multimedia/Event.swift; sourceTree = "<group>"; };
 		D70F1ECFF7A806F64474ED95EF7590C1 /* Pods-CompassSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CompassSDK.modulemap"; sourceTree = "<group>"; };
+		D928E619C927AEC0AE39E72D38B0B3E2 /* AbstractTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AbstractTracker.swift; sourceTree = "<group>"; };
 		D94B65081850CC85B4C3117E0632773E /* Pods-CompassSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.release.xcconfig"; sourceTree = "<group>"; };
-		D9591F3A5910AD508D52BF5CFD1911EE /* Rfv.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Rfv.swift; path = CompassSDK/RFV/Rfv.swift; sourceTree = "<group>"; };
-		E32E007725129C029786C3804BCC6274 /* CompassStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassStorage.swift; path = CompassSDK/Storage/CompassStorage.swift; sourceTree = "<group>"; };
+		E101A4587C97647C878C5A4A45283E86 /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		E834566426631C9A6AA8B1125F6C0ECE /* ApiRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		E8BC2FA90305C8800DF47AB4212A4B86 /* Pods-CompassSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CompassSDK-dummy.m"; sourceTree = "<group>"; };
 		E973FB2557D332FBF501C4FAB83C6737 /* Pods-Playground-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Playground-frameworks.sh"; sourceTree = "<group>"; };
-		F00E306E33402371ACF0C67D23D4F37E /* GetRFV.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GetRFV.swift; path = CompassSDK/RFV/GetRFV.swift; sourceTree = "<group>"; };
-		F2C14C5C67C314C7B06E26105F96825E /* TikOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TikOperation.swift; path = CompassSDK/Tick/TikOperation.swift; sourceTree = "<group>"; };
-		F9D0F0AEF6DC4A86A4F805BA8794272D /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassTrackerMultimedia.swift; path = CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
-		FC1160F2E28D0000C54CB45DFE156D28 /* MarfeelSDK-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-umbrella.h"; sourceTree = "<group>"; };
+		ED2BD3D56C6D64230369207040612EF0 /* LICENSE.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		F13346F2E320C3FBA75FFE85034E1921 /* MultimediaItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaItem.swift; sourceTree = "<group>"; };
+		F4B51916A633C8B51D9F0FC67D8A1F45 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F9241FE3A64625BAF1DBA2175220162F /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		FB3A14070B991597132865CEF574691B /* TikOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TikOperation.swift; sourceTree = "<group>"; };
 		FC475B1D06A10173BDCF30B7BCAC8083 /* Pods-Playground.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Playground.modulemap"; sourceTree = "<group>"; };
-		FF75158E8298442458C89A9660B0A67F /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Codable.swift; path = CompassSDK/Extensions/Codable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,37 +175,68 @@
 			path = "Target Support Files/Pods-CompassSDK-CompassSDKTests";
 			sourceTree = "<group>";
 		};
-		35D812B1F48F8236622FFA9648D849EC /* MarfeelSDK-iOS */ = {
+		01DA4845D2B1AA4BFF262869F1EDA42F /* RFV */ = {
 			isa = PBXGroup;
 			children = (
-				AEF556C6C3F5D6D141E58FA4CAA6A434 /* AbstractTracker.swift */,
-				68E84D9EAEA1CA7DF9673F08A7C623C5 /* ApiRouter.swift */,
-				7D76CAD238412880E110712B4F665F45 /* Bundle.swift */,
-				FF75158E8298442458C89A9660B0A67F /* Codable.swift */,
-				801790D069E929AFB8BD6EE7A2B77E48 /* CompassSDK.h */,
-				E32E007725129C029786C3804BCC6274 /* CompassStorage.swift */,
-				D2B567C063A3D191DB0CBACDB929AD0C /* CompassTracker.swift */,
-				F9D0F0AEF6DC4A86A4F805BA8794272D /* CompassTrackerMultimedia.swift */,
-				123687EE59195100A633003D47613DA2 /* Date.swift */,
-				D6A12874DC9EE16032DD5E281C4DF72B /* Event.swift */,
-				F00E306E33402371ACF0C67D23D4F37E /* GetRFV.swift */,
-				49FDC38DD3E87F491A8E059E56C892DD /* IngestTrackInfo.swift */,
-				820D91B00226BBA7F33D30602325E0BC /* MultimediaItem.swift */,
-				A5CE5EB99A649CE7F5426204204D1CCB /* MultimediaMetadata.swift */,
-				791250956F23E83048E1348FF20CFB06 /* MultimediaTrackInfo.swift */,
-				CDB256764A6DCC882914C6BB388476A8 /* PlaybackInfo.swift */,
-				2865997B60078BC9277865C5703F4C74 /* PListStorage.swift */,
-				D9591F3A5910AD508D52BF5CFD1911EE /* Rfv.swift */,
-				5EFEE6AE79E2D987490CF6DCBE1BC35E /* SendTik.swift */,
-				F2C14C5C67C314C7B06E26105F96825E /* TikOperation.swift */,
-				87D11FA23504B31683D4A30FBB1E33E9 /* TikOperationFactory.swift */,
-				35DCF0E7C8CDB39D916DD2EA8F24FFE2 /* TrackInfo.swift */,
-				B7CAF890138365AB214D67269D372BE9 /* Type.swift */,
-				489DA36C5C75337809252961F306F6CB /* URLRequest.swift */,
-				A461CFE76AEC754FBCE3DED9E5FAFEB3 /* Support Files */,
+				C308F91151FE61578B54889726BCC3B6 /* GetRFV.swift */,
+				39A7EEA8682ACB91DCD9891DC3C28B60 /* Rfv.swift */,
 			);
-			name = "MarfeelSDK-iOS";
-			path = "MarfeelSDK-iOS";
+			name = RFV;
+			path = CompassSDK/RFV;
+			sourceTree = "<group>";
+		};
+		06FD5CCC4E80D183AF55AF97EF29C4A2 /* Tick */ = {
+			isa = PBXGroup;
+			children = (
+				36ACDDEB7CDC0E9BFF7C7B55799B1317 /* SendTik.swift */,
+				FB3A14070B991597132865CEF574691B /* TikOperation.swift */,
+				26C3980669EC63E388524C7456AC5373 /* TikOperationFactory.swift */,
+			);
+			name = Tick;
+			path = CompassSDK/Tick;
+			sourceTree = "<group>";
+		};
+		27BB8F161D5D40A4487DA5F6F216C975 /* Communications */ = {
+			isa = PBXGroup;
+			children = (
+				E834566426631C9A6AA8B1125F6C0ECE /* ApiRouter.swift */,
+			);
+			name = Communications;
+			path = CompassSDK/Communications;
+			sourceTree = "<group>";
+		};
+		2892AC87C29ADDBC8F576C51A1C3F4DA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				409D022D42DA5CF8B74DA10EDDE89B26 /* MarfeelSDK-iOS.modulemap */,
+				54A4E271340ABB6976706289135B21FC /* MarfeelSDK-iOS-dummy.m */,
+				94D47D1CA0AAD31F47143692AB5C12B2 /* MarfeelSDK-iOS-Info.plist */,
+				741362B516D74F488E1AA52EAB12C76D /* MarfeelSDK-iOS-prefix.pch */,
+				5E16A3DA734222415100FF2D8E1F7600 /* MarfeelSDK-iOS-umbrella.h */,
+				487D5480FF9D37EB9BA2EED89575CE47 /* MarfeelSDK-iOS.debug.xcconfig */,
+				47FF14ED91B8ADA169C73C18798BA441 /* MarfeelSDK-iOS.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Pods/Target Support Files/MarfeelSDK-iOS";
+			sourceTree = "<group>";
+		};
+		2D754C4ABA76F6EDCB0DAB588EF7EF65 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				ED2BD3D56C6D64230369207040612EF0 /* LICENSE.md */,
+				5D49AAF14F563E8D445DF11B3D10EE43 /* MarfeelSDK-iOS.podspec */,
+				F4B51916A633C8B51D9F0FC67D8A1F45 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		2E82B4142A52280AD014FB70EECACA27 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6E0E069D9B2BCEB4CEBE02FD8A3E1F67 /* CompassTracker.swift */,
+				7CC4B9F65C941E7FFB902754988102BF /* IngestTrackInfo.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -211,6 +245,26 @@
 				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		5FAD637C57C6E26F68E7BCC764E35469 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DFBB3F1A2225DE177F6AA326A8A9139E /* MarfeelSDK-iOS */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		8011F26A228DCC2B12AFAC89D83BCC4A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B084519F34F414221B6B807E4B69FB2 /* Bundle.swift */,
+				F9241FE3A64625BAF1DBA2175220162F /* Codable.swift */,
+				E101A4587C97647C878C5A4A45283E86 /* Date.swift */,
+				00AAC1B796D328D521B13299541790D1 /* URLRequest.swift */,
+			);
+			name = Extensions;
+			path = CompassSDK/Extensions;
 			sourceTree = "<group>";
 		};
 		94329B4A26BE84EDE4EA7EF726D74456 /* Pods-CompassSDK */ = {
@@ -229,35 +283,22 @@
 			path = "Target Support Files/Pods-CompassSDK";
 			sourceTree = "<group>";
 		};
-		A461CFE76AEC754FBCE3DED9E5FAFEB3 /* Support Files */ = {
+		A95EE4D455BD127EBFBC038F75128131 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				49B39D4FCE90925725EE727587797433 /* MarfeelSDK-iOS.modulemap */,
-				61E5CAC610E6462F9F40F76E7E29B719 /* MarfeelSDK-iOS-dummy.m */,
-				C89A86A584D178242A0A0D1FE065B065 /* MarfeelSDK-iOS-Info.plist */,
-				61F740CEF2632AFB103183D99DFBDAD1 /* MarfeelSDK-iOS-prefix.pch */,
-				FC1160F2E28D0000C54CB45DFE156D28 /* MarfeelSDK-iOS-umbrella.h */,
-				5F2D2823E7475B9EB43A5476C94755AA /* MarfeelSDK-iOS.debug.xcconfig */,
-				368E4BFAE14195AB1C969218A6A14804 /* MarfeelSDK-iOS.release.xcconfig */,
+				580CD09D430F0FCCA387AA3B5982A00C /* CompassStorage.swift */,
+				62CF90D275BA5239BDD9365C74BDAB08 /* PListStorage.swift */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/MarfeelSDK-iOS";
-			sourceTree = "<group>";
-		};
-		AB0A047D5F18F7065109460FF5CDDF5C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				35D812B1F48F8236622FFA9648D849EC /* MarfeelSDK-iOS */,
-			);
-			name = Pods;
+			name = Storage;
+			path = CompassSDK/Storage;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				5FAD637C57C6E26F68E7BCC764E35469 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				AB0A047D5F18F7065109460FF5CDDF5C /* Pods */,
 				E1059EBDAFC2BBBB3D3F17C769E14827 /* Products */,
 				EB6043F3497740C0F29AB6B98BE3C6A7 /* Targets Support Files */,
 			);
@@ -288,6 +329,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DFBB3F1A2225DE177F6AA326A8A9139E /* MarfeelSDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				17BB881A20514A528882E3CB0DE1973F /* CompassSDK.h */,
+				27BB8F161D5D40A4487DA5F6F216C975 /* Communications */,
+				8011F26A228DCC2B12AFAC89D83BCC4A /* Extensions */,
+				2D754C4ABA76F6EDCB0DAB588EF7EF65 /* Pod */,
+				01DA4845D2B1AA4BFF262869F1EDA42F /* RFV */,
+				A95EE4D455BD127EBFBC038F75128131 /* Storage */,
+				2892AC87C29ADDBC8F576C51A1C3F4DA /* Support Files */,
+				06FD5CCC4E80D183AF55AF97EF29C4A2 /* Tick */,
+				F4E547939FC65119FC6E71200946421E /* Tracker */,
+			);
+			name = "MarfeelSDK-iOS";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		E1059EBDAFC2BBBB3D3F17C769E14827 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +365,32 @@
 				D1A74551FF0AE95DA29D9FC7B3BD33DF /* Pods-Playground */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F4E547939FC65119FC6E71200946421E /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				D928E619C927AEC0AE39E72D38B0B3E2 /* AbstractTracker.swift */,
+				BE696A2CEC180AE1EEA20AC863A4BF85 /* TrackInfo.swift */,
+				2E82B4142A52280AD014FB70EECACA27 /* Core */,
+				FF59AFBC03D4F8B9851234818FB69405 /* Multimedia */,
+			);
+			name = Tracker;
+			path = CompassSDK/Tracker;
+			sourceTree = "<group>";
+		};
+		FF59AFBC03D4F8B9851234818FB69405 /* Multimedia */ = {
+			isa = PBXGroup;
+			children = (
+				9660218E5CD94E3B677D9A671307F195 /* CompassTrackerMultimedia.swift */,
+				9F2750118CE251A991584479A86193A6 /* Event.swift */,
+				F13346F2E320C3FBA75FFE85034E1921 /* MultimediaItem.swift */,
+				83E6F3CC01E5841DDD6F33EE7E9A5C2A /* MultimediaMetadata.swift */,
+				80FE7977924A12C51D2702AE5248D353 /* MultimediaTrackInfo.swift */,
+				602320C7783451627F8CD189113EB70A /* PlaybackInfo.swift */,
+				8EA4E6199F30EE4BE4A1EDBC0AB38CDB /* Type.swift */,
+			);
+			path = Multimedia;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,7 +437,7 @@
 			buildConfigurationList = A99675BEDA5CF305D094F8D3A70A92B2 /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS" */;
 			buildPhases = (
 				594C386B7C9B8AB443F20545D83176DA /* Headers */,
-				CEE3429ECA5C6FE03852B4626CC75FB6 /* Sources */,
+				D8C1733A215C780E792949208E7009EB /* Sources */,
 				7F0720CCF0ADA742F0555AE1A466F02D /* Frameworks */,
 				7AB378C90BC42802EDDD27CDA4287038 /* Resources */,
 			);
@@ -414,7 +498,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				51858E56A2FA93D1539214425FC5D673 /* PBXTargetDependency */,
+				EB8D393F3D5B4191133C7019E768A202 /* PBXTargetDependency */,
 			);
 			name = "Pods-Playground";
 			productName = Pods_Playground;
@@ -507,45 +591,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEE3429ECA5C6FE03852B4626CC75FB6 /* Sources */ = {
+		D8C1733A215C780E792949208E7009EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FB6323804C439C669BF12C1F1D9303A /* AbstractTracker.swift in Sources */,
-				2E64F5D8764C0400AC785C652C01AEC8 /* ApiRouter.swift in Sources */,
-				A06136127249A0E8E9C669A9C91E9F59 /* Bundle.swift in Sources */,
-				661493AA21DB44D6B595D7FE0768746B /* Codable.swift in Sources */,
-				54340FA71DA62FC93EAF2F1A1988CF6A /* CompassStorage.swift in Sources */,
-				853C54A4DF7030EFD8E21DFE8801EAF9 /* CompassTracker.swift in Sources */,
-				A58E8A06A9A46751F3ADC309D48E697A /* CompassTrackerMultimedia.swift in Sources */,
-				A2CDAB6728D0286972F2FB775E721BE9 /* Date.swift in Sources */,
-				11F7DA02461D81BB2B1B8079E37515F7 /* Event.swift in Sources */,
-				AAA369A6B12BB4663C73EEF1FECFBBE0 /* GetRFV.swift in Sources */,
-				2F59F1514D33434207595B9D21287E71 /* IngestTrackInfo.swift in Sources */,
-				51B3BD1025F83F033489C2A6C02BF570 /* MarfeelSDK-iOS-dummy.m in Sources */,
-				7409B0026646A2A6D23833E3C4BA166C /* MultimediaItem.swift in Sources */,
-				C69ABFA2E3DFC525F81D559045CBCFF9 /* MultimediaMetadata.swift in Sources */,
-				A3A2B55D48E790FCB3AC2E1A86A65D10 /* MultimediaTrackInfo.swift in Sources */,
-				E8ECE0E94D668F92523701796006C4AE /* PlaybackInfo.swift in Sources */,
-				E642EC251865DDB3CE98A0DA50149D91 /* PListStorage.swift in Sources */,
-				28B481507438D1A3DFB51773B8BCEBB0 /* Rfv.swift in Sources */,
-				010C9B0BBEE5A587F71EE3888965158E /* SendTik.swift in Sources */,
-				55DC03C51F16595EDA7BF66F4F06D7C2 /* TikOperation.swift in Sources */,
-				C3A10AEC3ADF6768A2A2E4453E9172DC /* TikOperationFactory.swift in Sources */,
-				951748203A9B732C7E6FDE834F367C67 /* TrackInfo.swift in Sources */,
-				A2E16EA1CF7511FF45CBBB667BC850E0 /* Type.swift in Sources */,
-				20B24FAFCC00D951D22DBBFF2FE135E8 /* URLRequest.swift in Sources */,
+				AFBB80EC36B826383345EBF48F13F2FF /* AbstractTracker.swift in Sources */,
+				0DB079DE44B527426496584CF28EB9CE /* ApiRouter.swift in Sources */,
+				41EFE710BE68C342DBE37006C72886DC /* Bundle.swift in Sources */,
+				D31479B824B5DD73E37A4A502A45500A /* Codable.swift in Sources */,
+				C15FAB161CE96D4025E8F00789ECA23D /* CompassStorage.swift in Sources */,
+				63AB9FCBF545AFD4357E59C707EA7612 /* CompassTracker.swift in Sources */,
+				90C0A8C879DDBE6B3F0E79B1A448D393 /* CompassTrackerMultimedia.swift in Sources */,
+				644947EA1500A7FF3A35083B0E95458C /* Date.swift in Sources */,
+				77672EF539595D7769966C355F93A3D8 /* Event.swift in Sources */,
+				55EDE328ACBFA5068F2CD855DC439DCB /* GetRFV.swift in Sources */,
+				52C49CD916929ACB28A678431F162B82 /* IngestTrackInfo.swift in Sources */,
+				7E0CDAA8255707C5A19FD21D4A341E9A /* MarfeelSDK-iOS-dummy.m in Sources */,
+				98CE13599490C4FCA1D065BB6D72013D /* MultimediaItem.swift in Sources */,
+				CA06DE38CFD7E997ACDA75B7E491AE60 /* MultimediaMetadata.swift in Sources */,
+				E2E0E567577E545BD097CAD7916EED8F /* MultimediaTrackInfo.swift in Sources */,
+				2EC7A2251C7F7E3B147C05BB05DF090B /* PlaybackInfo.swift in Sources */,
+				F51DD67EE80BEE7AED22DA5BB7E61904 /* PListStorage.swift in Sources */,
+				8381EBB90B00E87B6869B64F6AFAE735 /* Rfv.swift in Sources */,
+				E485CD566FB7CDE2378A2328022F64EB /* SendTik.swift in Sources */,
+				B31CAA2484FC56F09E8182E7BD2AAD55 /* TikOperation.swift in Sources */,
+				A3A1EF519A9A042611DD805F166AAA90 /* TikOperationFactory.swift in Sources */,
+				6E86CE18AD43F5202F20C4DEAE50D80F /* TrackInfo.swift in Sources */,
+				5FACD31F69757D1F01733D9A09AA0F89 /* Type.swift in Sources */,
+				9993BB36F74353FA1FC374C411C9412C /* URLRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		51858E56A2FA93D1539214425FC5D673 /* PBXTargetDependency */ = {
+		EB8D393F3D5B4191133C7019E768A202 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MarfeelSDK-iOS";
 			target = 061ED9BA07A1C062E749CDD1A32C45D4 /* MarfeelSDK-iOS */;
-			targetProxy = C800C5ED87810DFFB2BCD0C7EE54CA58 /* PBXContainerItemProxy */;
+			targetProxy = E63689901448C58E7F3C46472BF97D82 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -589,7 +673,7 @@
 		};
 		5872B1A4E0933973FEEE073514D7E55D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 368E4BFAE14195AB1C969218A6A14804 /* MarfeelSDK-iOS.release.xcconfig */;
+			baseConfigurationReference = 47FF14ED91B8ADA169C73C18798BA441 /* MarfeelSDK-iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -866,7 +950,7 @@
 		};
 		DB6BFF4264CBEC15CD43A827AE583A5A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F2D2823E7475B9EB43A5476C94755AA /* MarfeelSDK-iOS.debug.xcconfig */;
+			baseConfigurationReference = 487D5480FF9D37EB9BA2EED89575CE47 /* MarfeelSDK-iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

@@ -7,6 +7,8 @@
 
 import Foundation
     
+typealias Vars = [String: String]
+
 struct TrackInfo: Encodable {
     enum CodingKeys : String, CodingKey {
         case pageUrl = "url"
@@ -24,6 +26,10 @@ struct TrackInfo: Encodable {
         case canonical = "c"
         case userId = "u"
         case pageType
+        case pageVars = "pvar"
+        case userVars = "uvar"
+        case sessionVars = "svar"
+        case userSegments = "useg"
     }
 
     var pageUrl: String? {
@@ -70,6 +76,19 @@ struct TrackInfo: Encodable {
     private var previosPageUrl: String?
     private var startPageDate: Date?
     
+    var userVars: Vars?
+    var sessionVars: Vars?
+    var pageVars: Vars?
+    var userSegments: [String]?
+    
+    private func dicToArray(_ vars: Vars?) -> [[String]] {
+        if (vars == nil) {
+            return []
+        }
+        
+        return vars!.keys.map({ [$0, vars![$0]!] })
+    }
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
@@ -86,5 +105,9 @@ struct TrackInfo: Encodable {
         try container.encodeIfPresent(canonical, forKey: .canonical)
         try container.encodeIfPresent(userId, forKey: .userId)
         try container.encodeIfPresent(pageType, forKey: .pageType)
+        try container.encodeIfPresent(dicToArray(userVars), forKey: .userVars)
+        try container.encodeIfPresent(dicToArray(pageVars), forKey: .pageVars)
+        try container.encodeIfPresent(dicToArray(sessionVars), forKey: .sessionVars)
+        try container.encodeIfPresent(userSegments, forKey: .userSegments)
     }
 }

@@ -23,7 +23,15 @@ extension URLRequest {
         
         let parameterArray = parameters.map { (arg) -> String in
           let (key, value) = arg
-            return "\(key)=\(self.percentEscapeString(value.description))"
+            var description = value.description
+            
+            if let arr = value as? [[String]] {
+                description = arr.description
+            } else if let arr = value as? [String] {
+                description = arr.description
+            }
+            
+            return "\(key)=\(self.percentEscapeString(description))"
         }
         
         httpBody = parameterArray.joined(separator: "&").data(using: String.Encoding.utf8)

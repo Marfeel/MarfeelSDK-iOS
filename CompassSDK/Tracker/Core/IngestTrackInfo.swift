@@ -130,5 +130,44 @@ extension IngestTrackInfo {
         get {
             trackInfo
         }
+        set {
+            trackInfo = newValue
+        }
+    }
+    
+    var userVars: Vars? {
+        set {
+            trackInfo.userVars = newValue
+        }
+        get {
+            trackInfo.userVars
+        }
+    }
+    
+    var pageVars: Vars? {
+        set {
+            trackInfo.pageVars = newValue
+        }
+        get {
+            trackInfo.pageVars
+        }
+    }
+    
+    var sessionVars: Vars? {
+        set {
+            trackInfo.sessionVars = newValue
+        }
+        get {
+            trackInfo.sessionVars
+        }
+    }
+    
+    var userSegments: [String]? {
+        set {
+            trackInfo.userSegments = newValue
+        }
+        get {
+            trackInfo.userSegments
+        }
     }
 }

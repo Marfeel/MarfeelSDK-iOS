@@ -69,43 +69,44 @@ extension CompassTrackerMultimedia {
 private extension CompassTrackerMultimedia {
     func doTick(_ id: String) {
         let dispatchDate = Date(timeIntervalSinceNow: 5)
-        var trackInfo = compassTracker.trackInfo.core
-                        
-        tiksInProgress[id] = tiksInProgress[id] ?? (0, false)
         
-        guard !tiksInProgress[id]!.scheduled else {
-            return
-        }
-        let tik = tiksInProgress[id]!.tik
-        let item = items[id]!
-        tiksInProgress[id]!.scheduled = true
-        let operation = tikOperationFactory.buildOperation(
-            dataBuilder: { [self] (completion) in
-                getCachedRfv {
-                    rfv in
-                    
-                    trackInfo.currentDate = Date()
-                    completion(MultimediaTrackInfo(
-                        trackInfo: trackInfo,
-                        rfv: rfv,
-                        item: item,
-                        tik: tik
-                    ))
-                }
-
-                return nil
-            },
-            dispatchDate: dispatchDate,
-            path: TIK_PATH,
-            contentType: ContentType.JSON
-        )
-        observeFinish(for: operation) { [weak self] in
-            guard self?.tiksInProgress[id] != nil else {
+        compassTracker.getCommonTrackingData{ [self] (trackInfo) in
+            tiksInProgress[id] = tiksInProgress[id] ?? (0, false)
+            
+            guard !tiksInProgress[id]!.scheduled else {
                 return
             }
-            self?.tiksInProgress[id] = (tik + 1, false)
+            let tik = tiksInProgress[id]!.tik
+            let item = items[id]!
+            tiksInProgress[id]!.scheduled = true
+            let operation = tikOperationFactory.buildOperation(
+                dataBuilder: { [self] (completion) in
+                    getCachedRfv { rfv in
+                        var finalTrackInfo = trackInfo
+                        
+                        finalTrackInfo.currentDate = Date()
+                        completion(MultimediaTrackInfo(
+                            trackInfo: finalTrackInfo,
+                            rfv: rfv,
+                            item: item,
+                            tik: tik
+                        ))
+                    }
+
+                    return nil
+                },
+                dispatchDate: dispatchDate,
+                path: TIK_PATH,
+                contentType: ContentType.JSON
+            )
+            observeFinish(for: operation) { [weak self] in
+                guard self?.tiksInProgress[id] != nil else {
+                    return
+                }
+                self?.tiksInProgress[id] = (tik + 1, false)
+            }
+            operationQueue.addOperation(operation)
         }
-        operationQueue.addOperation(operation)
     }
     
     func getCachedRfv(_ completion: ((Rfv?) -> ())?) {
