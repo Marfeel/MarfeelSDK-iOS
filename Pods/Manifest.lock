@@ -1,16 +1,16 @@
 PODS:
-  - MarfeelSDK-iOS (2.1.0)
+  - MarfeelSDK-iOS (2.3.0)
 
 DEPENDENCIES:
-  - MarfeelSDK-iOS (~> 2.1.0)
+  - MarfeelSDK-iOS (from `.`)
 
-SPEC REPOS:
-  trunk:
-    - MarfeelSDK-iOS
+EXTERNAL SOURCES:
+  MarfeelSDK-iOS:
+    :path: "."
 
 SPEC CHECKSUMS:
-  MarfeelSDK-iOS: ef187ad8657ea1de30eb039d9937b2bf24e0037a
+  MarfeelSDK-iOS: 75a10bb75a513820debe8cf18ed4f0e6f40a6ecd
 
-PODFILE CHECKSUM: 3a14168009967bf8db430eb2ea267e65e671bad6
+PODFILE CHECKSUM: 92f503428441f30a7a0263a05fda7f153431b15a
 
 COCOAPODS: 1.12.1
