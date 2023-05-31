@@ -68,7 +68,7 @@ public protocol CompassTracking: AnyObject {
     func setPageVar(name: String, value: String)
     func setSessionVar(name: String, value: String)
     func setUserVar(name: String, value: String)
-    func setUserSegment(_ name: String)
+    func addUserSegment(_ name: String)
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
@@ -210,7 +210,7 @@ extension CompassTracker: CompassTracking {
         storage.addUserVar(name: name, value: value)
     }
     
-    public func setUserSegment(_ name: String) {
+    public func addUserSegment(_ name: String) {
         storage.addUserSegment(name)
     }
     
