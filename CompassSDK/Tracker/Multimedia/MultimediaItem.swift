@@ -7,7 +7,7 @@
 
 import Foundation
 
-private enum Errors: String {
+private enum MultimediaErrors: String {
     case EVENT_OUT_OF_MEDIA_DURATION = "Event %@ for media %@ has not been processed because event time is not in media duration time."
 }
 
@@ -40,7 +40,7 @@ public class MultimediaItem: Encodable {
     public func addEvent(event: Event, eventTime: Int) {
         guard metadata.duration != nil && (eventTime < metadata.duration! + 1) else {
             print(
-                String(format: Errors.EVENT_OUT_OF_MEDIA_DURATION.rawValue, arguments: [eventTime, id]
+                String(format: MultimediaErrors.EVENT_OUT_OF_MEDIA_DURATION.rawValue, arguments: [eventTime, id]
                 )
             )
             

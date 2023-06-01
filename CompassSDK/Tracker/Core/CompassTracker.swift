@@ -10,6 +10,10 @@ import UIKit
 
 private let TIK_PATH = "ingest.php"
 
+enum CompassErrors: Error {
+    case invalidArgument(String)
+}
+
 public enum UserType {
     case custom(Int)
     case unknown, anonymous, logged, paid
@@ -72,6 +76,7 @@ public protocol CompassTracking: AnyObject {
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
+    func setPageTechnology(_ tech: Int)
 }
 
 public class CompassTracker: Tracker {
@@ -224,6 +229,16 @@ extension CompassTracker: CompassTracking {
     
     public func clearUserSegments() {
         storage.clearUserSegments()
+    }
+    
+    public func setPageTechnology(_ tech: Int) {
+        guard tech > 100 else {
+            print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
+            
+            return
+        }
+        
+        trackInfo.pageType = tech
     }
 }
 
