@@ -170,4 +170,13 @@ extension IngestTrackInfo {
             trackInfo.userSegments
         }
     }
+    
+    var pageType: Int {
+        set {
+            trackInfo.pageType = newValue
+        }
+        get {
+            trackInfo.pageType
+        }
+    }
 }

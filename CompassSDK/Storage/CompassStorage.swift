@@ -80,6 +80,8 @@ extension PListCompassStorage: CompassStorage {
             let sessionId = UUID().uuidString
             model?.sessionId = sessionId
             model?.sessionExpirationDate = Date().adding(minutes: 30)
+            model?.sessionVars = Vars()
+            
             return sessionId
         }
 
