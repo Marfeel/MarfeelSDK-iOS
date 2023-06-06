@@ -58,7 +58,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         }
 
-        sut.setPageTechnology(101)
+        sut.setPageType(101)
         sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
         sut.trackConversion(conversion: "First conversion")
         sut.trackConversion(conversion: "Second conversion")
@@ -77,7 +77,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         })
         let sut = CompassTracker(storage: MockStorage(), tikOperationFactory: operationProvider)
-        sut.setPageTechnology(2)
+        sut.setPageType(2)
         sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
 
         wait(for: [expectation], timeout: 5)
@@ -91,7 +91,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         }
 
-        sut.setPageTechnology(100)
+        sut.setPageType(100)
         sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
         
         wait(for: [expectation], timeout: 5)
@@ -105,7 +105,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         }
 
-        sut.setPageTechnology(101)
+        sut.setPageType(101)
         sut.trackNewPage(url: URL(string: "http://localhost/test3")!)
         
         wait(for: [expectation], timeout: 5)

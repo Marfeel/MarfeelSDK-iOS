@@ -76,7 +76,7 @@ public protocol CompassTracking: AnyObject {
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
-    func setPageTechnology(_ tech: Int)
+    func setPageType(_ tech: Int)
 }
 
 public class CompassTracker: Tracker {
@@ -231,7 +231,7 @@ extension CompassTracker: CompassTracking {
         storage.clearUserSegments()
     }
     
-    public func setPageTechnology(_ tech: Int) {
+    public func setPageType(_ tech: Int) {
         guard tech > 100 else {
             print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
             
