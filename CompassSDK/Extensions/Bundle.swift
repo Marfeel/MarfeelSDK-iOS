@@ -17,5 +17,7 @@ extension Bundle {
         return URL(string: urlString)
     }
     
+    var pageTechnology: Int? { object(forInfoDictionaryKey: "COMPASS_PAGE_TYPE") as? Int }
+    
     var compassVersion: String { "0.1" }
 }

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 private let TIK_PATH = "ingest.php"
+private let IOS_TECH = 3
 
 enum CompassErrors: Error {
     case invalidArgument(String)
@@ -76,7 +77,6 @@ public protocol CompassTracking: AnyObject {
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
-    func setPageType(_ tech: Int)
 }
 
 public class CompassTracker: Tracker {
@@ -89,6 +89,18 @@ public class CompassTracker: Tracker {
     
     private lazy var accountId: Int? = {
         bundle.compassAccountId
+    }()
+    
+    private lazy var pageTechnology: Int = {
+        let tech = bundle.pageTechnology ?? IOS_TECH
+        
+        guard tech > 100 || tech == IOS_TECH else {
+            print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
+            
+            return IOS_TECH
+        }
+        
+        return tech
     }()
 
     init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
@@ -107,6 +119,7 @@ public class CompassTracker: Tracker {
         trackInfo.sessionId = storage.sessionId
         
         trackInfo.accountId = accountId
+        trackInfo.pageType = pageTechnology
     }
 
     private var deadline: Double {
@@ -229,16 +242,6 @@ extension CompassTracker: CompassTracking {
     
     public func clearUserSegments() {
         storage.clearUserSegments()
-    }
-    
-    public func setPageType(_ tech: Int) {
-        guard tech > 100 else {
-            print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
-            
-            return
-        }
-        
-        trackInfo.pageType = tech
     }
 }
 

@@ -53,12 +53,10 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(ingestData.userVars, ["user": "var"])
             XCTAssertEqual(ingestData.pageVars, [String: String]())
             XCTAssertEqual(ingestData.userSegments, ["segment1", "segment2"])
-            XCTAssertEqual(ingestData.pageType, 101)
 
             expectation.fulfill()
         }
 
-        sut.setPageType(101)
         sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
         sut.trackConversion(conversion: "First conversion")
         sut.trackConversion(conversion: "Second conversion")
@@ -66,51 +64,6 @@ class CompassSDKTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testBannedPagedTechnologies() {
-        var expectation = XCTestExpectation()
-                
-        let operationProvider = MockedOperationProvider({ (data: Encodable) in
-            let ingestData = data as! IngestTrackInfo
-            
-            XCTAssertEqual(ingestData.pageType, 3)
-            
-            expectation.fulfill()
-        })
-        let sut = CompassTracker(storage: MockStorage(), tikOperationFactory: operationProvider)
-        sut.setPageType(2)
-        sut.trackNewPage(url: URL(string: "http://localhost/test1")!)
-
-        wait(for: [expectation], timeout: 5)
-        
-        expectation = XCTestExpectation()
-        operationProvider.expectation = { (data) in
-            let ingestData = data as! IngestTrackInfo
-            
-            XCTAssertEqual(ingestData.pageType, 3)
-
-            expectation.fulfill()
-        }
-
-        sut.setPageType(100)
-        sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
-        
-        wait(for: [expectation], timeout: 5)
-        
-        expectation = XCTestExpectation()
-        operationProvider.expectation = { (data) in
-            let ingestData = data as! IngestTrackInfo
-            
-            XCTAssertEqual(ingestData.pageType, 101)
-
-            expectation.fulfill()
-        }
-
-        sut.setPageType(101)
-        sut.trackNewPage(url: URL(string: "http://localhost/test3")!)
-        
-        wait(for: [expectation], timeout: 5)
-    }
-
     func testShouldFetchRFV() {
         let expectation = XCTestExpectation()
         let sut = GetRFV(apiRouter: MockApiRouterRfv(expect: {(apiCall) in
