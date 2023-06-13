@@ -54,7 +54,7 @@ struct TrackInfo: Encodable {
     var compassVersion: String?
     var userId: String?
     var userType: UserType?
-    var pageType = 3
+    var pageType: Int?
     var startPageTimeStamp: Int64? {
         return startPageDate?.timeStamp
     }

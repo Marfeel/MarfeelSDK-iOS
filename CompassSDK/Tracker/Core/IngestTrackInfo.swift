@@ -171,7 +171,7 @@ extension IngestTrackInfo {
         }
     }
     
-    var pageType: Int {
+    var pageType: Int? {
         set {
             trackInfo.pageType = newValue
         }
