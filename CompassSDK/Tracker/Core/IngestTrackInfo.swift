@@ -179,4 +179,13 @@ extension IngestTrackInfo {
             trackInfo.pageType
         }
     }
+    
+    var hasConsent: Bool? {
+        set {
+            trackInfo.hasConsent = newValue
+        }
+        get {
+            trackInfo.hasConsent
+        }
+    }
 }

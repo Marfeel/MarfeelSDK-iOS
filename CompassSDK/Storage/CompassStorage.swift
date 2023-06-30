@@ -17,12 +17,14 @@ protocol CompassStorage {
     var sessionVars: Vars { get }
     var userVars: Vars { get }
     var userSegments: [String] { get }
+    var hasConsent: Bool? { get }
     func addSessionVar(name: String, value: String)
     func addUserVar(name: String, value: String)
     func addUserSegment(_ name: String)
     func addUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
+    func setConsent(_ hasConsent: Bool)
 }
 
 enum Store: String {
@@ -42,6 +44,7 @@ class PListCompassStorage: PListStorage {
         var userVars: Vars?
         var sessionVars: Vars?
         var userSegments: [String]?
+        var hasConsent: Bool?
 
         static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [])}
     }
@@ -179,6 +182,19 @@ extension PListCompassStorage: CompassStorage {
     
     func clearUserSegments() {
         model?.userSegments?.removeAll()
+    }
+    
+    var hasConsent: Bool? {
+        get {
+            model?.hasConsent
+        }
+        set {
+            model?.hasConsent = newValue
+        }
+    }
+    
+    func setConsent(_ hasConsent: Bool) {
+        model?.hasConsent = hasConsent
     }
     
     var firstVisit: Date {

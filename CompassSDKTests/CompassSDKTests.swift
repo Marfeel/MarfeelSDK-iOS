@@ -60,7 +60,8 @@ class CompassSDKTests: XCTestCase {
         sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
         sut.trackConversion(conversion: "First conversion")
         sut.trackConversion(conversion: "Second conversion")
-        
+        sut.setConsent(true)
+
         wait(for: [expectation], timeout: 5)
     }
     

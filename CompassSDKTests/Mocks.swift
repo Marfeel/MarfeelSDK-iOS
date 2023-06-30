@@ -67,6 +67,11 @@ class MockedOperationProvider: TikOperationFactory {
 }
 
 class MockStorage: CompassStorage {
+    var hasConsent: Bool?
+    
+    func setConsent(_ hasConsent: Bool) {
+    }
+    
     func addUserSegments(_ segments: [String]) {
     }
     
@@ -75,7 +80,7 @@ class MockStorage: CompassStorage {
     var userVars = ["user": "var"]
     
     var userSegments = ["segment1", "segment2"]
-    
+        
     func addSessionVar(name: String, value: String) {
     }
     
