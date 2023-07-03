@@ -33,7 +33,7 @@ struct AllPosts: View {
             CompassTracker.shared.setSessionVar(name: "lolo2", value: "lola2")
             CompassTracker.shared.setUserVar(name: "hihi", value: "haha")
             CompassTracker.shared.setUserVar(name: "hihi2", value: "haha2")
-            CompassTracker.shared.trackNewPage(url: URL(string: "https://dev.marfeel.co")!)
+            CompassTracker.shared.trackScreen("ios homepage")
         })
     }
 }
