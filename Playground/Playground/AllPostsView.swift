@@ -25,6 +25,7 @@ struct AllPosts: View {
         }
         .onAppear(perform: {
             CompassTracker.shared.setUserType(.logged)
+            CompassTracker.shared.setConsent(false)
             CompassTracker.shared.addUserSegment("segment1")
             CompassTracker.shared.addUserSegment("segment1")
             CompassTracker.shared.addUserSegment("segment2")

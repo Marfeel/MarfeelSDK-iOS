@@ -77,6 +77,7 @@ public protocol CompassTracking: AnyObject {
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
+    func setConsent(_ hasConsent: Bool)
 }
 
 public class CompassTracker: Tracker {
@@ -243,6 +244,10 @@ extension CompassTracker: CompassTracking {
     public func clearUserSegments() {
         storage.clearUserSegments()
     }
+    
+    public func setConsent(_ hasConsent: Bool) {
+        storage.setConsent(hasConsent)
+    }
 }
 
 extension CompassTracker: ConversionsProvider {
@@ -264,7 +269,8 @@ internal extension CompassTracker {
                 finalTrackInfo.sessionVars = storage.sessionVars
                 finalTrackInfo.pageVars = pageVars
                 finalTrackInfo.userSegments = storage.userSegments
-                
+                finalTrackInfo.hasConsent = storage.hasConsent
+
                 completion(finalTrackInfo)
            }
         }
