@@ -44,7 +44,7 @@ class CompassSDKTests: XCTestCase {
             let ingestData = data as! IngestTrackInfo
             
             XCTAssertEqual(ingestData.conversions, ["First conversion", "Second conversion"])
-            XCTAssertEqual(ingestData.pageUrl, "http://localhost/test2")
+            XCTAssertEqual(ingestData.pageUrl, "https://marfeelwhois.mrf.io/dynamic/0/screen%20name")
             XCTAssertEqual(ingestData.siteUserId, "testUser1")
             XCTAssertEqual(ingestData.userType?.rawValue, 9)
             XCTAssertEqual(ingestData.userId, "userIdFromStorage")
@@ -57,7 +57,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         }
 
-        sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
+        sut.trackScreen("screen name")
         sut.trackConversion(conversion: "First conversion")
         sut.trackConversion(conversion: "Second conversion")
         sut.setConsent(true)

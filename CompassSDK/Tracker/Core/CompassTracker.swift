@@ -61,6 +61,8 @@ public protocol CompassTracking: AnyObject {
     func startPageView(url: URL, scrollView: UIScrollView?)
     func trackNewPage(url: URL)
     func trackNewPage(url: URL, scrollView: UIScrollView?)
+    func trackScreen(_ name: String)
+    func trackScreen(name: String, scrollView: UIScrollView?)
     func stopTracking()
     func getRFV(_ completion: @escaping (Rfv?) -> ())
     @available(*, deprecated, renamed: "setSiteUserId")
@@ -202,6 +204,22 @@ extension CompassTracker: CompassTracking {
         restart(pageName: url.absoluteString)
         doTik()
     }
+    
+    public func trackScreen(_ name: String) {
+        guard let url = screenUrl(name) else {
+            return
+        }
+        
+        trackNewPage(url: url)
+    }
+    
+    public func trackScreen(name: String, scrollView: UIScrollView?) {
+        guard let url = screenUrl(name) else {
+            return
+        }
+        
+        trackNewPage(url: url, scrollView: scrollView)
+    }
 
     public func stopTracking() {
         restart(pageName: nil)
@@ -311,5 +329,13 @@ private extension CompassTracker {
         trackInfo.pageUrl = pageName
         pageVars.removeAll()
         CompassTrackerMultimedia.shared.reset()
+    }
+    
+    func screenUrl(_ screen: String) -> URL? {
+        guard let encodedPath = screen.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed), let accountId = accountId else {
+            return nil
+        }
+        
+        return URL(string: "https://marfeelwhois.mrf.io/dynamic/\(accountId)/\(encodedPath)")
     }
 }
