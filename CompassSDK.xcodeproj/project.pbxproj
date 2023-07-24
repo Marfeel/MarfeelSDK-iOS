@@ -59,6 +59,7 @@
 		490E10DC29FB879100D4EACB /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaTrackInfo.swift; sourceTree = "<group>"; };
 		490E10E629FFEBB900D4EACB /* AbstractTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTracker.swift; sourceTree = "<group>"; };
 		490E10EC2A000CCB00D4EACB /* Rfv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rfv.swift; sourceTree = "<group>"; };
+		491558822A6E77340008E0E4 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4923C9922A012BE50036CE77 /* CompassSDKMultimediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassSDKMultimediaTests.swift; sourceTree = "<group>"; };
 		4923C9962A012FB60036CE77 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		4937CA7B2A03EA250004B217 /* MarfeelSDK-iOS.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MarfeelSDK-iOS.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -203,6 +204,7 @@
 		D77958D625B05C9600A7A44A = {
 			isa = PBXGroup;
 			children = (
+				491558822A6E77340008E0E4 /* Package.swift */,
 				4937CA7D2A03EEFB0004B217 /* LICENSE.md */,
 				4937CA7B2A03EA250004B217 /* MarfeelSDK-iOS.podspec */,
 				D7CE8DD326AADCC900F36F4B /* README.md */,
