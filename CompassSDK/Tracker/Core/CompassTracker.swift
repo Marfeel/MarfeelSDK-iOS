@@ -10,6 +10,8 @@ import UIKit
 
 private let TIK_PATH = "ingest.php"
 private let IOS_TECH = 3
+private let IOS_PRESSREADER_TECH = 12
+private let IOS_ALLOWED_TECHS = [IOS_TECH, IOS_PRESSREADER_TECH]
 
 enum CompassErrors: Error {
     case invalidArgument(String)
@@ -97,7 +99,7 @@ public class CompassTracker: Tracker {
     private lazy var pageTechnology: Int = {
         let tech = bundle.pageTechnology ?? IOS_TECH
         
-        guard tech > 100 || tech == IOS_TECH else {
+        guard tech > 100 || IOS_ALLOWED_TECHS.contains(tech) else {
             print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
             
             return IOS_TECH
