@@ -40,7 +40,7 @@ public class MultimediaItem: Encodable {
     public func addEvent(event: Event, eventTime: Int) {
         guard metadata.duration != nil && (eventTime < metadata.duration! + 1) else {
             print(
-                String(format: MultimediaErrors.EVENT_OUT_OF_MEDIA_DURATION.rawValue, arguments: [eventTime, id]
+                String(format: MultimediaErrors.EVENT_OUT_OF_MEDIA_DURATION.rawValue, arguments: [event.rawValue, id]
                 )
             )
             
