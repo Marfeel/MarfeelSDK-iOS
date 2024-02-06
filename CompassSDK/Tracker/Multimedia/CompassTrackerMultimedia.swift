@@ -46,7 +46,7 @@ extension CompassTrackerMultimedia: MultimediaTracking {
     }
     
     public func registerEvent(id: String, event: Event, eventTime: Int) {
-        guard let item = items[id] else {
+        guard var item = items[id] else {
             print(
                 String(format: Errors.ITEM_NOT_INITIALIZED.rawValue, arguments: [id])
             )
@@ -55,6 +55,8 @@ extension CompassTrackerMultimedia: MultimediaTracking {
         }
         
         item.addEvent(event: event, eventTime: eventTime)
+        items[id] = item;
+        
         doTick(id)
     }
 }
@@ -77,12 +79,17 @@ private extension CompassTrackerMultimedia {
                 return
             }
             let tik = tiksInProgress[id]!.tik
-            let item = items[id]!
+
+            guard let item = items[id] else {
+                return
+            }
+            
             tiksInProgress[id]!.scheduled = true
             let operation = tikOperationFactory.buildOperation(
                 dataBuilder: { [self] (completion) in
                     getCachedRfv { rfv in
                         var finalTrackInfo = trackInfo
+                                            
                         
                         finalTrackInfo.currentDate = Date()
                         completion(MultimediaTrackInfo(
