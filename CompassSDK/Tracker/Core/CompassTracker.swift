@@ -87,29 +87,46 @@ public protocol CompassTracking: AnyObject {
 public class CompassTracker: Tracker {
     public static let shared: CompassTracker = CompassTracker()
 
-    private let bundle: Bundle
+    private let config: TrackingConfig
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
     
-    private lazy var accountId: Int? = {
-        bundle.compassAccountId
-    }()
-    
-    private lazy var pageTechnology: Int = {
-        let tech = bundle.pageTechnology ?? IOS_TECH
-        
-        guard tech > 100 || IOS_ALLOWED_TECHS.contains(tech) else {
-            print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
-            
-            return IOS_TECH
+    private var accountId: Int? {
+        get {
+            config.accountId
         }
+    }
+    
+    public static func initialize(accountId: Int, pageTechnology: Int? = nil, endpoint: String? = nil) {
+        let tracker = CompassTracker.shared
         
-        return tech
-    }()
+        tracker.config.override(accountId: accountId, pageTechnology: pageTechnology, endpoint: endpoint)
+        tracker.setDataFromConfig()
+    }
+    
+    private func setDataFromConfig() {
+        trackInfo.accountId = self.accountId
+        trackInfo.pageType = self.pageTechnology
+        trackInfo.compassVersion = self.config.version
+    }
+    
+    private var pageTechnology: Int? {
+        get  {
+            let tech = config.pageTechnology ?? IOS_TECH
+            
+            guard tech > 100 || IOS_ALLOWED_TECHS.contains(tech) else {
+                print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
+                
+                return IOS_TECH
+            }
+            
+            return tech
+        }
+    }
 
-    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
-        self.bundle = bundle
+    init(config: TrackingConfig = TrackingConfig.shared, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
+        self.config = config
         self.storage = storage
         self.tikOperationFactory = tikOperationFactory
         self.getRFV = getRFV
@@ -119,12 +136,11 @@ public class CompassTracker: Tracker {
 
         trackInfo.firstVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
-        trackInfo.compassVersion = bundle.compassVersion
         trackInfo.userId = storage.userId
         trackInfo.sessionId = storage.sessionId
         
-        trackInfo.accountId = accountId
-        trackInfo.pageType = pageTechnology
+        setDataFromConfig()
+
     }
 
     private var deadline: Double {

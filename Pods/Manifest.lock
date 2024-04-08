@@ -1,5 +1,5 @@
 PODS:
-  - MarfeelSDK-iOS (2.6.1)
+  - MarfeelSDK-iOS (2.7.3)
 
 DEPENDENCIES:
   - MarfeelSDK-iOS (from `.`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  MarfeelSDK-iOS: cc8fcac1de5c823b1cf16b659f1610c93b063525
+  MarfeelSDK-iOS: b6a0ba86cf3b12de499f9ab8b63e6cfd161a7755
 
 PODFILE CHECKSUM: d27744114f1f55c6791c0fb12f2f11d4b2eca875
 
