@@ -345,7 +345,6 @@ private extension CompassTracker {
         stopObserving()
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
-        trackInfo.tik = 0
         pageVars.removeAll()
         CompassTrackerMultimedia.shared.reset()
     }
