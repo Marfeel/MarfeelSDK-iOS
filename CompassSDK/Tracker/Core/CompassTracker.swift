@@ -140,7 +140,7 @@ public class CompassTracker: Tracker {
         trackInfo.sessionId = storage.sessionId
         
         setDataFromConfig()
-
+        configureAppLifecycleListeners()
     }
 
     private var deadline: Double {
@@ -345,6 +345,7 @@ private extension CompassTracker {
         stopObserving()
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
+        trackInfo.tik = 0
         pageVars.removeAll()
         CompassTrackerMultimedia.shared.reset()
     }
@@ -355,5 +356,29 @@ private extension CompassTracker {
         }
         
         return URL(string: "https://marfeelwhois.mrf.io/dynamic/\(accountId)/\(encodedPath)")
+    }
+}
+
+private extension CompassTracker {
+    func onAppInactive() {
+        stopObserving()
+    }
+    
+    func onAppActive(){
+        doTik()
+    }
+    
+    func configureAppLifecycleListeners() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { _ in
+            self.onAppActive()
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { _ in
+            self.onAppInactive()
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
+            self.onAppInactive()
+        }
     }
 }
