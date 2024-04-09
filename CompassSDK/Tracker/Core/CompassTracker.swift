@@ -91,6 +91,7 @@ public class CompassTracker: Tracker {
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
+    private let lifecyleNotifier: AppLifecycleNotifierUseCase
     
     private var accountId: Int? {
         get {
@@ -125,11 +126,12 @@ public class CompassTracker: Tracker {
         }
     }
 
-    init(config: TrackingConfig = TrackingConfig.shared, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
+    init(config: TrackingConfig = TrackingConfig.shared, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV(), lifecycleNotifier: AppLifecycleNotifierUseCase = AppLifecycleNotifier()) {
         self.config = config
         self.storage = storage
         self.tikOperationFactory = tikOperationFactory
         self.getRFV = getRFV
+        self.lifecyleNotifier = lifecycleNotifier
         storage.addVisit()
 
         super.init(queueName: "com.compass.sdk.ingest.operation.queue")
@@ -359,25 +361,16 @@ private extension CompassTracker {
 }
 
 private extension CompassTracker {
-    func onAppInactive() {
-        stopObserving()
-    }
-    
-    func onAppActive(){
-        doTik()
-    }
-    
-    func configureAppLifecycleListeners() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { _ in
-            self.onAppActive()
-        }
 
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { _ in
-            self.onAppInactive()
+    private func configureAppLifecycleListeners() {
+        func onAppInactive() {
+            stopObserving()
         }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
-            self.onAppInactive()
+        
+        func onAppActive(){
+            doTik()
         }
+        
+        self.lifecyleNotifier.listen(onForeground: onAppActive, onBackground: onAppInactive)
     }
 }
