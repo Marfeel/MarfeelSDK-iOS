@@ -30,26 +30,24 @@ extension AppLifecycleNotifier: AppLifecycleNotifierUseCase {
             onBackground()
         }
         
-        self.listenersIds.append(
-            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { _ in
-                if (self.fromBackground) {
-                    self.fromBackground = false
-                    onForeground()
-                }
+        func _onForeground() {
+            if (self.fromBackground) {
+                self.fromBackground = false
+                onForeground()
             }
-        )
+        }
         
-        self.listenersIds.append(
-            NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { _ in
-                _onBackground()
-            }
-        )
-
-        self.listenersIds.append(
-            NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { _ in
-                _onBackground()
-            }
-        )
+        func observeNotification(forName: NSNotification.Name, cb: @escaping cb) {
+            self.listenersIds.append(
+                NotificationCenter.default.addObserver(forName: forName, object: nil, queue: .main) { _ in
+                    cb()
+                }
+            )
+        }
+        
+        observeNotification(forName: UIApplication.didBecomeActiveNotification, cb: _onForeground)
+        observeNotification(forName: UIApplication.willResignActiveNotification, cb: _onBackground)
+        observeNotification(forName: UIApplication.didEnterBackgroundNotification, cb: _onBackground)
     }
     
     func unlisten() {
