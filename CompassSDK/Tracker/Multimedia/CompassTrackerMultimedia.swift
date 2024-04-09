@@ -25,13 +25,11 @@ public class CompassTrackerMultimedia: Tracker {
     private var items = [String: MultimediaItem]()
     private var tiksInProgress: TiksDictionary = [:]
     
-    private let bundle: Bundle
     private let tikOperationFactory: TikOperationFactory
     private let compassTracker: CompassTracker
     private var rfv: Rfv?
 
-    init(bundle: Bundle = .main, tikOperationFactory: TikOperationFactory = TickOperationProvider(), compassTracker: CompassTracker = CompassTracker.shared) {
-        self.bundle = bundle
+    init(tikOperationFactory: TikOperationFactory = TickOperationProvider(), compassTracker: CompassTracker = CompassTracker.shared) {
         self.tikOperationFactory = tikOperationFactory
         self.compassTracker = compassTracker
         

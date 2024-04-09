@@ -11,13 +11,11 @@ extension Bundle {
     var compassAccountId: Int? {object(forInfoDictionaryKey: "COMPASS_ACCOUNT_ID") as? Int}
     
     var compassEndpoint: URL? {
-        guard let urlString = object(forInfoDictionaryKey: "COMPASS_ENDPOINT") as? String else {
-            return nil
-        }
+        let urlString = object(forInfoDictionaryKey: "COMPASS_ENDPOINT") as? String ?? "https://events.newsroom.bi/"
+        
         return URL(string: urlString)
     }
     
     var pageTechnology: Int? { object(forInfoDictionaryKey: "COMPASS_PAGE_TYPE") as? Int }
     
-    var compassVersion: String { "0.1" }
 }

@@ -21,7 +21,7 @@ struct GetRFVApiCall: ApiCall {
         ["u": userId, "ac": account]
     }
     
-    init(userId: String, account: Int, baseUrl: URL? = Bundle.main.compassEndpoint) {
+    init(userId: String, account: Int, baseUrl: URL? = TrackingConfig.shared.endpoint) {
         self.userId = userId
         self.account = account
         self.baseUrl = baseUrl
