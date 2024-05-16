@@ -20,6 +20,7 @@
 		4960742F29FA8D0B00EF49BD /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742E29FA8D0B00EF49BD /* Type.swift */; };
 		4960743329FA954200EF49BD /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743229FA954200EF49BD /* MultimediaItem.swift */; };
 		4960743729FA9ACE00EF49BD /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */; };
+		49C215142BF665890098AF91 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 49C215122BF6493C0098AF91 /* PrivacyInfo.xcprivacy */; };
 		49C744B32BC53E8F00072BE1 /* AppLifecycleNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C744B22BC53E8F00072BE1 /* AppLifecycleNotifier.swift */; };
 		49D3A5FB2BC434BA00DE9C7D /* TrackingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3A5FA2BC434BA00DE9C7D /* TrackingConfig.swift */; };
 		8708808975A1F437B5B1BFB4 /* Pods_CompassSDK_CompassSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100E312D8108F5F25BD32BC3 /* Pods_CompassSDK_CompassSDKTests.framework */; };
@@ -146,6 +147,14 @@
 			path = Multimedia;
 			sourceTree = "<group>";
 		};
+		49C215152BF66A8C0098AF91 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49C215122BF6493C0098AF91 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		49C744B12BC53E3B00072BE1 /* Lifecycle */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +251,7 @@
 		D77958E225B05C9600A7A44A /* CompassSDK */ = {
 			isa = PBXGroup;
 			children = (
+				49C215152BF66A8C0098AF91 /* Resources */,
 				49C744B12BC53E3B00072BE1 /* Lifecycle */,
 				D704E2D325D2DCCE006517D2 /* Communications */,
 				D7E6D45D25D1588C002749A3 /* RFV */,
@@ -380,6 +390,7 @@
 			files = (
 				D7CE8DD426AADCC900F36F4B /* README.md in Resources */,
 				D70E237025BDA0DA00BA3C38 /* Podfile in Resources */,
+				49C215142BF665890098AF91 /* PrivacyInfo.xcprivacy in Resources */,
 				4937CA7C2A03EA250004B217 /* MarfeelSDK-iOS.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

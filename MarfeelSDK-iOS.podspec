@@ -88,7 +88,8 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "CompassSDK", "CompassSDK/**/*.{swift}"
   spec.exclude_files = "Classes/Exclude"
-
+  spec.resource_bundles = { 'marfeelsdk_apple_privvacy' => ['CompassSDK/Resources/PrivacyInfo.xcprivacy'] }
+  
   # spec.public_header_files = "Classes/**/*.h"
 
 
