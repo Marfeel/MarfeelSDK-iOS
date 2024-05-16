@@ -20,6 +20,7 @@
 		4960742F29FA8D0B00EF49BD /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960742E29FA8D0B00EF49BD /* Type.swift */; };
 		4960743329FA954200EF49BD /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743229FA954200EF49BD /* MultimediaItem.swift */; };
 		4960743729FA9ACE00EF49BD /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */; };
+		49C215132BF6493C0098AF91 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 49C215122BF6493C0098AF91 /* PrivacyInfo.xcprivacy */; };
 		49C744B32BC53E8F00072BE1 /* AppLifecycleNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C744B22BC53E8F00072BE1 /* AppLifecycleNotifier.swift */; };
 		49D3A5FB2BC434BA00DE9C7D /* TrackingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3A5FA2BC434BA00DE9C7D /* TrackingConfig.swift */; };
 		8708808975A1F437B5B1BFB4 /* Pods_CompassSDK_CompassSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100E312D8108F5F25BD32BC3 /* Pods_CompassSDK_CompassSDKTests.framework */; };
@@ -72,6 +73,7 @@
 		4960742E29FA8D0B00EF49BD /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		4960743229FA954200EF49BD /* MultimediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaItem.swift; sourceTree = "<group>"; };
 		4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		49C215122BF6493C0098AF91 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		49C744B22BC53E8F00072BE1 /* AppLifecycleNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleNotifier.swift; sourceTree = "<group>"; };
 		49D3A5FA2BC434BA00DE9C7D /* TrackingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingConfig.swift; sourceTree = "<group>"; };
 		82623FE3DD6624740A8474AD /* Pods_CompassSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +253,7 @@
 				D70E237725BDA70B00BA3C38 /* Extensions */,
 				D77958E325B05C9600A7A44A /* CompassSDK.h */,
 				D77958E425B05C9600A7A44A /* Info.plist */,
+				49C215122BF6493C0098AF91 /* PrivacyInfo.xcprivacy */,
 			);
 			path = CompassSDK;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			files = (
 				D7CE8DD426AADCC900F36F4B /* README.md in Resources */,
 				D70E237025BDA0DA00BA3C38 /* Podfile in Resources */,
+				49C215132BF6493C0098AF91 /* PrivacyInfo.xcprivacy in Resources */,
 				4937CA7C2A03EA250004B217 /* MarfeelSDK-iOS.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,7 +628,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202101141204;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = P4JD844FL5;
+				DEVELOPMENT_TEAM = 8W6C86QM92;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -653,7 +657,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202101141204;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = P4JD844FL5;
+				DEVELOPMENT_TEAM = 8W6C86QM92;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
