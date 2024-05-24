@@ -46,7 +46,7 @@ class PListCompassStorage: PListStorage {
         var userSegments: [String]?
         var hasConsent: Bool?
 
-        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [])}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil)}
     }
 
     init() {
@@ -68,8 +68,19 @@ class PListCompassStorage: PListStorage {
     }
 
     private var model: Model? {
+        willSet {
+            guard let model = model, model.hasConsent != newValue?.hasConsent, newValue?.hasConsent == false else {
+                return
+            }
+            
+            remove(filename: Store.v2.rawValue)
+        }
         didSet {
-            guard let model = model else {return}
+            guard let model = model, model.hasConsent == true || model.hasConsent == nil else {
+                return
+                
+            }
+            
             persist(filename: Store.v2.rawValue, values: model)
         }
     }

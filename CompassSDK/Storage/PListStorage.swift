@@ -12,6 +12,7 @@ protocol PListStorage {
     var fileManager: FileManager {get}
     func load(_ filename: String) -> Model?
     func persist(filename: String, values: Model)
+    func remove(filename: String)
 }
 
 extension PListStorage {
@@ -32,5 +33,16 @@ extension PListStorage {
         }
         
         try? data.write(to: path)
+    }
+    
+    func remove(filename: String) {
+        guard let path = getFilePath(filename) else {
+            return
+        }
+        
+        do {
+            try fileManager.removeItem(at: path)
+
+        } catch {}
     }
 }

@@ -67,6 +67,7 @@ struct BlogPostView: View {
             CompassTracker.shared.trackNewPage(url: URL(string: blogPost.url)!)
             CompassTracker.shared.setPageVar(name: "pepe", value: blogPost.id.description)
             CompassTracker.shared.setPageVar(name: "pepe2", value: blogPost.id.description)
+            CompassTracker.shared.setUserVar(name: "pepe-user", value: blogPost.id.description)
         })
         .onReceive(videoPlayer.playbackStatePublisher) { state in
             guard isVideoInitialized else {
