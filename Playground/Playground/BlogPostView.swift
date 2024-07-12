@@ -78,21 +78,21 @@ struct BlogPostView: View {
                 videoPlayer.getCurrentTime {
                     time in
                     do {
-                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get()))
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get().converted(to: .seconds).value))
                     } catch {}
                 }
             case .paused:
                 videoPlayer.getCurrentTime {
                     time in
                     do {
-                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PAUSE, eventTime: Int(try time.get()))
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PAUSE, eventTime: Int(try time.get().converted(to: .seconds).value))
                     } catch {}
                 }
             case .ended:
                 videoPlayer.getCurrentTime {
                     time in
                     do {
-                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .END, eventTime: Int(try time.get()))
+                        CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .END, eventTime: Int(try time.get().converted(to: .seconds).value))
                     } catch {}
                 }
             default:
@@ -113,19 +113,19 @@ struct BlogPostView: View {
                     description: "description",
                     url: URL(string: "https://youtube.com/watch?v=\(blogPost.videoId)"),
                     authors: "authors",
-                    duration: Int(time)
+                    duration: Int(time.converted(to: .seconds).value)
                 )
             )
             videoPlayer.getCurrentTime {
                 time in
                 do {
-                    CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get()))
+                    CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .PLAY, eventTime: Int(try time.get().converted(to: .seconds).value))
                 } catch {}
             }
             self.isVideoInitialized = true
         }
         .onReceive(videoPlayer.currentTimePublisher()) { time in
-            CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .UPDATE_CURRENT_TIME, eventTime: Int(time))
+            CompassTrackerMultimedia.shared.registerEvent(id: blogPost.videoId, event: .UPDATE_CURRENT_TIME, eventTime: Int(time.converted(to: .seconds).value))
         }
     }
 }
