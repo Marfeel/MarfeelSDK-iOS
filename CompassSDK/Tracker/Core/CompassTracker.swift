@@ -165,17 +165,26 @@ public class CompassTracker: Tracker {
 
 extension CompassTracker: ScrollPercentProvider {
     func getScrollPercent(_ completion: @escaping (Float?) -> ()) {
-        guard  let scrollView = scrollView else {
+        guard let scrollView = scrollView else {
             completion(nil)
             return
         }
 
         DispatchQueue.main.async {
+            let contentHeight = scrollView.contentSize.height
+            let viewHeight = scrollView.frame.size.height
             let offset = scrollView.contentOffset.y
-            let scrolledDistance = offset + scrollView.contentInset.top
-            let percent = max(0, Float(min(1, scrolledDistance / scrollView.contentSize.height)))
+            let adjustedOffset = max(0, offset + scrollView.contentInset.top)
+            let maxScroll = max(0, contentHeight - viewHeight + scrollView.contentInset.bottom)
+            
+            guard maxScroll > 0 else {
+                completion(100)
+                return
+            }
+            
+            let percent = min(1, adjustedOffset / maxScroll)
             DispatchQueue.global(qos: .utility).async {
-                completion((percent * 100).rounded())
+                completion((Float(percent) * 100).rounded())
             }
         }
     }

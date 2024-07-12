@@ -1,16 +1,20 @@
 PODS:
-  - MarfeelSDK-iOS (2.8.0)
+  - MarfeelSDK-iOS (2.9.0)
+  - SwiftUIIntrospect (1.2.0)
 
 DEPENDENCIES:
-  - MarfeelSDK-iOS (from `.`)
+  - MarfeelSDK-iOS (~> 2.9.0)
+  - SwiftUIIntrospect (~> 1.0)
 
-EXTERNAL SOURCES:
-  MarfeelSDK-iOS:
-    :path: "."
+SPEC REPOS:
+  trunk:
+    - MarfeelSDK-iOS
+    - SwiftUIIntrospect
 
 SPEC CHECKSUMS:
-  MarfeelSDK-iOS: 8eafc95adc1047ab05b9be887fffe77edf3f2d6c
+  MarfeelSDK-iOS: 3e4df718850fd714971e24ee8f6d93c545bfd46e
+  SwiftUIIntrospect: 35fbc9ae46c869ae7290afdecf6f70c2b8c86b13
 
-PODFILE CHECKSUM: d27744114f1f55c6791c0fb12f2f11d4b2eca875
+PODFILE CHECKSUM: 82556b7b8206942993227cec38259c89149e0998
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2
