@@ -11,6 +11,7 @@ import MarfeelSDK_iOS
 
 struct AllPosts: View {
     @EnvironmentObject var store: BlogPostsStore
+    @State private var scrollView: UIScrollView?
     
     var body: some View {
         NavigationView {
@@ -24,6 +25,9 @@ struct AllPosts: View {
             .navigationTitle("All blog posts")
             .listStyle(InsetListStyle())
             .introspect(.scrollView, on: .iOS(.v13, .v14, .v15, .v16, .v17, .v18)) {
+                scrollView = $0
+             }
+            .onAppear(perform: {
                 CompassTracker.shared.setUserType(.logged)
                 CompassTracker.shared.addUserSegment("segment1")
                 CompassTracker.shared.addUserSegment("segment1")
@@ -32,8 +36,8 @@ struct AllPosts: View {
                 CompassTracker.shared.setSessionVar(name: "lolo2", value: "lola2")
                 CompassTracker.shared.setUserVar(name: "hihi", value: "haha")
                 CompassTracker.shared.setUserVar(name: "hihi2", value: "haha2")
-                CompassTracker.shared.trackScreen(name: "ios homepage", scrollView: $0)
-             }
+                CompassTracker.shared.trackScreen(name: "ios homepage", scrollView: scrollView)
+            })
         }
     }
 }
