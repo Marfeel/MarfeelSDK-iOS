@@ -308,16 +308,19 @@ internal extension CompassTracker {
     func getTrackingData(_ completion: @escaping (IngestTrackInfo) -> ()) {
         getScrollPercent { [self] (scrollPercent) in
             getConversions { [self] (conversions) in
+                if ((scrollPercent ?? 0) > (self.trackInfo.scrollPercent ?? 0)) {
+                    self.trackInfo.scrollPercent = scrollPercent
+                }
+                
                 var finalTrackInfo = self.trackInfo
              
-                finalTrackInfo.scrollPercent = scrollPercent
                 finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
                 finalTrackInfo.userVars = storage.userVars
                 finalTrackInfo.sessionVars = storage.sessionVars
                 finalTrackInfo.pageVars = pageVars
                 finalTrackInfo.userSegments = storage.userSegments
                 finalTrackInfo.hasConsent = storage.hasConsent
-
+                
                 completion(finalTrackInfo)
            }
         }

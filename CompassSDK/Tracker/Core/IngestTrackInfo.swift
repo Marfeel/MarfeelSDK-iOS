@@ -45,6 +45,7 @@ extension IngestTrackInfo {
             }
             trackInfo.pageUrl = newValue
             tik = 0
+            scrollPercent = 0
         }
         get {
             trackInfo.pageUrl
