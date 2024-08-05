@@ -36,11 +36,12 @@ class TikOperation: Operation {
         self.tikUseCase = tikUseCase
         self.path = path ?? ""
         self.contentType = contentType ?? ContentType.JSON
+        super.init()
     }
     
     private var timer: Timer?
     
-    private var runing: Bool = false {
+    private var running: Bool = false {
         didSet {
             willChangeValue(forKey: "isFinished")
             willChangeValue(forKey: "isExecuting")
@@ -49,39 +50,46 @@ class TikOperation: Operation {
         }
     }
     
-    override var isAsynchronous: Bool {true}
+    override var isAsynchronous: Bool { true }
     
-    override var isFinished: Bool {!runing}
+    override var isFinished: Bool { !running }
     
-    override var isExecuting: Bool {runing}
+    override var isExecuting: Bool { running }
     
     override func start() {
-        guard !isCancelled else {return}
-        runing = true
-        
-        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [self] (timer) in
-            let track = { [self] (data: Encodable?) in
+        guard !isCancelled else { return }
+        running = true
+    
+        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
+            guard let self = self else { return }
+            
+            let track = { [weak self] (data: Encodable?) in
+                guard let self = self else { return }
+                
                 let params = data?.params
-               
+                
                 if let params = params {
-                    tikUseCase.tik(path: path, type: contentType, params: params)
+                    self.tikUseCase.tik(path: self.path, type: self.contentType, params: params)
                 }
-                timer.invalidate()
-                runing = false
+                self.finish()
             }
-            let data = dataBuilder(track)
+            
+            let data = self.dataBuilder(track)
             
             if data != nil {
                 track(data)
             }
         })
         
-        RunLoop.current.add(self.timer!, forMode: .common)
-        RunLoop.current.run()
+        RunLoop.main.add(self.timer!, forMode: .common)
     }
     
     override func cancel() {
         timer?.invalidate()
-        runing = false
+        finish()
+    }
+    
+    private func finish() {
+        running = false
     }
 }
