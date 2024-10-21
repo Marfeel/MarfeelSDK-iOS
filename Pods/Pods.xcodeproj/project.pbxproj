@@ -7,273 +7,276 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01DF2FFF71B61CF6B9589DEF14AC7B76 /* IntrospectionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE6F7D2FE7D820C51533A34BE9A154C /* IntrospectionSelector.swift */; };
-		01FDEF280551CA61122FF10B61C32943 /* ProgressViewWithCircularStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC14D2ED110CDBAA5285B9D9E8F088A /* ProgressViewWithCircularStyle.swift */; };
-		044507FD12978510128154A718FF8BFA /* ListWithSidebarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0136804C9A34376EB11643D0BBC956B /* ListWithSidebarStyle.swift */; };
-		047C81737D127C566F40A75A9C1C7415 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C72F30BAE37AC346D75336A4952B8 /* ListCell.swift */; };
-		07B04C1A5675ABCBFC0A10C6986A5AC5 /* IntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480650E6A1E1DD3609D0CECD53803CF6 /* IntrospectionView.swift */; };
-		088A78C797B7E4AD7CA0CCFADA3DBBF2 /* PickerWithMenuStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E906595B600EC819191D128CDA1E5B45 /* PickerWithMenuStyle.swift */; };
-		08BB660C78A84C6D978A4CF1C59A932C /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F6E16F54EBE9618D64684900E8B69 /* SendTik.swift */; };
-		099D27FB2300734D29CF34D501257E76 /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A7DECA2F70DED632ADDA1F4B0D541C /* TikOperation.swift */; };
+		01DF2FFF71B61CF6B9589DEF14AC7B76 /* IntrospectionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D068FE1F93D21DB2937613099E78B /* IntrospectionSelector.swift */; };
+		01FDEF280551CA61122FF10B61C32943 /* ProgressViewWithCircularStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A47030219226659F60A98BDACA4D0 /* ProgressViewWithCircularStyle.swift */; };
+		044507FD12978510128154A718FF8BFA /* ListWithSidebarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EE4EB8771DC4F7563139BD4EF20206 /* ListWithSidebarStyle.swift */; };
+		047C81737D127C566F40A75A9C1C7415 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7318799C58745A5633491E8023E69C7C /* ListCell.swift */; };
+		07B04C1A5675ABCBFC0A10C6986A5AC5 /* IntrospectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC1536E59952E9F46C5B0394102FDFF /* IntrospectionView.swift */; };
+		088A78C797B7E4AD7CA0CCFADA3DBBF2 /* PickerWithMenuStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AFBD8F7D5C6A35CD9FF13627B65A /* PickerWithMenuStyle.swift */; };
+		0A04931BA8BEBD987CDCD5100E50B58C /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0FCFDD15747C3EC5D347FC5237A26 /* TikOperationFactory.swift */; };
+		0C84C3D7D4B2B6B9D6150074D25152A3 /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E787FF8204CC5F811437094A997C94 /* CompassStorage.swift */; };
 		105718748B5B1EA8FFAFC4C7899013B2 /* MarfeelSDK-iOS-marfeelsdk_apple_privacy in Resources */ = {isa = PBXBuildFile; fileRef = 0F2CB8D6D6B85F74D46232C4EA5314C6 /* MarfeelSDK-iOS-marfeelsdk_apple_privacy */; };
-		120465360A2EE1A20A49F72008801BA0 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48824DB4A211C972AB39B879F76CF185 /* Stepper.swift */; };
-		13085EF1246FC1FA96726261AECA0171 /* ListWithBorderedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C198CFE512EACA403AE5760A4E4E84BF /* ListWithBorderedStyle.swift */; };
-		13D9B3353856850E55CB8F7D932C6C52 /* ToggleWithSwitchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21103EDCF7E7F2A96831742537A094BD /* ToggleWithSwitchStyle.swift */; };
-		1858D679C304B710498EF1745EEA24BF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C32A61FACB80F3682BA4BF0751AD8 /* Button.swift */; };
-		1C8FE984DD9392994DAD1639E19786C7 /* IngestTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933B70DDE75E1E45D544107A1B064E2 /* IngestTrackInfo.swift */; };
-		1DAA38D952FF4D7C98430D60A10BCDC2 /* ProgressViewWithLinearStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A86F52BC02EBF0CAF53B3019DD7B7 /* ProgressViewWithLinearStyle.swift */; };
-		1DFDFB6701F0C1961B8841E0125FAFCF /* TabViewWithPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4955F56AB9EAE83A5254E6640E3D07 /* TabViewWithPageStyle.swift */; };
-		2049D3CDB46C4806225262DAC861D135 /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C7781DB34F5DF4BC77F2C29EF33E5974 /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23DC22C25C443826C74E58009264A326 /* DatePickerWithFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD19870C4A4D2ADC5BB15DDA2F1E5880 /* DatePickerWithFieldStyle.swift */; };
+		120465360A2EE1A20A49F72008801BA0 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4944A2C382A59CB8266072BB8AFE0 /* Stepper.swift */; };
+		13085EF1246FC1FA96726261AECA0171 /* ListWithBorderedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D5A308615281218761CDAC9DCBF6 /* ListWithBorderedStyle.swift */; };
+		13D9B3353856850E55CB8F7D932C6C52 /* ToggleWithSwitchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E392D2C5B8EC0B3DDF0D8967122437A /* ToggleWithSwitchStyle.swift */; };
+		16E012186054C4CB9F5B406FBF1571E3 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFDF734B29EC50C48A60BF4B0D5E08 /* ApiRouter.swift */; };
+		1858D679C304B710498EF1745EEA24BF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5B1F5ABDF8BF7030092225A389AF8 /* Button.swift */; };
+		1DAA38D952FF4D7C98430D60A10BCDC2 /* ProgressViewWithLinearStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575B687ABBEA99D544A8E068A7AE6BE /* ProgressViewWithLinearStyle.swift */; };
+		1DFDFB6701F0C1961B8841E0125FAFCF /* TabViewWithPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9602F44DBCCEA796BD45F0679A6663 /* TabViewWithPageStyle.swift */; };
+		2049D3CDB46C4806225262DAC861D135 /* CompassSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8867AE3FBC76361E1BCE150E039C605A /* CompassSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22EAFA6EB8214724CB28F2D0E60017EF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC664DD83284E5867E65A61FB4D1EB70 /* Date.swift */; };
+		23DC22C25C443826C74E58009264A326 /* DatePickerWithFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB85E6B13CF61EAA2AFFC2DA0B04EE5 /* DatePickerWithFieldStyle.swift */; };
 		24696FFDA024D0B5A78BB2486D1C0644 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		25E611A054691F5720AB70459EF70087 /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEF882B18D577D0EC009CE67AF8D1AD /* TextEditor.swift */; };
-		34D3CF00755DE76ECBF2FED4B133B20C /* TextFieldWithVerticalAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE221F4F5BFEB62A0315C005E6C47F3 /* TextFieldWithVerticalAxis.swift */; };
-		396F29FA7D02627200BD16BC4BAE8263 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B0B71D2B0240DFE8A0C6CEE491FFF /* Weak.swift */; };
-		3976CE1F7DCBCB7AD6E1582B6B78EC9C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9643246E8C16BB03C2E1D63A5D316D79 /* TextField.swift */; };
+		25E611A054691F5720AB70459EF70087 /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25651B744A91C05E66DB8D9DD8F7ECF /* TextEditor.swift */; };
+		34D3CF00755DE76ECBF2FED4B133B20C /* TextFieldWithVerticalAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2059AFF480161985E44F083FA3C1D6 /* TextFieldWithVerticalAxis.swift */; };
+		396F29FA7D02627200BD16BC4BAE8263 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F57FD3CA787D6C2E0C6D08FD7AF5CB /* Weak.swift */; };
+		3976CE1F7DCBCB7AD6E1582B6B78EC9C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC2601E7E34BDF452C59F4358E1F2A /* TextField.swift */; };
 		3C2846E6520607669B86EEA801DCFB51 /* Pods-CompassSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C6EDFEEA9FC9B22FD45AB21C95453126 /* Pods-CompassSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3C78970044B473694C505A72744219D8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BD93D6933FED4A22A4ABDA294D4A4 /* List.swift */; };
-		3D2BBCB2BBA0E2687D195E73835C9E3D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298A0BFE35410F915B7A681E310978D2 /* Map.swift */; };
-		3E5215E3AC4C13CA82AF5A918B3B58EA /* ToggleWithCheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A961F4B73E50113098423576BE23922 /* ToggleWithCheckboxStyle.swift */; };
-		40431C31B8E9DA29DDA35C4DC9B6F59E /* NavigationViewWithStackStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADFFCD59813091819BAD41A0204A0B /* NavigationViewWithStackStyle.swift */; };
-		412A19BB7EEF787C4DB575ED4671B75A /* NavigationViewWithColumnsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469909FB5FA7D52314ECD6FAAD0550D5 /* NavigationViewWithColumnsStyle.swift */; };
-		422CC6B95AB8CB74B3EC9702FEB8FE25 /* ListWithInsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BBFD2C9BA2DF9E2B222C3045F61AAB /* ListWithInsetStyle.swift */; };
-		48E1747B7E52C362F1A85511C9AF2DDD /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C6C2DB1E19238954582AEB599F774 /* VideoPlayer.swift */; };
-		54C8180E029E11EF1ABD1CF56E51B5D6 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2C1622255B11BDA5FC07B12057217 /* Slider.swift */; };
-		58AF5934D082A1AD2BD97E157BC97213 /* CompassStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D40FAE1F929D60F2C4CBFEB46A838 /* CompassStorage.swift */; };
-		5D4AF98B68BA4948B236F988DC08A7EA /* MarfeelSDK-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 44B16F6CBB90EA60A3435659F57DBA9D /* MarfeelSDK-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5D920ED998CD61A952A65FCAD52C9CBE /* NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939765B0B6BEC63DA8BDC79B2A8475C5 /* NavigationSplitView.swift */; };
-		6145FED2F9E8E1A8520A4799D6BE8297 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBCCD58A1B4501CCD1D3EA7F5434ABA /* Type.swift */; };
+		3C78970044B473694C505A72744219D8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9698217E8EDB579C8B51805392B81A /* List.swift */; };
+		3D2BBCB2BBA0E2687D195E73835C9E3D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481EF6230FF02D87A7208393A488EA9 /* Map.swift */; };
+		3E5215E3AC4C13CA82AF5A918B3B58EA /* ToggleWithCheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F663BB04B60BCDDE6F7282FA5C40F259 /* ToggleWithCheckboxStyle.swift */; };
+		40431C31B8E9DA29DDA35C4DC9B6F59E /* NavigationViewWithStackStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB36DAB2B13E62F851FC2BFD8157B75 /* NavigationViewWithStackStyle.swift */; };
+		412A19BB7EEF787C4DB575ED4671B75A /* NavigationViewWithColumnsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EF4BB545D86754EE4E045455A35696 /* NavigationViewWithColumnsStyle.swift */; };
+		422CC6B95AB8CB74B3EC9702FEB8FE25 /* ListWithInsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59229D96D29A627CAF5AD616905E0E7 /* ListWithInsetStyle.swift */; };
+		428C1A081A88DA34BF8F55AE62230EAB /* SendTik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE80836BB2792FD9A61F35036C1E90A /* SendTik.swift */; };
+		48E1747B7E52C362F1A85511C9AF2DDD /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73B0F5F6D7BAB50267F14A52E6A902 /* VideoPlayer.swift */; };
+		52062E5B2C7268036B11BF3E9509EC3A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 803024CF71D98F64E538DD3ABF682F17 /* PrivacyInfo.xcprivacy */; };
+		54C8180E029E11EF1ABD1CF56E51B5D6 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCB3D4D42DB328FB86B37D0E743634C /* Slider.swift */; };
+		5C0A363AD6C8E081818621AC8EC41774 /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E8D33DD510267F09C405FE46C6B78 /* CompassTracker.swift */; };
+		5D43F54CE19F3433A04B61183A3C1231 /* TrackingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA97B89F0EFE1667C6603785F333DE0 /* TrackingConfig.swift */; };
+		5D4AF98B68BA4948B236F988DC08A7EA /* MarfeelSDK-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C21D00BAC3DB766C23E85D8EB726F0F1 /* MarfeelSDK-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D920ED998CD61A952A65FCAD52C9CBE /* NavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D6D7BE7BA3217360E114C963429247 /* NavigationSplitView.swift */; };
 		6677E51B09820A4582D70B1CF19F9988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		693ADFF58AD76B635F9CF7DF79913E7A /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD41DE78DCD59673166CB1D33EBF2F31 /* PListStorage.swift */; };
-		69A7A154FBDA4C5968EF720EA1716740 /* RuntimeWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EFB2056696B3A0F5ADB4870F9EF84 /* RuntimeWarnings.swift */; };
+		69A7A154FBDA4C5968EF720EA1716740 /* RuntimeWarnings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5830A98C4D6F9634185DE7E9B678116C /* RuntimeWarnings.swift */; };
 		6D85CF63838B1350B84DCB8FA72F9CBA /* Pods-Playground-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C69DA08B15285F9048CAD91D2A024037 /* Pods-Playground-dummy.m */; };
-		6E421FEDF28BB6345EC45F1A8F9D0AE0 /* SwiftUIIntrospect-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ABF64D1DD918A8E0A7024A8AE9F89F /* SwiftUIIntrospect-dummy.m */; };
-		6F42C36F101955874A60408449830800 /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3D12AB2753257386BA029673BCBE6 /* MultimediaMetadata.swift */; };
-		7212FF82E7FAF7DE598D06F71540935B /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E0B844607DA16ED9287122E8242B08 /* Form.swift */; };
-		73577D1F271827DF698FFC944B7B63F4 /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E59B371980AAA69BF8311617B46EAB /* SecureField.swift */; };
-		73899C3E3995DEB28DC0011B370E2709 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFFE3A3F9FA745C83BF44C222C5247E /* URLRequest.swift */; };
+		6E421FEDF28BB6345EC45F1A8F9D0AE0 /* SwiftUIIntrospect-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2337BCE5EA0AFD03F8361BB8CA716188 /* SwiftUIIntrospect-dummy.m */; };
+		7212FF82E7FAF7DE598D06F71540935B /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD57A25DB4906E183D179457BFE23DF9 /* Form.swift */; };
+		73577D1F271827DF698FFC944B7B63F4 /* SecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F090FFBD9BFB8484FDDCCE23C3F223C /* SecureField.swift */; };
 		75D7E6EB10E2A8144141BA23EB0E26F4 /* Pods-Playground-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0A1B19F8388CA9BF317BAB0B93D2FC /* Pods-Playground-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75F33F5E696A9AFB4D393BF3C23061A6 /* ToggleWithButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D395E1EA6E13129DF5F701D44D742398 /* ToggleWithButtonStyle.swift */; };
-		776536707FE1EFC364C8997AFEC53FC8 /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DC56B2C9EDA9BEDAA008CBD4097878 /* Introspect.swift */; };
-		78AAFA6A265069E83249BA7E81ED5FE1 /* ListWithInsetGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127F08D2399107EACCFAF31E965882 /* ListWithInsetGroupedStyle.swift */; };
-		7A45DBE8D9F4481D082EE15B6D287D33 /* TrackingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7CDB7DEFF2B0104C40800E18CA5F3 /* TrackingConfig.swift */; };
+		75F33F5E696A9AFB4D393BF3C23061A6 /* ToggleWithButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F3BE67EA43D99701334BA9467E07A /* ToggleWithButtonStyle.swift */; };
+		769D5189DF2FD69EC73D59D36DA833BF /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB01131697321F10D30F5F900CA7D6 /* AbstractTracker.swift */; };
+		776536707FE1EFC364C8997AFEC53FC8 /* Introspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17972D7C458F2296C4080EC9828CFBE3 /* Introspect.swift */; };
+		78AAFA6A265069E83249BA7E81ED5FE1 /* ListWithInsetGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8E54301ECB33B62C7E48030A5777B /* ListWithInsetGroupedStyle.swift */; };
+		78B707DBDB9C137D87F4ED1CFEEC44F5 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C65F6DA467BDE5779955A391B9AD18 /* TrackInfo.swift */; };
 		7B62E359E018BCA56DAF66EFECA68C3E /* Pods-CompassSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BC2FA90305C8800DF47AB4212A4B86 /* Pods-CompassSDK-dummy.m */; };
-		7D46396E8C153E51A3C2329627600856 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C62F727F8682617B8CB132CD7D4CF /* ScrollView.swift */; };
-		7FE53A2166EAC256538E95FEF5B53CB9 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4149ADAC3B57E96AAD9B47465123D /* Sheet.swift */; };
-		808D2841ABEABEB2844E1DD624FAA604 /* MarfeelSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76964A822DABE96DAAE8F3191C3C7D /* MarfeelSDK-iOS-dummy.m */; };
-		880BC850911F5246290D8F81670E4A37 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F52137651BE9ABB807A8F4AD878E5 /* PageControl.swift */; };
+		7D46396E8C153E51A3C2329627600856 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75BBD54A0B43A4C194D8FC762618E4A /* ScrollView.swift */; };
+		7F8062F979BE6E19A2F153B5B5EE2741 /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF286C4AA41B56662679AEF60E58F6BD /* Rfv.swift */; };
+		7FC63AC7396785E85E67D4A3442BB1D8 /* PListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4B4B837424515ACA8D2DBAE5C8675C /* PListStorage.swift */; };
+		7FE53A2166EAC256538E95FEF5B53CB9 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0351572BE29991CEDA9CA21C4EAA1 /* Sheet.swift */; };
+		880BC850911F5246290D8F81670E4A37 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93A03ADC0221913E41083F49A202DB6 /* PageControl.swift */; };
 		885664226A0AD4BEE32C614AC305E081 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		8A84B8DFBA9650A6C669190DCAB39178 /* Pods-CompassSDK-CompassSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D546D43852FE9F293CE228D0CBFD57B0 /* Pods-CompassSDK-CompassSDKTests-dummy.m */; };
-		8AAAC3FC7F6AD97EA95DB2A8C9CDE7E8 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8261C904D053E49C8B40F4742544D6 /* DatePicker.swift */; };
-		9010ACDA2940DA9BD7D52EEE343A1048 /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6964BC289C32E07C14D6E4256DB7C37A /* MultimediaItem.swift */; };
-		94F110E0DFE62AA7E941ACA7A05168BE /* GetRFV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6012C24F1E3EF9CB3A570C994DC0E36F /* GetRFV.swift */; };
-		96B55C2F51CAC9D4C31AB64151A56ACE /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D627D4259AC2B215E0C0A53654596A1A /* TikOperationFactory.swift */; };
-		97F60345677D12CE5E924A91E0369E27 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A92C2035F9052A74A33B11E0D192D /* Date.swift */; };
-		99295D1D9D93FA17C6E964231632EA88 /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0217BF438EBD663427B6E6E71AFE81 /* Toggle.swift */; };
-		9C6A9816604D4B3FFE693D99F024BC9C /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F718EF91BFB1947394481AE6B35E7C6A /* TabView.swift */; };
-		9E5FE44F9EAD930DEFEF84B89B3D503A /* SwiftUIIntrospect-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E717C3E3704EA1A7020B9EFEDCBDF5B9 /* SwiftUIIntrospect-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A09505E297EC6FDF75FEDE837491FBC3 /* DatePickerWithWheelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975D43F23C18554B8315443360995C77 /* DatePickerWithWheelStyle.swift */; };
-		A1224358E41738D11EE4025C1BDE6F2F /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E25A0CDCBA713A559BF48BF0D3D3D1A /* SearchField.swift */; };
-		A585E32E8356E8135E50F0D71E3E601F /* PickerWithSegmentedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4491C4907BD55C902333212BD7B3872 /* PickerWithSegmentedStyle.swift */; };
-		A5EC0489C74B1FA3FE82E2CC4EFD4CDE /* PlatformVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7C459FC7BE5433AA9AF962F9E383A5 /* PlatformVersion.swift */; };
+		8AAAC3FC7F6AD97EA95DB2A8C9CDE7E8 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80072B2D6B255FD309F61DF577651C30 /* DatePicker.swift */; };
+		90978830428DD22D2B745C733F3AB3C4 /* IngestTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF10F9CE5C97EE23CF18328FEB0D5B1 /* IngestTrackInfo.swift */; };
+		99295D1D9D93FA17C6E964231632EA88 /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DFE1709293CC29DC15CE04C04407E /* Toggle.swift */; };
+		9944AFE160B2A2E23A028D46642AEEF9 /* MultimediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438102B2C7F84CF89EB9EF6E2AEB537D /* MultimediaItem.swift */; };
+		99BEAC4BA23F770501D540BC6B4A072D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F758EE29C2F6B20BCC02FA165F7592E3 /* Bundle.swift */; };
+		9C6A9816604D4B3FFE693D99F024BC9C /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98007A127CA65D47DC9B6F4F851BC0CF /* TabView.swift */; };
+		9DC92B93755840600C706FAA74E952D7 /* TikOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C2D389C40C30072AC58B2E3A550301 /* TikOperation.swift */; };
+		9E5FE44F9EAD930DEFEF84B89B3D503A /* SwiftUIIntrospect-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A83A415483713848F734A74FCA8A2994 /* SwiftUIIntrospect-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A09505E297EC6FDF75FEDE837491FBC3 /* DatePickerWithWheelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFAD037DEAFEAF64E504F767332CCAD /* DatePickerWithWheelStyle.swift */; };
+		A1224358E41738D11EE4025C1BDE6F2F /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369F5C523C086E6C752FDE9D45CF397E /* SearchField.swift */; };
+		A39285AD37128984BDE7C9EFCDCD07CE /* MultimediaMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27867B250103C0D1A857CE61BC5835EC /* MultimediaMetadata.swift */; };
+		A585E32E8356E8135E50F0D71E3E601F /* PickerWithSegmentedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE73D08C3912280DB0DA0205A70B1E7 /* PickerWithSegmentedStyle.swift */; };
+		A5EC0489C74B1FA3FE82E2CC4EFD4CDE /* PlatformVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683388D98C591939D8DF3786AA6B26A8 /* PlatformVersion.swift */; };
+		AAB5861DA5A7B7B9C8C40BD98B641A6C /* AppLifecycleNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D6C488B1850BBEB9908279CB581CD /* AppLifecycleNotifier.swift */; };
+		B48C626D57126C21F166318F7C8607C7 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADD2FAE8E5FE92393BC01CF1C5C4B6D /* URLRequest.swift */; };
 		B5BE48B7110578D1B6E006206E0263BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		B6E9CE772F40121DCE85254D4B38262F /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC63482CC3C99E4CF5DC2EBAFEF5852 /* ColorPicker.swift */; };
-		BC090FB8EB49D064D3B2965EA92EE490 /* IntrospectableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C92ACE2131D794962BF7BF945A596 /* IntrospectableViewType.swift */; };
-		BC88DA6A438EC7E691DE4D56AF06017D /* FormWithGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1E8A0FD791A32F53AC6EF5D1438DD /* FormWithGroupedStyle.swift */; };
-		BCAD60F3F144FE2F9037583842C2E0AF /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F536B96D4B69B98F47943DF671DFF /* NavigationStack.swift */; };
-		BDED0B0C29E451C4235EB76B2ACF89DC /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9885EBCB5413AFAFE34440C1A5F67A3C /* Window.swift */; };
-		BDFFF537778456A177AC6FB5D2C7478B /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5C8B6F23F695E50D7FDE98E68C8B3 /* SignInWithAppleButton.swift */; };
-		BEE4C13607722566B8B4E91B5444C72D /* AbstractTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4DF56F511B550A17E48F4925D0A8B9 /* AbstractTracker.swift */; };
-		C1C6D3EB2F4C1E8B7421F0451BE2545C /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32493224AFC8A7842265C6EA57265A4D /* ApiRouter.swift */; };
+		B6AD5043F030E13400625FEBBCC48E8B /* MarfeelSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B61489CBAFABC6F90AC6EA3CF2D7C2 /* MarfeelSDK-iOS-dummy.m */; };
+		B6E9CE772F40121DCE85254D4B38262F /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0635B729E10E60DAEC2B7E8E0CF32804 /* ColorPicker.swift */; };
+		BA644A4AD52F786F3AD720DE6FC0D8EB /* GetRFV.swift in Sources */ = {isa = PBXBuildFile; fileRef = C584E1F626F4B57FFF54ED7E290FA6E1 /* GetRFV.swift */; };
+		BC090FB8EB49D064D3B2965EA92EE490 /* IntrospectableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0D9FBF2FCFBDEEFA7BEE46A014B785 /* IntrospectableViewType.swift */; };
+		BC88DA6A438EC7E691DE4D56AF06017D /* FormWithGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B3DFC03689B051CFD590084B3B8D0B /* FormWithGroupedStyle.swift */; };
+		BCAD60F3F144FE2F9037583842C2E0AF /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE27BEC658B68BF303D22951FF6B1FC /* NavigationStack.swift */; };
+		BDED0B0C29E451C4235EB76B2ACF89DC /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F57EBA03356448691D94EDB142B131 /* Window.swift */; };
+		BDFFF537778456A177AC6FB5D2C7478B /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5309519D1ECE75303D2A94FBDD2DA4DA /* SignInWithAppleButton.swift */; };
 		C422759CB829F03B066013F099B2FEA3 /* Pods-CompassSDK-CompassSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B2384C9AB675AC48FA42DABC995EA22A /* Pods-CompassSDK-CompassSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C48087639CF5B29DF9E9114DE14E567E /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6954D64A690CF6F59985DB9D8145DA /* CompassTrackerMultimedia.swift */; };
-		C56B436B35A513749C2302EF80E05972 /* ListWithGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C073DB42E5024890911D682F176CF /* ListWithGroupedStyle.swift */; };
-		C93541A8876C31411655D95154F47973 /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF795F5DA3689D80C3A6FB4B3E34F6FB /* MultimediaTrackInfo.swift */; };
-		C9BE7BB756BBBB53E508C7230AFA7479 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B769935CC6570D59C78A015684014C /* ViewController.swift */; };
-		CC142003CF9AA5D8640C3F827E54ABF1 /* DatePickerWithGraphicalStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B737FBA628009D57EB69381BACCD45 /* DatePickerWithGraphicalStyle.swift */; };
-		CC1E053D6A46C0D90AC15AF8DCAB33AA /* FullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D1D7BA85C20E22AA8965656249EDA /* FullScreenCover.swift */; };
-		CE69A244A9E52D8F9B259F2755CFD0AE /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FAE6CE984C9FD4DAA07AB831874DE /* Table.swift */; };
-		CE7E0244EABD41E7E372F7A8C851FD09 /* PickerWithWheelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE1A6B9B8ADD9C57E5CE3C998C8FA9 /* PickerWithWheelStyle.swift */; };
-		D036AE3A2F40D82EB9102ED62BC530C8 /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C807BA6C8EC7213B9F1116621F507 /* PlaybackInfo.swift */; };
-		D156D9264140285EFBE570C8D79115E1 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F53C44E342C41DD492546607F242A /* PlatformView.swift */; };
-		D6A5490CD9DB0704B6362CAFE8CAE230 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A74211619AF64182ED108B2FCE4FC /* TrackInfo.swift */; };
-		D97B8FA196182B4A156BF2E3C5A2B439 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E60560D8A317949865068CB60D8FA7 /* Popover.swift */; };
-		DB801822F7FA3C3B46C5FE5491D7ADBF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 87DD99558FB9F28AE72038628863E2AC /* PrivacyInfo.xcprivacy */; };
-		DF34EC04066C895E36D928CC380613D1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562CD9F68EF64F4B0C06DA50BDB074D3 /* Event.swift */; };
-		DF42ED8FBCE3D641C1B4091B74EA7EDB /* DatePickerWithStepperFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17DF2443B5A404F07A4733E047D7C9 /* DatePickerWithStepperFieldStyle.swift */; };
-		E172799A88C44E1ECBE84C50674D5FF9 /* CompassTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4686F5B0B605A6F4FF308B6153CA4742 /* CompassTracker.swift */; };
-		E24948260EA67A26C1FE1F6F3360A691 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA034302C2E89F58EF53055C48D858 /* Codable.swift */; };
-		E3B82CAA07A1C4C15B5DA259370D1A5F /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9107A2424D6A578123547EB29FA6A /* Bundle.swift */; };
-		E63717308CCB500F33285E9D31E2BB6C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD24EBC02C83BD9C1C0E0805AAAA976 /* Utils.swift */; };
-		E727D4F27D92F8086D6B37DB40FE7905 /* AppLifecycleNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D83EBF0178137391A21D0E9170501 /* AppLifecycleNotifier.swift */; };
-		E7485E9895EF64AE71E7BE685D782DAB /* Rfv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB9A5611B9BF51B2F35611E18B1CC5 /* Rfv.swift */; };
-		EC9A8DB21334E1F87C878E1C0ADD7B7C /* DatePickerWithCompactStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747511BD74F6BE97C6BEA273F108DA75 /* DatePickerWithCompactStyle.swift */; };
+		C56B436B35A513749C2302EF80E05972 /* ListWithGroupedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D2C2CDEC6F8C318BBA0FB52EFAD1D /* ListWithGroupedStyle.swift */; };
+		C9BE7BB756BBBB53E508C7230AFA7479 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1722BE69C072E95D5D1AE2BCA309F2 /* ViewController.swift */; };
+		CC142003CF9AA5D8640C3F827E54ABF1 /* DatePickerWithGraphicalStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6741F982A6B2DE02B97E2F903CF33B8 /* DatePickerWithGraphicalStyle.swift */; };
+		CC1E053D6A46C0D90AC15AF8DCAB33AA /* FullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BCF4361F0F4D9654A9FAE96F0E9979 /* FullScreenCover.swift */; };
+		CE69A244A9E52D8F9B259F2755CFD0AE /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B037CECC6EB83265B0D39A2270F18 /* Table.swift */; };
+		CE7E0244EABD41E7E372F7A8C851FD09 /* PickerWithWheelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5921AD2CE1AD02CD6845B472ADB089D /* PickerWithWheelStyle.swift */; };
+		D156D9264140285EFBE570C8D79115E1 /* PlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CDC6867B8C121B5F4A8C94EE1C8FAE /* PlatformView.swift */; };
+		D535B725A7560C7CCD5CEBDEA1954723 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E549B784A5D1B56EE20CD461EC4A55E /* Type.swift */; };
+		D97B8FA196182B4A156BF2E3C5A2B439 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D9EDE62D5E76E512A00BD20792202 /* Popover.swift */; };
+		DA58BFD231AA9C8E27E25241308985CA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D6013B80D68BC59E700C5520363C /* Event.swift */; };
+		DBF1A420AB6A2B4E91B956CA8432D707 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F08EFB9476A20AB60807F569F60187 /* Codable.swift */; };
+		DF42ED8FBCE3D641C1B4091B74EA7EDB /* DatePickerWithStepperFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C65520F875FE4CAAD37DF1ECA4F6440 /* DatePickerWithStepperFieldStyle.swift */; };
+		E63717308CCB500F33285E9D31E2BB6C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C37EE80E394D2AF1FCB18042ACB644 /* Utils.swift */; };
+		E675DEB0DFF6201ACADA17268FA1705E /* CompassTrackerMultimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33969BDC0AA71A15F104C37047FF671F /* CompassTrackerMultimedia.swift */; };
+		E984DC12302CB947E828EAA84E7AB8D7 /* PlaybackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE84DD863DF616CD3744E8DA2BBBC3 /* PlaybackInfo.swift */; };
+		EC9A8DB21334E1F87C878E1C0ADD7B7C /* DatePickerWithCompactStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FACE6C52C3BB17299A80EA333C6A90 /* DatePickerWithCompactStyle.swift */; };
+		EF91C995A88E8B50ED9E356A046E887A /* MultimediaTrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892ABECDF7AEE1B97C9E3E762DE7A6D0 /* MultimediaTrackInfo.swift */; };
 		F6BD1F4E2CEADD401C8B2884F84CA621 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		F8389717DBFA37CC1C5C4A1AD622359B /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC166B3DBE86107F0F51237F0172445F /* View.swift */; };
-		FD8E41BBB1AE40750B1C4C104391D970 /* PlatformViewVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA331FBE8BF6F8F03C3F0436C07A14F /* PlatformViewVersion.swift */; };
+		F8389717DBFA37CC1C5C4A1AD622359B /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A4937E60F42099FAC1953FCD41F68 /* View.swift */; };
+		FD8E41BBB1AE40750B1C4C104391D970 /* PlatformViewVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359216D5CCE7A7AEE077B174AECCA8CC /* PlatformViewVersion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		18A5D15FB56C987CA6A292DAAA51C643 /* PBXContainerItemProxy */ = {
+		125CB76599EF93D42E4AD3247ED00597 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4BD68C28178D97A4DD85F9AE89868514;
 			remoteInfo = "MarfeelSDK-iOS-marfeelsdk_apple_privacy";
 		};
-		84E8070C2732EDE36331D3C7E39CEC97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FF94F6BC609DB21F0194205C23064AFC;
-			remoteInfo = SwiftUIIntrospect;
-		};
-		A95DBD65BC476327D60FD7E37663E7AF /* PBXContainerItemProxy */ = {
+		61CAE584B52B6B1F950D9C42A260EB10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 061ED9BA07A1C062E749CDD1A32C45D4;
 			remoteInfo = "MarfeelSDK-iOS";
 		};
+		AF94BEE6ED2E458DE9807388D9F4139A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF94F6BC609DB21F0194205C23064AFC;
+			remoteInfo = SwiftUIIntrospect;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		012F53C44E342C41DD492546607F242A /* PlatformView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformView.swift; path = Sources/PlatformView.swift; sourceTree = "<group>"; };
-		035A86F52BC02EBF0CAF53B3019DD7B7 /* ProgressViewWithLinearStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProgressViewWithLinearStyle.swift; path = Sources/ViewTypes/ProgressViewWithLinearStyle.swift; sourceTree = "<group>"; };
-		05BC7BB7516E4691DF94D7D6150EE848 /* SwiftUIIntrospect-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftUIIntrospect-Info.plist"; sourceTree = "<group>"; };
-		05E60560D8A317949865068CB60D8FA7 /* Popover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Popover.swift; path = Sources/ViewTypes/Popover.swift; sourceTree = "<group>"; };
-		06ABF64D1DD918A8E0A7024A8AE9F89F /* SwiftUIIntrospect-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftUIIntrospect-dummy.m"; sourceTree = "<group>"; };
-		06B769935CC6570D59C78A015684014C /* ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewTypes/ViewController.swift; sourceTree = "<group>"; };
-		0AC63482CC3C99E4CF5DC2EBAFEF5852 /* ColorPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColorPicker.swift; path = Sources/ViewTypes/ColorPicker.swift; sourceTree = "<group>"; };
-		0D9D1D7BA85C20E22AA8965656249EDA /* FullScreenCover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FullScreenCover.swift; path = Sources/ViewTypes/FullScreenCover.swift; sourceTree = "<group>"; };
-		0DFFE3A3F9FA745C83BF44C222C5247E /* URLRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLRequest.swift; path = CompassSDK/Extensions/URLRequest.swift; sourceTree = "<group>"; };
-		0E25A0CDCBA713A559BF48BF0D3D3D1A /* SearchField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchField.swift; path = Sources/ViewTypes/SearchField.swift; sourceTree = "<group>"; };
-		0E6954D64A690CF6F59985DB9D8145DA /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassTrackerMultimedia.swift; path = CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
+		03DFDF734B29EC50C48A60BF4B0D5E08 /* ApiRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		0481EF6230FF02D87A7208393A488EA9 /* Map.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Map.swift; path = Sources/ViewTypes/Map.swift; sourceTree = "<group>"; };
+		0635B729E10E60DAEC2B7E8E0CF32804 /* ColorPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColorPicker.swift; path = Sources/ViewTypes/ColorPicker.swift; sourceTree = "<group>"; };
+		08B9DC1A73B5E09D550110BF55805370 /* MarfeelSDK-iOS.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "MarfeelSDK-iOS.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0ADD2FAE8E5FE92393BC01CF1C5C4B6D /* URLRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		0AE6D5A308615281218761CDAC9DCBF6 /* ListWithBorderedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithBorderedStyle.swift; path = Sources/ViewTypes/ListWithBorderedStyle.swift; sourceTree = "<group>"; };
+		0C65520F875FE4CAAD37DF1ECA4F6440 /* DatePickerWithStepperFieldStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithStepperFieldStyle.swift; path = Sources/ViewTypes/DatePickerWithStepperFieldStyle.swift; sourceTree = "<group>"; };
 		0F2CB8D6D6B85F74D46232C4EA5314C6 /* MarfeelSDK-iOS-marfeelsdk_apple_privacy */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "MarfeelSDK-iOS-marfeelsdk_apple_privacy"; path = marfeelsdk_apple_privacy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EE30F890448786348A28985D6B420A /* Pods-CompassSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-Info.plist"; sourceTree = "<group>"; };
 		121D89BF80EC22BE17834919CBBEC48C /* Pods-CompassSDK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK"; path = Pods_CompassSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		142F536B96D4B69B98F47943DF671DFF /* NavigationStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationStack.swift; path = Sources/ViewTypes/NavigationStack.swift; sourceTree = "<group>"; };
-		15127F08D2399107EACCFAF31E965882 /* ListWithInsetGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithInsetGroupedStyle.swift; path = Sources/ViewTypes/ListWithInsetGroupedStyle.swift; sourceTree = "<group>"; };
+		17972D7C458F2296C4080EC9828CFBE3 /* Introspect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Introspect.swift; path = Sources/Introspect.swift; sourceTree = "<group>"; };
+		18EB01131697321F10D30F5F900CA7D6 /* AbstractTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AbstractTracker.swift; sourceTree = "<group>"; };
 		19D3B284F6E05501161EBB21321CDC05 /* Pods-CompassSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CompassSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
-		1AE5C8B6F23F695E50D7FDE98E68C8B3 /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignInWithAppleButton.swift; path = Sources/ViewTypes/SignInWithAppleButton.swift; sourceTree = "<group>"; };
+		1A5B037CECC6EB83265B0D39A2270F18 /* Table.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Table.swift; path = Sources/ViewTypes/Table.swift; sourceTree = "<group>"; };
 		1C8031220F7ECC04F0D76F050E0655F4 /* SwiftUIIntrospect */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftUIIntrospect; path = SwiftUIIntrospect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DD63F077FFAC7571E5781CC2C6803BE /* SwiftUIIntrospect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftUIIntrospect.debug.xcconfig; sourceTree = "<group>"; };
-		201B0B71D2B0240DFE8A0C6CEE491FFF /* Weak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Weak.swift; path = Sources/Weak.swift; sourceTree = "<group>"; };
-		21103EDCF7E7F2A96831742537A094BD /* ToggleWithSwitchStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithSwitchStyle.swift; path = Sources/ViewTypes/ToggleWithSwitchStyle.swift; sourceTree = "<group>"; };
-		21A7DECA2F70DED632ADDA1F4B0D541C /* TikOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TikOperation.swift; path = CompassSDK/Tick/TikOperation.swift; sourceTree = "<group>"; };
-		23BB9A5611B9BF51B2F35611E18B1CC5 /* Rfv.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Rfv.swift; path = CompassSDK/RFV/Rfv.swift; sourceTree = "<group>"; };
-		256C807BA6C8EC7213B9F1116621F507 /* PlaybackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlaybackInfo.swift; path = CompassSDK/Tracker/Multimedia/PlaybackInfo.swift; sourceTree = "<group>"; };
+		1FE80836BB2792FD9A61F35036C1E90A /* SendTik.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SendTik.swift; sourceTree = "<group>"; };
+		2337BCE5EA0AFD03F8361BB8CA716188 /* SwiftUIIntrospect-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftUIIntrospect-dummy.m"; sourceTree = "<group>"; };
+		27867B250103C0D1A857CE61BC5835EC /* MultimediaMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaMetadata.swift; sourceTree = "<group>"; };
 		27B074E68C4C5B1DB50F12EDEF0B45C3 /* Pods-Playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Playground.release.xcconfig"; sourceTree = "<group>"; };
-		2933B70DDE75E1E45D544107A1B064E2 /* IngestTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IngestTrackInfo.swift; path = CompassSDK/Tracker/Core/IngestTrackInfo.swift; sourceTree = "<group>"; };
-		298A0BFE35410F915B7A681E310978D2 /* Map.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Map.swift; path = Sources/ViewTypes/Map.swift; sourceTree = "<group>"; };
-		2A17DF2443B5A404F07A4733E047D7C9 /* DatePickerWithStepperFieldStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithStepperFieldStyle.swift; path = Sources/ViewTypes/DatePickerWithStepperFieldStyle.swift; sourceTree = "<group>"; };
-		2A4DF56F511B550A17E48F4925D0A8B9 /* AbstractTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbstractTracker.swift; path = CompassSDK/Tracker/AbstractTracker.swift; sourceTree = "<group>"; };
-		2A8A74211619AF64182ED108B2FCE4FC /* TrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TrackInfo.swift; path = CompassSDK/Tracker/TrackInfo.swift; sourceTree = "<group>"; };
-		2AC9107A2424D6A578123547EB29FA6A /* Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bundle.swift; path = CompassSDK/Extensions/Bundle.swift; sourceTree = "<group>"; };
+		2B9698217E8EDB579C8B51805392B81A /* List.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = List.swift; path = Sources/ViewTypes/List.swift; sourceTree = "<group>"; };
 		2C9CB4E010EA5C478480AFD7960F3974 /* Pods-CompassSDK-CompassSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK-CompassSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		31A2C1622255B11BDA5FC07B12057217 /* Slider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Slider.swift; path = Sources/ViewTypes/Slider.swift; sourceTree = "<group>"; };
-		31DC56B2C9EDA9BEDAA008CBD4097878 /* Introspect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Introspect.swift; path = Sources/Introspect.swift; sourceTree = "<group>"; };
-		31E59B371980AAA69BF8311617B46EAB /* SecureField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecureField.swift; path = Sources/ViewTypes/SecureField.swift; sourceTree = "<group>"; };
-		32493224AFC8A7842265C6EA57265A4D /* ApiRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApiRouter.swift; path = CompassSDK/Communications/ApiRouter.swift; sourceTree = "<group>"; };
+		2DB85E6B13CF61EAA2AFFC2DA0B04EE5 /* DatePickerWithFieldStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithFieldStyle.swift; path = Sources/ViewTypes/DatePickerWithFieldStyle.swift; sourceTree = "<group>"; };
+		2DE73D08C3912280DB0DA0205A70B1E7 /* PickerWithSegmentedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithSegmentedStyle.swift; path = Sources/ViewTypes/PickerWithSegmentedStyle.swift; sourceTree = "<group>"; };
+		2FF10F9CE5C97EE23CF18328FEB0D5B1 /* IngestTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IngestTrackInfo.swift; sourceTree = "<group>"; };
+		33969BDC0AA71A15F104C37047FF671F /* CompassTrackerMultimedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassTrackerMultimedia.swift; sourceTree = "<group>"; };
+		359216D5CCE7A7AEE077B174AECCA8CC /* PlatformViewVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformViewVersion.swift; path = Sources/PlatformViewVersion.swift; sourceTree = "<group>"; };
+		369F5C523C086E6C752FDE9D45CF397E /* SearchField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchField.swift; path = Sources/ViewTypes/SearchField.swift; sourceTree = "<group>"; };
 		3733C70FFFCC078D28A0BA3315140C38 /* Pods-Playground-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Playground-Info.plist"; sourceTree = "<group>"; };
-		379BD93D6933FED4A22A4ABDA294D4A4 /* List.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = List.swift; path = Sources/ViewTypes/List.swift; sourceTree = "<group>"; };
-		3BD24EBC02C83BD9C1C0E0805AAAA976 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Sources/Utils.swift; sourceTree = "<group>"; };
-		3E7C459FC7BE5433AA9AF962F9E383A5 /* PlatformVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformVersion.swift; path = Sources/PlatformVersion.swift; sourceTree = "<group>"; };
-		4318AC1BF60504DA8F7A2A57895DD1F3 /* MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
-		438F6E16F54EBE9618D64684900E8B69 /* SendTik.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SendTik.swift; path = CompassSDK/Tick/SendTik.swift; sourceTree = "<group>"; };
-		43C7CDB7DEFF2B0104C40800E18CA5F3 /* TrackingConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TrackingConfig.swift; path = CompassSDK/Tracker/Core/TrackingConfig.swift; sourceTree = "<group>"; };
-		44B16F6CBB90EA60A3435659F57DBA9D /* MarfeelSDK-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-umbrella.h"; sourceTree = "<group>"; };
-		4686F5B0B605A6F4FF308B6153CA4742 /* CompassTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassTracker.swift; path = CompassSDK/Tracker/Core/CompassTracker.swift; sourceTree = "<group>"; };
-		469909FB5FA7D52314ECD6FAAD0550D5 /* NavigationViewWithColumnsStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationViewWithColumnsStyle.swift; path = Sources/ViewTypes/NavigationViewWithColumnsStyle.swift; sourceTree = "<group>"; };
-		480650E6A1E1DD3609D0CECD53803CF6 /* IntrospectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectionView.swift; path = Sources/IntrospectionView.swift; sourceTree = "<group>"; };
-		48824DB4A211C972AB39B879F76CF185 /* Stepper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stepper.swift; path = Sources/ViewTypes/Stepper.swift; sourceTree = "<group>"; };
-		48E4149ADAC3B57E96AAD9B47465123D /* Sheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sheet.swift; path = Sources/ViewTypes/Sheet.swift; sourceTree = "<group>"; };
-		4A961F4B73E50113098423576BE23922 /* ToggleWithCheckboxStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithCheckboxStyle.swift; path = Sources/ViewTypes/ToggleWithCheckboxStyle.swift; sourceTree = "<group>"; };
-		4CADFFCD59813091819BAD41A0204A0B /* NavigationViewWithStackStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationViewWithStackStyle.swift; path = Sources/ViewTypes/NavigationViewWithStackStyle.swift; sourceTree = "<group>"; };
-		4D8C32A61FACB80F3682BA4BF0751AD8 /* Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Sources/ViewTypes/Button.swift; sourceTree = "<group>"; };
-		4DAE1A6B9B8ADD9C57E5CE3C998C8FA9 /* PickerWithWheelStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithWheelStyle.swift; path = Sources/ViewTypes/PickerWithWheelStyle.swift; sourceTree = "<group>"; };
-		54B737FBA628009D57EB69381BACCD45 /* DatePickerWithGraphicalStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithGraphicalStyle.swift; path = Sources/ViewTypes/DatePickerWithGraphicalStyle.swift; sourceTree = "<group>"; };
-		554D40FAE1F929D60F2C4CBFEB46A838 /* CompassStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompassStorage.swift; path = CompassSDK/Storage/CompassStorage.swift; sourceTree = "<group>"; };
-		562CD9F68EF64F4B0C06DA50BDB074D3 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = CompassSDK/Tracker/Multimedia/Event.swift; sourceTree = "<group>"; };
-		568D83EBF0178137391A21D0E9170501 /* AppLifecycleNotifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppLifecycleNotifier.swift; path = CompassSDK/Lifecycle/AppLifecycleNotifier.swift; sourceTree = "<group>"; };
-		5D6FAE6CE984C9FD4DAA07AB831874DE /* Table.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Table.swift; path = Sources/ViewTypes/Table.swift; sourceTree = "<group>"; };
+		38C65F6DA467BDE5779955A391B9AD18 /* TrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
+		3A1722BE69C072E95D5D1AE2BCA309F2 /* ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewTypes/ViewController.swift; sourceTree = "<group>"; };
+		3BB36DAB2B13E62F851FC2BFD8157B75 /* NavigationViewWithStackStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationViewWithStackStyle.swift; path = Sources/ViewTypes/NavigationViewWithStackStyle.swift; sourceTree = "<group>"; };
+		3CA0351572BE29991CEDA9CA21C4EAA1 /* Sheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sheet.swift; path = Sources/ViewTypes/Sheet.swift; sourceTree = "<group>"; };
+		3D2059AFF480161985E44F083FA3C1D6 /* TextFieldWithVerticalAxis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldWithVerticalAxis.swift; path = Sources/ViewTypes/TextFieldWithVerticalAxis.swift; sourceTree = "<group>"; };
+		3E392D2C5B8EC0B3DDF0D8967122437A /* ToggleWithSwitchStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithSwitchStyle.swift; path = Sources/ViewTypes/ToggleWithSwitchStyle.swift; sourceTree = "<group>"; };
+		3F9D2C2CDEC6F8C318BBA0FB52EFAD1D /* ListWithGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithGroupedStyle.swift; path = Sources/ViewTypes/ListWithGroupedStyle.swift; sourceTree = "<group>"; };
+		3FA5B1F5ABDF8BF7030092225A389AF8 /* Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Sources/ViewTypes/Button.swift; sourceTree = "<group>"; };
+		3FE27BEC658B68BF303D22951FF6B1FC /* NavigationStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationStack.swift; path = Sources/ViewTypes/NavigationStack.swift; sourceTree = "<group>"; };
+		414A4937E60F42099FAC1953FCD41F68 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Sources/ViewTypes/View.swift; sourceTree = "<group>"; };
+		438102B2C7F84CF89EB9EF6E2AEB537D /* MultimediaItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaItem.swift; sourceTree = "<group>"; };
+		4A0D9FBF2FCFBDEEFA7BEE46A014B785 /* IntrospectableViewType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectableViewType.swift; path = Sources/IntrospectableViewType.swift; sourceTree = "<group>"; };
+		4F7E8D33DD510267F09C405FE46C6B78 /* CompassTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassTracker.swift; sourceTree = "<group>"; };
+		5309519D1ECE75303D2A94FBDD2DA4DA /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignInWithAppleButton.swift; path = Sources/ViewTypes/SignInWithAppleButton.swift; sourceTree = "<group>"; };
+		55B61489CBAFABC6F90AC6EA3CF2D7C2 /* MarfeelSDK-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarfeelSDK-iOS-dummy.m"; sourceTree = "<group>"; };
+		5830A98C4D6F9634185DE7E9B678116C /* RuntimeWarnings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RuntimeWarnings.swift; path = Sources/RuntimeWarnings.swift; sourceTree = "<group>"; };
 		5D76D5F95984629A2228EEE2B4D6675A /* Pods-CompassSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		5F168D7A9984B72D6851C66DD80F852C /* MarfeelSDK-iOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "MarfeelSDK-iOS"; path = MarfeelSDK_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6012C24F1E3EF9CB3A570C994DC0E36F /* GetRFV.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GetRFV.swift; path = CompassSDK/RFV/GetRFV.swift; sourceTree = "<group>"; };
-		637C62F727F8682617B8CB132CD7D4CF /* ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = Sources/ViewTypes/ScrollView.swift; sourceTree = "<group>"; };
-		683A5A050881CE856A3AD4E04F737BD0 /* MarfeelSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		6964BC289C32E07C14D6E4256DB7C37A /* MultimediaItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaItem.swift; path = CompassSDK/Tracker/Multimedia/MultimediaItem.swift; sourceTree = "<group>"; };
+		6042FA70CE79BB762873D9367DF49003 /* SwiftUIIntrospect-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftUIIntrospect-prefix.pch"; sourceTree = "<group>"; };
+		62C37EE80E394D2AF1FCB18042ACB644 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Sources/Utils.swift; sourceTree = "<group>"; };
+		653182C2D23D8AF6A8BC30E671999D79 /* SwiftUIIntrospect-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftUIIntrospect-Info.plist"; sourceTree = "<group>"; };
+		66EE4EB8771DC4F7563139BD4EF20206 /* ListWithSidebarStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithSidebarStyle.swift; path = Sources/ViewTypes/ListWithSidebarStyle.swift; sourceTree = "<group>"; };
+		683388D98C591939D8DF3786AA6B26A8 /* PlatformVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformVersion.swift; path = Sources/PlatformVersion.swift; sourceTree = "<group>"; };
+		68F08EFB9476A20AB60807F569F60187 /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		69BCF4361F0F4D9654A9FAE96F0E9979 /* FullScreenCover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FullScreenCover.swift; path = Sources/ViewTypes/FullScreenCover.swift; sourceTree = "<group>"; };
+		69D6D7BE7BA3217360E114C963429247 /* NavigationSplitView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationSplitView.swift; path = Sources/ViewTypes/NavigationSplitView.swift; sourceTree = "<group>"; };
 		6A8033549A17DA4B55C21FEC24DA1C98 /* Pods-CompassSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-acknowledgements.plist"; sourceTree = "<group>"; };
-		6BA331FBE8BF6F8F03C3F0436C07A14F /* PlatformViewVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformViewVersion.swift; path = Sources/PlatformViewVersion.swift; sourceTree = "<group>"; };
-		6F9C073DB42E5024890911D682F176CF /* ListWithGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithGroupedStyle.swift; path = Sources/ViewTypes/ListWithGroupedStyle.swift; sourceTree = "<group>"; };
+		6F1D9B63B881FD579C2C4B74AAAB5E86 /* SwiftUIIntrospect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftUIIntrospect.release.xcconfig; sourceTree = "<group>"; };
+		713DFE1709293CC29DC15CE04C04407E /* Toggle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Toggle.swift; path = Sources/ViewTypes/Toggle.swift; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		733C92ACE2131D794962BF7BF945A596 /* IntrospectableViewType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectableViewType.swift; path = Sources/IntrospectableViewType.swift; sourceTree = "<group>"; };
-		747511BD74F6BE97C6BEA273F108DA75 /* DatePickerWithCompactStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithCompactStyle.swift; path = Sources/ViewTypes/DatePickerWithCompactStyle.swift; sourceTree = "<group>"; };
+		7318799C58745A5633491E8023E69C7C /* ListCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListCell.swift; path = Sources/ViewTypes/ListCell.swift; sourceTree = "<group>"; };
+		79FACE6C52C3BB17299A80EA333C6A90 /* DatePickerWithCompactStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithCompactStyle.swift; path = Sources/ViewTypes/DatePickerWithCompactStyle.swift; sourceTree = "<group>"; };
 		7AE67FA85F08027C69B02A5EE591C8B5 /* Pods-CompassSDK-CompassSDKTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CompassSDK-CompassSDKTests.modulemap"; sourceTree = "<group>"; };
 		7B6049C0EF4193F639C9D0FE1DA791E3 /* Pods-Playground-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Playground-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7EB042E129C69F32D19CF8381D794E25 /* MarfeelSDK-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-prefix.pch"; sourceTree = "<group>"; };
+		80072B2D6B255FD309F61DF577651C30 /* DatePicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePicker.swift; path = Sources/ViewTypes/DatePicker.swift; sourceTree = "<group>"; };
+		803024CF71D98F64E538DD3ABF682F17 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = CompassSDK/Resources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		82B3DFC03689B051CFD590084B3B8D0B /* FormWithGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormWithGroupedStyle.swift; path = Sources/ViewTypes/FormWithGroupedStyle.swift; sourceTree = "<group>"; };
+		830F3BE67EA43D99701334BA9467E07A /* ToggleWithButtonStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithButtonStyle.swift; path = Sources/ViewTypes/ToggleWithButtonStyle.swift; sourceTree = "<group>"; };
 		836E05CBF8571FDA83B185194FA09E15 /* Pods-Playground */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Playground"; path = Pods_Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		87DD99558FB9F28AE72038628863E2AC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = CompassSDK/Resources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		8AEF882B18D577D0EC009CE67AF8D1AD /* TextEditor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextEditor.swift; path = Sources/ViewTypes/TextEditor.swift; sourceTree = "<group>"; };
-		8BDA034302C2E89F58EF53055C48D858 /* Codable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Codable.swift; path = CompassSDK/Extensions/Codable.swift; sourceTree = "<group>"; };
-		939765B0B6BEC63DA8BDC79B2A8475C5 /* NavigationSplitView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationSplitView.swift; path = Sources/ViewTypes/NavigationSplitView.swift; sourceTree = "<group>"; };
-		9643246E8C16BB03C2E1D63A5D316D79 /* TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Sources/ViewTypes/TextField.swift; sourceTree = "<group>"; };
-		96C3D12AB2753257386BA029673BCBE6 /* MultimediaMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaMetadata.swift; path = CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift; sourceTree = "<group>"; };
-		975D43F23C18554B8315443360995C77 /* DatePickerWithWheelStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithWheelStyle.swift; path = Sources/ViewTypes/DatePickerWithWheelStyle.swift; sourceTree = "<group>"; };
-		9885EBCB5413AFAFE34440C1A5F67A3C /* Window.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Window.swift; path = Sources/ViewTypes/Window.swift; sourceTree = "<group>"; };
-		9BC14D2ED110CDBAA5285B9D9E8F088A /* ProgressViewWithCircularStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProgressViewWithCircularStyle.swift; path = Sources/ViewTypes/ProgressViewWithCircularStyle.swift; sourceTree = "<group>"; };
+		83B2AFBD8F7D5C6A35CD9FF13627B65A /* PickerWithMenuStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithMenuStyle.swift; path = Sources/ViewTypes/PickerWithMenuStyle.swift; sourceTree = "<group>"; };
+		83C2D389C40C30072AC58B2E3A550301 /* TikOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TikOperation.swift; sourceTree = "<group>"; };
+		849D9EDE62D5E76E512A00BD20792202 /* Popover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Popover.swift; path = Sources/ViewTypes/Popover.swift; sourceTree = "<group>"; };
+		84A4944A2C382A59CB8266072BB8AFE0 /* Stepper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stepper.swift; path = Sources/ViewTypes/Stepper.swift; sourceTree = "<group>"; };
+		8867AE3FBC76361E1BCE150E039C605A /* CompassSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CompassSDK.h; path = CompassSDK/CompassSDK.h; sourceTree = "<group>"; };
+		892ABECDF7AEE1B97C9E3E762DE7A6D0 /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultimediaTrackInfo.swift; sourceTree = "<group>"; };
+		896DBBB46F8DDD066FF0085DD00AB11A /* MarfeelSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "MarfeelSDK-iOS.modulemap"; sourceTree = "<group>"; };
+		8C5D068FE1F93D21DB2937613099E78B /* IntrospectionSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectionSelector.swift; path = Sources/IntrospectionSelector.swift; sourceTree = "<group>"; };
+		8E7B674F1ABB97EA549E8DA9040E03F0 /* SwiftUIIntrospect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftUIIntrospect.debug.xcconfig; sourceTree = "<group>"; };
+		8F090FFBD9BFB8484FDDCCE23C3F223C /* SecureField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecureField.swift; path = Sources/ViewTypes/SecureField.swift; sourceTree = "<group>"; };
+		93EF4BB545D86754EE4E045455A35696 /* NavigationViewWithColumnsStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NavigationViewWithColumnsStyle.swift; path = Sources/ViewTypes/NavigationViewWithColumnsStyle.swift; sourceTree = "<group>"; };
+		98007A127CA65D47DC9B6F4F851BC0CF /* TabView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TabView.swift; path = Sources/ViewTypes/TabView.swift; sourceTree = "<group>"; };
+		9BCB3D4D42DB328FB86B37D0E743634C /* Slider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Slider.swift; path = Sources/ViewTypes/Slider.swift; sourceTree = "<group>"; };
+		9C73B0F5F6D7BAB50267F14A52E6A902 /* VideoPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Sources/ViewTypes/VideoPlayer.swift; sourceTree = "<group>"; };
+		9CFAD037DEAFEAF64E504F767332CCAD /* DatePickerWithWheelStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithWheelStyle.swift; path = Sources/ViewTypes/DatePickerWithWheelStyle.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E0217BF438EBD663427B6E6E71AFE81 /* Toggle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Toggle.swift; path = Sources/ViewTypes/Toggle.swift; sourceTree = "<group>"; };
-		A29DBF7AC336189D89EF34956E56408F /* MarfeelSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		A2C1E8A0FD791A32F53AC6EF5D1438DD /* FormWithGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormWithGroupedStyle.swift; path = Sources/ViewTypes/FormWithGroupedStyle.swift; sourceTree = "<group>"; };
-		A4491C4907BD55C902333212BD7B3872 /* PickerWithSegmentedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithSegmentedStyle.swift; path = Sources/ViewTypes/PickerWithSegmentedStyle.swift; sourceTree = "<group>"; };
+		9E549B784A5D1B56EE20CD461EC4A55E /* Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		A03D6C488B1850BBEB9908279CB581CD /* AppLifecycleNotifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppLifecycleNotifier.swift; sourceTree = "<group>"; };
+		A1C2FB71691E59177A68EF24FD0D6FF2 /* LICENSE.md */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.md; sourceTree = "<group>"; };
+		A2CDC6867B8C121B5F4A8C94EE1C8FAE /* PlatformView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlatformView.swift; path = Sources/PlatformView.swift; sourceTree = "<group>"; };
+		A4BE84DD863DF616CD3744E8DA2BBBC3 /* PlaybackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
+		A5A8E54301ECB33B62C7E48030A5777B /* ListWithInsetGroupedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithInsetGroupedStyle.swift; path = Sources/ViewTypes/ListWithInsetGroupedStyle.swift; sourceTree = "<group>"; };
 		A6E834BA1D4021EBFF590A0E25212FE9 /* Pods-CompassSDK-CompassSDKTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-Info.plist"; sourceTree = "<group>"; };
-		AB8261C904D053E49C8B40F4742544D6 /* DatePicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePicker.swift; path = Sources/ViewTypes/DatePicker.swift; sourceTree = "<group>"; };
-		AC8A92C2035F9052A74A33B11E0D192D /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Date.swift; path = CompassSDK/Extensions/Date.swift; sourceTree = "<group>"; };
-		AF856E9379E4944DEB78501FED4F9E20 /* SwiftUIIntrospect-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftUIIntrospect-prefix.pch"; sourceTree = "<group>"; };
+		A83A415483713848F734A74FCA8A2994 /* SwiftUIIntrospect-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftUIIntrospect-umbrella.h"; sourceTree = "<group>"; };
+		AAA97B89F0EFE1667C6603785F333DE0 /* TrackingConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TrackingConfig.swift; sourceTree = "<group>"; };
 		B2384C9AB675AC48FA42DABC995EA22A /* Pods-CompassSDK-CompassSDKTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CompassSDK-CompassSDKTests-umbrella.h"; sourceTree = "<group>"; };
-		B63F52137651BE9ABB807A8F4AD878E5 /* PageControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PageControl.swift; path = Sources/ViewTypes/PageControl.swift; sourceTree = "<group>"; };
+		B25651B744A91C05E66DB8D9DD8F7ECF /* TextEditor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextEditor.swift; path = Sources/ViewTypes/TextEditor.swift; sourceTree = "<group>"; };
 		B6B926B0F188178A6BB0B2E21A83674C /* Pods-Playground-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Playground-acknowledgements.plist"; sourceTree = "<group>"; };
+		B74B0162F9EE69ED0DB8CB8FE42ACE56 /* SwiftUIIntrospect.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftUIIntrospect.modulemap; sourceTree = "<group>"; };
+		B755BC964BF427E4C2FFA1CBB68C3B12 /* MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
 		B88EE55A84BF74614F4A73D39619B04A /* Pods-CompassSDK-CompassSDKTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CompassSDK-CompassSDKTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		BC166B3DBE86107F0F51237F0172445F /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Sources/ViewTypes/View.swift; sourceTree = "<group>"; };
-		BD19870C4A4D2ADC5BB15DDA2F1E5880 /* DatePickerWithFieldStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithFieldStyle.swift; path = Sources/ViewTypes/DatePickerWithFieldStyle.swift; sourceTree = "<group>"; };
+		B93A03ADC0221913E41083F49A202DB6 /* PageControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PageControl.swift; path = Sources/ViewTypes/PageControl.swift; sourceTree = "<group>"; };
+		BC87E2481287A3DA944E62D4DCBCC876 /* MarfeelSDK-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		BCC1536E59952E9F46C5B0394102FDFF /* IntrospectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectionView.swift; path = Sources/IntrospectionView.swift; sourceTree = "<group>"; };
+		BD57A25DB4906E183D179457BFE23DF9 /* Form.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Form.swift; path = Sources/ViewTypes/Form.swift; sourceTree = "<group>"; };
+		BD9A47030219226659F60A98BDACA4D0 /* ProgressViewWithCircularStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProgressViewWithCircularStyle.swift; path = Sources/ViewTypes/ProgressViewWithCircularStyle.swift; sourceTree = "<group>"; };
 		BF0A1B19F8388CA9BF317BAB0B93D2FC /* Pods-Playground-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Playground-umbrella.h"; sourceTree = "<group>"; };
-		BF795F5DA3689D80C3A6FB4B3E34F6FB /* MultimediaTrackInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimediaTrackInfo.swift; path = CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift; sourceTree = "<group>"; };
-		C198CFE512EACA403AE5760A4E4E84BF /* ListWithBorderedStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithBorderedStyle.swift; path = Sources/ViewTypes/ListWithBorderedStyle.swift; sourceTree = "<group>"; };
+		C21D00BAC3DB766C23E85D8EB726F0F1 /* MarfeelSDK-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-umbrella.h"; sourceTree = "<group>"; };
 		C4DB3B2130B9B66DD0B33E952E8D893A /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
+		C584E1F626F4B57FFF54ED7E290FA6E1 /* GetRFV.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GetRFV.swift; sourceTree = "<group>"; };
+		C5921AD2CE1AD02CD6845B472ADB089D /* PickerWithWheelStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithWheelStyle.swift; path = Sources/ViewTypes/PickerWithWheelStyle.swift; sourceTree = "<group>"; };
+		C6741F982A6B2DE02B97E2F903CF33B8 /* DatePickerWithGraphicalStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerWithGraphicalStyle.swift; path = Sources/ViewTypes/DatePickerWithGraphicalStyle.swift; sourceTree = "<group>"; };
 		C69DA08B15285F9048CAD91D2A024037 /* Pods-Playground-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Playground-dummy.m"; sourceTree = "<group>"; };
 		C6EDFEEA9FC9B22FD45AB21C95453126 /* Pods-CompassSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CompassSDK-umbrella.h"; sourceTree = "<group>"; };
 		C6F9B6F7E98CA5A7566D35360686FAA9 /* Pods-CompassSDK-CompassSDKTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-CompassSDK-CompassSDKTests"; path = Pods_CompassSDK_CompassSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7781DB34F5DF4BC77F2C29EF33E5974 /* CompassSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CompassSDK.h; path = CompassSDK/CompassSDK.h; sourceTree = "<group>"; };
+		C7C9F7E8C5942D328F788E710B6C5596 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		C7E787FF8204CC5F811437094A997C94 /* CompassStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompassStorage.swift; sourceTree = "<group>"; };
 		CB136E0F72F1F2D523D974FDE2F7379E /* Pods-CompassSDK-CompassSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK-CompassSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		CB4955F56AB9EAE83A5254E6640E3D07 /* TabViewWithPageStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TabViewWithPageStyle.swift; path = Sources/ViewTypes/TabViewWithPageStyle.swift; sourceTree = "<group>"; };
-		CCE6F7D2FE7D820C51533A34BE9A154C /* IntrospectionSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntrospectionSelector.swift; path = Sources/IntrospectionSelector.swift; sourceTree = "<group>"; };
 		CDA9E2601106109B1C7EC988755513F9 /* Pods-CompassSDK-CompassSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CompassSDK-CompassSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		CE76964A822DABE96DAAE8F3191C3C7D /* MarfeelSDK-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarfeelSDK-iOS-dummy.m"; sourceTree = "<group>"; };
-		D395E1EA6E13129DF5F701D44D742398 /* ToggleWithButtonStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithButtonStyle.swift; path = Sources/ViewTypes/ToggleWithButtonStyle.swift; sourceTree = "<group>"; };
-		D540AE68B3E7FE290FF0144A294188AD /* SwiftUIIntrospect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftUIIntrospect.release.xcconfig; sourceTree = "<group>"; };
+		CED0FCFDD15747C3EC5D347FC5237A26 /* TikOperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TikOperationFactory.swift; sourceTree = "<group>"; };
 		D546D43852FE9F293CE228D0CBFD57B0 /* Pods-CompassSDK-CompassSDKTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CompassSDK-CompassSDKTests-dummy.m"; sourceTree = "<group>"; };
-		D627D4259AC2B215E0C0A53654596A1A /* TikOperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TikOperationFactory.swift; path = CompassSDK/Tick/TikOperationFactory.swift; sourceTree = "<group>"; };
+		D59229D96D29A627CAF5AD616905E0E7 /* ListWithInsetStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithInsetStyle.swift; path = Sources/ViewTypes/ListWithInsetStyle.swift; sourceTree = "<group>"; };
 		D70F1ECFF7A806F64474ED95EF7590C1 /* Pods-CompassSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CompassSDK.modulemap"; sourceTree = "<group>"; };
+		D75BBD54A0B43A4C194D8FC762618E4A /* ScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScrollView.swift; path = Sources/ViewTypes/ScrollView.swift; sourceTree = "<group>"; };
+		D8B6D9E26047B44C2F4F288175B12A85 /* ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
 		D94B65081850CC85B4C3117E0632773E /* Pods-CompassSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CompassSDK.release.xcconfig"; sourceTree = "<group>"; };
-		DE4651F615F5E1F80D217B0EDD08A100 /* MarfeelSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "MarfeelSDK-iOS.modulemap"; sourceTree = "<group>"; };
-		DE7C6C2DB1E19238954582AEB599F774 /* VideoPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoPlayer.swift; path = Sources/ViewTypes/VideoPlayer.swift; sourceTree = "<group>"; };
-		DFCEBB717BBA0C52A50BEC3879B38A31 /* ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist"; sourceTree = "<group>"; };
-		DFE221F4F5BFEB62A0315C005E6C47F3 /* TextFieldWithVerticalAxis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldWithVerticalAxis.swift; path = Sources/ViewTypes/TextFieldWithVerticalAxis.swift; sourceTree = "<group>"; };
-		E0136804C9A34376EB11643D0BBC956B /* ListWithSidebarStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithSidebarStyle.swift; path = Sources/ViewTypes/ListWithSidebarStyle.swift; sourceTree = "<group>"; };
-		E717C3E3704EA1A7020B9EFEDCBDF5B9 /* SwiftUIIntrospect-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftUIIntrospect-umbrella.h"; sourceTree = "<group>"; };
-		E71C72F30BAE37AC346D75336A4952B8 /* ListCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListCell.swift; path = Sources/ViewTypes/ListCell.swift; sourceTree = "<group>"; };
+		DC664DD83284E5867E65A61FB4D1EB70 /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		DDDC2601E7E34BDF452C59F4358E1F2A /* TextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = Sources/ViewTypes/TextField.swift; sourceTree = "<group>"; };
+		E18C66FF67282E65FC1133F8339767A2 /* MarfeelSDK-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarfeelSDK-iOS-prefix.pch"; sourceTree = "<group>"; };
+		E575B687ABBEA99D544A8E068A7AE6BE /* ProgressViewWithLinearStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProgressViewWithLinearStyle.swift; path = Sources/ViewTypes/ProgressViewWithLinearStyle.swift; sourceTree = "<group>"; };
 		E8BC2FA90305C8800DF47AB4212A4B86 /* Pods-CompassSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CompassSDK-dummy.m"; sourceTree = "<group>"; };
-		E906595B600EC819191D128CDA1E5B45 /* PickerWithMenuStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PickerWithMenuStyle.swift; path = Sources/ViewTypes/PickerWithMenuStyle.swift; sourceTree = "<group>"; };
 		E973FB2557D332FBF501C4FAB83C6737 /* Pods-Playground-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Playground-frameworks.sh"; sourceTree = "<group>"; };
-		F2BBFD2C9BA2DF9E2B222C3045F61AAB /* ListWithInsetStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListWithInsetStyle.swift; path = Sources/ViewTypes/ListWithInsetStyle.swift; sourceTree = "<group>"; };
-		F2E0B844607DA16ED9287122E8242B08 /* Form.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Form.swift; path = Sources/ViewTypes/Form.swift; sourceTree = "<group>"; };
-		F718EF91BFB1947394481AE6B35E7C6A /* TabView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TabView.swift; path = Sources/ViewTypes/TabView.swift; sourceTree = "<group>"; };
-		FA0EFB2056696B3A0F5ADB4870F9EF84 /* RuntimeWarnings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RuntimeWarnings.swift; path = Sources/RuntimeWarnings.swift; sourceTree = "<group>"; };
+		E9F57FD3CA787D6C2E0C6D08FD7AF5CB /* Weak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Weak.swift; path = Sources/Weak.swift; sourceTree = "<group>"; };
+		EE4B4B837424515ACA8D2DBAE5C8675C /* PListStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PListStorage.swift; sourceTree = "<group>"; };
+		EF286C4AA41B56662679AEF60E58F6BD /* Rfv.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Rfv.swift; sourceTree = "<group>"; };
+		F1F57EBA03356448691D94EDB142B131 /* Window.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Window.swift; path = Sources/ViewTypes/Window.swift; sourceTree = "<group>"; };
+		F4D9D6013B80D68BC59E700C5520363C /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		F663BB04B60BCDDE6F7282FA5C40F259 /* ToggleWithCheckboxStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleWithCheckboxStyle.swift; path = Sources/ViewTypes/ToggleWithCheckboxStyle.swift; sourceTree = "<group>"; };
+		F758EE29C2F6B20BCC02FA165F7592E3 /* Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		FC475B1D06A10173BDCF30B7BCAC8083 /* Pods-Playground.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Playground.modulemap"; sourceTree = "<group>"; };
-		FCBCCD58A1B4501CCD1D3EA7F5434ABA /* Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Type.swift; path = CompassSDK/Tracker/Multimedia/Type.swift; sourceTree = "<group>"; };
-		FD1801C2E7185BE20ABF00833E7CF122 /* SwiftUIIntrospect.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftUIIntrospect.modulemap; sourceTree = "<group>"; };
-		FD41DE78DCD59673166CB1D33EBF2F31 /* PListStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PListStorage.swift; path = CompassSDK/Storage/PListStorage.swift; sourceTree = "<group>"; };
+		FF50C3187E30A4335D963E8A3D4E1594 /* MarfeelSDK-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MarfeelSDK-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FF9602F44DBCCEA796BD45F0679A6663 /* TabViewWithPageStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TabViewWithPageStyle.swift; path = Sources/ViewTypes/TabViewWithPageStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,18 +304,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3BA5B312F3BB40614B92027CCA4E03B1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		63E6A0970FD2EF34FD80C1B8429A1CC1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6677E51B09820A4582D70B1CF19F9988 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C71D2AB740444E1D7DD5CE659527ECF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,90 +346,73 @@
 			path = "Target Support Files/Pods-CompassSDK-CompassSDKTests";
 			sourceTree = "<group>";
 		};
-		136691CFA9FB7EC9805D1BF78DCAC78E /* SwiftUIIntrospect */ = {
+		06BD3AFA63DAF5946E81102E99638421 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				4D8C32A61FACB80F3682BA4BF0751AD8 /* Button.swift */,
-				0AC63482CC3C99E4CF5DC2EBAFEF5852 /* ColorPicker.swift */,
-				AB8261C904D053E49C8B40F4742544D6 /* DatePicker.swift */,
-				747511BD74F6BE97C6BEA273F108DA75 /* DatePickerWithCompactStyle.swift */,
-				BD19870C4A4D2ADC5BB15DDA2F1E5880 /* DatePickerWithFieldStyle.swift */,
-				54B737FBA628009D57EB69381BACCD45 /* DatePickerWithGraphicalStyle.swift */,
-				2A17DF2443B5A404F07A4733E047D7C9 /* DatePickerWithStepperFieldStyle.swift */,
-				975D43F23C18554B8315443360995C77 /* DatePickerWithWheelStyle.swift */,
-				F2E0B844607DA16ED9287122E8242B08 /* Form.swift */,
-				A2C1E8A0FD791A32F53AC6EF5D1438DD /* FormWithGroupedStyle.swift */,
-				0D9D1D7BA85C20E22AA8965656249EDA /* FullScreenCover.swift */,
-				31DC56B2C9EDA9BEDAA008CBD4097878 /* Introspect.swift */,
-				733C92ACE2131D794962BF7BF945A596 /* IntrospectableViewType.swift */,
-				CCE6F7D2FE7D820C51533A34BE9A154C /* IntrospectionSelector.swift */,
-				480650E6A1E1DD3609D0CECD53803CF6 /* IntrospectionView.swift */,
-				379BD93D6933FED4A22A4ABDA294D4A4 /* List.swift */,
-				E71C72F30BAE37AC346D75336A4952B8 /* ListCell.swift */,
-				C198CFE512EACA403AE5760A4E4E84BF /* ListWithBorderedStyle.swift */,
-				6F9C073DB42E5024890911D682F176CF /* ListWithGroupedStyle.swift */,
-				15127F08D2399107EACCFAF31E965882 /* ListWithInsetGroupedStyle.swift */,
-				F2BBFD2C9BA2DF9E2B222C3045F61AAB /* ListWithInsetStyle.swift */,
-				E0136804C9A34376EB11643D0BBC956B /* ListWithSidebarStyle.swift */,
-				298A0BFE35410F915B7A681E310978D2 /* Map.swift */,
-				939765B0B6BEC63DA8BDC79B2A8475C5 /* NavigationSplitView.swift */,
-				142F536B96D4B69B98F47943DF671DFF /* NavigationStack.swift */,
-				469909FB5FA7D52314ECD6FAAD0550D5 /* NavigationViewWithColumnsStyle.swift */,
-				4CADFFCD59813091819BAD41A0204A0B /* NavigationViewWithStackStyle.swift */,
-				B63F52137651BE9ABB807A8F4AD878E5 /* PageControl.swift */,
-				E906595B600EC819191D128CDA1E5B45 /* PickerWithMenuStyle.swift */,
-				A4491C4907BD55C902333212BD7B3872 /* PickerWithSegmentedStyle.swift */,
-				4DAE1A6B9B8ADD9C57E5CE3C998C8FA9 /* PickerWithWheelStyle.swift */,
-				3E7C459FC7BE5433AA9AF962F9E383A5 /* PlatformVersion.swift */,
-				012F53C44E342C41DD492546607F242A /* PlatformView.swift */,
-				6BA331FBE8BF6F8F03C3F0436C07A14F /* PlatformViewVersion.swift */,
-				05E60560D8A317949865068CB60D8FA7 /* Popover.swift */,
-				9BC14D2ED110CDBAA5285B9D9E8F088A /* ProgressViewWithCircularStyle.swift */,
-				035A86F52BC02EBF0CAF53B3019DD7B7 /* ProgressViewWithLinearStyle.swift */,
-				FA0EFB2056696B3A0F5ADB4870F9EF84 /* RuntimeWarnings.swift */,
-				637C62F727F8682617B8CB132CD7D4CF /* ScrollView.swift */,
-				0E25A0CDCBA713A559BF48BF0D3D3D1A /* SearchField.swift */,
-				31E59B371980AAA69BF8311617B46EAB /* SecureField.swift */,
-				48E4149ADAC3B57E96AAD9B47465123D /* Sheet.swift */,
-				1AE5C8B6F23F695E50D7FDE98E68C8B3 /* SignInWithAppleButton.swift */,
-				31A2C1622255B11BDA5FC07B12057217 /* Slider.swift */,
-				48824DB4A211C972AB39B879F76CF185 /* Stepper.swift */,
-				5D6FAE6CE984C9FD4DAA07AB831874DE /* Table.swift */,
-				F718EF91BFB1947394481AE6B35E7C6A /* TabView.swift */,
-				CB4955F56AB9EAE83A5254E6640E3D07 /* TabViewWithPageStyle.swift */,
-				8AEF882B18D577D0EC009CE67AF8D1AD /* TextEditor.swift */,
-				9643246E8C16BB03C2E1D63A5D316D79 /* TextField.swift */,
-				DFE221F4F5BFEB62A0315C005E6C47F3 /* TextFieldWithVerticalAxis.swift */,
-				9E0217BF438EBD663427B6E6E71AFE81 /* Toggle.swift */,
-				D395E1EA6E13129DF5F701D44D742398 /* ToggleWithButtonStyle.swift */,
-				4A961F4B73E50113098423576BE23922 /* ToggleWithCheckboxStyle.swift */,
-				21103EDCF7E7F2A96831742537A094BD /* ToggleWithSwitchStyle.swift */,
-				3BD24EBC02C83BD9C1C0E0805AAAA976 /* Utils.swift */,
-				DE7C6C2DB1E19238954582AEB599F774 /* VideoPlayer.swift */,
-				BC166B3DBE86107F0F51237F0172445F /* View.swift */,
-				06B769935CC6570D59C78A015684014C /* ViewController.swift */,
-				201B0B71D2B0240DFE8A0C6CEE491FFF /* Weak.swift */,
-				9885EBCB5413AFAFE34440C1A5F67A3C /* Window.swift */,
-				EBDB1A8AC1E8AB95C80059C66A353A8B /* Support Files */,
+				18EB01131697321F10D30F5F900CA7D6 /* AbstractTracker.swift */,
+				38C65F6DA467BDE5779955A391B9AD18 /* TrackInfo.swift */,
+				5385091744EDF1DD9C23FF4FC9984712 /* Core */,
+				22E0C83965415935177BAF8BFC713751 /* Multimedia */,
 			);
-			name = SwiftUIIntrospect;
-			path = SwiftUIIntrospect;
+			name = Tracker;
+			path = CompassSDK/Tracker;
 			sourceTree = "<group>";
 		};
-		46C635EF70906162AB74C3B883EB1928 /* Support Files */ = {
+		22E0C83965415935177BAF8BFC713751 /* Multimedia */ = {
 			isa = PBXGroup;
 			children = (
-				DE4651F615F5E1F80D217B0EDD08A100 /* MarfeelSDK-iOS.modulemap */,
-				CE76964A822DABE96DAAE8F3191C3C7D /* MarfeelSDK-iOS-dummy.m */,
-				4318AC1BF60504DA8F7A2A57895DD1F3 /* MarfeelSDK-iOS-Info.plist */,
-				7EB042E129C69F32D19CF8381D794E25 /* MarfeelSDK-iOS-prefix.pch */,
-				44B16F6CBB90EA60A3435659F57DBA9D /* MarfeelSDK-iOS-umbrella.h */,
-				683A5A050881CE856A3AD4E04F737BD0 /* MarfeelSDK-iOS.debug.xcconfig */,
-				A29DBF7AC336189D89EF34956E56408F /* MarfeelSDK-iOS.release.xcconfig */,
-				DFCEBB717BBA0C52A50BEC3879B38A31 /* ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist */,
+				33969BDC0AA71A15F104C37047FF671F /* CompassTrackerMultimedia.swift */,
+				F4D9D6013B80D68BC59E700C5520363C /* Event.swift */,
+				438102B2C7F84CF89EB9EF6E2AEB537D /* MultimediaItem.swift */,
+				27867B250103C0D1A857CE61BC5835EC /* MultimediaMetadata.swift */,
+				892ABECDF7AEE1B97C9E3E762DE7A6D0 /* MultimediaTrackInfo.swift */,
+				A4BE84DD863DF616CD3744E8DA2BBBC3 /* PlaybackInfo.swift */,
+				9E549B784A5D1B56EE20CD461EC4A55E /* Type.swift */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/MarfeelSDK-iOS";
+			name = Multimedia;
+			path = Multimedia;
+			sourceTree = "<group>";
+		};
+		3D6797350DF9690AFB1381C7BC683809 /* Communications */ = {
+			isa = PBXGroup;
+			children = (
+				03DFDF734B29EC50C48A60BF4B0D5E08 /* ApiRouter.swift */,
+			);
+			name = Communications;
+			path = CompassSDK/Communications;
+			sourceTree = "<group>";
+		};
+		44EC1FBAFE22C7198AF5410F797046B2 /* RFV */ = {
+			isa = PBXGroup;
+			children = (
+				C584E1F626F4B57FFF54ED7E290FA6E1 /* GetRFV.swift */,
+				EF286C4AA41B56662679AEF60E58F6BD /* Rfv.swift */,
+			);
+			name = RFV;
+			path = CompassSDK/RFV;
+			sourceTree = "<group>";
+		};
+		478B0B056583645B30A014C84F0BB3D1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F758EE29C2F6B20BCC02FA165F7592E3 /* Bundle.swift */,
+				68F08EFB9476A20AB60807F569F60187 /* Codable.swift */,
+				DC664DD83284E5867E65A61FB4D1EB70 /* Date.swift */,
+				0ADD2FAE8E5FE92393BC01CF1C5C4B6D /* URLRequest.swift */,
+			);
+			name = Extensions;
+			path = CompassSDK/Extensions;
+			sourceTree = "<group>";
+		};
+		5385091744EDF1DD9C23FF4FC9984712 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4F7E8D33DD510267F09C405FE46C6B78 /* CompassTracker.swift */,
+				2FF10F9CE5C97EE23CF18328FEB0D5B1 /* IngestTrackInfo.swift */,
+				AAA97B89F0EFE1667C6603785F333DE0 /* TrackingConfig.swift */,
+			);
+			name = Core;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -450,6 +436,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		605ED68EB4F03441B68DA10FF51D5368 /* Tick */ = {
+			isa = PBXGroup;
+			children = (
+				1FE80836BB2792FD9A61F35036C1E90A /* SendTik.swift */,
+				83C2D389C40C30072AC58B2E3A550301 /* TikOperation.swift */,
+				CED0FCFDD15747C3EC5D347FC5237A26 /* TikOperationFactory.swift */,
+			);
+			name = Tick;
+			path = CompassSDK/Tick;
+			sourceTree = "<group>";
+		};
+		762DD70E4DAB217AC9D703B5513475A9 /* Lifecycle */ = {
+			isa = PBXGroup;
+			children = (
+				A03D6C488B1850BBEB9908279CB581CD /* AppLifecycleNotifier.swift */,
+			);
+			name = Lifecycle;
+			path = CompassSDK/Lifecycle;
+			sourceTree = "<group>";
+		};
+		8F2CDDD58500640C8F477BE4199C7B8E /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C7E787FF8204CC5F811437094A997C94 /* CompassStorage.swift */,
+				EE4B4B837424515ACA8D2DBAE5C8675C /* PListStorage.swift */,
+			);
+			name = Storage;
+			path = CompassSDK/Storage;
+			sourceTree = "<group>";
+		};
 		94329B4A26BE84EDE4EA7EF726D74456 /* Pods-CompassSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,24 +482,50 @@
 			path = "Target Support Files/Pods-CompassSDK";
 			sourceTree = "<group>";
 		};
-		B2CD3E8B90FE44FCCEB0C64CFFF53214 /* Pods */ = {
+		A04E5938C6DAD7E11FD70A69203F74A0 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				F9762261232B271A9C82DBCA0060A75A /* MarfeelSDK-iOS */,
-				136691CFA9FB7EC9805D1BF78DCAC78E /* SwiftUIIntrospect */,
+				A1C2FB71691E59177A68EF24FD0D6FF2 /* LICENSE.md */,
+				08B9DC1A73B5E09D550110BF55805370 /* MarfeelSDK-iOS.podspec */,
+				C7C9F7E8C5942D328F788E710B6C5596 /* README.md */,
 			);
-			name = Pods;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		B505170D5F1034D70988979F92AB1930 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				896DBBB46F8DDD066FF0085DD00AB11A /* MarfeelSDK-iOS.modulemap */,
+				55B61489CBAFABC6F90AC6EA3CF2D7C2 /* MarfeelSDK-iOS-dummy.m */,
+				B755BC964BF427E4C2FFA1CBB68C3B12 /* MarfeelSDK-iOS-Info.plist */,
+				E18C66FF67282E65FC1133F8339767A2 /* MarfeelSDK-iOS-prefix.pch */,
+				C21D00BAC3DB766C23E85D8EB726F0F1 /* MarfeelSDK-iOS-umbrella.h */,
+				FF50C3187E30A4335D963E8A3D4E1594 /* MarfeelSDK-iOS.debug.xcconfig */,
+				BC87E2481287A3DA944E62D4DCBCC876 /* MarfeelSDK-iOS.release.xcconfig */,
+				D8B6D9E26047B44C2F4F288175B12A85 /* ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Pods/Target Support Files/MarfeelSDK-iOS";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				CFB070133C2C53872D978EDA0597E508 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				B2CD3E8B90FE44FCCEB0C64CFFF53214 /* Pods */,
+				F83BBFFC3C75646B4D655C5CBE35194A /* Pods */,
 				5CDBB1F825A6C06976FC29936588853A /* Products */,
 				EB6043F3497740C0F29AB6B98BE3C6A7 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		CFB070133C2C53872D978EDA0597E508 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DCF74E7CB1F84094BA2F0D15D914EE55 /* MarfeelSDK-iOS */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		D1A74551FF0AE95DA29D9FC7B3BD33DF /* Pods-Playground */ = {
@@ -511,12 +553,108 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DC1D843CACDAD01958335D6C526AB840 /* Resources */ = {
+		D3F848D2EB882802EC00A54960E1BD0F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				87DD99558FB9F28AE72038628863E2AC /* PrivacyInfo.xcprivacy */,
+				B74B0162F9EE69ED0DB8CB8FE42ACE56 /* SwiftUIIntrospect.modulemap */,
+				2337BCE5EA0AFD03F8361BB8CA716188 /* SwiftUIIntrospect-dummy.m */,
+				653182C2D23D8AF6A8BC30E671999D79 /* SwiftUIIntrospect-Info.plist */,
+				6042FA70CE79BB762873D9367DF49003 /* SwiftUIIntrospect-prefix.pch */,
+				A83A415483713848F734A74FCA8A2994 /* SwiftUIIntrospect-umbrella.h */,
+				8E7B674F1ABB97EA549E8DA9040E03F0 /* SwiftUIIntrospect.debug.xcconfig */,
+				6F1D9B63B881FD579C2C4B74AAAB5E86 /* SwiftUIIntrospect.release.xcconfig */,
 			);
-			name = Resources;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftUIIntrospect";
+			sourceTree = "<group>";
+		};
+		DCF74E7CB1F84094BA2F0D15D914EE55 /* MarfeelSDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8867AE3FBC76361E1BCE150E039C605A /* CompassSDK.h */,
+				803024CF71D98F64E538DD3ABF682F17 /* PrivacyInfo.xcprivacy */,
+				3D6797350DF9690AFB1381C7BC683809 /* Communications */,
+				478B0B056583645B30A014C84F0BB3D1 /* Extensions */,
+				762DD70E4DAB217AC9D703B5513475A9 /* Lifecycle */,
+				A04E5938C6DAD7E11FD70A69203F74A0 /* Pod */,
+				44EC1FBAFE22C7198AF5410F797046B2 /* RFV */,
+				8F2CDDD58500640C8F477BE4199C7B8E /* Storage */,
+				B505170D5F1034D70988979F92AB1930 /* Support Files */,
+				605ED68EB4F03441B68DA10FF51D5368 /* Tick */,
+				06BD3AFA63DAF5946E81102E99638421 /* Tracker */,
+			);
+			name = "MarfeelSDK-iOS";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E633A21C394145D138D5C95F0921C5E5 /* SwiftUIIntrospect */ = {
+			isa = PBXGroup;
+			children = (
+				3FA5B1F5ABDF8BF7030092225A389AF8 /* Button.swift */,
+				0635B729E10E60DAEC2B7E8E0CF32804 /* ColorPicker.swift */,
+				80072B2D6B255FD309F61DF577651C30 /* DatePicker.swift */,
+				79FACE6C52C3BB17299A80EA333C6A90 /* DatePickerWithCompactStyle.swift */,
+				2DB85E6B13CF61EAA2AFFC2DA0B04EE5 /* DatePickerWithFieldStyle.swift */,
+				C6741F982A6B2DE02B97E2F903CF33B8 /* DatePickerWithGraphicalStyle.swift */,
+				0C65520F875FE4CAAD37DF1ECA4F6440 /* DatePickerWithStepperFieldStyle.swift */,
+				9CFAD037DEAFEAF64E504F767332CCAD /* DatePickerWithWheelStyle.swift */,
+				BD57A25DB4906E183D179457BFE23DF9 /* Form.swift */,
+				82B3DFC03689B051CFD590084B3B8D0B /* FormWithGroupedStyle.swift */,
+				69BCF4361F0F4D9654A9FAE96F0E9979 /* FullScreenCover.swift */,
+				17972D7C458F2296C4080EC9828CFBE3 /* Introspect.swift */,
+				4A0D9FBF2FCFBDEEFA7BEE46A014B785 /* IntrospectableViewType.swift */,
+				8C5D068FE1F93D21DB2937613099E78B /* IntrospectionSelector.swift */,
+				BCC1536E59952E9F46C5B0394102FDFF /* IntrospectionView.swift */,
+				2B9698217E8EDB579C8B51805392B81A /* List.swift */,
+				7318799C58745A5633491E8023E69C7C /* ListCell.swift */,
+				0AE6D5A308615281218761CDAC9DCBF6 /* ListWithBorderedStyle.swift */,
+				3F9D2C2CDEC6F8C318BBA0FB52EFAD1D /* ListWithGroupedStyle.swift */,
+				A5A8E54301ECB33B62C7E48030A5777B /* ListWithInsetGroupedStyle.swift */,
+				D59229D96D29A627CAF5AD616905E0E7 /* ListWithInsetStyle.swift */,
+				66EE4EB8771DC4F7563139BD4EF20206 /* ListWithSidebarStyle.swift */,
+				0481EF6230FF02D87A7208393A488EA9 /* Map.swift */,
+				69D6D7BE7BA3217360E114C963429247 /* NavigationSplitView.swift */,
+				3FE27BEC658B68BF303D22951FF6B1FC /* NavigationStack.swift */,
+				93EF4BB545D86754EE4E045455A35696 /* NavigationViewWithColumnsStyle.swift */,
+				3BB36DAB2B13E62F851FC2BFD8157B75 /* NavigationViewWithStackStyle.swift */,
+				B93A03ADC0221913E41083F49A202DB6 /* PageControl.swift */,
+				83B2AFBD8F7D5C6A35CD9FF13627B65A /* PickerWithMenuStyle.swift */,
+				2DE73D08C3912280DB0DA0205A70B1E7 /* PickerWithSegmentedStyle.swift */,
+				C5921AD2CE1AD02CD6845B472ADB089D /* PickerWithWheelStyle.swift */,
+				683388D98C591939D8DF3786AA6B26A8 /* PlatformVersion.swift */,
+				A2CDC6867B8C121B5F4A8C94EE1C8FAE /* PlatformView.swift */,
+				359216D5CCE7A7AEE077B174AECCA8CC /* PlatformViewVersion.swift */,
+				849D9EDE62D5E76E512A00BD20792202 /* Popover.swift */,
+				BD9A47030219226659F60A98BDACA4D0 /* ProgressViewWithCircularStyle.swift */,
+				E575B687ABBEA99D544A8E068A7AE6BE /* ProgressViewWithLinearStyle.swift */,
+				5830A98C4D6F9634185DE7E9B678116C /* RuntimeWarnings.swift */,
+				D75BBD54A0B43A4C194D8FC762618E4A /* ScrollView.swift */,
+				369F5C523C086E6C752FDE9D45CF397E /* SearchField.swift */,
+				8F090FFBD9BFB8484FDDCCE23C3F223C /* SecureField.swift */,
+				3CA0351572BE29991CEDA9CA21C4EAA1 /* Sheet.swift */,
+				5309519D1ECE75303D2A94FBDD2DA4DA /* SignInWithAppleButton.swift */,
+				9BCB3D4D42DB328FB86B37D0E743634C /* Slider.swift */,
+				84A4944A2C382A59CB8266072BB8AFE0 /* Stepper.swift */,
+				1A5B037CECC6EB83265B0D39A2270F18 /* Table.swift */,
+				98007A127CA65D47DC9B6F4F851BC0CF /* TabView.swift */,
+				FF9602F44DBCCEA796BD45F0679A6663 /* TabViewWithPageStyle.swift */,
+				B25651B744A91C05E66DB8D9DD8F7ECF /* TextEditor.swift */,
+				DDDC2601E7E34BDF452C59F4358E1F2A /* TextField.swift */,
+				3D2059AFF480161985E44F083FA3C1D6 /* TextFieldWithVerticalAxis.swift */,
+				713DFE1709293CC29DC15CE04C04407E /* Toggle.swift */,
+				830F3BE67EA43D99701334BA9467E07A /* ToggleWithButtonStyle.swift */,
+				F663BB04B60BCDDE6F7282FA5C40F259 /* ToggleWithCheckboxStyle.swift */,
+				3E392D2C5B8EC0B3DDF0D8967122437A /* ToggleWithSwitchStyle.swift */,
+				62C37EE80E394D2AF1FCB18042ACB644 /* Utils.swift */,
+				9C73B0F5F6D7BAB50267F14A52E6A902 /* VideoPlayer.swift */,
+				414A4937E60F42099FAC1953FCD41F68 /* View.swift */,
+				3A1722BE69C072E95D5D1AE2BCA309F2 /* ViewController.swift */,
+				E9F57FD3CA787D6C2E0C6D08FD7AF5CB /* Weak.swift */,
+				F1F57EBA03356448691D94EDB142B131 /* Window.swift */,
+				D3F848D2EB882802EC00A54960E1BD0F /* Support Files */,
+			);
+			name = SwiftUIIntrospect;
+			path = SwiftUIIntrospect;
 			sourceTree = "<group>";
 		};
 		EB6043F3497740C0F29AB6B98BE3C6A7 /* Targets Support Files */ = {
@@ -529,55 +667,12 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		EBDB1A8AC1E8AB95C80059C66A353A8B /* Support Files */ = {
+		F83BBFFC3C75646B4D655C5CBE35194A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FD1801C2E7185BE20ABF00833E7CF122 /* SwiftUIIntrospect.modulemap */,
-				06ABF64D1DD918A8E0A7024A8AE9F89F /* SwiftUIIntrospect-dummy.m */,
-				05BC7BB7516E4691DF94D7D6150EE848 /* SwiftUIIntrospect-Info.plist */,
-				AF856E9379E4944DEB78501FED4F9E20 /* SwiftUIIntrospect-prefix.pch */,
-				E717C3E3704EA1A7020B9EFEDCBDF5B9 /* SwiftUIIntrospect-umbrella.h */,
-				1DD63F077FFAC7571E5781CC2C6803BE /* SwiftUIIntrospect.debug.xcconfig */,
-				D540AE68B3E7FE290FF0144A294188AD /* SwiftUIIntrospect.release.xcconfig */,
+				E633A21C394145D138D5C95F0921C5E5 /* SwiftUIIntrospect */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftUIIntrospect";
-			sourceTree = "<group>";
-		};
-		F9762261232B271A9C82DBCA0060A75A /* MarfeelSDK-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				2A4DF56F511B550A17E48F4925D0A8B9 /* AbstractTracker.swift */,
-				32493224AFC8A7842265C6EA57265A4D /* ApiRouter.swift */,
-				568D83EBF0178137391A21D0E9170501 /* AppLifecycleNotifier.swift */,
-				2AC9107A2424D6A578123547EB29FA6A /* Bundle.swift */,
-				8BDA034302C2E89F58EF53055C48D858 /* Codable.swift */,
-				C7781DB34F5DF4BC77F2C29EF33E5974 /* CompassSDK.h */,
-				554D40FAE1F929D60F2C4CBFEB46A838 /* CompassStorage.swift */,
-				4686F5B0B605A6F4FF308B6153CA4742 /* CompassTracker.swift */,
-				0E6954D64A690CF6F59985DB9D8145DA /* CompassTrackerMultimedia.swift */,
-				AC8A92C2035F9052A74A33B11E0D192D /* Date.swift */,
-				562CD9F68EF64F4B0C06DA50BDB074D3 /* Event.swift */,
-				6012C24F1E3EF9CB3A570C994DC0E36F /* GetRFV.swift */,
-				2933B70DDE75E1E45D544107A1B064E2 /* IngestTrackInfo.swift */,
-				6964BC289C32E07C14D6E4256DB7C37A /* MultimediaItem.swift */,
-				96C3D12AB2753257386BA029673BCBE6 /* MultimediaMetadata.swift */,
-				BF795F5DA3689D80C3A6FB4B3E34F6FB /* MultimediaTrackInfo.swift */,
-				256C807BA6C8EC7213B9F1116621F507 /* PlaybackInfo.swift */,
-				FD41DE78DCD59673166CB1D33EBF2F31 /* PListStorage.swift */,
-				23BB9A5611B9BF51B2F35611E18B1CC5 /* Rfv.swift */,
-				438F6E16F54EBE9618D64684900E8B69 /* SendTik.swift */,
-				21A7DECA2F70DED632ADDA1F4B0D541C /* TikOperation.swift */,
-				D627D4259AC2B215E0C0A53654596A1A /* TikOperationFactory.swift */,
-				2A8A74211619AF64182ED108B2FCE4FC /* TrackInfo.swift */,
-				43C7CDB7DEFF2B0104C40800E18CA5F3 /* TrackingConfig.swift */,
-				FCBCCD58A1B4501CCD1D3EA7F5434ABA /* Type.swift */,
-				0DFFE3A3F9FA745C83BF44C222C5247E /* URLRequest.swift */,
-				DC1D843CACDAD01958335D6C526AB840 /* Resources */,
-				46C635EF70906162AB74C3B883EB1928 /* Support Files */,
-			);
-			name = "MarfeelSDK-iOS";
-			path = "MarfeelSDK-iOS";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -632,14 +727,14 @@
 			buildConfigurationList = 2B197264E245193C6E1A7A9A78414436 /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS" */;
 			buildPhases = (
 				A722D38B028276838CA60C4BC9F02CF9 /* Headers */,
-				1772C8B7AD26FCE55A56A6899DBDBA90 /* Sources */,
+				678D7139B12178F5156E3E86AE311E80 /* Sources */,
 				1BB024EFF1125793C597009EC54EE5F1 /* Frameworks */,
 				2D1AE8DA1033B86F17F64AA19CBA2701 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				50C755E1207F6901BABA042B7C604C50 /* PBXTargetDependency */,
+				3C2BD31DB355B0AD16A5A3ADA2C3D9D5 /* PBXTargetDependency */,
 			);
 			name = "MarfeelSDK-iOS";
 			productName = MarfeelSDK_iOS;
@@ -648,11 +743,11 @@
 		};
 		4BD68C28178D97A4DD85F9AE89868514 /* MarfeelSDK-iOS-marfeelsdk_apple_privacy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B71F4A9E8A54222F83E194D44BA3E954 /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS-marfeelsdk_apple_privacy" */;
+			buildConfigurationList = 1AA1D6E63A243E3BB7A6D0F4FB72E40D /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS-marfeelsdk_apple_privacy" */;
 			buildPhases = (
-				9BD234A3E52E5F80FEB8BC790857DCFC /* Sources */,
-				3BA5B312F3BB40614B92027CCA4E03B1 /* Frameworks */,
-				73A75084278D2B23650C368729B11E25 /* Resources */,
+				6DC28247CF3010419C18B0C36A1FD68D /* Sources */,
+				6C71D2AB740444E1D7DD5CE659527ECF /* Frameworks */,
+				8E2C0153C552BA0C091086CEBF0F6077 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -711,8 +806,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				6E03555FB1B063BA75A3A2392C07FAB2 /* PBXTargetDependency */,
-				F7958F534CE1FF093EEAD5D8FB8E4C7A /* PBXTargetDependency */,
+				F3071A5C7F393BA98E975D3432F6EE50 /* PBXTargetDependency */,
+				EC999E781F1CC27837A9D6C342A9AAFC /* PBXTargetDependency */,
 			);
 			name = "Pods-Playground";
 			productName = Pods_Playground;
@@ -799,14 +894,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73A75084278D2B23650C368729B11E25 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DB801822F7FA3C3B46C5FE5491D7ADBF /* PrivacyInfo.xcprivacy in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7BF512C32845D7745BA8FF41DB5C5F56 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -814,42 +901,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		1772C8B7AD26FCE55A56A6899DBDBA90 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		8E2C0153C552BA0C091086CEBF0F6077 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEE4C13607722566B8B4E91B5444C72D /* AbstractTracker.swift in Sources */,
-				C1C6D3EB2F4C1E8B7421F0451BE2545C /* ApiRouter.swift in Sources */,
-				E727D4F27D92F8086D6B37DB40FE7905 /* AppLifecycleNotifier.swift in Sources */,
-				E3B82CAA07A1C4C15B5DA259370D1A5F /* Bundle.swift in Sources */,
-				E24948260EA67A26C1FE1F6F3360A691 /* Codable.swift in Sources */,
-				58AF5934D082A1AD2BD97E157BC97213 /* CompassStorage.swift in Sources */,
-				E172799A88C44E1ECBE84C50674D5FF9 /* CompassTracker.swift in Sources */,
-				C48087639CF5B29DF9E9114DE14E567E /* CompassTrackerMultimedia.swift in Sources */,
-				97F60345677D12CE5E924A91E0369E27 /* Date.swift in Sources */,
-				DF34EC04066C895E36D928CC380613D1 /* Event.swift in Sources */,
-				94F110E0DFE62AA7E941ACA7A05168BE /* GetRFV.swift in Sources */,
-				1C8FE984DD9392994DAD1639E19786C7 /* IngestTrackInfo.swift in Sources */,
-				808D2841ABEABEB2844E1DD624FAA604 /* MarfeelSDK-iOS-dummy.m in Sources */,
-				9010ACDA2940DA9BD7D52EEE343A1048 /* MultimediaItem.swift in Sources */,
-				6F42C36F101955874A60408449830800 /* MultimediaMetadata.swift in Sources */,
-				C93541A8876C31411655D95154F47973 /* MultimediaTrackInfo.swift in Sources */,
-				D036AE3A2F40D82EB9102ED62BC530C8 /* PlaybackInfo.swift in Sources */,
-				693ADFF58AD76B635F9CF7DF79913E7A /* PListStorage.swift in Sources */,
-				E7485E9895EF64AE71E7BE685D782DAB /* Rfv.swift in Sources */,
-				08BB660C78A84C6D978A4CF1C59A932C /* SendTik.swift in Sources */,
-				099D27FB2300734D29CF34D501257E76 /* TikOperation.swift in Sources */,
-				96B55C2F51CAC9D4C31AB64151A56ACE /* TikOperationFactory.swift in Sources */,
-				D6A5490CD9DB0704B6362CAFE8CAE230 /* TrackInfo.swift in Sources */,
-				7A45DBE8D9F4481D082EE15B6D287D33 /* TrackingConfig.swift in Sources */,
-				6145FED2F9E8E1A8520A4799D6BE8297 /* Type.swift in Sources */,
-				73899C3E3995DEB28DC0011B370E2709 /* URLRequest.swift in Sources */,
+				52062E5B2C7268036B11BF3E9509EC3A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		3E6B677DC42C539CEDA893512962CAEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -858,18 +920,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		678D7139B12178F5156E3E86AE311E80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769D5189DF2FD69EC73D59D36DA833BF /* AbstractTracker.swift in Sources */,
+				16E012186054C4CB9F5B406FBF1571E3 /* ApiRouter.swift in Sources */,
+				AAB5861DA5A7B7B9C8C40BD98B641A6C /* AppLifecycleNotifier.swift in Sources */,
+				99BEAC4BA23F770501D540BC6B4A072D /* Bundle.swift in Sources */,
+				DBF1A420AB6A2B4E91B956CA8432D707 /* Codable.swift in Sources */,
+				0C84C3D7D4B2B6B9D6150074D25152A3 /* CompassStorage.swift in Sources */,
+				5C0A363AD6C8E081818621AC8EC41774 /* CompassTracker.swift in Sources */,
+				E675DEB0DFF6201ACADA17268FA1705E /* CompassTrackerMultimedia.swift in Sources */,
+				22EAFA6EB8214724CB28F2D0E60017EF /* Date.swift in Sources */,
+				DA58BFD231AA9C8E27E25241308985CA /* Event.swift in Sources */,
+				BA644A4AD52F786F3AD720DE6FC0D8EB /* GetRFV.swift in Sources */,
+				90978830428DD22D2B745C733F3AB3C4 /* IngestTrackInfo.swift in Sources */,
+				B6AD5043F030E13400625FEBBCC48E8B /* MarfeelSDK-iOS-dummy.m in Sources */,
+				9944AFE160B2A2E23A028D46642AEEF9 /* MultimediaItem.swift in Sources */,
+				A39285AD37128984BDE7C9EFCDCD07CE /* MultimediaMetadata.swift in Sources */,
+				EF91C995A88E8B50ED9E356A046E887A /* MultimediaTrackInfo.swift in Sources */,
+				E984DC12302CB947E828EAA84E7AB8D7 /* PlaybackInfo.swift in Sources */,
+				7FC63AC7396785E85E67D4A3442BB1D8 /* PListStorage.swift in Sources */,
+				7F8062F979BE6E19A2F153B5B5EE2741 /* Rfv.swift in Sources */,
+				428C1A081A88DA34BF8F55AE62230EAB /* SendTik.swift in Sources */,
+				9DC92B93755840600C706FAA74E952D7 /* TikOperation.swift in Sources */,
+				0A04931BA8BEBD987CDCD5100E50B58C /* TikOperationFactory.swift in Sources */,
+				78B707DBDB9C137D87F4ED1CFEEC44F5 /* TrackInfo.swift in Sources */,
+				5D43F54CE19F3433A04B61183A3C1231 /* TrackingConfig.swift in Sources */,
+				D535B725A7560C7CCD5CEBDEA1954723 /* Type.swift in Sources */,
+				B48C626D57126C21F166318F7C8607C7 /* URLRequest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC28247CF3010419C18B0C36A1FD68D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7452E55F452EAEE6D871E748F5C8A5C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7B62E359E018BCA56DAF66EFECA68C3E /* Pods-CompassSDK-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BD234A3E52E5F80FEB8BC790857DCFC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,23 +1048,23 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		50C755E1207F6901BABA042B7C604C50 /* PBXTargetDependency */ = {
+		3C2BD31DB355B0AD16A5A3ADA2C3D9D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MarfeelSDK-iOS-marfeelsdk_apple_privacy";
 			target = 4BD68C28178D97A4DD85F9AE89868514 /* MarfeelSDK-iOS-marfeelsdk_apple_privacy */;
-			targetProxy = 18A5D15FB56C987CA6A292DAAA51C643 /* PBXContainerItemProxy */;
+			targetProxy = 125CB76599EF93D42E4AD3247ED00597 /* PBXContainerItemProxy */;
 		};
-		6E03555FB1B063BA75A3A2392C07FAB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "MarfeelSDK-iOS";
-			target = 061ED9BA07A1C062E749CDD1A32C45D4 /* MarfeelSDK-iOS */;
-			targetProxy = A95DBD65BC476327D60FD7E37663E7AF /* PBXContainerItemProxy */;
-		};
-		F7958F534CE1FF093EEAD5D8FB8E4C7A /* PBXTargetDependency */ = {
+		EC999E781F1CC27837A9D6C342A9AAFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftUIIntrospect;
 			target = FF94F6BC609DB21F0194205C23064AFC /* SwiftUIIntrospect */;
-			targetProxy = 84E8070C2732EDE36331D3C7E39CEC97 /* PBXContainerItemProxy */;
+			targetProxy = AF94BEE6ED2E458DE9807388D9F4139A /* PBXContainerItemProxy */;
+		};
+		F3071A5C7F393BA98E975D3432F6EE50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MarfeelSDK-iOS";
+			target = 061ED9BA07A1C062E749CDD1A32C45D4 /* MarfeelSDK-iOS */;
+			targetProxy = 61CAE584B52B6B1F950D9C42A260EB10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1013,7 +1108,7 @@
 		};
 		244886E36FED2B27AA53D5925A120167 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DD63F077FFAC7571E5781CC2C6803BE /* SwiftUIIntrospect.debug.xcconfig */;
+			baseConfigurationReference = 8E7B674F1ABB97EA549E8DA9040E03F0 /* SwiftUIIntrospect.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1048,7 +1143,7 @@
 		};
 		3DD1D39832257D4EA8D36C7B28334484 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A29DBF7AC336189D89EF34956E56408F /* MarfeelSDK-iOS.release.xcconfig */;
+			baseConfigurationReference = BC87E2481287A3DA944E62D4DCBCC876 /* MarfeelSDK-iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1119,23 +1214,6 @@
 			};
 			name = Debug;
 		};
-		65A4607B7CE1A6878307A3EC7FADD3BD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A29DBF7AC336189D89EF34956E56408F /* MarfeelSDK-iOS.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarfeelSDK-iOS";
-				IBSC_MODULE = MarfeelSDK_iOS;
-				INFOPLIST_FILE = "Target Support Files/MarfeelSDK-iOS/ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_NAME = marfeelsdk_apple_privacy;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		7B257982B905AB8F682082F103759AA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D94B65081850CC85B4C3117E0632773E /* Pods-CompassSDK.release.xcconfig */;
@@ -1173,6 +1251,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		892059E1F28800C9BD5E570D6E608B92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF50C3187E30A4335D963E8A3D4E1594 /* MarfeelSDK-iOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarfeelSDK-iOS";
+				IBSC_MODULE = MarfeelSDK_iOS;
+				INFOPLIST_FILE = "Target Support Files/MarfeelSDK-iOS/ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_NAME = marfeelsdk_apple_privacy;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
 		};
 		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1276,7 +1371,7 @@
 		};
 		985904FB9AFC64997AD815C9F00F2326 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D540AE68B3E7FE290FF0144A294188AD /* SwiftUIIntrospect.release.xcconfig */;
+			baseConfigurationReference = 6F1D9B63B881FD579C2C4B74AAAB5E86 /* SwiftUIIntrospect.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1312,7 +1407,7 @@
 		};
 		A27395D8C75231BBED8DCB19034A8A42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 683A5A050881CE856A3AD4E04F737BD0 /* MarfeelSDK-iOS.debug.xcconfig */;
+			baseConfigurationReference = FF50C3187E30A4335D963E8A3D4E1594 /* MarfeelSDK-iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1342,23 +1437,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		A8AF38DF4966ABD81FE5C81656CA1F46 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 683A5A050881CE856A3AD4E04F737BD0 /* MarfeelSDK-iOS.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarfeelSDK-iOS";
-				IBSC_MODULE = MarfeelSDK_iOS;
-				INFOPLIST_FILE = "Target Support Files/MarfeelSDK-iOS/ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_NAME = marfeelsdk_apple_privacy;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -1427,6 +1505,23 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
+		};
+		F0BE8194D0763D25CEA221274A2A57EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC87E2481287A3DA944E62D4DCBCC876 /* MarfeelSDK-iOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarfeelSDK-iOS";
+				IBSC_MODULE = MarfeelSDK_iOS;
+				INFOPLIST_FILE = "Target Support Files/MarfeelSDK-iOS/ResourceBundle-marfeelsdk_apple_privacy-MarfeelSDK-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_NAME = marfeelsdk_apple_privacy;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
 		};
 		F321C4184C70A6885F6C40AE239DF9AF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1506,6 +1601,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1AA1D6E63A243E3BB7A6D0F4FB72E40D /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS-marfeelsdk_apple_privacy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				892059E1F28800C9BD5E570D6E608B92 /* Debug */,
+				F0BE8194D0763D25CEA221274A2A57EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2B197264E245193C6E1A7A9A78414436 /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1538,15 +1642,6 @@
 			buildConfigurations = (
 				244886E36FED2B27AA53D5925A120167 /* Debug */,
 				985904FB9AFC64997AD815C9F00F2326 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B71F4A9E8A54222F83E194D44BA3E954 /* Build configuration list for PBXNativeTarget "MarfeelSDK-iOS-marfeelsdk_apple_privacy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A8AF38DF4966ABD81FE5C81656CA1F46 /* Debug */,
-				65A4607B7CE1A6878307A3EC7FADD3BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
