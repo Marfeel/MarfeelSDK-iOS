@@ -17,7 +17,7 @@ protocol ConversionsProvider: AnyObject {
 typealias DataBuilderCompletion = (_ res: Encodable) -> Void
 typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Encodable?
 
-class TikOperation: Operation {
+class TikOperation: Operation, @unchecked Sendable {
     private let dataBuilder: DataBuilder
     private let dispatchDate: Date
     private let tikUseCase: SendTikCuseCase
