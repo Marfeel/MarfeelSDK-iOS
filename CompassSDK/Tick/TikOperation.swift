@@ -39,7 +39,7 @@ class TikOperation: Operation {
         super.init()
     }
     
-    private var timer: Timer?
+    private var timer: DispatchSourceTimer?
     
     private var running: Bool = false {
         didSet {
@@ -59,12 +59,24 @@ class TikOperation: Operation {
     override func start() {
         guard !isCancelled else { return }
         running = true
-    
-        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [weak self] (timer) in
-            guard let self = self else { return }
+        
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
+        let timeInterval = dispatchDate.timeIntervalSinceNow
+        let deadline = DispatchTime.now() + timeInterval
+        
+        timer.schedule(deadline: deadline)
+        
+        timer.setEventHandler { [weak self] in
+            guard let self = self, !self.isCancelled else {
+                self?.finish()
+                return
+            }
             
             let track = { [weak self] (data: Encodable?) in
-                guard let self = self else { return }
+                guard let self = self, !self.isCancelled else {
+                    self?.finish()
+                    return
+                }
                 
                 let params = data?.params
                 
@@ -79,17 +91,20 @@ class TikOperation: Operation {
             if data != nil {
                 track(data)
             }
-        })
-        
-        RunLoop.main.add(self.timer!, forMode: .common)
+        }
+
+        self.timer = timer
+        timer.resume()
     }
     
     override func cancel() {
-        timer?.invalidate()
         finish()
+        super.cancel()
     }
     
     private func finish() {
+        timer?.cancel()
+        timer = nil
         running = false
     }
 }

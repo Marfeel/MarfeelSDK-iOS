@@ -340,7 +340,9 @@ private extension CompassTracker {
         trackInfo.currentDate = dispatchDate
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
-                getTrackingData(completion)
+                DispatchQueue.global(qos: .utility).async {
+                    self.getTrackingData(completion)
+                }
                 
                 return nil
             },
