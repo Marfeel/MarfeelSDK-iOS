@@ -82,6 +82,7 @@ public protocol CompassTracking: AnyObject {
     func removeUserSegment(_ name: String)
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
+    func getUserId() -> String
 }
 
 public class CompassTracker: Tracker {
@@ -294,6 +295,10 @@ extension CompassTracker: CompassTracking {
     
     public func setConsent(_ hasConsent: Bool) {
         storage.setConsent(hasConsent)
+    }
+    
+    public func getUserId() -> String {
+        return storage.userId
     }
 }
 
