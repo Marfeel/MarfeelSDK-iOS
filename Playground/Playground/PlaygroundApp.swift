@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarfeelSDK_iOS
 
 @main
 struct PlaygroundApp: App {
@@ -13,5 +14,9 @@ struct PlaygroundApp: App {
         WindowGroup {
             ContentView()
         }
+    }
+    
+    init() {
+        CompassTracker.initialize(accountId: 0, pageTechnology: 105)
     }
 }

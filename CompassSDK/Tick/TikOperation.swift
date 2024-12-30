@@ -17,7 +17,7 @@ protocol ConversionsProvider: AnyObject {
 typealias DataBuilderCompletion = (_ res: Encodable) -> Void
 typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Encodable?
 
-class TikOperation: Operation {
+class TikOperation: Operation, @unchecked Sendable {
     private let dataBuilder: DataBuilder
     private let dispatchDate: Date
     private let tikUseCase: SendTikCuseCase
@@ -36,11 +36,12 @@ class TikOperation: Operation {
         self.tikUseCase = tikUseCase
         self.path = path ?? ""
         self.contentType = contentType ?? ContentType.JSON
+        super.init()
     }
     
-    private var timer: Timer?
+    private var timer: DispatchSourceTimer?
     
-    private var runing: Bool = false {
+    private var running: Bool = false {
         didSet {
             willChangeValue(forKey: "isFinished")
             willChangeValue(forKey: "isExecuting")
@@ -49,39 +50,61 @@ class TikOperation: Operation {
         }
     }
     
-    override var isAsynchronous: Bool {true}
+    override var isAsynchronous: Bool { true }
     
-    override var isFinished: Bool {!runing}
+    override var isFinished: Bool { !running }
     
-    override var isExecuting: Bool {runing}
+    override var isExecuting: Bool { running }
     
     override func start() {
-        guard !isCancelled else {return}
-        runing = true
+        guard !isCancelled else { return }
+        running = true
         
-        self.timer = Timer(fire: self.dispatchDate, interval: 0, repeats: false, block: { [self] (timer) in
-            let track = { [self] (data: Encodable?) in
-                let params = data?.params
-               
-                if let params = params {
-                    tikUseCase.tik(path: path, type: contentType, params: params)
-                }
-                timer.invalidate()
-                runing = false
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
+        let timeInterval = dispatchDate.timeIntervalSinceNow
+        let deadline = DispatchTime.now() + timeInterval
+        
+        timer.schedule(deadline: deadline)
+        
+        timer.setEventHandler { [weak self] in
+            guard let self = self, !self.isCancelled else {
+                self?.finish()
+                return
             }
-            let data = dataBuilder(track)
+            
+            let track = { [weak self] (data: Encodable?) in
+                guard let self = self, !self.isCancelled else {
+                    self?.finish()
+                    return
+                }
+                
+                let params = data?.params
+                
+                if let params = params {
+                    self.tikUseCase.tik(path: self.path, type: self.contentType, params: params)
+                }
+                self.finish()
+            }
+            
+            let data = self.dataBuilder(track)
             
             if data != nil {
                 track(data)
             }
-        })
-        
-        RunLoop.current.add(self.timer!, forMode: .common)
-        RunLoop.current.run()
+        }
+
+        self.timer = timer
+        timer.resume()
     }
     
     override func cancel() {
-        timer?.invalidate()
-        runing = false
+        finish()
+        super.cancel()
+    }
+    
+    private func finish() {
+        timer?.cancel()
+        timer = nil
+        running = false
     }
 }

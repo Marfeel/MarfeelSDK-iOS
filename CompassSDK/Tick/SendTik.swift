@@ -18,7 +18,7 @@ struct TikApiCall: ApiCall {
     let baseUrl: URL?
     let type: ContentType
     
-    init(baseUrl: URL? = Bundle.main.compassEndpoint, params: [String : Any], path: String, type: ContentType) {
+    init(baseUrl: URL? = TrackingConfig.shared.endpoint, params: [String : Any], path: String, type: ContentType) {
         self.baseUrl = baseUrl
         self.params = params
         self.path = path

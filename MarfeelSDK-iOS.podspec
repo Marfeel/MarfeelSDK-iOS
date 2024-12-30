@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MarfeelSDK-iOS"
-  spec.version      = "2.6.0"
+  spec.version      = "2.11.0"
   spec.summary      = "iOS version of MarfeelSDK."
 
   # This description is used to generate tags and improve search results.
@@ -88,7 +88,8 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "CompassSDK", "CompassSDK/**/*.{swift}"
   spec.exclude_files = "Classes/Exclude"
-
+  spec.resource_bundles = { 'marfeelsdk_apple_privacy' => ['CompassSDK/Resources/PrivacyInfo.xcprivacy'] }
+  
   # spec.public_header_files = "Classes/**/*.h"
 
 

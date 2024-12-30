@@ -10,6 +10,8 @@ import UIKit
 
 private let TIK_PATH = "ingest.php"
 private let IOS_TECH = 3
+private let IOS_PRESSREADER_TECH = 12
+private let IOS_ALLOWED_TECHS = [IOS_TECH, IOS_PRESSREADER_TECH]
 
 enum CompassErrors: Error {
     case invalidArgument(String)
@@ -80,49 +82,68 @@ public protocol CompassTracking: AnyObject {
     func removeUserSegment(_ name: String)
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
+    func getUserId() -> String
 }
 
 public class CompassTracker: Tracker {
     public static let shared: CompassTracker = CompassTracker()
 
-    private let bundle: Bundle
+    private let config: TrackingConfig
     private let storage: CompassStorage
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
+    private let lifecyleNotifier: AppLifecycleNotifierUseCase
     
-    private lazy var accountId: Int? = {
-        bundle.compassAccountId
-    }()
-    
-    private lazy var pageTechnology: Int = {
-        let tech = bundle.pageTechnology ?? IOS_TECH
-        
-        guard tech > 100 || tech == IOS_TECH else {
-            print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
-            
-            return IOS_TECH
+    private var accountId: Int? {
+        get {
+            config.accountId
         }
+    }
+    
+    public static func initialize(accountId: Int, pageTechnology: Int? = nil, endpoint: String? = nil) {
+        let tracker = CompassTracker.shared
         
-        return tech
-    }()
+        tracker.config.override(accountId: accountId, pageTechnology: pageTechnology, endpoint: endpoint)
+        tracker.setDataFromConfig()
+    }
+    
+    private func setDataFromConfig() {
+        trackInfo.accountId = self.accountId
+        trackInfo.pageType = self.pageTechnology
+        trackInfo.compassVersion = self.config.version
+    }
+    
+    private var pageTechnology: Int? {
+        get  {
+            let tech = config.pageTechnology ?? IOS_TECH
+            
+            guard tech > 100 || IOS_ALLOWED_TECHS.contains(tech) else {
+                print(CompassErrors.invalidArgument("page technology value should be greater than 100"))
+                
+                return IOS_TECH
+            }
+            
+            return tech
+        }
+    }
 
-    init(bundle: Bundle = .main, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV()) {
-        self.bundle = bundle
+    init(config: TrackingConfig = TrackingConfig.shared, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV(), lifecycleNotifier: AppLifecycleNotifierUseCase = AppLifecycleNotifier()) {
+        self.config = config
         self.storage = storage
         self.tikOperationFactory = tikOperationFactory
         self.getRFV = getRFV
+        self.lifecyleNotifier = lifecycleNotifier
         storage.addVisit()
 
         super.init(queueName: "com.compass.sdk.ingest.operation.queue")
 
         trackInfo.firstVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
-        trackInfo.compassVersion = bundle.compassVersion
         trackInfo.userId = storage.userId
         trackInfo.sessionId = storage.sessionId
         
-        trackInfo.accountId = accountId
-        trackInfo.pageType = pageTechnology
+        setDataFromConfig()
+        configureAppLifecycleListeners()
     }
 
     private var deadline: Double {
@@ -145,17 +166,26 @@ public class CompassTracker: Tracker {
 
 extension CompassTracker: ScrollPercentProvider {
     func getScrollPercent(_ completion: @escaping (Float?) -> ()) {
-        guard  let scrollView = scrollView else {
+        guard let scrollView = scrollView else {
             completion(nil)
             return
         }
 
         DispatchQueue.main.async {
+            let contentHeight = scrollView.contentSize.height
+            let viewHeight = scrollView.frame.size.height
             let offset = scrollView.contentOffset.y
-            let scrolledDistance = offset + scrollView.contentInset.top
-            let percent = max(0, Float(min(1, scrolledDistance / scrollView.contentSize.height)))
+            let adjustedOffset = max(0, offset + scrollView.contentInset.top)
+            let maxScroll = max(0, contentHeight - viewHeight + scrollView.contentInset.bottom)
+            
+            guard maxScroll > 0 else {
+                completion(100)
+                return
+            }
+            
+            let percent = min(1, adjustedOffset / maxScroll)
             DispatchQueue.global(qos: .utility).async {
-                completion((percent * 100).rounded())
+                completion((Float(percent) * 100).rounded())
             }
         }
     }
@@ -266,6 +296,10 @@ extension CompassTracker: CompassTracking {
     public func setConsent(_ hasConsent: Bool) {
         storage.setConsent(hasConsent)
     }
+    
+    public func getUserId() -> String {
+        return storage.userId
+    }
 }
 
 extension CompassTracker: ConversionsProvider {
@@ -279,16 +313,19 @@ internal extension CompassTracker {
     func getTrackingData(_ completion: @escaping (IngestTrackInfo) -> ()) {
         getScrollPercent { [self] (scrollPercent) in
             getConversions { [self] (conversions) in
+                if ((scrollPercent ?? 0) > (self.trackInfo.scrollPercent ?? 0)) {
+                    self.trackInfo.scrollPercent = scrollPercent
+                }
+                
                 var finalTrackInfo = self.trackInfo
              
-                finalTrackInfo.scrollPercent = scrollPercent
                 finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
                 finalTrackInfo.userVars = storage.userVars
                 finalTrackInfo.sessionVars = storage.sessionVars
                 finalTrackInfo.pageVars = pageVars
                 finalTrackInfo.userSegments = storage.userSegments
                 finalTrackInfo.hasConsent = storage.hasConsent
-
+                
                 completion(finalTrackInfo)
            }
         }
@@ -308,7 +345,9 @@ private extension CompassTracker {
         trackInfo.currentDate = dispatchDate
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
-                getTrackingData(completion)
+                DispatchQueue.global(qos: .utility).async {
+                    self.getTrackingData(completion)
+                }
                 
                 return nil
             },
@@ -337,5 +376,20 @@ private extension CompassTracker {
         }
         
         return URL(string: "https://marfeelwhois.mrf.io/dynamic/\(accountId)/\(encodedPath)")
+    }
+}
+
+private extension CompassTracker {
+
+    private func configureAppLifecycleListeners() {
+        func onAppInactive() {
+            stopObserving()
+        }
+        
+        func onAppActive(){
+            doTik()
+        }
+        
+        self.lifecyleNotifier.listen(onForeground: onAppActive, onBackground: onAppInactive)
     }
 }

@@ -84,11 +84,11 @@ struct TrackInfo: Encodable {
     var hasConsent: Bool?
     
     private func dicToArray(_ vars: Vars?) -> [[String]] {
-        if (vars == nil) {
+        guard let vars = vars else {
             return []
         }
         
-        return vars!.keys.map({ [$0, vars![$0]!] })
+        return vars.map({ [$0.key, $0.value] })
     }
     
     public func encode(to encoder: Encoder) throws {
