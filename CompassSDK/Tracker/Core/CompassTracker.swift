@@ -147,7 +147,7 @@ public class CompassTracker: Tracker {
     }
 
     private var deadline: Double {
-        switch trackInfo.tik {
+        switch tick {
         case 0..<2: return 5
         case 2: return 10
         case 3..<20: return 15
@@ -156,6 +156,8 @@ public class CompassTracker: Tracker {
     }
     
     private var trackInfo = IngestTrackInfo()
+    
+    private var tick = 0
 
     private var scrollView: UIScrollView?
 
@@ -310,24 +312,26 @@ extension CompassTracker: ConversionsProvider {
 }
 
 internal extension CompassTracker {
-    func getTrackingData(_ completion: @escaping (IngestTrackInfo) -> ()) {
-        getScrollPercent { [self] (scrollPercent) in
-            getConversions { [self] (conversions) in
-                if ((scrollPercent ?? 0) > (self.trackInfo.scrollPercent ?? 0)) {
-                    self.trackInfo.scrollPercent = scrollPercent
-                }
-                
-                var finalTrackInfo = self.trackInfo
-             
-                finalTrackInfo.conversions = conversions.isEmpty ? nil : conversions
-                finalTrackInfo.userVars = storage.userVars
-                finalTrackInfo.sessionVars = storage.sessionVars
-                finalTrackInfo.pageVars = pageVars
-                finalTrackInfo.userSegments = storage.userSegments
-                finalTrackInfo.hasConsent = storage.hasConsent
-                
-                completion(finalTrackInfo)
-           }
+    func getTrackingData(for conversion: String? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
+        getScrollPercent { [self] scrollPercent in
+            var finalTrackInfo = self.trackInfo
+            
+            if let scrollPercent = scrollPercent, scrollPercent > (finalTrackInfo.scrollPercent ?? 0) {
+                finalTrackInfo.scrollPercent = scrollPercent
+            }
+            
+            if let conversion = conversion {
+                finalTrackInfo.conversions = [conversion]
+            }
+            
+            finalTrackInfo.userVars = storage.userVars
+            finalTrackInfo.sessionVars = storage.sessionVars
+            finalTrackInfo.pageVars = pageVars
+            finalTrackInfo.userSegments = storage.userSegments
+            finalTrackInfo.hasConsent = storage.hasConsent
+            finalTrackInfo.tik = tick!
+            
+            completion(finalTrackInfo)
         }
     }
     
@@ -340,24 +344,49 @@ internal extension CompassTracker {
 
 private extension CompassTracker {
     func doTik() {
-        guard trackInfo.pageUrl != nil else {return}
-        let dispatchDate = Date(timeIntervalSinceNow: deadline)
-        trackInfo.currentDate = dispatchDate
+        guard trackInfo.pageUrl != nil else { return }
+        
+        getConversions { [self] conversions in
+            let dispatchDate = Date(timeIntervalSinceNow: deadline)
+            
+            let dispatchGroup = DispatchGroup()
+            
+            if conversions.isEmpty {
+                dispatchGroup.enter()
+                createOperation(conversion: nil, dispatchDate: dispatchDate, dispatchGroup: dispatchGroup)
+            } else {
+                for conversion in conversions {
+                    dispatchGroup.enter()
+                    createOperation(conversion: conversion, dispatchDate: dispatchDate, dispatchGroup: dispatchGroup)
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                self.doTik()
+            }
+        }
+    }
+    
+    private func createOperation(conversion: String?, dispatchDate: Date, dispatchGroup: DispatchGroup) {
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
                 DispatchQueue.global(qos: .utility).async {
-                    self.getTrackingData(completion)
+                    if let conversion = conversion {
+                        self.getTrackingData(for: conversion, tick: self.tick, completion)
+                    } else {
+                        self.getTrackingData(for: nil, tick: self.tick, completion)
+                    }
+                    self.tick += 1
                 }
-                
                 return nil
             },
             dispatchDate: dispatchDate,
             path: TIK_PATH,
             contentType: ContentType.FORM
         )
-        observeFinish(for: operation) { [self] in
-            trackInfo.tik = trackInfo.tik + 1
-            self.doTik()
+        
+        observeFinish(for: operation) {
+            dispatchGroup.leave()
         }
         operationQueue.addOperation(operation)
     }
@@ -367,6 +396,7 @@ private extension CompassTracker {
         operationQueue.cancelAllOperations()
         trackInfo.pageUrl = pageName
         pageVars.removeAll()
+        tick = 0
         CompassTrackerMultimedia.shared.reset()
     }
     
