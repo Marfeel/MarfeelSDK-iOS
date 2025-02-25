@@ -25,7 +25,7 @@ class BlogPostsStore: ObservableObject {
             """,
             featured: true,
             url: "http://dev.marfeel.co/2022/11/25/article-with-video-html5/",
-            videoId: "eeiOGg17YNQ"
+            videoId: "UbjLtXKEE-I"
         ),
         BlogPost(
             title: "Post 2 Title",
@@ -43,7 +43,7 @@ class BlogPostsStore: ObservableObject {
             """,
             featured: false,
             url: "http://dev.marfeel.co/2022/07/29/hola-1/",
-            videoId: "d-6Iqnp2Ja8"
+            videoId: "UbjLtXKEE-I"
         ),
         BlogPost(
             title: "Post 3 Title",
@@ -60,7 +60,7 @@ class BlogPostsStore: ObservableObject {
             """,
             featured: false,
             url: "http://dev.marfeel.co/2022/07/29/corrupti-sit-vero-asperiores-ratione-non-velit/",
-            videoId: "d-6Iqnp2Ja8"
+            videoId: "UbjLtXKEE-I"
         ),
         BlogPost(
             title: "Post 4 Title",
@@ -78,7 +78,7 @@ class BlogPostsStore: ObservableObject {
             """,
             featured: false,
             url: "http://dev.marfeel.co/2022/06/28/consectetur-consequuntur-quis-nobis-quia/",
-            videoId: "eeiOGg17YNQ"
+            videoId: "UbjLtXKEE-I"
         )
     ]
 }
