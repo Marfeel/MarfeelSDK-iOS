@@ -32,7 +32,16 @@ extension ApiCall {
         }
         
         request.addValue(type.rawValue, forHTTPHeaderField: "Content-Type")
+        request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
+
         return request
+    }
+    
+    private var userAgent: String {
+        let codeVersion = Bundle.compassSDK?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
+        let deviceType = UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "mobile"
+        
+        return "Marfeel-iOS-SDK/\(codeVersion) (\(UIDevice.current.model)) \(deviceType)"
     }
 }
 
