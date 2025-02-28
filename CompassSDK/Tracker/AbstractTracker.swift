@@ -33,18 +33,24 @@ public class Tracker {
         let opId = getOperationId(for: operation)
 
         finishObserver[opId] = operation.observe(\Operation.isFinished, options: .new) { [weak self] (operation, change) in
-            guard !operation.isCancelled, operation.isFinished else {return}
-            
-            self?.finishObserver.removeValue(forKey: opId)
+            guard !operation.isCancelled, operation.isFinished else { return }
+           
+            self?.invalidateObserver(for: opId)
             cb?()
         }
     }
     
+    private func invalidateObserver(for opId: Int) {
+        finishObserver[opId]?.invalidate()
+        finishObserver.removeValue(forKey: opId)
+    }
+    
     internal func stopObserving(for operation: Operation) {
-        finishObserver.removeValue(forKey: getOperationId(for: operation))
+        invalidateObserver(for: getOperationId(for: operation))
     }
     
     internal func stopObserving() {
+        finishObserver.values.forEach { $0.invalidate() }
         finishObserver.removeAll()
     }
 }

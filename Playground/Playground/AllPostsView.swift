@@ -28,6 +28,7 @@ struct AllPosts: View {
                 scrollView = $0
              }
             .onAppear(perform: {
+                CompassTracker.shared.setLandingPage("landing page")
                 CompassTracker.shared.setUserType(.logged)
                 CompassTracker.shared.addUserSegment("segment1")
                 CompassTracker.shared.addUserSegment("segment1")

@@ -357,7 +357,9 @@ private extension CompassTracker {
     func doTik() {
         guard trackInfo.pageUrl != nil else { return }
         
-        getConversions { [self] conversions in
+        getConversions { [weak self] conversions in
+            guard let self = self else { return }
+            
             let dispatchDate = Date(timeIntervalSinceNow: deadline)
             
             let dispatchGroup = DispatchGroup()
