@@ -13,6 +13,7 @@ struct IngestTrackInfo: Encodable {
         case visitDuration = "l"
         case scrollPercent = "sc"
         case implodedConversions = "conv"
+        case landingPage = "lp"
     }
     
     private var trackInfo = TrackInfo()
@@ -26,6 +27,8 @@ struct IngestTrackInfo: Encodable {
     var scrollPercent: Float?
     private var implodedConversions: String?
     
+    var landingPage: String?
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
@@ -34,6 +37,7 @@ struct IngestTrackInfo: Encodable {
         try container.encodeIfPresent(visitDuration, forKey: .visitDuration)
         try container.encodeIfPresent(scrollPercent, forKey: .scrollPercent)
         try container.encodeIfPresent(implodedConversions, forKey: .implodedConversions)
+        try container.encodeIfPresent(landingPage, forKey: .landingPage)
     }
 }
 

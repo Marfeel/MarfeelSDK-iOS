@@ -83,6 +83,8 @@ public protocol CompassTracking: AnyObject {
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
     func getUserId() -> String
+    func setLandingPage(_ landingPage: String)
+    func setLandingPage(_ landingPage: URL)
 }
 
 public class CompassTracker: Tracker {
@@ -194,6 +196,14 @@ extension CompassTracker: ScrollPercentProvider {
 }
 
 extension CompassTracker: CompassTracking {
+    public func setLandingPage(_ landingPage: String) {
+        storage.setLandingPage(landingPage)
+    }
+    
+    public func setLandingPage(_ landingPage: URL) {
+        storage.setLandingPage(landingPage.absoluteString)
+    }
+    
     @available(*, deprecated, renamed: "setSiteUserId")
     public func setUserId(_ userId: String?) {
         setSiteUserId(userId)
@@ -329,6 +339,7 @@ internal extension CompassTracker {
             finalTrackInfo.pageVars = pageVars
             finalTrackInfo.userSegments = storage.userSegments
             finalTrackInfo.hasConsent = storage.hasConsent
+            finalTrackInfo.landingPage = storage.landingPage
             finalTrackInfo.tik = tick!
             
             completion(finalTrackInfo)
