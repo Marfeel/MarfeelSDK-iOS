@@ -18,4 +18,8 @@ extension Bundle {
     
     var pageTechnology: Int? { object(forInfoDictionaryKey: "COMPASS_PAGE_TYPE") as? Int }
     
+    static var compassSDK: Bundle? {
+        return Bundle(for: CompassTracker.self)
+    }
+    
 }

@@ -16,10 +16,11 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MarfeelSDK-iOS"
-  spec.version      = "2.12.1"
+  spec.version      = "2.13.0"
   spec.summary      = "iOS version of MarfeelSDK."
 
-  # This description is used to generate tags and improve search results.
+
+  # This description is used to generate tags and improve searc h results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
