@@ -18,6 +18,7 @@ protocol CompassStorage {
     var userVars: Vars { get }
     var userSegments: [String] { get }
     var hasConsent: Bool? { get }
+    var landingPage: String? { get }
     func addSessionVar(name: String, value: String)
     func addUserVar(name: String, value: String)
     func addUserSegment(_ name: String)
@@ -25,6 +26,7 @@ protocol CompassStorage {
     func removeUserSegment(_ name: String)
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
+    func setLandingPage(_ landingPage: String)
 }
 
 enum Store: String {
@@ -45,8 +47,9 @@ class PListCompassStorage: PListStorage {
         var sessionVars: Vars?
         var userSegments: [String]?
         var hasConsent: Bool?
+        var landingPage: String?
 
-        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil)}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil, landingPage: nil)}
     }
 
     init() {
@@ -95,6 +98,7 @@ extension PListCompassStorage: CompassStorage {
             model?.sessionId = sessionId
             model?.sessionExpirationDate = Date().adding(minutes: 30)
             model?.sessionVars = Vars()
+            model?.landingPage = nil
             
             return sessionId
         }
@@ -216,6 +220,14 @@ extension PListCompassStorage: CompassStorage {
         }
 
         return firstVisit
+    }
+    
+    var landingPage: String? {
+        return model?.landingPage
+    }
+    
+    func setLandingPage(_ landingPage: String) {
+        model?.landingPage = landingPage
     }
 }
         
