@@ -25,7 +25,7 @@ class TikOperation: Operation, @unchecked Sendable {
     private let contentType: ContentType
     
     private var timer: DispatchSourceTimer?
-    private let lock = NSLock()
+    private let lock = NSRecursiveLock()
 
     init(
         dataBuilder: @escaping DataBuilder,
@@ -50,13 +50,20 @@ class TikOperation: Operation, @unchecked Sendable {
             return _running
         }
         set {
+            var didChange = false
             lock.lock()
-            willChangeValue(forKey: "isFinished")
-            willChangeValue(forKey: "isExecuting")
-            _running = newValue
-            didChangeValue(forKey: "isFinished")
-            didChangeValue(forKey: "isExecuting")
+            if _running != newValue {
+                willChangeValue(forKey: "isFinished")
+                willChangeValue(forKey: "isExecuting")
+                _running = newValue
+                didChange = true
+            }
             lock.unlock()
+            
+            if didChange {
+                didChangeValue(forKey: "isFinished")
+                didChangeValue(forKey: "isExecuting")
+            }
         }
     }
 

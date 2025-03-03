@@ -97,8 +97,6 @@ private extension CompassTrackerMultimedia {
                             tik: tik
                         ))
                     }
-
-                    return nil
                 },
                 dispatchDate: dispatchDate,
                 path: TIK_PATH,
