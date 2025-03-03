@@ -357,7 +357,9 @@ private extension CompassTracker {
     func doTik() {
         guard trackInfo.pageUrl != nil else { return }
         
-        getConversions { [self] conversions in
+        getConversions { [weak self] conversions in
+            guard let self = self else { return }
+            
             let dispatchDate = Date(timeIntervalSinceNow: deadline)
             
             let dispatchGroup = DispatchGroup()
@@ -389,7 +391,6 @@ private extension CompassTracker {
                     }
                     self.tick += 1
                 }
-                return nil
             },
             dispatchDate: dispatchDate,
             path: TIK_PATH,
@@ -404,7 +405,7 @@ private extension CompassTracker {
 
     func restart(pageName: String?) {
         stopObserving()
-        operationQueue.cancelAllOperations()
+        operationQueue.operations.forEach{ $0.cancel() }
         trackInfo.pageUrl = pageName
         pageVars.removeAll()
         tick = 0

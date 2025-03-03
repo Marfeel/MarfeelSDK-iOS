@@ -15,7 +15,7 @@ protocol ConversionsProvider: AnyObject {
     func getConversions(_ completion: @escaping ([String]) -> ())
 }
 typealias DataBuilderCompletion = (_ res: Encodable) -> Void
-typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Encodable?
+typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Void
 
 class TikOperation: Operation, @unchecked Sendable {
     private let dataBuilder: DataBuilder
@@ -24,6 +24,9 @@ class TikOperation: Operation, @unchecked Sendable {
     private let path: String
     private let contentType: ContentType
     
+    private var timer: DispatchSourceTimer?
+    private let lock = NSRecursiveLock()
+
     init(
         dataBuilder: @escaping DataBuilder,
         dispatchDate: Date,
@@ -39,31 +42,47 @@ class TikOperation: Operation, @unchecked Sendable {
         super.init()
     }
     
-    private var timer: DispatchSourceTimer?
-    
-    private var running: Bool = false {
-        didSet {
-            willChangeValue(forKey: "isFinished")
-            willChangeValue(forKey: "isExecuting")
-            didChangeValue(forKey: "isFinished")
-            didChangeValue(forKey: "isExecuting")
+    private var _running: Bool = false
+    private var running: Bool {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _running
+        }
+        set {
+            var didChange = false
+            lock.lock()
+            if _running != newValue {
+                willChangeValue(forKey: "isFinished")
+                willChangeValue(forKey: "isExecuting")
+                _running = newValue
+                didChange = true
+            }
+            lock.unlock()
+            
+            if didChange {
+                didChangeValue(forKey: "isFinished")
+                didChangeValue(forKey: "isExecuting")
+            }
         }
     }
-    
+
     override var isAsynchronous: Bool { true }
-    
     override var isFinished: Bool { !running }
-    
     override var isExecuting: Bool { running }
     
     override func start() {
-        guard !isCancelled else { return }
+        guard !isCancelled else {
+            finish()
+            return
+        }
+        
         running = true
         
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
         let timeInterval = dispatchDate.timeIntervalSinceNow
-        let deadline = DispatchTime.now() + timeInterval
-        
+        let deadline = DispatchTime.now() + max(timeInterval, 0)
+
         timer.schedule(deadline: deadline)
         
         timer.setEventHandler { [weak self] in
@@ -86,11 +105,7 @@ class TikOperation: Operation, @unchecked Sendable {
                 self.finish()
             }
             
-            let data = self.dataBuilder(track)
-            
-            if data != nil {
-                track(data)
-            }
+           self.dataBuilder(track)
         }
 
         self.timer = timer
@@ -98,11 +113,17 @@ class TikOperation: Operation, @unchecked Sendable {
     }
     
     override func cancel() {
-        finish()
         super.cancel()
+        finish()
     }
     
     private func finish() {
+        lock.lock()
+        defer { lock.unlock() }
+
+        guard running else { return }
+        
+        timer?.setEventHandler {} 
         timer?.cancel()
         timer = nil
         running = false
