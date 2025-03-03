@@ -10,6 +10,7 @@ import Foundation
 public class Tracker {
     private let queueName: String
     private var finishObserver: [Int: NSKeyValueObservation] = [:]
+    private let observerLock = NSLock()
 
     init(queueName: String) {
         self.queueName = queueName
@@ -32,6 +33,8 @@ public class Tracker {
     internal func observeFinish(for operation: Operation, cb: (() -> Void)?) {
         let opId = getOperationId(for: operation)
 
+        observerLock.lock()
+        defer { observerLock.unlock() }
         finishObserver[opId] = operation.observe(\Operation.isFinished, options: .new) { [weak self] (operation, change) in
             guard !operation.isCancelled, operation.isFinished else { return }
            
@@ -41,6 +44,8 @@ public class Tracker {
     }
     
     private func invalidateObserver(for opId: Int) {
+        observerLock.lock()
+        defer { observerLock.unlock() }
         finishObserver[opId]?.invalidate()
         finishObserver.removeValue(forKey: opId)
     }
@@ -50,6 +55,8 @@ public class Tracker {
     }
     
     internal func stopObserving() {
+        observerLock.lock()
+        defer { observerLock.unlock() }
         finishObserver.values.forEach { $0.invalidate() }
         finishObserver.removeAll()
     }
