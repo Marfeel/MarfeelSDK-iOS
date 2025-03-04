@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ContentType: String, Codable {
     case JSON = "application/json; charset=utf-8"
