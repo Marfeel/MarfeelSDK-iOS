@@ -408,6 +408,7 @@ private extension CompassTracker {
         operationQueue.operations.forEach{ $0.cancel() }
         trackInfo.pageUrl = pageName
         pageVars.removeAll()
+        trackInfo.sessionId = storage.sessionId
         tick = 0
         CompassTrackerMultimedia.shared.reset()
     }

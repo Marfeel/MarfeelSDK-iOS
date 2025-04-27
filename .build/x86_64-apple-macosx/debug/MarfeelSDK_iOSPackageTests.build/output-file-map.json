@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/master.swiftdeps"
+  },
+  "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.d",
+    "object": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.swiftdeps"
+  }
+}

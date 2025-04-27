@@ -1,0 +1,23 @@
+{
+  "": {
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/master.swiftdeps"
+  },
+  "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKMultimediaTests.swift": {
+    "dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.d",
+    "object": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.swift.o",
+    "swiftmodule": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.swiftdeps"
+  },
+  "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKTests.swift": {
+    "dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.d",
+    "object": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.swift.o",
+    "swiftmodule": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.swiftdeps"
+  },
+  "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/Mocks.swift": {
+    "dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.d",
+    "object": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.swift.o",
+    "swiftmodule": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks~partial.swiftmodule",
+    "swift-dependencies": "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.swiftdeps"
+  }
+}

@@ -1,0 +1,6 @@
+framework module MarfeelSDK_iOS {
+  umbrella header "MarfeelSDK-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

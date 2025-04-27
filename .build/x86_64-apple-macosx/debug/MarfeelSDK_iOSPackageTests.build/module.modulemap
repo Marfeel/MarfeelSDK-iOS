@@ -1,0 +1,4 @@
+module MarfeelSDK_iOSPackageTests {
+    header "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/MarfeelSDK-iOSPackageTests-Swift.h"
+    requires objc
+}

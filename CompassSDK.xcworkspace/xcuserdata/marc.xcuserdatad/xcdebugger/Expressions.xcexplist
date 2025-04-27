@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CompassTracker.screenUrl(_:):CompassTracker.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "&quot;https://marfeelwhois.mrf.io/dynamic/\(accountId)/\(encodedPath)&quot;">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in YouTubeView.makeUIView(context:):YoutubeView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.sessionVars.getter:CompassStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.addUserVar(name:value:):CompassStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in GetRFV.fetch(userId:account:_:):GetRFV.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.addSessionVar(name:value:):CompassStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.loadModel():CompassStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "modelV1.suid">
+            </PersistentString>
+            <PersistentString
+               value = "modelV1.userId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in TikOperation.start():TikOperation.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ApiCall.request.getter:ApiRouter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "request.httpBody">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.model.willset:CompassStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newValue?.hasConsent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CompassTrackerMultimedia.doTick(_:):CompassTrackerMultimedia.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in YouTubeView.makeUIView(context:):YoutubeView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "YouTubeView.updateUIView(_:context:):YoutubeView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ApiRouter.call(from:_:):ApiRouter.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CompassSDKTests.testShouldSendTik():CompassSDKTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "data.conversions">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ApiRouter.request&lt;&#x3c4;_0_0&gt;(from:_:):ApiRouter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "String(decoding: data, as: UTF-8.self)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TrackInfo.encode(to:):TrackInfo.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "[].description">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GetRFV.fetch(userId:account:_:):GetRFV.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.model.didset:CompassStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TrackInfo.dicToArray(_:):TrackInfo.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "vars.keys">
+            </PersistentString>
+            <PersistentString
+               value = "vars!.keys.map({ [$0, vars![$0]!] })">
+            </PersistentString>
+            <PersistentString
+               value = "vars == vars2">
+            </PersistentString>
+            <PersistentString
+               value = "[&quot;a&quot;] == [&quot;a&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "self.userVars == vars2">
+            </PersistentString>
+            <PersistentString
+               value = "vars.map({ [$0.key, $0.value] })">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in URLRequest.encodeParameters(parameters:):URLRequest.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "value.componentsJoined(by: &quot;,&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PListStorage.remove(filename:):PListStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in CompassTracker.getTrackingData(_:):CompassTracker.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "finalTrackInfo == trackInfo">
+            </PersistentString>
+            <PersistentString
+               value = "finalTrackInfo.pageVars == pageVars">
+            </PersistentString>
+            <PersistentString
+               value = "trackInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PListCompassStorage.init():CompassStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = ".empty">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

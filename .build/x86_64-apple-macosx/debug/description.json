@@ -1,0 +1,1038 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.xctest/Contents/MacOS/MarfeelSDK-iOSPackageTests",
+      "packagePath" : "/Users/marc/mrf/MarfeelSDK-iOS",
+      "productName" : "MarfeelSDK-iOSPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.MarfeelSDK-iOS-x86_64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/sources",
+      "importPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Communications/ApiRouter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Bundle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Codable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Date.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/URLRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Lifecycle/AppLifecycleNotifier.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/GetRFV.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/Rfv.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/CompassStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/PListStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/SendTik.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperationFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/AbstractTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/CompassTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/IngestTrackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/TrackingConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Event.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/PlaybackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Type.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/TrackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "MarfeelSDK_iOS",
+      "moduleOutputPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOS.swiftmodule",
+      "objects" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/ApiRouter.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Bundle.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Codable.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Date.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/URLRequest.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AppLifecycleNotifier.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/GetRFV.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Rfv.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassStorage.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PListStorage.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/SendTik.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperation.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperationFactory.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AbstractTracker.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTracker.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/IngestTrackInfo.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackingConfig.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTrackerMultimedia.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Event.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaItem.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaMetadata.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaTrackInfo.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PlaybackInfo.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Type.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackInfo.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx10.13",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MarfeelSDK-iOS-Swift.h",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/ApiRouter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Bundle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Codable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Date.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/URLRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AppLifecycleNotifier.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/GetRFV.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Rfv.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PListStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/SendTik.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperationFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AbstractTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/IngestTrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackingConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTrackerMultimedia.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Event.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaMetadata.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaTrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PlaybackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Type.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOS.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Communications/ApiRouter.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Bundle.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Codable.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Date.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/URLRequest.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Lifecycle/AppLifecycleNotifier.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/GetRFV.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/Rfv.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/CompassStorage.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/PListStorage.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/SendTik.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperation.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperationFactory.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/AbstractTracker.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/CompassTracker.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/IngestTrackInfo.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/TrackingConfig.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Event.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaItem.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/PlaybackInfo.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Type.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/TrackInfo.swift"
+      ],
+      "tempsPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.MarfeelSDK-iOSPackageTests-x86_64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/sources",
+      "importPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOSTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "MarfeelSDK_iOSPackageTests",
+      "moduleOutputPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOSPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx10.13",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/MarfeelSDK-iOSPackageTests-Swift.h",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOSPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.MarfeelSDK-iOSTests-x86_64-apple-macosx14.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/sources",
+      "importPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKMultimediaTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/Mocks.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOS.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "MarfeelSDK_iOSTests",
+      "moduleOutputPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOSTests.swiftmodule",
+      "objects" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.swift.o",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules/MarfeelSDK_iOSTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKMultimediaTests.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKTests.swift",
+        "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/Mocks.swift"
+      ],
+      "tempsPath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "MarfeelSDK_iOS" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "MarfeelSDK_iOS",
+      "-incremental",
+      "-c",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Communications/ApiRouter.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Bundle.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Codable.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Date.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/URLRequest.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Lifecycle/AppLifecycleNotifier.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/GetRFV.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/Rfv.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/CompassStorage.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/PListStorage.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/SendTik.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperation.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperationFactory.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/AbstractTracker.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/CompassTracker.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/IngestTrackInfo.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/TrackingConfig.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Event.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaItem.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/PlaybackInfo.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Type.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/TrackInfo.swift",
+      "-I",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx10.13",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MarfeelSDK-iOS-Swift.h",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "MarfeelSDK_iOSPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "MarfeelSDK_iOSPackageTests",
+      "-incremental",
+      "-c",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx10.13",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/MarfeelSDK-iOSPackageTests-Swift.h",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "MarfeelSDK_iOSTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "MarfeelSDK_iOSTests",
+      "-incremental",
+      "-c",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKMultimediaTests.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKTests.swift",
+      "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/Mocks.swift",
+      "-I",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/Modules",
+      "-target",
+      "x86_64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "MarfeelSDK_iOS" : [
+
+    ],
+    "MarfeelSDK_iOSPackageTests" : [
+      "MarfeelSDK_iOSTests",
+      "MarfeelSDK_iOS"
+    ],
+    "MarfeelSDK_iOSTests" : [
+      "MarfeelSDK_iOS"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "writeCommands" : {
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Communications/ApiRouter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Bundle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Codable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/Date.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Extensions/URLRequest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Lifecycle/AppLifecycleNotifier.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/GetRFV.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/RFV/Rfv.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/CompassStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Storage/PListStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/SendTik.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tick/TikOperationFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/AbstractTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/CompassTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/IngestTrackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Core/TrackingConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/CompassTrackerMultimedia.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Event.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaMetadata.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/MultimediaTrackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/PlaybackInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/Multimedia/Type.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDK/Tracker/TrackInfo.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/sources"
+    },
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/sources"
+    },
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKMultimediaTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/CompassSDKTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/CompassSDKTests/Mocks.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/sources"
+    },
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AbstractTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/ApiRouter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/AppLifecycleNotifier.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Bundle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Codable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/CompassTrackerMultimedia.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Date.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Event.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/GetRFV.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/IngestTrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaMetadata.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MultimediaTrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PListStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/PlaybackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Rfv.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/SendTik.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TikOperationFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/TrackingConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/Type.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/URLRequest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKMultimediaTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/CompassSDKTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOSTests.build/Mocks.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK-iOSPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

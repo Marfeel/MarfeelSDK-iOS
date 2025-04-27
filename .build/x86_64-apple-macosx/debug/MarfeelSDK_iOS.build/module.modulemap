@@ -1,0 +1,4 @@
+module MarfeelSDK_iOS {
+    header "/Users/marc/mrf/MarfeelSDK-iOS/.build/x86_64-apple-macosx/debug/MarfeelSDK_iOS.build/MarfeelSDK-iOS-Swift.h"
+    requires objc
+}
