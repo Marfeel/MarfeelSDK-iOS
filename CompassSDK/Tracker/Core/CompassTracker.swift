@@ -61,10 +61,10 @@ public protocol CompassTracking: AnyObject {
     func startPageView(url: URL)
     @available(*, deprecated, renamed: "trackNewPage")
     func startPageView(url: URL, scrollView: UIScrollView?)
-    func trackNewPage(url: URL)
-    func trackNewPage(url: URL, scrollView: UIScrollView?)
-    func trackScreen(_ name: String)
-    func trackScreen(name: String, scrollView: UIScrollView?)
+    func trackNewPage(url: URL, rs: String?)
+    func trackNewPage(url: URL, scrollView: UIScrollView?, rs: String?)
+    func trackScreen(_ name: String, rs: String?)
+    func trackScreen(name: String, scrollView: UIScrollView?, rs: String?)
     func stopTracking()
     func getRFV(_ completion: @escaping (Rfv?) -> ())
     @available(*, deprecated, renamed: "setSiteUserId")
@@ -83,7 +83,7 @@ public protocol CompassTracking: AnyObject {
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
     func getUserId() -> String
-    func setLandingPage(_ landingPage: String)
+    func setLandingPage(_ landingPage: String?)
     func setLandingPage(_ landingPage: URL)
 }
 
@@ -196,7 +196,7 @@ extension CompassTracker: ScrollPercentProvider {
 }
 
 extension CompassTracker: CompassTracking {
-    public func setLandingPage(_ landingPage: String) {
+    public func setLandingPage(_ landingPage: String?) {
         storage.setLandingPage(landingPage)
     }
     
@@ -237,30 +237,30 @@ extension CompassTracker: CompassTracking {
         trackNewPage(url: url)
     }
 
-    public func trackNewPage(url: URL, scrollView: UIScrollView?) {
+    public func trackNewPage(url: URL, scrollView: UIScrollView?, rs: String? = nil) {
         self.scrollView = scrollView
-        self.trackNewPage(url: url)
+        self.trackNewPage(url: url, rs: rs)
     }
 
-    public func trackNewPage(url: URL) {
-        restart(pageName: url.absoluteString)
+    public func trackNewPage(url: URL, rs: String? = nil) {
+        restart(pageName: url.absoluteString, rs: rs)
         doTik()
     }
     
-    public func trackScreen(_ name: String) {
+    public func trackScreen(_ name: String, rs: String? = nil) {
         guard let url = screenUrl(name) else {
             return
         }
         
-        trackNewPage(url: url)
+        trackNewPage(url: url, rs: rs)
     }
     
-    public func trackScreen(name: String, scrollView: UIScrollView?) {
+    public func trackScreen(name: String, scrollView: UIScrollView?, rs: String? = nil) {
         guard let url = screenUrl(name) else {
             return
         }
         
-        trackNewPage(url: url, scrollView: scrollView)
+        trackNewPage(url: url, scrollView: scrollView, rs: rs)
     }
 
     public func stopTracking() {
@@ -403,10 +403,11 @@ private extension CompassTracker {
         operationQueue.addOperation(operation)
     }
 
-    func restart(pageName: String?) {
+    func restart(pageName: String?, rs: String? = nil) {
         stopObserving()
         operationQueue.operations.forEach{ $0.cancel() }
         trackInfo.pageUrl = pageName
+        trackInfo.recirculationSource = rs
         pageVars.removeAll()
         trackInfo.sessionId = storage.sessionId
         tick = 0
