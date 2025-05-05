@@ -26,7 +26,7 @@ protocol CompassStorage {
     func removeUserSegment(_ name: String)
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
-    func setLandingPage(_ landingPage: String)
+    func setLandingPage(_ landingPage: String?)
 }
 
 enum Store: String {
@@ -226,7 +226,7 @@ extension PListCompassStorage: CompassStorage {
         return model?.landingPage
     }
     
-    func setLandingPage(_ landingPage: String) {
+    func setLandingPage(_ landingPage: String?) {
         model?.landingPage = landingPage
     }
 }

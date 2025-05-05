@@ -25,7 +25,8 @@ class BlogPostsStore: ObservableObject {
             """,
             featured: true,
             url: "http://dev.marfeel.co/2022/11/25/article-with-video-html5/",
-            videoId: "UbjLtXKEE-I"
+            videoId: "UbjLtXKEE-I",
+            rs: "recirculation source"
         ),
         BlogPost(
             title: "Post 2 Title",

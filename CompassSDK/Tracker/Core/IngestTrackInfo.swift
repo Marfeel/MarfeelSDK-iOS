@@ -14,6 +14,8 @@ struct IngestTrackInfo: Encodable {
         case scrollPercent = "sc"
         case implodedConversions = "conv"
         case landingPage = "lp"
+        case cc = "cc"
+        case recirculationSoruce = "rs"
     }
     
     private var trackInfo = TrackInfo()
@@ -28,6 +30,7 @@ struct IngestTrackInfo: Encodable {
     private var implodedConversions: String?
     
     var landingPage: String?
+    var recirculationSource: String?
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -38,6 +41,8 @@ struct IngestTrackInfo: Encodable {
         try container.encodeIfPresent(scrollPercent, forKey: .scrollPercent)
         try container.encodeIfPresent(implodedConversions, forKey: .implodedConversions)
         try container.encodeIfPresent(landingPage, forKey: .landingPage)
+        try container.encodeIfPresent(cc, forKey: .cc)
+        try container.encodeIfPresent(recirculationSource, forKey: .recirculationSoruce)
     }
 }
 
@@ -190,6 +195,19 @@ extension IngestTrackInfo {
         }
         get {
             trackInfo.hasConsent
+        }
+    }
+    
+    var cc: Int {
+        get {
+            switch hasConsent {
+            case true:
+                return 1
+            case false:
+                return 0
+            default:
+                return 3
+            }
         }
     }
 }
