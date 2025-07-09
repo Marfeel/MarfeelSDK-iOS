@@ -323,8 +323,12 @@ extension CompassTracker: ConversionsProvider {
 
 internal extension CompassTracker {
     func getTrackingData(for conversion: String? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
-        getScrollPercent { [self] scrollPercent in
-            var finalTrackInfo = self.trackInfo
+        let trackInfoCopy = self.trackInfo
+        
+        getScrollPercent { [weak self] scrollPercent in
+            guard let self else { return }
+            
+            var finalTrackInfo = trackInfoCopy
             
             if let scrollPercent = scrollPercent, scrollPercent > (finalTrackInfo.scrollPercent ?? 0) {
                 finalTrackInfo.scrollPercent = scrollPercent

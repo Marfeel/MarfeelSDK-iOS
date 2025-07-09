@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "MarfeelSDK-iOS"
-  spec.version      = "2.16.0"
+  spec.version      = "2.16.1"
   spec.summary      = "iOS version of MarfeelSDK."
 
 
