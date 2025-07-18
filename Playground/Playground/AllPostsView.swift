@@ -38,6 +38,7 @@ struct AllPosts: View {
                 CompassTracker.shared.setUserVar(name: "hihi", value: "haha")
                 CompassTracker.shared.setUserVar(name: "hihi2", value: "haha2")
                 CompassTracker.shared.trackScreen(name: "ios homepage", scrollView: scrollView)
+                CompassTracker.shared.setPageMetric(name: "metric_string", value: 100)
             })
         }
     }

@@ -75,6 +75,7 @@ public protocol CompassTracking: AnyObject {
     func track(conversion: String)
     func trackConversion(conversion: String)
     func setPageVar(name: String, value: String)
+    func setPageMetric(name: String, value: Int)
     func setSessionVar(name: String, value: String)
     func setUserVar(name: String, value: String)
     func addUserSegment(_ name: String)
@@ -166,6 +167,8 @@ public class CompassTracker: Tracker {
     private var newConversions = [String]()
     
     private var pageVars = [String: String]()
+    
+    private var pageMetrics = [String: Int]()
 }
 
 extension CompassTracker: ScrollPercentProvider {
@@ -281,6 +284,10 @@ extension CompassTracker: CompassTracking {
         pageVars[name] = value
     }
     
+    public func setPageMetric(name: String, value: Int) {
+        pageMetrics[name] = value
+    }
+    
     public func setSessionVar(name: String, value: String) {
         storage.addSessionVar(name: name, value: value)
     }
@@ -341,6 +348,7 @@ internal extension CompassTracker {
             finalTrackInfo.userVars = storage.userVars
             finalTrackInfo.sessionVars = storage.sessionVars
             finalTrackInfo.pageVars = pageVars
+            finalTrackInfo.pageMetrics = pageMetrics
             finalTrackInfo.userSegments = storage.userSegments
             finalTrackInfo.hasConsent = storage.hasConsent
             finalTrackInfo.landingPage = storage.landingPage
@@ -413,6 +421,7 @@ private extension CompassTracker {
         trackInfo.pageUrl = pageName
         trackInfo.recirculationSource = rs
         pageVars.removeAll()
+        pageMetrics.removeAll()
         trackInfo.sessionId = storage.sessionId
         tick = 0
         CompassTrackerMultimedia.shared.reset()
