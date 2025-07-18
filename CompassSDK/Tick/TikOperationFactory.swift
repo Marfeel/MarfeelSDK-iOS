@@ -17,7 +17,13 @@ protocol TikOperationFactory {
 }
 
 class TickOperationProvider: TikOperationFactory {
+    private let sharedTikUseCase: SendTikCuseCase
+
+    init(tikUseCase: SendTikCuseCase = SendTik()) {
+        self.sharedTikUseCase = tikUseCase
+    }
+    
     func buildOperation(dataBuilder: @escaping DataBuilder, dispatchDate: Date, path: String?, contentType: ContentType?) -> Operation {
-        TikOperation(dataBuilder: dataBuilder, dispatchDate: dispatchDate, tikUseCase: SendTik(), path: path, contentType: contentType)
+        TikOperation(dataBuilder: dataBuilder, dispatchDate: dispatchDate, tikUseCase: sharedTikUseCase, path: path, contentType: contentType)
     }
 }

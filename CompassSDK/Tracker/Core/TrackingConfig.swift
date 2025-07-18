@@ -10,6 +10,8 @@ import Foundation
 public class TrackingConfig {
     var accountId: Int?
     var endpoint: URL?
+    var fallbackEndpoint: URL?
+    var fallbackEndpointWindow: Double?
     var pageTechnology: Int?
     let version = "0.1"
     
@@ -19,6 +21,8 @@ public class TrackingConfig {
         self.accountId = bundle.compassAccountId
         self.pageTechnology = bundle.pageTechnology
         self.endpoint = bundle.compassEndpoint
+        self.fallbackEndpoint = bundle.compassFallbackEndpoint
+        self.fallbackEndpointWindow = bundle.fallbackWindow
     }
     
     public func override(accountId: Int, pageTechnology: Int?, endpoint: String?) {
