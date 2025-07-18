@@ -16,6 +16,7 @@ struct IngestTrackInfo: Encodable {
         case landingPage = "lp"
         case cc = "cc"
         case recirculationSoruce = "rs"
+        case pageMetrics = "pm"
     }
     
     private var trackInfo = TrackInfo()
@@ -31,6 +32,7 @@ struct IngestTrackInfo: Encodable {
     
     var landingPage: String?
     var recirculationSource: String?
+    var pageMetrics: [String:Int]?
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -43,6 +45,11 @@ struct IngestTrackInfo: Encodable {
         try container.encodeIfPresent(landingPage, forKey: .landingPage)
         try container.encodeIfPresent(cc, forKey: .cc)
         try container.encodeIfPresent(recirculationSource, forKey: .recirculationSoruce)
+
+        if let pageMetrics = pageMetrics {
+            let metricsArray: [[String]] = pageMetrics.map { [$0.key, "\($0.value)"] }
+            try container.encode(metricsArray, forKey: .pageMetrics)
+        }
     }
 }
 

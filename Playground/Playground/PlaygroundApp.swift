@@ -17,6 +17,6 @@ struct PlaygroundApp: App {
     }
     
     init() {
-        CompassTracker.initialize(accountId: 0, pageTechnology: 105)
+        CompassTracker.initialize(accountId: 1659, pageTechnology: 105)
     }
 }
