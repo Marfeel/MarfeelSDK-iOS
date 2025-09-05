@@ -157,7 +157,19 @@ public class CompassTracker: Tracker {
         }
     }
     
-    private var trackInfo = IngestTrackInfo()
+    private var _trackInfo = IngestTrackInfo()
+    private let trackInfoQueue = DispatchQueue(label: "com.marfeel.trackinfo", attributes: .concurrent)
+    
+    private var trackInfo: IngestTrackInfo {
+        get {
+            return trackInfoQueue.sync { _trackInfo }
+        }
+        set {
+            trackInfoQueue.async(flags: .barrier) { [weak self] in
+                self?._trackInfo = newValue
+            }
+        }
+    }
     
     private var tick = 0
 
@@ -323,10 +335,14 @@ extension CompassTracker: ConversionsProvider {
 
 internal extension CompassTracker {
     func getTrackingData(for conversion: String? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
+        // Use the thread-safe trackInfo accessor
         let trackInfoCopy = self.trackInfo
         
         getScrollPercent { [weak self] scrollPercent in
-            guard let self else { return }
+            guard let self = self else { 
+                completion(trackInfoCopy)
+                return 
+            }
             
             var finalTrackInfo = trackInfoCopy
             
@@ -338,15 +354,23 @@ internal extension CompassTracker {
                 finalTrackInfo.conversions = [conversion]
             }
             
-            finalTrackInfo.userVars = storage.userVars
-            finalTrackInfo.sessionVars = storage.sessionVars
-            finalTrackInfo.pageVars = pageVars
-            finalTrackInfo.userSegments = storage.userSegments
-            finalTrackInfo.hasConsent = storage.hasConsent
-            finalTrackInfo.landingPage = storage.landingPage
-            finalTrackInfo.tik = tick!
-            
-            completion(finalTrackInfo)
+            // Access storage properties on main queue for UI thread safety
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    completion(finalTrackInfo)
+                    return
+                }
+                
+                finalTrackInfo.userVars = self.storage.userVars
+                finalTrackInfo.sessionVars = self.storage.sessionVars
+                finalTrackInfo.pageVars = self.pageVars
+                finalTrackInfo.userSegments = self.storage.userSegments
+                finalTrackInfo.hasConsent = self.storage.hasConsent
+                finalTrackInfo.landingPage = self.storage.landingPage
+                finalTrackInfo.tik = tick!
+                
+                completion(finalTrackInfo)
+            }
         }
     }
     
