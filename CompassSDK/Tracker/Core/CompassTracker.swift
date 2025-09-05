@@ -158,7 +158,19 @@ public class CompassTracker: Tracker {
         }
     }
     
-    private var trackInfo = IngestTrackInfo()
+    private var _trackInfo = IngestTrackInfo()
+    private let trackInfoQueue = DispatchQueue(label: "com.marfeel.trackinfo", attributes: .concurrent)
+
+    private var trackInfo: IngestTrackInfo {
+        get {
+            return trackInfoQueue.sync { _trackInfo }
+        }
+        set {
+            trackInfoQueue.async(flags: .barrier) { [weak self] in
+                self?._trackInfo = newValue
+            }
+        }
+    }
     
     private var tick = 0
 
@@ -333,7 +345,10 @@ internal extension CompassTracker {
         let trackInfoCopy = self.trackInfo
         
         getScrollPercent { [weak self] scrollPercent in
-            guard let self else { return }
+            guard let self = self else {
+                completion(trackInfoCopy)
+                return
+            }
             
             var finalTrackInfo = trackInfoCopy
             
@@ -345,16 +360,23 @@ internal extension CompassTracker {
                 finalTrackInfo.conversions = [conversion]
             }
             
-            finalTrackInfo.userVars = storage.userVars
-            finalTrackInfo.sessionVars = storage.sessionVars
-            finalTrackInfo.pageVars = pageVars
-            finalTrackInfo.pageMetrics = pageMetrics
-            finalTrackInfo.userSegments = storage.userSegments
-            finalTrackInfo.hasConsent = storage.hasConsent
-            finalTrackInfo.landingPage = storage.landingPage
-            finalTrackInfo.tik = tick!
-            
-            completion(finalTrackInfo)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    completion(finalTrackInfo)
+                    return
+                }
+
+                finalTrackInfo.userVars = storage.userVars
+                finalTrackInfo.sessionVars = storage.sessionVars
+                finalTrackInfo.pageVars = pageVars
+                finalTrackInfo.pageMetrics = pageMetrics
+                finalTrackInfo.userSegments = storage.userSegments
+                finalTrackInfo.hasConsent = storage.hasConsent
+                finalTrackInfo.landingPage = storage.landingPage
+                finalTrackInfo.tik = tick!
+                
+                completion(finalTrackInfo)
+            }
         }
     }
     
