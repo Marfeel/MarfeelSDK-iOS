@@ -21,7 +21,9 @@ struct IngestTrackInfo: Encodable {
     
     private var trackInfo = TrackInfo()
     var tik = 0
-    private var visitDuration: Int64?
+    private var visitDuration: Int64? {
+        Int64((trackInfo.currentDate?.timeStamp ?? 0) - (trackInfo.startPageTimeStamp ?? 0))
+    }
     var conversions: [String]? {
         didSet {
             implodedConversions = conversions?.joined(separator: ",")
@@ -75,10 +77,6 @@ extension IngestTrackInfo {
         }
     }
     var currentDate: Date? {
-        set {
-            trackInfo.currentDate = newValue
-            visitDuration = Int64((newValue?.timeStamp ?? 0) - (trackInfo.startPageTimeStamp ?? 0))
-        }
         get {
             trackInfo.currentDate
         }
@@ -89,7 +87,7 @@ extension IngestTrackInfo {
             trackInfo.currentVisitDate = newValue
         }
         get {
-            trackInfo.currentDate
+            trackInfo.currentVisitDate
         }
     }
 

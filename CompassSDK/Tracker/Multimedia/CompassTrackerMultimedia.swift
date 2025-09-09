@@ -86,10 +86,8 @@ private extension CompassTrackerMultimedia {
             let operation = tikOperationFactory.buildOperation(
                 dataBuilder: { [self] (completion) in
                     getCachedRfv { rfv in
-                        var finalTrackInfo = trackInfo
+                        let finalTrackInfo = trackInfo
                                             
-                        
-                        finalTrackInfo.currentDate = Date()
                         completion(MultimediaTrackInfo(
                             trackInfo: finalTrackInfo,
                             rfv: rfv,
