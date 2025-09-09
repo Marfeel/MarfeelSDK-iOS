@@ -49,7 +49,9 @@ struct TrackInfo: Encodable {
     }
     var accountId: Int?
     var firstVisitDate: Date?
-    var currentDate: Date?
+    var currentDate: Date? {
+        return Date()
+    }
     var currentVisitDate: Date?
     var siteUserId: String?
     var compassVersion: String?
@@ -112,5 +114,7 @@ struct TrackInfo: Encodable {
         try container.encodeIfPresent(dicToArray(sessionVars), forKey: .sessionVars)
         try container.encodeIfPresent(userSegments, forKey: .userSegments)
         try container.encodeIfPresent(hasConsent, forKey: .hasConsent)
+        try container.encodeIfPresent(currentTimeStamp, forKey: .currentTimeStamp)
+        try container.encodeIfPresent(currentVisitTimeStamp, forKey: .currentVisitTimeStamp)
     }
 }
