@@ -63,7 +63,6 @@ final class SendTik: SendTikCuseCase {
             timeout: 10
         ) { [weak self] error in
             guard let self = self else { return }
-
             if error != nil,
                self.getOrigin() == .primary,
                self.fallbackUrl != nil {
@@ -71,6 +70,15 @@ final class SendTik: SendTikCuseCase {
                 self.performFallback(path: path, type: type, params: params)
             }
         }
+    }
+
+    private func makeApiCall(path: String, type: ContentType, params: [String: Any]) -> TikApiCall {
+        return TikApiCall(
+            baseUrl: currentBaseUrl(),
+            params: params,
+            path: path,
+            type: type
+        )
     }
 
     private func performTrackedCall(
@@ -89,12 +97,7 @@ final class SendTik: SendTikCuseCase {
             }
         }
 
-        let apiCall = TikApiCall(
-            baseUrl: currentBaseUrl(),
-            params: params,
-            path: path,
-            type: type
-        )
+        let apiCall = makeApiCall(path: path, type: type, params: params)
 
         var isCompleted = false
         let complete: (Error?) -> Void = { error in
@@ -129,13 +132,7 @@ final class SendTik: SendTikCuseCase {
             }
         }
 
-        let fallbackCall = TikApiCall(
-            baseUrl: currentBaseUrl(),
-            params: params,
-            path: path,
-            type: type
-        )
-
+        let fallbackCall = makeApiCall(path: path, type: type, params: params)
         apiRouter.call(from: fallbackCall) { _ in
             if fallbackTaskID != .invalid {
                 self.application.endBackgroundTask(fallbackTaskID)
@@ -162,7 +159,6 @@ final class SendTik: SendTikCuseCase {
     private func activateFallback() {
         syncQueue.sync {
             guard origin == .primary else { return }
-
             origin = .fallback
             fallbackDispatchTimer?.cancel()
             fallbackDispatchTimer = nil
