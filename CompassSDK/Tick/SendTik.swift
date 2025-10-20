@@ -11,7 +11,12 @@ struct TikApiCall: ApiCall {
     let baseUrl: URL?
     let type: ContentType
 
-    init(baseUrl: URL? = TrackingConfig.shared.endpoint, params: [String: Any], path: String, type: ContentType) {
+    init(
+        baseUrl: URL? = TrackingConfig.shared.endpoint,
+        params: [String: Any],
+        path: String,
+        type: ContentType
+    ) {
         self.baseUrl = baseUrl
         self.params = params
         self.path = path
@@ -24,7 +29,7 @@ enum OriginType {
     case fallback
 }
 
-class SendTik: SendTikCuseCase {
+final class SendTik: SendTikCuseCase {
     private let apiRouter: ApiRouting
     private let application: UIApplication
     private let primaryUrl: URL?
@@ -34,8 +39,6 @@ class SendTik: SendTikCuseCase {
     private var origin: OriginType = .primary
     private var fallbackDispatchTimer: DispatchSourceTimer?
     private let syncQueue = DispatchQueue(label: "SendTik.sync")
-
-    private var backgroundIdentifier: UIBackgroundTaskIdentifier?
 
     init(
         apiRouter: ApiRouting = ApiRouter(),
@@ -52,14 +55,40 @@ class SendTik: SendTikCuseCase {
     }
 
     func tik(path: String, type: ContentType, params: [String: Any]) {
-        backgroundIdentifier = application.beginBackgroundTask {
-            self.endBackgroundTask()
-        }
+        performTrackedCall(
+            name: "SendTik.primary",
+            path: path,
+            type: type,
+            params: params,
+            timeout: 10
+        ) { [weak self] error in
+            guard let self = self else { return }
 
-        performTikCall(path: path, type: type, params: params)
+            if error != nil,
+               self.getOrigin() == .primary,
+               self.fallbackUrl != nil {
+                self.activateFallback()
+                self.performFallback(path: path, type: type, params: params)
+            }
+        }
     }
 
-    private func performTikCall(path: String, type: ContentType, params: [String: Any]) {
+    private func performTrackedCall(
+        name: String,
+        path: String,
+        type: ContentType,
+        params: [String: Any],
+        timeout: TimeInterval? = nil,
+        completion: @escaping (Error?) -> Void
+    ) {
+        var taskID: UIBackgroundTaskIdentifier = .invalid
+        taskID = application.beginBackgroundTask(withName: name) {
+            if taskID != .invalid {
+                self.application.endBackgroundTask(taskID)
+                taskID = .invalid
+            }
+        }
+
         let apiCall = TikApiCall(
             baseUrl: currentBaseUrl(),
             params: params,
@@ -67,26 +96,50 @@ class SendTik: SendTikCuseCase {
             type: type
         )
 
-        apiRouter.call(from: apiCall) { [weak self] error in
-            guard let self = self else { return }
+        var isCompleted = false
+        let complete: (Error?) -> Void = { error in
+            guard !isCompleted else { return }
+            isCompleted = true
+            if taskID != .invalid {
+                self.application.endBackgroundTask(taskID)
+                taskID = .invalid
+            }
+            completion(error)
+        }
 
-            if error != nil,
-               self.getOrigin() == .primary,
-               self.fallbackUrl != nil {
-                self.activateFallback()
-
-                let fallbackCall = TikApiCall(
-                    baseUrl: self.currentBaseUrl(),
-                    params: params,
-                    path: path,
-                    type: type
-                )
-
-                self.apiRouter.call(from: fallbackCall) { _ in
-                    self.endBackgroundTask()
+        if let timeout = timeout {
+            DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+                if !isCompleted {
+                    complete(NSError(domain: "SendTik", code: -1, userInfo: [NSLocalizedDescriptionKey: "Primary request timeout"]))
                 }
-            } else {
-                self.endBackgroundTask()
+            }
+        }
+
+        apiRouter.call(from: apiCall) { error in
+            complete(error)
+        }
+    }
+
+    private func performFallback(path: String, type: ContentType, params: [String: Any]) {
+        var fallbackTaskID: UIBackgroundTaskIdentifier = .invalid
+        fallbackTaskID = application.beginBackgroundTask(withName: "SendTik.fallback") {
+            if fallbackTaskID != .invalid {
+                self.application.endBackgroundTask(fallbackTaskID)
+                fallbackTaskID = .invalid
+            }
+        }
+
+        let fallbackCall = TikApiCall(
+            baseUrl: currentBaseUrl(),
+            params: params,
+            path: path,
+            type: type
+        )
+
+        apiRouter.call(from: fallbackCall) { _ in
+            if fallbackTaskID != .invalid {
+                self.application.endBackgroundTask(fallbackTaskID)
+                fallbackTaskID = .invalid
             }
         }
     }
@@ -111,7 +164,6 @@ class SendTik: SendTikCuseCase {
             guard origin == .primary else { return }
 
             origin = .fallback
-
             fallbackDispatchTimer?.cancel()
             fallbackDispatchTimer = nil
 
@@ -128,15 +180,11 @@ class SendTik: SendTikCuseCase {
     }
 
     private func deactivateFallback() {
-        origin = .primary
-        fallbackDispatchTimer?.cancel()
-        fallbackDispatchTimer = nil
-    }
-
-    private func endBackgroundTask() {
-        guard let backgroundIdentifier = self.backgroundIdentifier else { return }
-
-        self.application.endBackgroundTask(backgroundIdentifier)
-        self.backgroundIdentifier = .invalid
+        syncQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.origin = .primary
+            self.fallbackDispatchTimer?.cancel()
+            self.fallbackDispatchTimer = nil
+        }
     }
 }
