@@ -63,6 +63,7 @@ final class SendTik: SendTikCuseCase {
             timeout: 10
         ) { [weak self] error in
             guard let self = self else { return }
+
             if error != nil,
                self.getOrigin() == .primary,
                self.fallbackUrl != nil {
@@ -133,7 +134,13 @@ final class SendTik: SendTikCuseCase {
         }
 
         let fallbackCall = makeApiCall(path: path, type: type, params: params)
-        apiRouter.call(from: fallbackCall) { _ in
+
+        DispatchQueue.global().async {
+            self.apiRouter.call(from: fallbackCall) { _ in
+            }
+        }
+
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
             if fallbackTaskID != .invalid {
                 self.application.endBackgroundTask(fallbackTaskID)
                 fallbackTaskID = .invalid
@@ -159,6 +166,7 @@ final class SendTik: SendTikCuseCase {
     private func activateFallback() {
         syncQueue.sync {
             guard origin == .primary else { return }
+
             origin = .fallback
             fallbackDispatchTimer?.cancel()
             fallbackDispatchTimer = nil
