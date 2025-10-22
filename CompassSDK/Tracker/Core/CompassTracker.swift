@@ -22,6 +22,30 @@ public enum UserType {
     case unknown, anonymous, logged, paid
 }
 
+public struct ConversionOptions {
+    public let initiator: String?
+    public let id: String?
+    public let value: String?
+    public let meta: [String: String]?
+    public let scope: String?
+
+    public init(initiator: String? = nil, id: String? = nil, value: String? = nil, meta: [String: String]? = nil, scope: String? = nil) {
+        self.initiator = initiator
+        self.id = id
+        self.value = value
+        self.meta = meta
+        self.scope = scope
+    }
+}
+
+struct Conversion {
+    let conversion: String
+    let initiator: String?
+    let id: String?
+    let value: String?
+    let meta: [[String]]?
+}
+
 extension UserType: RawRepresentable, Codable {
     public typealias RawValue = Int
 
@@ -74,6 +98,7 @@ public protocol CompassTracking: AnyObject {
     @available(*, deprecated, renamed: "trackConversion")
     func track(conversion: String)
     func trackConversion(conversion: String)
+    func trackConversion(conversion: String, options: ConversionOptions)
     func setPageVar(name: String, value: String)
     func setPageMetric(name: String, value: Int)
     func setSessionVar(name: String, value: String)
@@ -176,7 +201,7 @@ public class CompassTracker: Tracker {
 
     private var scrollView: UIScrollView?
 
-    private var newConversions = [String]()
+    private var newConversions = [Conversion]()
     
     private var pageVars = [String: String]()
     
@@ -289,7 +314,41 @@ extension CompassTracker: CompassTracking {
     }
 
     public func trackConversion(conversion: String) {
-        newConversions.append(conversion)
+        newConversions.append(Conversion(conversion: conversion, initiator: nil, id: nil, value: nil, meta: nil))
+    }
+
+    public func trackConversion(conversion: String, options: ConversionOptions) {
+        let conversionId = getConversionId(options: options)
+        let convertedMeta = convertMetaToArray(options.meta)
+        newConversions.append(Conversion(
+            conversion: conversion,
+            initiator: options.initiator,
+            id: conversionId,
+            value: options.value,
+            meta: convertedMeta
+        ))
+    }
+
+    private func convertMetaToArray(_ meta: [String: String]?) -> [[String]]? {
+        guard let meta = meta else { return nil }
+        return meta.map { [$0.key, $0.value] }
+    }
+
+    private func getConversionId(options: ConversionOptions) -> String? {
+        if let id = options.id {
+            return id
+        }
+
+        switch options.scope {
+        case "user":
+            return storage.userId
+        case "session":
+            return trackInfo.sessionId
+        case "page":
+            return trackInfo.pageId
+        default:
+            return nil
+        }
     }
     
     public func setPageVar(name: String, value: String) {
@@ -334,32 +393,36 @@ extension CompassTracker: CompassTracking {
 }
 
 extension CompassTracker: ConversionsProvider {
-    func getConversions(_ completion: @escaping ([String]) -> ()) {
+    func getConversions(_ completion: @escaping ([Conversion]) -> ()) {
         completion(newConversions)
-        newConversions = [String]()
+        newConversions = [Conversion]()
     }
 }
 
 internal extension CompassTracker {
-    func getTrackingData(for conversion: String? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
+    func getTrackingData(for conversion: Conversion? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
         let trackInfoCopy = self.trackInfo
-        
+
         getScrollPercent { [weak self] scrollPercent in
             guard let self = self else {
                 completion(trackInfoCopy)
                 return
             }
-            
+
             var finalTrackInfo = trackInfoCopy
-            
+
             if let scrollPercent = scrollPercent, scrollPercent > (finalTrackInfo.scrollPercent ?? 0) {
                 finalTrackInfo.scrollPercent = scrollPercent
             }
-            
+
             if let conversion = conversion {
-                finalTrackInfo.conversions = [conversion]
+                finalTrackInfo.conversions = [conversion.conversion]
+                finalTrackInfo.conversionInitiator = conversion.initiator
+                finalTrackInfo.conversionId = conversion.id
+                finalTrackInfo.conversionValue = conversion.value
+                finalTrackInfo.conversionMeta = conversion.meta
             }
-            
+
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     completion(finalTrackInfo)
@@ -374,7 +437,7 @@ internal extension CompassTracker {
                 finalTrackInfo.hasConsent = storage.hasConsent
                 finalTrackInfo.landingPage = storage.landingPage
                 finalTrackInfo.tik = tick!
-                
+
                 completion(finalTrackInfo)
             }
         }
@@ -414,15 +477,11 @@ private extension CompassTracker {
         }
     }
     
-    private func createOperation(conversion: String?, dispatchDate: Date, dispatchGroup: DispatchGroup) {
+    private func createOperation(conversion: Conversion?, dispatchDate: Date, dispatchGroup: DispatchGroup) {
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
                 DispatchQueue.global(qos: .utility).async {
-                    if let conversion = conversion {
-                        self.getTrackingData(for: conversion, tick: self.tick, completion)
-                    } else {
-                        self.getTrackingData(for: nil, tick: self.tick, completion)
-                    }
+                    self.getTrackingData(for: conversion, tick: self.tick, completion)
                     self.tick += 1
                 }
             },

@@ -9,7 +9,7 @@ let package = Package(
         .iOS(.v11)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
+        //Users/miquelmasriera/Marfeel/MarfeelSDK-iOS/CompassSDK/Tracker/Core/CompassTracker.swift/ Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "MarfeelSDK-iOS",
             targets: ["MarfeelSDK-iOS"]

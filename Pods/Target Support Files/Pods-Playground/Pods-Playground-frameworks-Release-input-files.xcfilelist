@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-Playground/Pods-Playground-frameworks.sh
+${BUILT_PRODUCTS_DIR}/MarfeelSDK-iOS/MarfeelSDK_iOS.framework
+${BUILT_PRODUCTS_DIR}/SwiftUIIntrospect/SwiftUIIntrospect.framework

@@ -12,7 +12,7 @@ protocol ScrollPercentProvider: AnyObject {
 }
 
 protocol ConversionsProvider: AnyObject {
-    func getConversions(_ completion: @escaping ([String]) -> ())
+    func getConversions(_ completion: @escaping ([Conversion]) -> ())
 }
 typealias DataBuilderCompletion = (_ res: Encodable) -> Void
 typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Void
