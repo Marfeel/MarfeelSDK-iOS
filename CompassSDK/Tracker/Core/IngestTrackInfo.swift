@@ -12,11 +12,15 @@ struct IngestTrackInfo: Encodable {
         case tik = "a"
         case visitDuration = "l"
         case scrollPercent = "sc"
-        case implodedConversions = "conv"
         case landingPage = "lp"
         case cc = "cc"
         case recirculationSoruce = "rs"
         case pageMetrics = "pm"
+        case implodedConversions = "conv"
+        case conversionInitiator = "conv_i"
+        case conversionId = "cvid"
+        case conversionValue = "cvv"
+        case conversionMeta = "cvar"
     }
     
     private var trackInfo = TrackInfo()
@@ -35,6 +39,10 @@ struct IngestTrackInfo: Encodable {
     var landingPage: String?
     var recirculationSource: String?
     var pageMetrics: [String:Int]?
+    var conversionInitiator: String?
+    var conversionId: String?
+    var conversionValue: String?
+    var conversionMeta: [[String]]?
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -52,6 +60,10 @@ struct IngestTrackInfo: Encodable {
             let metricsArray: [[String]] = pageMetrics.map { [$0.key, "\($0.value)"] }
             try container.encode(metricsArray, forKey: .pageMetrics)
         }
+        try container.encodeIfPresent(conversionInitiator, forKey: .conversionInitiator)
+        try container.encodeIfPresent(conversionId, forKey: .conversionId)
+        try container.encodeIfPresent(conversionValue, forKey: .conversionValue)
+        try container.encodeIfPresent(conversionMeta, forKey: .conversionMeta)
     }
 }
 
@@ -130,6 +142,11 @@ extension IngestTrackInfo {
         }
         get {
             trackInfo.sessionId
+        }
+    }
+    var pageId: String? {
+        get {
+            trackInfo.pageId
         }
     }
     var firstVisitDate: Date? {

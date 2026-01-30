@@ -70,7 +70,16 @@ struct BlogPostView: View {
             CompassTracker.shared.setUserVar(name: "pepe-user", value: blogPost.id.description)
             CompassTracker.shared.trackConversion(conversion: "conv_1")
             CompassTracker.shared.trackConversion(conversion: "conv_2")
-            CompassTracker.shared.trackConversion(conversion: "conv_3")
+            CompassTracker.shared.trackConversion(
+                conversion: "conv_3",
+                options: ConversionOptions(
+                    initiator: "testInit",
+                    id: "testId",
+                    value: "testValue",
+                    meta: ["key1": "val1", "key2": "val2"],
+                    scope: "testSocpe"
+                )
+            )
         })
         .onReceive(videoPlayer.playbackStatePublisher) { state in
             guard isVideoInitialized else {
