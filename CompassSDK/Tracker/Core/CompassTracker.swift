@@ -22,14 +22,20 @@ public enum UserType {
     case unknown, anonymous, logged, paid
 }
 
+public enum ConversionScope {
+    case user
+    case session
+    case page
+}
+
 public struct ConversionOptions {
     public let initiator: String?
     public let id: String?
     public let value: String?
     public let meta: [String: String]?
-    public let scope: String?
+    public let scope: ConversionScope?
 
-    public init(initiator: String? = nil, id: String? = nil, value: String? = nil, meta: [String: String]? = nil, scope: String? = nil) {
+    public init(initiator: String? = nil, id: String? = nil, value: String? = nil, meta: [String: String]? = nil, scope: ConversionScope? = nil) {
         self.initiator = initiator
         self.id = id
         self.value = value
@@ -319,6 +325,10 @@ extension CompassTracker: CompassTracking {
 
     public func trackConversion(conversion: String, options: ConversionOptions) {
         let conversionId = getConversionId(options: options)
+        if storage.hasTrackedConversion(conversion, id: conversionId) {
+            return
+        }
+        storage.addTrackedConversion(conversion, id: conversionId)
         let convertedMeta = convertMetaToArray(options.meta)
         newConversions.append(Conversion(
             conversion: conversion,
@@ -340,13 +350,13 @@ extension CompassTracker: CompassTracking {
         }
 
         switch options.scope {
-        case "user":
+        case .user:
             return storage.userId
-        case "session":
+        case .session:
             return trackInfo.sessionId
-        case "page":
+        case .page:
             return trackInfo.pageId
-        default:
+        case nil:
             return nil
         }
     }

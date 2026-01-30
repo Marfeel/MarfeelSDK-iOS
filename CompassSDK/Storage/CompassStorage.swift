@@ -27,6 +27,8 @@ protocol CompassStorage {
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
     func setLandingPage(_ landingPage: String?)
+    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool
+    func addTrackedConversion(_ conversion: String, id: String?)
 }
 
 enum Store: String {
@@ -48,8 +50,9 @@ class PListCompassStorage: PListStorage {
         var userSegments: [String]?
         var hasConsent: Bool?
         var landingPage: String?
+        var trackedConversions: [String]?
 
-        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil, landingPage: nil)}
+        static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil, landingPage: nil, trackedConversions: [])}
     }
 
     init() {
@@ -228,6 +231,24 @@ extension PListCompassStorage: CompassStorage {
     
     func setLandingPage(_ landingPage: String?) {
         model?.landingPage = landingPage
+    }
+
+    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool {
+        let key = conversionKey(conversion, id: id)
+        return model?.trackedConversions?.contains(key) ?? false
+    }
+
+    func addTrackedConversion(_ conversion: String, id: String?) {
+        if model?.trackedConversions == nil {
+            model?.trackedConversions = []
+        }
+
+        let key = conversionKey(conversion, id: id)
+        model?.trackedConversions?.append(key)
+    }
+
+    private func conversionKey(_ conversion: String, id: String?) -> String {
+        return id != nil ? "\(conversion):\(id!)" : conversion
     }
 }
         

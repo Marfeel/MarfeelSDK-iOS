@@ -68,37 +68,37 @@ class MockedOperationProvider: TikOperationFactory {
 
 class MockStorage: CompassStorage {
     var hasConsent: Bool?
-    
+
     func setConsent(_ hasConsent: Bool) {
     }
-    
+
     func addUserSegments(_ segments: [String]) {
     }
-    
+
     var sessionVars = ["session": "var"]
-    
+
     var userVars = ["user": "var"]
-    
+
     var userSegments = ["segment1", "segment2"]
-        
+
     func addSessionVar(name: String, value: String) {
     }
-    
+
     func addUserVar(name: String, value: String) {
     }
-    
+
     func addVisit() {
     }
-    
+
     func addUserSegment(_ name: String) {
     }
-    
+
     func removeUserSegment(_ name: String) {
     }
-    
+
     func clearUserSegments() {
     }
-    
+
     var userId = "userIdFromStorage"
     var sessionId = "sessionIdFromStorage"
     var suid: String? = "suidFromStorage"
@@ -106,7 +106,23 @@ class MockStorage: CompassStorage {
     var lastVisit: Date? = nil
     var previousVisit: Date? = nil
     var sessionExpirationDate:Date? = nil
-    
+    var landingPage: String? = nil
+
+    func setLandingPage(_ landingPage: String?) {
+    }
+
+    private var trackedConversions: [String] = []
+
+    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool {
+        let key = id != nil ? "\(conversion):\(id!)" : conversion
+        return trackedConversions.contains(key)
+    }
+
+    func addTrackedConversion(_ conversion: String, id: String?) {
+        let key = id != nil ? "\(conversion):\(id!)" : conversion
+        trackedConversions.append(key)
+    }
+
     init() {}
 }
 

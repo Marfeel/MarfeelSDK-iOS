@@ -71,13 +71,42 @@ struct BlogPostView: View {
             CompassTracker.shared.trackConversion(conversion: "conv_1")
             CompassTracker.shared.trackConversion(conversion: "conv_2")
             CompassTracker.shared.trackConversion(
-                conversion: "conv_3",
+                conversion: "conv_6",
                 options: ConversionOptions(
                     initiator: "testInit",
                     id: "testId",
                     value: "testValue",
                     meta: ["key1": "val1", "key2": "val2"],
-                    scope: "testSocpe"
+                    scope: ConversionScope.page
+                )
+            )
+            CompassTracker.shared.trackConversion(
+                conversion: "conv_7",
+                options: ConversionOptions(
+                    initiator: "testInit",
+                    id: "4",
+                    value: "4",
+                    meta: ["key1": "val1", "key2": "val2"]
+                )
+            )
+            CompassTracker.shared.trackConversion(
+                conversion: "conv_6",
+                options: ConversionOptions(
+                    initiator: "testInit",
+                    id: "testId",
+                    value: "testValue",
+                    meta: ["key1": "val1", "key2": "val2"],
+                    scope: ConversionScope.page
+                )
+            )
+            CompassTracker.shared.trackConversion(
+                conversion: "conv_8",
+                options: ConversionOptions(
+                    initiator: "5",
+                    id: "5",
+                    value: "5",
+                    meta: ["key1": "val1", "key2": "val2"],
+                    scope: ConversionScope.session
                 )
             )
         })
