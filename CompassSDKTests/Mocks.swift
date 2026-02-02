@@ -112,15 +112,21 @@ class MockStorage: CompassStorage {
     }
 
     private var trackedConversions: [String] = []
+    
+    func shouldTrackConversion(_ conversion: String, id: String?) -> Bool {
+        if id == nil {
+            return true
+        }
 
-    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool {
-        let key = id != nil ? "\(conversion):\(id!)" : conversion
-        return trackedConversions.contains(key)
+        let key = "\(conversion):\(id!)"
+
+        return trackedConversions.contains(key) == false
     }
 
     func addTrackedConversion(_ conversion: String, id: String?) {
-        let key = id != nil ? "\(conversion):\(id!)" : conversion
-        trackedConversions.append(key)
+        if id != nil {
+            trackedConversions.append("\(conversion):\(id!)")
+        }
     }
 
     init() {}

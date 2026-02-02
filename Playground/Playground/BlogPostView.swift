@@ -71,7 +71,7 @@ struct BlogPostView: View {
             CompassTracker.shared.trackConversion(conversion: "conv_1")
             CompassTracker.shared.trackConversion(conversion: "conv_2")
             CompassTracker.shared.trackConversion(
-                conversion: "conv_6",
+                conversion: "conv_3",
                 options: ConversionOptions(
                     initiator: "testInit",
                     id: "testId",
@@ -81,7 +81,7 @@ struct BlogPostView: View {
                 )
             )
             CompassTracker.shared.trackConversion(
-                conversion: "conv_7",
+                conversion: "conv_4",
                 options: ConversionOptions(
                     initiator: "testInit",
                     id: "4",
@@ -90,7 +90,7 @@ struct BlogPostView: View {
                 )
             )
             CompassTracker.shared.trackConversion(
-                conversion: "conv_6",
+                conversion: "conv_3",
                 options: ConversionOptions(
                     initiator: "testInit",
                     id: "testId",
@@ -100,14 +100,10 @@ struct BlogPostView: View {
                 )
             )
             CompassTracker.shared.trackConversion(
-                conversion: "conv_8",
-                options: ConversionOptions(
-                    initiator: "5",
-                    id: "5",
-                    value: "5",
-                    meta: ["key1": "val1", "key2": "val2"],
-                    scope: ConversionScope.session
-                )
+                conversion: "conv_5"
+            )
+            CompassTracker.shared.trackConversion(
+                conversion: "conv_5"
             )
         })
         .onReceive(videoPlayer.playbackStatePublisher) { state in

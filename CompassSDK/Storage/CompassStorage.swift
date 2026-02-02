@@ -27,7 +27,7 @@ protocol CompassStorage {
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
     func setLandingPage(_ landingPage: String?)
-    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool
+    func shouldTrackConversion(_ conversion: String, id: String?) -> Bool
     func addTrackedConversion(_ conversion: String, id: String?)
 }
 
@@ -233,18 +233,27 @@ extension PListCompassStorage: CompassStorage {
         model?.landingPage = landingPage
     }
 
-    func hasTrackedConversion(_ conversion: String, id: String?) -> Bool {
+    func shouldTrackConversion(_ conversion: String, id: String?) -> Bool {
+        
+        if id == nil {
+            return true
+        }
+
         let key = conversionKey(conversion, id: id)
-        return model?.trackedConversions?.contains(key) ?? false
+
+        return model?.trackedConversions?.contains(key) == false
     }
 
     func addTrackedConversion(_ conversion: String, id: String?) {
         if model?.trackedConversions == nil {
             model?.trackedConversions = []
         }
+        
+        if id != nil {
+            let key = conversionKey(conversion, id: id)
 
-        let key = conversionKey(conversion, id: id)
-        model?.trackedConversions?.append(key)
+            model?.trackedConversions?.append(key)
+        }
     }
 
     private func conversionKey(_ conversion: String, id: String?) -> String {

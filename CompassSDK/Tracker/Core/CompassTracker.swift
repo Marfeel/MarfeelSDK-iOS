@@ -325,18 +325,18 @@ extension CompassTracker: CompassTracking {
 
     public func trackConversion(conversion: String, options: ConversionOptions) {
         let conversionId = getConversionId(options: options)
-        if storage.hasTrackedConversion(conversion, id: conversionId) {
-            return
+        
+        if storage.shouldTrackConversion(conversion, id: conversionId) {
+            storage.addTrackedConversion(conversion, id: conversionId)
+            
+            newConversions.append(Conversion(
+                conversion: conversion,
+                initiator: options.initiator,
+                id: conversionId,
+                value: options.value,
+                meta: convertMetaToArray(options.meta)
+            ))
         }
-        storage.addTrackedConversion(conversion, id: conversionId)
-        let convertedMeta = convertMetaToArray(options.meta)
-        newConversions.append(Conversion(
-            conversion: conversion,
-            initiator: options.initiator,
-            id: conversionId,
-            value: options.value,
-            meta: convertedMeta
-        ))
     }
 
     private func convertMetaToArray(_ meta: [String: String]?) -> [[String]]? {
