@@ -75,7 +75,7 @@ struct TrackInfo: Encodable {
     }
     var sessionId: String?
     private var pagesViewed = 0
-    private var pageId: String?
+    private(set) var pageId: String?
     private var previosPageUrl: String?
     private var startPageDate: Date?
     

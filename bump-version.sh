@@ -1,12 +1,19 @@
 #!/bin/bash
 
-# Check if version argument is provided
+# Check if bump type argument is provided
 if [ -z "$1" ]; then
-  echo "Usage: ./bump_version.sh <new_version>"
+  echo "Usage: ./bump-version.sh <bump_type>"
+  echo "  bump_type: 'major', 'minor', or 'patch'"
   exit 1
 fi
 
-NEW_VERSION="$1"
+BUMP_TYPE="$1"
+
+# Validate bump type
+if [ "$BUMP_TYPE" != "major" ] && [ "$BUMP_TYPE" != "minor" ] && [ "$BUMP_TYPE" != "patch" ]; then
+  echo "Error: bump_type must be 'major', 'minor', or 'patch'"
+  exit 1
+fi
 
 # Define paths for podspec and Info.plist
 PODSPEC_FILE="MarfeelSDK-iOS.podspec"
@@ -24,8 +31,35 @@ if [ ! -f "$PLIST_PATH" ]; then
   exit 1
 fi
 
+# Read current version from line 19 of podspec
+CURRENT_VERSION=$(sed -n '19p' "$PODSPEC_FILE" | grep -o '"[0-9]*\.[0-9]*\.[0-9]*"' | tr -d '"')
+
+if [ -z "$CURRENT_VERSION" ]; then
+  echo "Error: Could not read version from line 19 of $PODSPEC_FILE"
+  exit 1
+fi
+
+# Parse version components
+MAJOR=$(echo "$CURRENT_VERSION" | cut -d. -f1)
+MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f2)
+PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+
+# Calculate new version based on bump type
+if [ "$BUMP_TYPE" == "major" ]; then
+  MAJOR=$((MAJOR + 1))
+  MINOR=0
+  PATCH=0
+elif [ "$BUMP_TYPE" == "minor" ]; then
+  MINOR=$((MINOR + 1))
+  PATCH=0
+else
+  PATCH=$((PATCH + 1))
+fi
+
+NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+
 # Update the version in the .podspec file
-echo "Updating podspec version..."
+echo "Updating podspec version $CURRENT_VERSION → $NEW_VERSION..."
 sed -i '' "s/spec.version      = \".*\"/spec.version      = \"$NEW_VERSION\"/" "$PODSPEC_FILE"
 
 # Update the version in the Info.plist file
@@ -39,6 +73,3 @@ else
   echo "Failed to update version in podspec or Info.plist"
   exit 1
 fi
-
-
-echo "Version bump complete"

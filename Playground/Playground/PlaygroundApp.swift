@@ -17,6 +17,13 @@ struct PlaygroundApp: App {
     }
     
     init() {
+        // Clear storage for fresh start (debug only)
+        let fileManager = FileManager.default
+        if let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let plistURL = documentsURL.appendingPathComponent("CompassPersistenceV2.plist")
+            try? fileManager.removeItem(at: plistURL)
+        }
+
         CompassTracker.initialize(accountId: 1659, pageTechnology: 105)
     }
 }
