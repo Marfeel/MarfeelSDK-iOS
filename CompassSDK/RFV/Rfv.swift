@@ -22,10 +22,10 @@ public struct Rfv: Codable {
         case v
     }
     
-    let rfv: Float
-    let r: Int
-    let f: Int
-    let v: Int
+    public let rfv: Float
+    public let r: Int
+    public let f: Int
+    public let v: Int
     
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: DecodingKeys.self)
