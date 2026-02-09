@@ -117,6 +117,7 @@ public protocol CompassTracking: AnyObject {
     func getUserId() -> String
     func setLandingPage(_ landingPage: String?)
     func setLandingPage(_ landingPage: URL)
+    func updateScrollPercentage(_ percentage: Float)
 }
 
 public class CompassTracker: Tracker {
@@ -399,6 +400,13 @@ extension CompassTracker: CompassTracking {
     
     public func getUserId() -> String {
         return storage.userId
+    }
+
+    public func updateScrollPercentage(_ percentage: Float) {
+        let clamped = min(100, max(0, percentage))
+        if clamped > (trackInfo.scrollPercent ?? 0) {
+            trackInfo.scrollPercent = clamped
+        }
     }
 }
 
