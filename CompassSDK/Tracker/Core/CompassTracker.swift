@@ -264,7 +264,7 @@ extension CompassTracker: CompassTracking {
             completion(nil)
             return
         }
-        getRFV.fetch(userId: userId, account: accountId) { rfv, _ in
+        getRFV.fetch(userId: userId, registeredUserId: trackInfo.siteUserId, account: accountId) { rfv, _ in
             completion(rfv)
         }
     }

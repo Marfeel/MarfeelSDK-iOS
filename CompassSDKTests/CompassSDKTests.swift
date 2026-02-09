@@ -73,7 +73,7 @@ class CompassSDKTests: XCTestCase {
             XCTAssertEqual(apiCall.params["u"] as! String, "uuid")
             XCTAssertEqual(apiCall.params["ac"] as! Int, 0)
         }))
-        sut.fetch(userId: "uuid", account: 0) { (rfv, error) in
+        sut.fetch(userId: "uuid", registeredUserId: nil, account: 0) { (rfv, error) in
             guard error == nil else {
                 XCTFail()
                 return
