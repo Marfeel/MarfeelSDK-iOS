@@ -105,6 +105,12 @@ struct BlogPostView: View {
             CompassTracker.shared.trackConversion(
                 conversion: "conv_5"
             )
+
+            CompassTracker.shared.getRFV { _ in }
+
+            CompassTracker.shared.setSiteUserId("test-user-1")
+
+            CompassTracker.shared.getRFV { _ in }
         })
         .onReceive(videoPlayer.playbackStatePublisher) { state in
             guard isVideoInitialized else {
