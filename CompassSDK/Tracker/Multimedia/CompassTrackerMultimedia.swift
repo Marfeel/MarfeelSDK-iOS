@@ -22,9 +22,20 @@ public protocol MultimediaTracking: AnyObject {
 
 public class CompassTrackerMultimedia: Tracker {
     public static let shared = CompassTrackerMultimedia()
-    private var items = [String: MultimediaItem]()
-    private var tiksInProgress: TiksDictionary = [:]
-    
+    private var _items = [String: MultimediaItem]()
+    private var _tiksInProgress: TiksDictionary = [:]
+    private let stateQueue = DispatchQueue(label: "com.marfeel.multimedia.state", attributes: .concurrent)
+
+    private var items: [String: MultimediaItem] {
+        get { stateQueue.sync { _items } }
+        set { stateQueue.async(flags: .barrier) { [weak self] in self?._items = newValue } }
+    }
+
+    private var tiksInProgress: TiksDictionary {
+        get { stateQueue.sync { _tiksInProgress } }
+        set { stateQueue.async(flags: .barrier) { [weak self] in self?._tiksInProgress = newValue } }
+    }
+
     private let tikOperationFactory: TikOperationFactory
     private let compassTracker: CompassTracker
     private var rfv: Rfv?
@@ -42,52 +53,63 @@ extension CompassTrackerMultimedia: MultimediaTracking {
         items[id] = MultimediaItem(id: id, provider: provider, providerId: providerId, type: type, metadata: metadata)
         doTick(id)
     }
-    
+
     public func registerEvent(id: String, event: Event, eventTime: Int) {
         guard var item = items[id] else {
             print(
                 String(format: Errors.ITEM_NOT_INITIALIZED.rawValue, arguments: [id])
             )
-            
+
             return
         }
-        
+
         item.addEvent(event: event, eventTime: eventTime)
-        items[id] = item;
-        
+        items[id] = item
+
         doTick(id)
     }
 }
 
 extension CompassTrackerMultimedia {
     func reset() {
-        items.removeAll()
-        tiksInProgress.removeAll()
+        stateQueue.async(flags: .barrier) { [weak self] in
+            self?._items.removeAll()
+            self?._tiksInProgress.removeAll()
+        }
     }
 }
 
 private extension CompassTrackerMultimedia {
     func doTick(_ id: String) {
         let dispatchDate = Date(timeIntervalSinceNow: 5)
-        
-        compassTracker.getCommonTrackingData{ [self] (trackInfo) in
-            tiksInProgress[id] = tiksInProgress[id] ?? (0, false)
-            
-            guard !tiksInProgress[id]!.scheduled else {
-                return
-            }
-            let tik = tiksInProgress[id]!.tik
 
-            guard let item = items[id] else {
-                return
+        compassTracker.getCommonTrackingData{ [weak self] (trackInfo) in
+            guard let self = self else { return }
+
+            var tik: Int = 0
+            var item: MultimediaItem?
+
+            self.stateQueue.sync(flags: .barrier) {
+                self._tiksInProgress[id] = self._tiksInProgress[id] ?? (0, false)
+
+                guard let tikEntry = self._tiksInProgress[id], !tikEntry.scheduled else {
+                    return
+                }
+
+                item = self._items[id]
+                guard item != nil else { return }
+
+                tik = tikEntry.tik
+                self._tiksInProgress[id] = (tik, true)
             }
-            
-            tiksInProgress[id]!.scheduled = true
-            let operation = tikOperationFactory.buildOperation(
-                dataBuilder: { [self] (completion) in
-                    getCachedRfv { rfv in
+
+            guard let item = item else { return }
+
+            let operation = self.tikOperationFactory.buildOperation(
+                dataBuilder: { [weak self] (completion) in
+                    self?.getCachedRfv { rfv in
                         let finalTrackInfo = trackInfo
-                                            
+
                         completion(MultimediaTrackInfo(
                             trackInfo: finalTrackInfo,
                             rfv: rfv,
@@ -100,13 +122,16 @@ private extension CompassTrackerMultimedia {
                 path: TIK_PATH,
                 contentType: ContentType.JSON
             )
-            observeFinish(for: operation) { [weak self] in
-                guard self?.tiksInProgress[id] != nil else {
-                    return
+            self.observeFinish(for: operation) { [weak self] in
+                guard let self = self else { return }
+                self.stateQueue.async(flags: .barrier) {
+                    guard self._tiksInProgress[id] != nil else {
+                        return
+                    }
+                    self._tiksInProgress[id] = (tik + 1, false)
                 }
-                self?.tiksInProgress[id] = (tik + 1, false)
             }
-            operationQueue.addOperation(operation)
+            self.operationQueue.addOperation(operation)
         }
     }
     
