@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo "Triggering release notes"
+            }
+        }
+    }
+    post {
+        success {
+            build job: 'release-notes',
+                wait: false,
+                parameters: [
+                    string(name: 'REPO_NAME', value: 'MarfeelSDK-iOS'),
+                    string(name: 'COMMIT_HASH', value: env.GIT_COMMIT)
+                ]
+        }
+    }
+}
