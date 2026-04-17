@@ -1,0 +1,276 @@
+{
+    "compass": {},
+    "targeting": {
+        "frequencyCap": {
+            "FC_ThHPY5uhTVm18whxUUB1OQ": [
+                "cls"
+            ],
+            "IL_vG9H2h7ST-qy2g5f17hPuw": [
+                "d"
+            ],
+            "IL_wbA7tMXMQL-qDBBSKPOGpg": [
+                "d"
+            ]
+        }
+    },
+    "content": {
+        "editorialId": "262283850"
+    },
+    "flowcards": {
+        "cards": {}
+    },
+    "inline": {
+        "actions": {
+            "error-page-recommender": {
+                "id": "IL_gkzbOCfARluk3UxUk3OwRQ",
+                "placement": "body.error-page .subhome-content",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=1"
+                },
+                "features": {
+                    "mode": "modal",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": "body.error-page .subhome-content",
+                        "strategy": "append"
+                    }
+                ]
+            },
+            "home-commerce-block": {
+                "id": "IL_qOIuJJxpTmS7u9qz-B8_4g",
+                "placement": ".commerce-block",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=2"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": ".commerce-block",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "article-poll-related": {
+                "id": "IL_00AB1AE4RQqcqiVaKrEgAg",
+                "placement": ".article-poll .detail-body",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=3"
+                },
+                "strategy": "replace",
+                "features": {
+                    "mode": "modal",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": ".article-poll .detail-body",
+                        "strategy": "insertAfter"
+                    }
+                ]
+            },
+            "home-travel-slot-2": {
+                "id": "IL_MxYqtDnHScO0_v0Dat1XuA",
+                "placement": "div#slot-travel-2",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=4"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": "div#slot-travel-2",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-people-block": {
+                "id": "IL_GdAoW4O2ReyPfvWAIhVrLA",
+                "placement": ".people-block",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=5"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": ".people-block",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "article-sidebar-featured": {
+                "id": "IL_ttF3eLbNSu2ohHTdOuJJeQ",
+                "placement": ".aside-block-1",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=6"
+                },
+                "features": {
+                    "mode": "modal",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": ".aside-block-1",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-travel-slot-1": {
+                "id": "IL_mTh1XoKURQe-UkJSBk2HNA",
+                "placement": "div#slot-travel-1",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=7"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": "div#slot-travel-1",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "article-sidebar-most-read": {
+                "id": "IL_sX4t5TGWTYaYQ947eaQO_A",
+                "placement": ".aside-block-2",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=8"
+                },
+                "features": {
+                    "mode": "modal",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": ".aside-block-2",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-cities-pdf": {
+                "id": "IL_-7LpTCxhQm6FXY9HtiOI1Q",
+                "placement": ".print-edition-news",
+                "content": {
+                    "type": "TextHTML",
+                    "url": "https://example.com/widget?id=9"
+                },
+                "strategy": "replace",
+                "features": {
+                    "mode": "contextual",
+                    "removable": true,
+                    "background": "#F5F5F5"
+                },
+                "selectors": [
+                    {
+                        "selector": ".print-edition-news",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-cities-block": {
+                "id": "IL_5jP5oc0gSEuuroyzwwG6pA",
+                "placement": ".cities-block",
+                "content": {
+                    "type": "TextHTML",
+                    "url": "https://example.com/widget?id=10"
+                },
+                "strategy": "replace",
+                "features": {
+                    "mode": "contextual",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": ".cities-block",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-animals-block": {
+                "id": "IL_cOvP3QCaT8SEOeG4MA6-rw",
+                "placement": ".branded-block-3",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=11"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": ".branded-block-3",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "home-more-news-block": {
+                "id": "IL_n-9_qPW3Rba72KrkkAO5Hw",
+                "placement": ".more-news-block",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=12"
+                },
+                "strategy": "replace",
+                "features": {
+                    "button": {
+                        "action": "setSnapPoint:hidden"
+                    },
+                    "mode": "modal",
+                    "removable": true,
+                    "transition": "scrollBounded"
+                },
+                "selectors": [
+                    {
+                        "selector": ".more-news-block",
+                        "strategy": "replace"
+                    }
+                ]
+            }
+        }
+    }
+}

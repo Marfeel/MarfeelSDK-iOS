@@ -50,16 +50,12 @@ public class CompassTrackerMultimedia: Tracker {
 
 extension CompassTrackerMultimedia: MultimediaTracking {
     public func initializeItem(id: String, provider: String, providerId: String, type: Type, metadata: MultimediaMetadata) {
-        stateLock.lock()
         items[id] = MultimediaItem(id: id, provider: provider, providerId: providerId, type: type, metadata: metadata)
-        stateLock.unlock()
         doTick(id)
     }
 
     public func registerEvent(id: String, event: Event, eventTime: Int) {
-        stateLock.lock()
         guard var item = items[id] else {
-            stateLock.unlock()
             print(
                 String(format: Errors.ITEM_NOT_INITIALIZED.rawValue, arguments: [id])
             )
