@@ -467,8 +467,6 @@ internal extension CompassTracker {
         }
     }
 
-    // MARK: - Experiences subsystem accessors
-
     var experiencesPageUrl: String? { trackInfo.pageUrl }
     var experiencesAccountId: String { String(config.accountId ?? 0) }
     var experiencesPageTechnology: Int { IOS_TECH }

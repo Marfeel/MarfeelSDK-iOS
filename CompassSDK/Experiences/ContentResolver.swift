@@ -17,8 +17,6 @@ internal class ContentResolver {
         }
     }
 
-    // MARK: - Raw fetch
-
     private func fetchRaw(url: String, completion: @escaping (String?) -> Void) {
         guard let requestUrl = URL(string: url) else {
             completion(nil)
@@ -33,8 +31,6 @@ internal class ContentResolver {
         }.resume()
     }
 
-    // MARK: - Bundled fetch
-    //
     // All entry state mutations happen on `queue`. The network call itself runs
     // off-queue; we re-enter `queue` in its completion. Callers arriving while a
     // fetch is in flight are appended to `entry.pending` and drained together
@@ -120,8 +116,6 @@ internal class ContentResolver {
         }
     }
 
-    // MARK: - Bundle parsing
-
     private func parseBundle(_ body: String) -> BundledPayload {
         guard let data = body.data(using: .utf8),
               let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
@@ -165,8 +159,6 @@ internal class ContentResolver {
         return BundledPayload(contents: mergedContents, vars: mergedVars)
     }
 
-    // MARK: - Data structures
-
     internal struct BundledPayload {
         var contents: [String: [String]]
         let vars: [String: String]
@@ -178,8 +170,6 @@ internal class ContentResolver {
         var isFetching = false
         var pending: [(String, (String?) -> Void)] = []
     }
-
-    // MARK: - URL analysis
 
     private static let jukeboxMarker = "flowcards.mrf.io/transformer/"
 

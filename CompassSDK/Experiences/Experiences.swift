@@ -175,8 +175,6 @@ internal class ExperiencesTracker: ExperiencesTracking {
         recirculationTracker.trackClick(name: experience.name, link: link)
     }
 
-    // MARK: - QA/Debug
-
     func clearFrequencyCaps() {
         frequencyCapManager.clear()
     }

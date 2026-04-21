@@ -19,8 +19,6 @@ internal class FrequencyCapManager {
         self.timeZone = timeZone
     }
 
-    // MARK: - Data model
-
     private struct EventCounter: Codable {
         var impression: Int64 = 0
         var close: Int64 = 0
@@ -36,8 +34,6 @@ internal class FrequencyCapManager {
         var last: EventCounter = EventCounter()
         var buckets: [Int: [Int: [Int: EventCounter]]] = [:]
     }
-
-    // MARK: - Public API
 
     func trackImpression(experienceId: String) {
         bump(experienceId) { leaf, entry, now in
@@ -95,8 +91,6 @@ internal class FrequencyCapManager {
             defaults.removeObject(forKey: FrequencyCapManager.storageKey)
         }
     }
-
-    // MARK: - Private
 
     private func bump(_ id: String, mutate: (inout EventCounter, inout ExperienceCounter, Int64) -> Void) {
         queue.sync(flags: .barrier) {
@@ -219,8 +213,6 @@ internal class FrequencyCapManager {
         cal.minimumDaysInFirstWeek = 4
         return cal
     }
-
-    // MARK: - Persistence
 
     private func loadAll() -> [String: ExperienceCounter] {
         guard let data = defaults.data(forKey: FrequencyCapManager.storageKey) else { return [:] }
