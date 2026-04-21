@@ -471,7 +471,7 @@ internal extension CompassTracker {
 
     var experiencesPageUrl: String? { trackInfo.pageUrl }
     var experiencesAccountId: String { String(config.accountId ?? 0) }
-    var experiencesPageTechnology: Int { config.pageTechnology ?? IOS_TECH }
+    var experiencesPageTechnology: Int { IOS_TECH }
     var experiencesSessionId: String { storage.sessionId }
     var experiencesUserId: String { storage.userId }
     var experiencesRegisteredUserId: String? { storage.suid }
