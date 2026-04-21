@@ -45,8 +45,6 @@ struct ExperiencesView: View {
         }
     }
 
-    // MARK: - Fetch
-
     private var fetchSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             TextField("URL", text: $url)
@@ -117,8 +115,6 @@ struct ExperiencesView: View {
             .cornerRadius(6)
     }
 
-    // MARK: - Tracking
-
     private var trackingButtons: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Track (first experience)").font(.headline)
@@ -156,8 +152,6 @@ struct ExperiencesView: View {
             }
         }
     }
-
-    // MARK: - Frequency Caps
 
     private var frequencyCapsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -209,8 +203,6 @@ struct ExperiencesView: View {
         .id(capsVersion)
     }
 
-    // MARK: - Experiments
-
     private var experimentsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Experiments").font(.headline).padding(.top, 16)
@@ -259,8 +251,6 @@ struct ExperiencesView: View {
         .id(experimentsVersion)
     }
 
-    // MARK: - Generic Recirculation
-
     private var genericRecirculationSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Generic Recirculation").font(.headline).padding(.top, 16)
@@ -296,8 +286,6 @@ struct ExperiencesView: View {
         }
     }
 
-    // MARK: - Actions
-
     private func fetchExperiences(resolve: Bool) {
         isLoading = true
         resultText = ""
@@ -330,8 +318,6 @@ struct ExperiencesView: View {
         }
     }
 }
-
-// MARK: - Button Style
 
 struct TrackButtonStyle: ButtonStyle {
     let color: Color
