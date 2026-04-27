@@ -24,7 +24,7 @@ CompassSDK/
 │   ├── Experiences.swift                 # Public Experiences singleton (protocol + impl)
 │   ├── Recirculation.swift               # Public Recirculation singleton (protocol + impl)
 │   ├── WholeModuleAugmenter.swift        # Position-255 sentinel injection logic
-│   ├── ExperiencesApiClient.swift        # GET request builder for /json/experiences
+│   ├── ExperiencesApiClient.swift        # GET request builder for /json/experiences/app
 │   ├── RecirculationApiClient.swift      # POST sender for recirculation events
 │   ├── ExperiencesResponseParser.swift   # JSON response → [Experience] parsing + ParseResult
 │   ├── ContentResolver.swift             # Fetches experience content (with bundle + jukebox support)
@@ -225,7 +225,7 @@ internal protocol NetworkInfoProviding {
 - Returns `"wifi"`, `"cellular"`, `"ethernet"`, or `nil`
 
 ### 3.2 `ExperiencesApiClient`
-- **Endpoint:** `GET https://flowcards.mrf.io/json/experiences`
+- **Endpoint:** `GET https://flowcards.mrf.io/json/experiences/app`
 - **Does NOT use existing `ApiCall` protocol** — that protocol's extension hardcodes `httpMethod = "POST"`. Experiences needs GET with query params
 - Build URL with `URLComponents` + `URLQueryItem`
 - Use `URLSession.dataTask(with: URL)` directly

@@ -43,7 +43,7 @@ internal class ExperiencesApiClient {
     private func buildUrl(pageUrl: String, customTargeting: [String: String]) -> URL? {
         let tracker = CompassTracker.shared
 
-        guard var components = URLComponents(string: "\(baseUrl)/json/experiences") else { return nil }
+        guard var components = URLComponents(string: "\(baseUrl)/json/experiences/app") else { return nil }
         var items: [URLQueryItem] = []
 
         items.append(URLQueryItem(name: "sid", value: tracker.experiencesAccountId))
