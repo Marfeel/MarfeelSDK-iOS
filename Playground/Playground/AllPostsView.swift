@@ -9,17 +9,38 @@ import SwiftUI
 import SwiftUIIntrospect
 import MarfeelSDK_iOS
 
+private let blogListModuleName = "blog-list"
+
 struct AllPosts: View {
     @EnvironmentObject var store: BlogPostsStore
     @State private var scrollView: UIScrollView?
-    
+
+    private var recirculationLinks: [(BlogPost, RecirculationLink)] {
+        store.blogPosts.enumerated().map { index, post in
+            (post, RecirculationLink(url: post.url, position: index))
+        }
+    }
+
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(store.blogPosts) {post in
+                ForEach(Array(recirculationLinks.enumerated()), id: \.element.0.id) { _, pair in
+                    let (post, link) = pair
                     NavigationLink(destination: BlogPostView(blogPost: post)) {
                         BlogPostCardList(blogPost: post)
+                            .onAppear {
+                                Recirculation.shared.trackImpression(
+                                    name: blogListModuleName,
+                                    link: link
+                                )
+                            }
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        Recirculation.shared.trackClick(
+                            name: blogListModuleName,
+                            link: link
+                        )
+                    })
                 }
             }
             .navigationTitle("All blog posts")
@@ -39,6 +60,11 @@ struct AllPosts: View {
                 CompassTracker.shared.setUserVar(name: "hihi2", value: "haha2")
                 CompassTracker.shared.trackScreen(name: "ios homepage", scrollView: scrollView)
                 CompassTracker.shared.setPageMetric(name: "metric_string", value: 100)
+
+                Recirculation.shared.trackEligible(
+                    name: blogListModuleName,
+                    links: recirculationLinks.map { $0.1 }
+                )
             })
         }
     }

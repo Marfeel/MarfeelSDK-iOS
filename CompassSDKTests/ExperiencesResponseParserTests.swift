@@ -163,4 +163,92 @@ class ExperiencesResponseParserTests: XCTestCase {
         let result = parser.parse(loadJson("experiences_response_small"))
         XCTAssertEqual("190281109", result.editorialId)
     }
+
+    func testTreeFilterGroupWithEmptyChildrenProducesNoFilters() {
+        let json: [String: Any] = [
+            "compass": [
+                "actions": [
+                    "a": [
+                        "id": "AC_1",
+                        "filters": [
+                            "type": "group",
+                            "children": [Any](),
+                            "logic": "AND"
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        let result = parser.parse(json)
+        XCTAssertNil(result.experiences.first!.filters)
+    }
+
+    func testTreeFilterTopLevelConditionMapsComparatorToOperator() {
+        let json: [String: Any] = [
+            "experimentation": [
+                "actions": [
+                    "a": [
+                        "id": "AC_1",
+                        "filters": [
+                            "type": "condition",
+                            "field": "url",
+                            "comparator": "eq",
+                            "values": ["https://dev.marfeel.co/"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        let result = parser.parse(json)
+        let filters = result.experiences.first!.filters!
+        XCTAssertEqual(1, filters.count)
+        XCTAssertEqual("url", filters[0].key)
+        XCTAssertEqual(.equals, filters[0].operator)
+        XCTAssertEqual(["https://dev.marfeel.co/"], filters[0].values)
+    }
+
+    func testTreeFilterGroupFlattensNestedConditionChildren() {
+        let json: [String: Any] = [
+            "compass": [
+                "actions": [
+                    "a": [
+                        "id": "AC_1",
+                        "filters": [
+                            "type": "group",
+                            "logic": "AND",
+                            "children": [
+                                ["type": "condition", "field": "url", "comparator": "contains", "values": ["news"]],
+                                ["type": "condition", "field": "lang", "comparator": "neq", "values": ["es"]]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        let result = parser.parse(json)
+        let filters = result.experiences.first!.filters!
+        XCTAssertEqual(2, filters.count)
+        XCTAssertEqual(.like, filters[0].operator)
+        XCTAssertEqual(.notEquals, filters[1].operator)
+    }
+
+    func testLegacyArrayFilterFormStillParses() {
+        let json: [String: Any] = [
+            "inline": [
+                "actions": [
+                    "a": [
+                        "id": "IL_1",
+                        "filters": [
+                            ["key": "url", "operator": "EQUALS", "values": ["https://example.com"]]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        let result = parser.parse(json)
+        let filters = result.experiences.first!.filters!
+        XCTAssertEqual(1, filters.count)
+        XCTAssertEqual("url", filters[0].key)
+        XCTAssertEqual(.equals, filters[0].operator)
+    }
 }

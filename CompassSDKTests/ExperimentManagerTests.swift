@@ -72,7 +72,7 @@ class ExperimentManagerTests: XCTestCase {
 
         let experience = makeExperience(
             id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: "EQUALS", values: [assignedVariant])]
+            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .equals, values: [assignedVariant])]
         )
         let filtered = manager.filterByExperiments([experience])
         XCTAssertEqual(1, filtered.count)
@@ -82,7 +82,7 @@ class ExperimentManagerTests: XCTestCase {
         manager.handleExperimentGroups(makeExperimentGroups())
         let experience = makeExperience(
             id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: "EQUALS", values: ["nonexistent"])]
+            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .equals, values: ["nonexistent"])]
         )
         let filtered = manager.filterByExperiments([experience])
         XCTAssertEqual(0, filtered.count)
@@ -97,7 +97,7 @@ class ExperimentManagerTests: XCTestCase {
     func testFilterByExperimentsKeepsNonExperimentFilters() {
         let experience = makeExperience(
             id: "exp1",
-            filters: [ExperienceFilter(key: "url", operator: "EQUALS", values: ["something.com"])]
+            filters: [ExperienceFilter(key: "url", operator: .equals, values: ["something.com"])]
         )
         let filtered = manager.filterByExperiments([experience])
         XCTAssertEqual(1, filtered.count)
@@ -110,7 +110,7 @@ class ExperimentManagerTests: XCTestCase {
 
         let experience = makeExperience(
             id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: "NOT_EQUALS", values: [other])]
+            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .notEquals, values: [other])]
         )
         let filtered = manager.filterByExperiments([experience])
         XCTAssertEqual(1, filtered.count)
@@ -122,7 +122,7 @@ class ExperimentManagerTests: XCTestCase {
 
         let experience = makeExperience(
             id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: "NOT_EQUALS", values: [assigned])]
+            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .notEquals, values: [assigned])]
         )
         let filtered = manager.filterByExperiments([experience])
         XCTAssertEqual(0, filtered.count)

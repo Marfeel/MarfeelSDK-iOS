@@ -55,9 +55,9 @@ internal class ExperimentManager {
                 let groupId = String(filter.key.dropFirst(ExperimentManager.filterPrefix.count))
                 guard let assignedVariant = assignments[groupId] else { return false }
                 switch filter.operator {
-                case "EQUALS":
+                case .equals:
                     return filter.values.contains(assignedVariant)
-                case "NOT_EQUALS":
+                case .notEquals:
                     return !filter.values.contains(assignedVariant)
                 default:
                     return true

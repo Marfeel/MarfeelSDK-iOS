@@ -88,24 +88,52 @@ internal class ExperiencesResponseParser {
     }
 
     private func parseFilters(_ action: [String: Any]) -> [ExperienceFilter]? {
-        var explicit: [ExperienceFilter] = []
-        if let filtersArray = action["filters"] as? [[String: Any]] {
-            explicit = filtersArray.compactMap { obj -> ExperienceFilter? in
-                guard let key = obj["key"] as? String,
-                      let values = obj["values"] as? [String] else { return nil }
-                return ExperienceFilter(
-                    key: key,
-                    operator: (obj["operator"] as? String) ?? "EQUALS",
-                    values: values
-                )
-            }
-        }
-
+        let explicit = parseFiltersField(action["filters"])
         var combined = explicit
         if let experimentFilter = parseExperimentFilter(action["experiment"] as? [String: Any]) {
             combined.append(experimentFilter)
         }
         return combined.isEmpty ? nil : combined
+    }
+
+    private func parseFiltersField(_ value: Any?) -> [ExperienceFilter] {
+        if let array = value as? [[String: Any]] {
+            return array.compactMap(parseLegacyFilter)
+        }
+        if let object = value as? [String: Any] {
+            return parseFilterTree(object)
+        }
+        return []
+    }
+
+    private func parseLegacyFilter(_ obj: [String: Any]) -> ExperienceFilter? {
+        guard let key = obj["key"] as? String,
+              let values = obj["values"] as? [String] else { return nil }
+        let op = (obj["operator"] as? String).map { ExperienceFilterOperator.fromKey($0) } ?? .equals
+        return ExperienceFilter(key: key, operator: op, values: values)
+    }
+
+    private func parseFilterTree(_ node: [String: Any]) -> [ExperienceFilter] {
+        switch node["type"] as? String {
+        case "condition":
+            return parseConditionNode(node).map { [$0] } ?? []
+        case "group":
+            guard let children = node["children"] as? [[String: Any]] else { return [] }
+            return children.flatMap { parseFilterTree($0) }
+        default:
+            return []
+        }
+    }
+
+    private func parseConditionNode(_ node: [String: Any]) -> ExperienceFilter? {
+        guard let field = node["field"] as? String,
+              let values = node["values"] as? [String] else { return nil }
+        let comparator = (node["comparator"] as? String) ?? "eq"
+        return ExperienceFilter(
+            key: field,
+            operator: ExperienceFilterOperator.fromKey(comparator),
+            values: values
+        )
     }
 
     private func parseExperimentFilter(_ experiment: [String: Any]?) -> ExperienceFilter? {
@@ -115,7 +143,7 @@ internal class ExperiencesResponseParser {
               !variantIds.isEmpty else { return nil }
         return ExperienceFilter(
             key: "mrf_exp_\(groupId)",
-            operator: "EQUALS",
+            operator: .equals,
             values: variantIds
         )
     }
