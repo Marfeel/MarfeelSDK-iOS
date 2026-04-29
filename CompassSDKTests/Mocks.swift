@@ -41,16 +41,10 @@ class MockOperation: Operation {
         let onData = { [self] (data: Encodable) in
             print(data.jsonEncode()!)
             runing = false
-            
+
             expectation?(data)
         }
-        let data = dataBuilder(onData)
-        
-        guard data != nil else {
-            return
-        }
-        
-        onData(data!)
+        dataBuilder(onData)
     }
 }
 

@@ -466,6 +466,30 @@ internal extension CompassTracker {
             completion(ingestTrackInfo.core)
         }
     }
+
+    var experiencesPageUrl: String? { trackInfo.pageUrl }
+    var experiencesAccountId: String { String(config.accountId ?? 0) }
+    var experiencesPageTechnology: Int { IOS_TECH }
+    var experiencesSessionId: String { storage.sessionId }
+    var experiencesUserId: String { storage.userId }
+    var experiencesRegisteredUserId: String? { storage.suid }
+    var experiencesUserType: Int { trackInfo.userType?.rawValue ?? 0 }
+    var experiencesFirstVisitTimestamp: Int64 { storage.firstVisit.timeStamp }
+    var experiencesUserSegments: [String] { storage.userSegments }
+    var experiencesUserVars: Vars { storage.userVars }
+    var experiencesSessionVars: Vars { storage.sessionVars }
+    var experiencesPageVars: Vars { pageVars }
+    var experiencesHasConsent: Bool? { storage.hasConsent }
+    var experiencesConsentCode: String {
+        switch storage.hasConsent {
+        case true: return "1"
+        case false: return "0"
+        default: return "3"
+        }
+    }
+    var experiencesLandingPage: String? { storage.landingPage }
+    var experiencesPreviousPageUrl: String? { trackInfo.core.previosPageUrl }
+    var experiencesPreviousVisitTimestamp: Int64 { storage.previousVisit?.timeStamp ?? 0 }
 }
 
 private extension CompassTracker {
