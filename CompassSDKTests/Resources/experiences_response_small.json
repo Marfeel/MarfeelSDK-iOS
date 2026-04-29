@@ -1,0 +1,112 @@
+{
+    "targeting": {
+        "frequencyCap": {
+            "IL_HMNmL7lWTOWBldjNWm1PgQ": [
+                "d"
+            ],
+            "IL_CRdHEBwJQxqkrmXggsSp-Q": [
+                "d"
+            ],
+            "IL_FQuCyODGSOeqppSkcpr3Vw": [
+                "ls"
+            ],
+            "IL_YF3w9ADrR7eTwRoCMEkUvg": [
+                "ls"
+            ]
+        }
+    },
+    "content": {
+        "editorialId": "190281109"
+    },
+    "flowcards": {
+        "cards": {}
+    },
+    "inline": {
+        "actions": {
+            "home-cta-widget": {
+                "id": "IL_mLTwLgXbRS-MJzh1rJM6ng",
+                "placement": "#slot-a",
+                "content": {
+                    "type": "TextHTML",
+                    "url": "https://example.com/widget?id=a"
+                },
+                "strategy": "replace",
+                "features": {
+                    "mode": "contextual",
+                    "removable": true
+                },
+                "selectors": [
+                    {
+                        "selector": "#slot-a",
+                        "strategy": "replace"
+                    }
+                ]
+            },
+            "content-recommender-block": {
+                "id": "IL_r1-HQ0psRiiLuHZTpi9lDQ",
+                "family": "recommenderexperience",
+                "placement": "popup",
+                "content": {
+                    "type": "Json",
+                    "url": "https://example.com/recommender?id=b"
+                },
+                "strategy": "append",
+                "features": {
+                    "mode": "contextual",
+                    "removable": false,
+                    "accentColor": "#ff9828",
+                    "position": "2,1",
+                    "backdropColor": "transparent",
+                    "maxWidth": "100vw"
+                }
+            }
+        }
+    },
+    "compass": {
+        "actions": {
+            "recirculation-ticker": {
+                "id": "AC_5zWHRfzXTQOEISmksXIoew",
+                "placement": "window",
+                "recirculationModules": [
+                    {
+                        "name": "ticker",
+                        "selector": "#csw > div.ek"
+                    }
+                ]
+            }
+        }
+    },
+    "affiliationEnhancer": {
+        "actions": {
+            "affiliation-enhancer": {
+                "id": "AC_-R26iUcSTyCwya8od9k2yg",
+                "placement": "window",
+                "context": "{\"source\":\"direct\",\"campaign\":\"\",\"url\":\"https://example.com/\"}"
+            }
+        }
+    },
+    "adManager": {
+        "actions": {
+            "gam-home": {
+                "id": "AC_9YP58jOFQli-neuaHNqpcA",
+                "placement": "window",
+                "targeting": [
+                    {
+                        "key": "m_test",
+                        "value": "home"
+                    }
+                ]
+            },
+            "gam-loyal-segment": {
+                "id": "AC_Gwyc3MW_TWiMzAIUsIiHRA",
+                "placement": "window",
+                "targeting": [
+                    {
+                        "key": "m_user",
+                        "value": "loyal"
+                    }
+                ]
+            }
+        }
+    }
+}

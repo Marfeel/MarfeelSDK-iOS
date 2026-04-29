@@ -9,14 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var store = BlogPostsStore()
-    
+
     var body: some View {
-        AllPosts()
-            .environmentObject(store)
-            .tabItem {
-                Image(systemName: "list.dash")
-                Text("See all")
-            }
+        TabView {
+            AllPosts()
+                .environmentObject(store)
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("Posts")
+                }
+            ExperiencesView()
+                .tabItem {
+                    Image(systemName: "sparkles")
+                    Text("Experiences")
+                }
+        }
     }
 }
 struct ContentView_Previews: PreviewProvider {
