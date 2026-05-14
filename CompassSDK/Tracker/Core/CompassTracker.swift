@@ -326,10 +326,10 @@ extension CompassTracker: CompassTracking {
 
     public func trackConversion(conversion: String, options: ConversionOptions) {
         let conversionId = getConversionId(options: options)
-        
+
         if storage.shouldTrackConversion(conversion, id: conversionId) {
             storage.addTrackedConversion(conversion, id: conversionId)
-            
+
             newConversions.append(Conversion(
                 conversion: conversion,
                 initiator: options.initiator,
@@ -337,6 +337,8 @@ extension CompassTracker: CompassTracking {
                 value: options.value,
                 meta: convertMetaToArray(options.meta)
             ))
+        } else if let conversionId = conversionId {
+            setPageVar(name: "ios-duplicatedConversion", value: "\(conversion):\(conversionId)")
         }
     }
 
