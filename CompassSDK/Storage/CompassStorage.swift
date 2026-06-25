@@ -29,6 +29,10 @@ protocol CompassStorage {
     func setLandingPage(_ landingPage: String?)
     func shouldTrackConversion(_ conversion: String, id: String?) -> Bool
     func addTrackedConversion(_ conversion: String, id: String?)
+    func readCdpMasterId() -> String?
+    func writeCdpMasterId(_ newMasterId: String) -> String?
+    func readCdpCachedIdentity(sessionId: String) -> CdpCachedIdentity?
+    func writeCdpCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String)
 }
 
 enum Store: String {
@@ -51,6 +55,10 @@ class PListCompassStorage: PListStorage {
         var hasConsent: Bool?
         var landingPage: String?
         var trackedConversions: [String]?
+        var cdpMasterId: String?
+        var cdpRfv: String?
+        var cdpCohorts: String?
+        var cdpCacheSessionId: String?
 
         static var empty: Model {.init(numVisits: 0, userId: nil, suid: nil, firstVisit: nil, lastVisit: nil, userVars: Vars(), sessionVars: Vars(), userSegments: [], hasConsent: nil, landingPage: nil, trackedConversions: [])}
     }
@@ -258,6 +266,49 @@ extension PListCompassStorage: CompassStorage {
 
     private func conversionKey(_ conversion: String, id: String?) -> String {
         return id != nil ? "\(conversion):\(id!)" : conversion
+    }
+
+    // MARK: - CDP identity
+
+    /// Returns the stored master_id only if it is a valid UUID. A corrupt / non-UUID
+    /// value is transparently treated as absent (triggers a fresh resolve).
+    func readCdpMasterId() -> String? {
+        guard let id = model?.cdpMasterId, UUID(uuidString: id) != nil else { return nil }
+        return id
+    }
+
+    /// Persists a new master_id and returns the **old** (validated) value — needed for
+    /// segment carry-over when the master_id changes.
+    func writeCdpMasterId(_ newMasterId: String) -> String? {
+        let old = readCdpMasterId()
+        model?.cdpMasterId = newMasterId
+        return old
+    }
+
+    /// Session-tagged cached identity. Returns nil once the session rotates, nil if
+    /// nothing is cached, and nil if the cohorts cache is corrupt (not an array).
+    func readCdpCachedIdentity(sessionId: String) -> CdpCachedIdentity? {
+        guard model?.cdpCacheSessionId == sessionId else { return nil }
+
+        let rfvJson = model?.cdpRfv
+        let cohortsJson = model?.cdpCohorts
+
+        if rfvJson == nil && cohortsJson == nil { return nil }
+        guard let cohorts = parseCdpCohorts(cohortsJson) else { return nil }
+        let rfv = rfvJson.flatMap { CdpRfv.jsonStringDecode(from: $0) }
+
+        return CdpCachedIdentity(rfv: rfv, cohorts: cohorts)
+    }
+
+    func writeCdpCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) {
+        model?.cdpRfv = rfv.flatMap { $0.encode() }.flatMap { String(data: $0, encoding: .utf8) }
+        model?.cdpCohorts = (cohorts.encode()).flatMap { String(data: $0, encoding: .utf8) }
+        model?.cdpCacheSessionId = sessionId
+    }
+
+    private func parseCdpCohorts(_ json: String?) -> [Int]? {
+        guard let json = json, let data = json.data(using: .utf8) else { return nil }
+        return try? JSONDecoder().decode([Int].self, from: data)
     }
 }
         

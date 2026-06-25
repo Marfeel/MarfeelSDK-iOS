@@ -21,6 +21,9 @@ struct IngestTrackInfo: Encodable {
         case conversionId = "cvid"
         case conversionValue = "cvv"
         case conversionMeta = "cvar"
+        case cdpMasterId = "cdp_mid"
+        case cdpRfv = "cdp_rfv"
+        case cdpCohorts = "cdp_cohorts"
     }
     
     private var trackInfo = TrackInfo()
@@ -43,7 +46,11 @@ struct IngestTrackInfo: Encodable {
     var conversionId: String?
     var conversionValue: String?
     var conversionMeta: [[String]]?
-    
+
+    var cdpMasterId: String?
+    var cdpRfv: String?
+    var cdpCohorts: String?
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
@@ -64,6 +71,9 @@ struct IngestTrackInfo: Encodable {
         try container.encodeIfPresent(conversionId, forKey: .conversionId)
         try container.encodeIfPresent(conversionValue, forKey: .conversionValue)
         try container.encodeIfPresent(conversionMeta, forKey: .conversionMeta)
+        try container.encodeIfPresent(cdpMasterId, forKey: .cdpMasterId)
+        try container.encodeIfPresent(cdpRfv, forKey: .cdpRfv)
+        try container.encodeIfPresent(cdpCohorts, forKey: .cdpCohorts)
     }
 }
 

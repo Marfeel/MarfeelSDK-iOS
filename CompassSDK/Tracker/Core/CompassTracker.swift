@@ -135,11 +135,16 @@ public class CompassTracker: Tracker {
         }
     }
     
-    public static func initialize(accountId: Int, pageTechnology: Int? = nil, endpoint: String? = nil) {
+    public static func initialize(accountId: Int, pageTechnology: Int? = nil, endpoint: String? = nil, enableCdp: Bool = false) {
         let tracker = CompassTracker.shared
-        
+
         tracker.config.override(accountId: accountId, pageTechnology: pageTechnology, endpoint: endpoint)
+        tracker.config.cdpEnabled = enableCdp
         tracker.setDataFromConfig()
+
+        if enableCdp {
+            CdpTracker.shared.start()
+        }
     }
     
     private func setDataFromConfig() {
@@ -258,6 +263,9 @@ extension CompassTracker: CompassTracking {
 
     public func setSiteUserId(_ userId: String?) {
         trackInfo.siteUserId = userId
+        if config.cdpEnabled, let userId = userId {
+            CdpTracker.shared.onSiteUserId(userId)
+        }
     }
 
     public func getRFV(_ completion: @escaping (Rfv?) -> ()) {
@@ -292,6 +300,7 @@ extension CompassTracker: CompassTracking {
     public func trackNewPage(url: URL, rs: String? = nil) {
         restart(pageName: url.absoluteString, rs: rs)
         doTik()
+        if config.cdpEnabled { CdpTracker.shared.onNewPage() }
     }
     
     public func trackScreen(_ name: String, rs: String? = nil) {
@@ -398,6 +407,7 @@ extension CompassTracker: CompassTracking {
     
     public func setConsent(_ hasConsent: Bool) {
         storage.setConsent(hasConsent)
+        if config.cdpEnabled { CdpTracker.shared.onConsentChanged() }
     }
     
     public func getUserId() -> String {
@@ -458,6 +468,16 @@ internal extension CompassTracker {
                 finalTrackInfo.landingPage = storage.landingPage
                 finalTrackInfo.tik = tick!
 
+                // CDP beacon fields — only under personalization consent AND a master_id.
+                if config.cdpEnabled, storage.hasConsent != false {
+                    let cdpData = CdpTracker.shared.getCdpData()
+                    if let masterId = cdpData.masterId {
+                        finalTrackInfo.cdpMasterId = masterId
+                        finalTrackInfo.cdpRfv = cdpData.rfvSerialized.isEmpty ? nil : cdpData.rfvSerialized
+                        finalTrackInfo.cdpCohorts = cdpData.cohortsSerialized
+                    }
+                }
+
                 completion(finalTrackInfo)
             }
         }
@@ -492,6 +512,23 @@ internal extension CompassTracker {
     var experiencesLandingPage: String? { storage.landingPage }
     var experiencesPreviousPageUrl: String? { trackInfo.core.previosPageUrl }
     var experiencesPreviousVisitTimestamp: Int64 { storage.previousVisit?.timeStamp ?? 0 }
+
+}
+
+// MARK: - CdpHost
+// CompassTracker is the CDP's host: it stays the single owner of persistence, session,
+// consent and account config, exposed to the CDP through this narrow protocol.
+extension CompassTracker: CdpHost {
+    var cdpEnabled: Bool { config.cdpEnabled }
+    var cdpAccountId: Int? { accountId }
+    var cdpUserId: String { storage.userId }
+    var cdpSessionId: String { storage.sessionId }
+    var cdpConsent: Bool? { storage.hasConsent }
+    var cdpUserVars: [String: String] { storage.userVars }
+    func cdpReadMasterId() -> String? { storage.readCdpMasterId() }
+    func cdpWriteMasterId(_ id: String) -> String? { storage.writeCdpMasterId(id) }
+    func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity? { storage.readCdpCachedIdentity(sessionId: sessionId) }
+    func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) { storage.writeCdpCachedIdentity(rfv: rfv, cohorts: cohorts, sessionId: sessionId) }
 }
 
 private extension CompassTracker {
@@ -570,6 +607,7 @@ private extension CompassTracker {
         
         func onAppActive(){
             doTik()
+            if config.cdpEnabled { CdpTracker.shared.start() }
         }
         
         self.lifecyleNotifier.listen(onForeground: onAppActive, onBackground: onAppInactive)

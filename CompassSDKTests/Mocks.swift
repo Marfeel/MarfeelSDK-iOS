@@ -123,6 +123,37 @@ class MockStorage: CompassStorage {
         }
     }
 
+    var cdpMasterId: String?
+    var cdpRfv: String?
+    var cdpCohorts: String?
+    var cdpCacheSessionId: String?
+
+    func readCdpMasterId() -> String? {
+        guard let id = cdpMasterId, UUID(uuidString: id) != nil else { return nil }
+        return id
+    }
+
+    func writeCdpMasterId(_ newMasterId: String) -> String? {
+        let old = readCdpMasterId()
+        cdpMasterId = newMasterId
+        return old
+    }
+
+    func readCdpCachedIdentity(sessionId: String) -> CdpCachedIdentity? {
+        guard cdpCacheSessionId == sessionId else { return nil }
+        if cdpRfv == nil && cdpCohorts == nil { return nil }
+        guard let json = cdpCohorts, let data = json.data(using: .utf8),
+              let cohorts = try? JSONDecoder().decode([Int].self, from: data) else { return nil }
+        let rfv = cdpRfv.flatMap { CdpRfv.jsonStringDecode(from: $0) }
+        return CdpCachedIdentity(rfv: rfv, cohorts: cohorts)
+    }
+
+    func writeCdpCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) {
+        cdpRfv = rfv.flatMap { $0.encode() }.flatMap { String(data: $0, encoding: .utf8) }
+        cdpCohorts = cohorts.encode().flatMap { String(data: $0, encoding: .utf8) }
+        cdpCacheSessionId = sessionId
+    }
+
     init() {}
 }
 
