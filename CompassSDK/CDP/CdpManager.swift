@@ -25,6 +25,9 @@ internal protocol CdpHost: AnyObject {
     func cdpWriteMasterId(_ id: String) -> String?
     func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity?
     func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String)
+    /// The legacy (`useg`) segment list — bridged into the CDP store on first resolve.
+    var cdpLegacySegments: [String] { get }
+    func cdpWriteLegacySegments(_ segments: [String])
 }
 
 internal final class CdpManager {
@@ -242,6 +245,29 @@ internal final class CdpManager {
             let local = self.segmentsStore.read(account: self.currentAccountIdString(), masterId: masterId)
             if !local.isEmpty {
                 self.postSegmentChangeLocked(segmentsAdd: local, segmentsRemove: nil)
+            }
+        }
+    }
+
+    /// Bridge the legacy (`useg`) segment store into the CDP store on first identity
+    /// resolve, mirroring the web `mergeLegacySegmentsIntoCdpStorage` union: union the
+    /// legacy list into the CDP store for the resolved master_id, then write the union
+    /// back to the legacy store so both stay in sync. Must run BEFORE `reconcileSegments`
+    /// so the unioned set is what gets pushed as `segments_add`. No-op without a real
+    /// master_id (leaves the legacy list untouched).
+    func mergeLegacySegments() {
+        guard hasConsent() else { return }
+        queue.async {
+            guard let masterId = self.host.cdpReadMasterId() else { return }
+            let account = self.currentAccountIdString()
+            let legacy = self.host.cdpLegacySegments
+            let stored = self.segmentsStore.read(account: account, masterId: masterId)
+            let merged = self.dedup(stored + legacy)
+            if Set(merged) != Set(stored) {
+                self.segmentsStore.write(account: account, masterId: masterId, value: merged)
+            }
+            if Set(merged) != Set(legacy) {
+                self.host.cdpWriteLegacySegments(merged)
             }
         }
     }

@@ -137,6 +137,7 @@ final class CdpTests: XCTestCase {
         var cdpUserId = "cookie"
         var cdpSessionId = "session"
         var cdpUserVars: [String: String] = [:]
+        var legacySegments: [String] = []
 
         init(enabled: Bool, consent: Bool?, account: Int?, masterId: String?) {
             self.cdpEnabled = enabled
@@ -149,6 +150,8 @@ final class CdpTests: XCTestCase {
         func cdpWriteMasterId(_ id: String) -> String? { let old = masterId; masterId = id; return old }
         func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity? { nil }
         func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) {}
+        var cdpLegacySegments: [String] { legacySegments }
+        func cdpWriteLegacySegments(_ segments: [String]) { legacySegments = segments }
     }
 
     private func makeManager(enabled: Bool = true, consent: Bool? = true, account: Int? = 123, masterId: String?, segmentsStore: CdpSegmentsStore) -> CdpManager {
@@ -166,6 +169,45 @@ final class CdpTests: XCTestCase {
             // Pre-identity segments land in the "local" bucket.
             XCTAssertEqual(store.read(account: "123", masterId: LOCAL_MID_SENTINEL), ["sports_fan"])
             XCTAssertEqual(manager.getCdpSegments(), ["sports_fan"])
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testMergeLegacySegmentsUnionsIntoCdpStoreAndWritesBack() {
+        let store = CdpSegmentsStore(defaults: defaults)
+        let host = MockCdpHost(enabled: true, consent: true, account: 123, masterId: "mid-1")
+        host.legacySegments = ["sports_fan", "premium"]
+        // A segment already in the CDP store (e.g. set via addCdpSegment before resolve).
+        store.write(account: "123", masterId: "mid-1", value: ["premium", "newsletter"])
+        let manager = CdpManager(api: CdpApiClient(), host: host, segmentsStore: store)
+
+        manager.mergeLegacySegments()
+
+        let expectation = XCTestExpectation(description: "merged")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            // Union of CDP store + legacy, deduped.
+            XCTAssertEqual(Set(store.read(account: "123", masterId: "mid-1")), ["premium", "newsletter", "sports_fan"])
+            // Union written back to the legacy store too (bidirectional, matches web).
+            XCTAssertEqual(Set(host.legacySegments), ["premium", "newsletter", "sports_fan"])
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testMergeLegacySegmentsNoOpWithoutMasterId() {
+        let store = CdpSegmentsStore(defaults: defaults)
+        let host = MockCdpHost(enabled: true, consent: true, account: 123, masterId: nil)
+        host.legacySegments = ["sports_fan"]
+        let manager = CdpManager(api: CdpApiClient(), host: host, segmentsStore: store)
+
+        manager.mergeLegacySegments()
+
+        let expectation = XCTestExpectation(description: "noop")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            // No master_id → nothing merged, legacy list untouched.
+            XCTAssertEqual(host.legacySegments, ["sports_fan"])
+            XCTAssertEqual(store.read(account: "123", masterId: LOCAL_MID_SENTINEL), [])
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 2)

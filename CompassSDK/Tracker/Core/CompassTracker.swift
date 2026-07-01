@@ -391,18 +391,22 @@ extension CompassTracker: CompassTracking {
     
     public func addUserSegment(_ name: String) {
         storage.addUserSegment(name)
+        if config.cdpEnabled { CdpTracker.shared.addCdpSegment(name) }
     }
-    
+
     public func setUserSegments(_ segments: [String]) {
         storage.addUserSegments(segments)
+        if config.cdpEnabled { CdpTracker.shared.setCdpSegments(segments) }
     }
-    
+
     public func removeUserSegment(_ name: String) {
         storage.removeUserSegment(name)
+        if config.cdpEnabled { CdpTracker.shared.removeCdpSegment(name) }
     }
-    
+
     public func clearUserSegments() {
         storage.clearUserSegments()
+        if config.cdpEnabled { CdpTracker.shared.clearCdpSegments() }
     }
     
     public func setConsent(_ hasConsent: Bool) {
@@ -529,6 +533,8 @@ extension CompassTracker: CdpHost {
     func cdpWriteMasterId(_ id: String) -> String? { storage.writeCdpMasterId(id) }
     func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity? { storage.readCdpCachedIdentity(sessionId: sessionId) }
     func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) { storage.writeCdpCachedIdentity(rfv: rfv, cohorts: cohorts, sessionId: sessionId) }
+    var cdpLegacySegments: [String] { storage.userSegments }
+    func cdpWriteLegacySegments(_ segments: [String]) { storage.addUserSegments(segments) }
 }
 
 private extension CompassTracker {

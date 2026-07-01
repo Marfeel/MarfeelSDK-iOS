@@ -69,6 +69,9 @@ internal final class CdpTracker: CdpTracking {
     private func registerIdentityResolvedWork(host: CdpHost) {
         manager.onIdentityResolved { [weak self] in
             guard let self = self else { return }
+            // Bridge legacy `useg` segments into the CDP store, then reconcile so the
+            // unioned set is what gets pushed as segments_add (matches web ordering).
+            self.manager.mergeLegacySegments()
             self.manager.reconcileSegments()
             var properties = host.cdpUserVars
             properties["timezone"] = TimeZone.current.identifier
