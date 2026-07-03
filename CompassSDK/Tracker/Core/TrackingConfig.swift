@@ -13,8 +13,9 @@ public class TrackingConfig {
     var fallbackEndpoint: URL?
     var fallbackEndpointWindow: Double?
     var pageTechnology: Int?
+    var cdpEnabled: Bool = false
     let version = "0.1"
-    
+
     public static let shared: TrackingConfig = TrackingConfig()
     
     init(bundle: Bundle = .main) {

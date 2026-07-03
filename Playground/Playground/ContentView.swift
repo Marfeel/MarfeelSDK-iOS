@@ -23,6 +23,11 @@ struct ContentView: View {
                     Image(systemName: "sparkles")
                     Text("Experiences")
                 }
+            CdpView()
+                .tabItem {
+                    Image(systemName: "person.badge.key")
+                    Text("CDP")
+                }
         }
     }
 }

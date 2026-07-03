@@ -24,6 +24,6 @@ struct PlaygroundApp: App {
             try? fileManager.removeItem(at: plistURL)
         }
 
-        CompassTracker.initialize(accountId: 1659, pageTechnology: 105)
+        CompassTracker.initialize(accountId: 1659, pageTechnology: 105, enableCdp: true)
     }
 }
