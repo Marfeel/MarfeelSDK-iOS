@@ -115,6 +115,7 @@ public protocol CompassTracking: AnyObject {
     func clearUserSegments()
     func setConsent(_ hasConsent: Bool)
     func getUserId() -> String
+    func getSessionId() -> String
     func setLandingPage(_ landingPage: String?)
     func setLandingPage(_ landingPage: URL)
     func updateScrollPercentage(_ percentage: Float)
@@ -416,6 +417,10 @@ extension CompassTracker: CompassTracking {
     
     public func getUserId() -> String {
         return storage.userId
+    }
+
+    public func getSessionId() -> String {
+        return storage.sessionId
     }
 
     public func updateScrollPercentage(_ percentage: Float) {
