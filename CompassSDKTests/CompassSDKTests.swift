@@ -64,7 +64,12 @@ class CompassSDKTests: XCTestCase {
 
         wait(for: [expectation], timeout: 5)
     }
-    
+
+    func testGetSessionId() {
+        let sut = CompassTracker(storage: MockStorage())
+        XCTAssertEqual(sut.getSessionId(), "sessionIdFromStorage")
+    }
+
     func testShouldFetchRFV() {
         let expectation = XCTestExpectation()
         let sut = GetRFV(apiRouter: MockApiRouterRfv(expect: {(apiCall) in
