@@ -39,10 +39,9 @@ extension ApiCall {
     }
     
     private var userAgent: String {
-        let codeVersion = Bundle.compassSDK?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
         let deviceType = UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "mobile"
-        
-        return "Marfeel-iOS-SDK/\(codeVersion) (\(UIDevice.current.model)) \(deviceType)"
+
+        return "Marfeel-iOS-SDK/\(SDK_VERSION) (\(UIDevice.current.model)) \(deviceType)"
     }
 }
 

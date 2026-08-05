@@ -26,8 +26,5 @@ extension Bundle {
     
     var fallbackWindow: Double? { object(forInfoDictionaryKey: "COPASS_FALLBACK_ENDPOINT_WINDOW") as? Double ?? 60 }
 
-    static var compassSDK: Bundle? {
-        return Bundle(for: CompassTracker.self)
-    }
     
 }

@@ -15,9 +15,10 @@ if [ "$BUMP_TYPE" != "major" ] && [ "$BUMP_TYPE" != "minor" ] && [ "$BUMP_TYPE" 
   exit 1
 fi
 
-# Define paths for podspec and Info.plist
+# Define paths for podspec, Info.plist and the compile-time version constant
 PODSPEC_FILE="MarfeelSDK-iOS.podspec"
 PLIST_PATH="CompassSDK/Info.plist"
+VERSION_SWIFT_PATH="CompassSDK/SDKVersion.swift"
 
 # Check if the podspec file exists
 if [ ! -f "$PODSPEC_FILE" ]; then
@@ -28,6 +29,12 @@ fi
 # Check if the Info.plist file exists
 if [ ! -f "$PLIST_PATH" ]; then
   echo "Info.plist file not found at $PLIST_PATH"
+  exit 1
+fi
+
+# Check if the version constant file exists
+if [ ! -f "$VERSION_SWIFT_PATH" ]; then
+  echo "SDKVersion.swift not found at $VERSION_SWIFT_PATH"
   exit 1
 fi
 
@@ -66,9 +73,18 @@ sed -i '' "s/spec.version      = \".*\"/spec.version      = \"$NEW_VERSION\"/" "
 echo "Updating Info.plist version..."
 plutil -replace CFBundleShortVersionString -string "$NEW_VERSION" "$PLIST_PATH"
 
+# Update the compile-time version constant (sent in the User-Agent header)
+echo "Updating SDKVersion.swift version..."
+sed -i '' "s/^let SDK_VERSION = \".*\"$/let SDK_VERSION = \"$NEW_VERSION\"/" "$VERSION_SWIFT_PATH"
+
+if ! grep -q "^let SDK_VERSION = \"$NEW_VERSION\"$" "$VERSION_SWIFT_PATH"; then
+  echo "Failed to update SDK_VERSION in $VERSION_SWIFT_PATH"
+  exit 1
+fi
+
 # Check if the changes were successful
 if [ $? -eq 0 ]; then
-  echo "Version updated successfully in both podspec and Info.plist"
+  echo "Version updated successfully in podspec, Info.plist and SDKVersion.swift"
 else
   echo "Failed to update version in podspec or Info.plist"
   exit 1

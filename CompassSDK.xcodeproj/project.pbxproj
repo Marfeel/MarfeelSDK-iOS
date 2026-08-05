@@ -24,6 +24,7 @@
 		49C215142BF665890098AF91 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		49C744B32BC53E8F00072BE1 /* AppLifecycleNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C744B22BC53E8F00072BE1 /* AppLifecycleNotifier.swift */; };
 		49D3A5FB2BC434BA00DE9C7D /* TrackingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3A5FA2BC434BA00DE9C7D /* TrackingConfig.swift */; };
+		4BE200022BC434BA00DE9C7D /* SDKVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE200012BC434BA00DE9C7D /* SDKVersion.swift */; };
 		B1E7404C4C8410187ABFEF65 /* Pods_CompassSDK_CompassSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E48A486C75145EF7273767 /* Pods_CompassSDK_CompassSDKTests.framework */; };
 		D704E28425D29597006517D2 /* TikOperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704E28325D29597006517D2 /* TikOperationFactory.swift */; };
 		D704E2D525D2DCED006517D2 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704E2D425D2DCED006517D2 /* ApiRouter.swift */; };
@@ -77,6 +78,7 @@
 		4960743229FA954200EF49BD /* MultimediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaItem.swift; sourceTree = "<group>"; };
 		4960743629FA9ACE00EF49BD /* PlaybackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackInfo.swift; sourceTree = "<group>"; };
 		49C744B22BC53E8F00072BE1 /* AppLifecycleNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleNotifier.swift; sourceTree = "<group>"; };
+		4BE200012BC434BA00DE9C7D /* SDKVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKVersion.swift; sourceTree = "<group>"; };
 		49D3A5FA2BC434BA00DE9C7D /* TrackingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingConfig.swift; sourceTree = "<group>"; };
 		68CBA1232D07F2E0B0F94A06 /* Pods-CompassSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompassSDK.debug.xcconfig"; path = "Target Support Files/Pods-CompassSDK/Pods-CompassSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		D704E28325D29597006517D2 /* TikOperationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikOperationFactory.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				D70E237D25BDA77500BA3C38 /* Tick */,
 				D70E237825BDA71B00BA3C38 /* Storage */,
 				D70E237725BDA70B00BA3C38 /* Extensions */,
+				4BE200012BC434BA00DE9C7D /* SDKVersion.swift */,
 				D77958E325B05C9600A7A44A /* CompassSDK.h */,
 				D77958E425B05C9600A7A44A /* Info.plist */,
 			);
@@ -472,6 +475,7 @@
 				D779590425B0653500A7A44A /* SendTik.swift in Sources */,
 				D704E2D525D2DCED006517D2 /* ApiRouter.swift in Sources */,
 				49D3A5FB2BC434BA00DE9C7D /* TrackingConfig.swift in Sources */,
+				4BE200022BC434BA00DE9C7D /* SDKVersion.swift in Sources */,
 				D7D4559525B49BB200CC2BCE /* Bundle.swift in Sources */,
 				49C744B32BC53E8F00072BE1 /* AppLifecycleNotifier.swift in Sources */,
 				D7E6D46525D15AC2002749A3 /* URLRequest.swift in Sources */,
