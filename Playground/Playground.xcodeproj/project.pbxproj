@@ -19,6 +19,8 @@
 		4923C9CA2A0195870036CE77 /* BlogPostCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9C92A0195870036CE77 /* BlogPostCardList.swift */; };
 		4923C9CD2A01962D0036CE77 /* BlogPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CC2A01962D0036CE77 /* BlogPostView.swift */; };
 		4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4923C9CF2A0196820036CE77 /* AllPostsView.swift */; };
+		4AE100022A0196820036CE77 /* ExperiencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE100012A0196820036CE77 /* ExperiencesView.swift */; };
+		4AE100042A0196820036CE77 /* CdpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE100032A0196820036CE77 /* CdpView.swift */; };
 		49DAD32A2A0268B500B25852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD3292A0268B500B25852 /* Assets.xcassets */; };
 		49DAD32C2A02690400B25852 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAD32B2A02690400B25852 /* Preview Assets.xcassets */; };
 		49DAD3342A027AB600B25852 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49DAD3332A027AB600B25852 /* YouTubePlayerKit */; };
@@ -39,6 +41,8 @@
 		4923C9C92A0195870036CE77 /* BlogPostCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCardList.swift; sourceTree = "<group>"; };
 		4923C9CC2A01962D0036CE77 /* BlogPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostView.swift; sourceTree = "<group>"; };
 		4923C9CF2A0196820036CE77 /* AllPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostsView.swift; sourceTree = "<group>"; };
+		4AE100012A0196820036CE77 /* ExperiencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesView.swift; sourceTree = "<group>"; };
+		4AE100032A0196820036CE77 /* CdpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpView.swift; sourceTree = "<group>"; };
 		49DAD3292A0268B500B25852 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DAD32B2A02690400B25852 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E1CE4CCAA7A3151832892079 /* Pods-Playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.release.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				4923C9C92A0195870036CE77 /* BlogPostCardList.swift */,
 				4923C9CC2A01962D0036CE77 /* BlogPostView.swift */,
 				4923C9CF2A0196820036CE77 /* AllPostsView.swift */,
+				4AE100012A0196820036CE77 /* ExperiencesView.swift */,
+				4AE100032A0196820036CE77 /* CdpView.swift */,
 			);
 			path = Playground;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 				4923C9A82A0190D40036CE77 /* PlaygroundApp.swift in Sources */,
 				4923C9D02A0196820036CE77 /* AllPostsView.swift in Sources */,
 				4923C9C72A0193CE0036CE77 /* BlogPostStore.swift in Sources */,
+				4AE100022A0196820036CE77 /* ExperiencesView.swift in Sources */,
+				4AE100042A0196820036CE77 /* CdpView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
