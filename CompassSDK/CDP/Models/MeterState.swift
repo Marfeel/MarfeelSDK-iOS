@@ -93,14 +93,14 @@ extension MeterState {
     }
 }
 
-private func cdpInt(_ value: Any?) -> Int? {
+internal func cdpInt(_ value: Any?) -> Int? {
     if let number = value as? NSNumber { return number.intValue }
     if let int = value as? Int { return int }
     if let string = value as? String { return Int(string) }
     return nil
 }
 
-private func cdpBool(_ value: Any?) -> Bool? {
+internal func cdpBool(_ value: Any?) -> Bool? {
     if let number = value as? NSNumber { return number.boolValue }
     if let bool = value as? Bool { return bool }
     return nil

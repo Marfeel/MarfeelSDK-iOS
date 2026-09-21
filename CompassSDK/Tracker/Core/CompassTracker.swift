@@ -113,12 +113,43 @@ public protocol CompassTracking: AnyObject {
     func setUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
     func clearUserSegments()
+    /// The user segments as a beacon sends them (`useg`): the device-owned segments
+    /// unioned with the Server Segments the CDP asserts, server first, deduplicated and
+    /// capped at 100. When the union overflows the user var `mrf_tooManySegments` is set
+    /// and device-owned segments are the ones dropped. Storage itself is never trimmed.
+    /// Reads whatever Server Segments are known right now.
+    func getUserSegments() -> [String]
+    /// `getUserSegments()` after resolving identity, so the Server Segments are current.
+    func getUserSegments(completion: @escaping ([String]) -> Void)
+    /// The user vars as a beacon sends them (`uvar`): the device-owned vars followed by
+    /// the Server Properties the CDP computed for this user. Device-owned wins on a key
+    /// collision. Reads whatever Server Properties are known right now.
+    func getUserVars() -> [String: String]
+    /// `getUserVars()` after resolving identity, so the Server Properties are current.
+    func getUserVars(completion: @escaping ([String: String]) -> Void)
+    /// Turns this device into a **new visitor**. Call it on sign-out.
+    ///
+    /// Synchronously — before this call returns — the site user id is dropped, a new
+    /// internal user id, first visit and session are minted, user vars and segments are
+    /// emptied and the whole local CDP state (master_id, cached rfv/cohorts, mirrors,
+    /// meters, anonymous consent memory) is wiped. `completion` fires once the
+    /// best-effort remote CDP reset settles, bounded to five seconds. It never fails and
+    /// never re-resolves identity: the next `trackNewPage` does. The current page keeps
+    /// its page id, so a sign-out that stays on screen should be followed by a new
+    /// `trackNewPage` / `trackScreen`. Concurrent calls share one run.
+    func resetUser(completion: (() -> Void)?)
+    @available(*, deprecated, renamed: "resetUser(completion:)")
+    func resetIdentity(completion: (() -> Void)?)
     func setConsent(_ hasConsent: Bool)
     func getUserId() -> String
     func getSessionId() -> String
     func setLandingPage(_ landingPage: String?)
     func setLandingPage(_ landingPage: URL)
     func updateScrollPercentage(_ percentage: Float)
+}
+
+public extension CompassTracking {
+    func resetUser() { resetUser(completion: nil) }
 }
 
 public class CompassTracker: Tracker {
@@ -129,6 +160,9 @@ public class CompassTracker: Tracker {
     private let tikOperationFactory: TikOperationFactory
     private let getRFV: GetRFVUseCase
     private let lifecyleNotifier: AppLifecycleNotifierUseCase
+    /// The CDP facade this tracker drives. `CdpTracker.shared` in production (its host is
+    /// `CompassTracker.shared`); tests inject one whose host is the tracker under test.
+    private var cdp: CdpTracker!
     
     private var accountId: Int? {
         get {
@@ -144,7 +178,7 @@ public class CompassTracker: Tracker {
         tracker.setDataFromConfig()
 
         if enableCdp {
-            CdpTracker.shared.start()
+            tracker.cdpFacade.start()
         }
     }
     
@@ -168,7 +202,14 @@ public class CompassTracker: Tracker {
         }
     }
 
-    init(config: TrackingConfig = TrackingConfig.shared, storage: CompassStorage = PListCompassStorage(), tikOperationFactory: TikOperationFactory = TickOperationProvider(), getRFV: GetRFVUseCase = GetRFV(), lifecycleNotifier: AppLifecycleNotifierUseCase = AppLifecycleNotifier()) {
+    init(
+        config: TrackingConfig = TrackingConfig.shared,
+        storage: CompassStorage = PListCompassStorage(),
+        tikOperationFactory: TikOperationFactory = TickOperationProvider(),
+        getRFV: GetRFVUseCase = GetRFV(),
+        lifecycleNotifier: AppLifecycleNotifierUseCase = AppLifecycleNotifier(),
+        cdpProvider: ((CdpHost) -> CdpTracker)? = nil
+    ) {
         self.config = config
         self.storage = storage
         self.tikOperationFactory = tikOperationFactory
@@ -178,13 +219,54 @@ public class CompassTracker: Tracker {
 
         super.init(queueName: "com.compass.sdk.ingest.operation.queue")
 
+        // Eager, not lazy: `lazy var` initialisation is not thread-safe and both are reached
+        // from arbitrary threads on a process-wide singleton.
+        userData = UserDataMerger(
+            cdpEnabled: { [weak self] in self?.config.cdpEnabled ?? false },
+            readOwnedSegments: { [weak self] in self?.storage.userSegments ?? [] },
+            readOwnedVars: { [weak self] in self?.storage.userVars ?? [:] },
+            listServerSegments: { [weak self] in self?.cdp.listServerSegments() ?? [] },
+            getServerSegments: { [weak self] completion in
+                guard let self = self else { completion([]); return }
+                self.cdp.getServerSegments(completion: completion)
+            },
+            listServerProperties: { [weak self] in self?.cdp.listServerProperties() ?? [:] },
+            getServerProperties: { [weak self] completion in
+                guard let self = self else { completion([:]); return }
+                self.cdp.getServerProperties(completion: completion)
+            },
+            trimmer: SegmentTrimmer(
+                readOwnedUserVars: { [weak self] in self?.storage.userVars ?? [:] },
+                setUserVar: { [weak self] name, value in self?.writeUserVar(name: name, value: value) },
+                removeUserVar: { [weak self] name in self?.writeUserVar(name: name, value: nil) }
+            )
+        )
+        userResetter = UserResetter(
+            rotateLocalUser: { [weak self] in self?.rotateLocalUser() },
+            clearRemoteState: { [weak self] completion in
+                guard let self = self, self.config.cdpEnabled else { completion(); return }
+                self.cdp.resetRemoteIdentity { _ in completion() }
+            }
+        )
+
         trackInfo.firstVisitDate = storage.firstVisit
         trackInfo.currentVisitDate = Date()
         trackInfo.userId = storage.userId
         trackInfo.sessionId = storage.sessionId
+
+        // Resolved last: the production facade's host is `CompassTracker.shared`, which is
+        // this very instance while it is being constructed.
+        cdp = cdpProvider?(self)
         
         setDataFromConfig()
         configureAppLifecycleListeners()
+    }
+
+    /// `CdpTracker.shared` is reached lazily so `CompassTracker.shared` finishes
+    /// constructing before the facade captures it as its host.
+    private var cdpFacade: CdpTracker {
+        if let cdp = cdp { return cdp }
+        return CdpTracker.shared
     }
 
     private var deadline: Double {
@@ -219,6 +301,12 @@ public class CompassTracker: Tracker {
     private var pageVars = [String: String]()
     
     private var pageMetrics = [String: Int]()
+
+    /// The merged, trimmed read-side views the beacon sends as `useg` / `uvar`; keeps
+    /// `mrf_tooManySegments` in step with the segment union on every read.
+    private var userData: UserDataMerger!
+
+    private var userResetter: UserResetter!
 }
 
 extension CompassTracker: ScrollPercentProvider {
@@ -265,7 +353,7 @@ extension CompassTracker: CompassTracking {
     public func setSiteUserId(_ userId: String?) {
         trackInfo.siteUserId = userId
         if config.cdpEnabled, let userId = userId {
-            CdpTracker.shared.onSiteUserId(userId)
+            cdpFacade.onSiteUserId(userId)
         }
     }
 
@@ -301,7 +389,7 @@ extension CompassTracker: CompassTracking {
     public func trackNewPage(url: URL, rs: String? = nil) {
         restart(pageName: url.absoluteString, rs: rs)
         doTik()
-        if config.cdpEnabled { CdpTracker.shared.onNewPage() }
+        if config.cdpEnabled { cdpFacade.onNewPage() }
     }
     
     public func trackScreen(_ name: String, rs: String? = nil) {
@@ -387,32 +475,100 @@ extension CompassTracker: CompassTracking {
     }
     
     public func setUserVar(name: String, value: String) {
-        storage.addUserVar(name: name, value: value)
+        writeUserVar(name: name, value: value)
+    }
+
+    /// The one write path for device-owned user vars: persists, then pushes the owned set
+    /// to the CDP profile (debounced). A nil `value` removes the var.
+    private func writeUserVar(name: String, value: String?) {
+        if let value = value {
+            storage.addUserVar(name: name, value: value)
+        } else {
+            storage.removeUserVar(name: name)
+        }
+        if config.cdpEnabled {
+            cdpFacade.flushUserVars { [weak self] in self?.storage.userVars ?? [:] }
+        }
     }
     
     public func addUserSegment(_ name: String) {
         storage.addUserSegment(name)
-        if config.cdpEnabled { CdpTracker.shared.addCdpSegment(name) }
+        if config.cdpEnabled { cdpFacade.addCdpSegment(name) }
     }
 
+    /// Bulk replace is the one shape where intent is ambiguous — an echo of
+    /// `getUserSegments()` and a deliberate assertion look the same — so a requested key
+    /// that only the server asserts is dropped (with a warning) instead of becoming
+    /// device-owned. `addUserSegment` is the unambiguous way to claim ownership.
     public func setUserSegments(_ segments: [String]) {
-        storage.addUserSegments(segments)
-        if config.cdpEnabled { CdpTracker.shared.setCdpSegments(segments) }
+        let next = config.cdpEnabled
+            ? SegmentOwnership.rejectUnownedSegments(requested: segments, owned: storage.userSegments, server: cdpFacade.listServerSegments())
+            : segments
+        storage.addUserSegments(next)
+        if config.cdpEnabled { cdpFacade.setCdpSegments(next) }
+    }
+
+    public func getUserSegments() -> [String] { userData.segments() }
+
+    public func getUserSegments(completion: @escaping ([String]) -> Void) { userData.segments(completion: completion) }
+
+    public func getUserVars() -> [String: String] { userData.vars() }
+
+    public func getUserVars(completion: @escaping ([String: String]) -> Void) { userData.vars(completion: completion) }
+
+    public func resetUser(completion: (() -> Void)?) {
+        userResetter.reset(completion: completion)
+    }
+
+    @available(*, deprecated, renamed: "resetUser(completion:)")
+    public func resetIdentity(completion: (() -> Void)?) {
+        resetUser(completion: completion)
+    }
+
+    /// The synchronous half of `resetUser()`. Order matters: the CDP wipe reads the live
+    /// master_id so it goes first; the storage reset blanks the user (last visit included,
+    /// so `lv` never inherits the previous user's) but keeps CMP consent; then the new
+    /// user id, first visit and session are minted eagerly and the running page's track
+    /// info is re-pointed at them so its remaining beacons carry the new `u`, `fv`, `t`, `s`.
+    private func rotateLocalUser() {
+        UserRotation(
+            clearCdpIdentity: { [self] in cdpFacade.clearIdentity() },
+            resetStorage: { [self] in
+                storage.resetUser()
+                storage.addVisit()
+            },
+            rebootstrapTrackInfo: { [self] in
+                // Read (and mint) the storage values first — file I/O — then mutate only the
+                // fields the reset owns in one synchronous barrier, so no beacon can observe a
+                // half-rotated visitor and a concurrent `trackNewPage` is not clobbered.
+                let userId = storage.userId
+                let firstVisit = storage.firstVisit
+                let sessionId = storage.sessionId
+                trackInfoQueue.sync(flags: .barrier) {
+                    _trackInfo.siteUserId = nil
+                    _trackInfo.userType = nil
+                    _trackInfo.userId = userId
+                    _trackInfo.firstVisitDate = firstVisit
+                    _trackInfo.currentVisitDate = Date()
+                    _trackInfo.sessionId = sessionId
+                }
+            }
+        ).rotate()
     }
 
     public func removeUserSegment(_ name: String) {
         storage.removeUserSegment(name)
-        if config.cdpEnabled { CdpTracker.shared.removeCdpSegment(name) }
+        if config.cdpEnabled { cdpFacade.removeCdpSegment(name) }
     }
 
     public func clearUserSegments() {
         storage.clearUserSegments()
-        if config.cdpEnabled { CdpTracker.shared.clearCdpSegments() }
+        if config.cdpEnabled { cdpFacade.clearCdpSegments() }
     }
     
     public func setConsent(_ hasConsent: Bool) {
         storage.setConsent(hasConsent)
-        if config.cdpEnabled { CdpTracker.shared.onConsentChanged() }
+        if config.cdpEnabled { cdpFacade.onConsentChanged() }
     }
     
     public func getUserId() -> String {
@@ -468,22 +624,24 @@ internal extension CompassTracker {
                     return
                 }
 
-                finalTrackInfo.userVars = storage.userVars
+                // Segments first: trimming may flip `mrf_tooManySegments`, which `uvar` should carry in this same beacon.
+                finalTrackInfo.userSegments = userData.segments()
+                finalTrackInfo.userVars = userData.vars()
                 finalTrackInfo.sessionVars = storage.sessionVars
                 finalTrackInfo.pageVars = pageVars
                 finalTrackInfo.pageMetrics = pageMetrics
-                finalTrackInfo.userSegments = storage.userSegments
                 finalTrackInfo.hasConsent = storage.hasConsent
                 finalTrackInfo.landingPage = storage.landingPage
                 finalTrackInfo.tik = tick!
 
                 // CDP beacon fields — only under personalization consent AND a master_id.
                 if config.cdpEnabled, storage.hasConsent != false {
-                    let cdpData = CdpTracker.shared.getCdpData()
+                    let cdpData = cdpFacade.getUserProfile()
                     if let masterId = cdpData.masterId {
                         finalTrackInfo.cdpMasterId = masterId
                         finalTrackInfo.cdpRfv = cdpData.rfvSerialized.isEmpty ? nil : cdpData.rfvSerialized
                         finalTrackInfo.cdpCohorts = cdpData.cohortsSerialized
+                        finalTrackInfo.cdpFresh = cdpData.identityFresh ? "1" : nil
                     }
                 }
 
@@ -536,8 +694,10 @@ extension CompassTracker: CdpHost {
     var cdpUserVars: [String: String] { storage.userVars }
     func cdpReadMasterId() -> String? { storage.readCdpMasterId() }
     func cdpWriteMasterId(_ id: String) -> String? { storage.writeCdpMasterId(id) }
+    func cdpClearMasterId() { storage.clearCdpMasterId() }
     func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity? { storage.readCdpCachedIdentity(sessionId: sessionId) }
     func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) { storage.writeCdpCachedIdentity(rfv: rfv, cohorts: cohorts, sessionId: sessionId) }
+    func cdpClearCachedIdentity() { storage.clearCdpCachedIdentity() }
     var cdpLegacySegments: [String] { storage.userSegments }
     func cdpWriteLegacySegments(_ segments: [String]) { storage.addUserSegments(segments) }
 }
@@ -618,7 +778,7 @@ private extension CompassTracker {
         
         func onAppActive(){
             doTik()
-            if config.cdpEnabled { CdpTracker.shared.start() }
+            if config.cdpEnabled { cdpFacade.start() }
         }
         
         self.lifecyleNotifier.listen(onForeground: onAppActive, onBackground: onAppInactive)

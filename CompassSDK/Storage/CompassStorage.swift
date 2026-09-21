@@ -21,6 +21,7 @@ protocol CompassStorage {
     var landingPage: String? { get }
     func addSessionVar(name: String, value: String)
     func addUserVar(name: String, value: String)
+    func removeUserVar(name: String)
     func addUserSegment(_ name: String)
     func addUserSegments(_ segments: [String])
     func removeUserSegment(_ name: String)
@@ -31,8 +32,12 @@ protocol CompassStorage {
     func addTrackedConversion(_ conversion: String, id: String?)
     func readCdpMasterId() -> String?
     func writeCdpMasterId(_ newMasterId: String) -> String?
+    func clearCdpMasterId()
     func readCdpCachedIdentity(sessionId: String) -> CdpCachedIdentity?
     func writeCdpCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String)
+    func clearCdpCachedIdentity()
+    /// Blanks everything that identifies or describes the current user (see `PListCompassStorage.resetUser`).
+    func resetUser()
 }
 
 enum Store: String {
@@ -81,21 +86,24 @@ class PListCompassStorage: PListStorage {
         return modelV1
     }
 
+    /// The model is read and written from several queues (main, the ingest operations, the
+    /// CDP manager queue, whoever calls `resetUser()`), so access is serialised here and
+    /// every mutation persists the whole struct atomically.
+    private let storageQueue = DispatchQueue(label: "com.marfeel.compass.storage")
+    private var _model: Model?
+
     private var model: Model? {
-        willSet {
-            guard let model = model, model.hasConsent != newValue?.hasConsent, newValue?.hasConsent == false else {
-                return
+        get { storageQueue.sync { _model } }
+        set {
+            storageQueue.sync {
+                if let current = _model, current.hasConsent != newValue?.hasConsent, newValue?.hasConsent == false {
+                    remove(filename: Store.v2.rawValue)
+                }
+                _model = newValue
+                if let updated = newValue, updated.hasConsent == true || updated.hasConsent == nil {
+                    persist(filename: Store.v2.rawValue, values: updated)
+                }
             }
-            
-            remove(filename: Store.v2.rawValue)
-        }
-        didSet {
-            guard let model = model, model.hasConsent == true || model.hasConsent == nil else {
-                return
-                
-            }
-            
-            persist(filename: Store.v2.rawValue, values: model)
         }
     }
 
@@ -184,6 +192,11 @@ extension PListCompassStorage: CompassStorage {
         }
         
         model?.userVars?[name] = value
+    }
+
+    func removeUserVar(name: String) {
+        guard model?.userVars?[name] != nil else { return }
+        model?.userVars?.removeValue(forKey: name)
     }
     
     func addUserSegment(_ name: String) {
@@ -304,6 +317,45 @@ extension PListCompassStorage: CompassStorage {
         model?.cdpRfv = rfv.flatMap { $0.encode() }.flatMap { String(data: $0, encoding: .utf8) }
         model?.cdpCohorts = (cohorts.encode()).flatMap { String(data: $0, encoding: .utf8) }
         model?.cdpCacheSessionId = sessionId
+    }
+
+    func clearCdpMasterId() {
+        model?.cdpMasterId = nil
+    }
+
+    /// Cached rfv/cohorts read back as **absent** afterwards, so the next resolve mints.
+    func clearCdpCachedIdentity() {
+        model?.cdpRfv = nil
+        model?.cdpCohorts = nil
+        model?.cdpCacheSessionId = nil
+    }
+
+    // MARK: - User reset
+
+    /// Blanks everything that identifies or describes the current user so the next read
+    /// re-runs the genuine first-install bootstrap: a new `userId` is minted by the
+    /// `userId` getter, a new first visit by `firstVisit`, a new session by `sessionId`.
+    /// The CMP consent (`hasConsent`) is **kept** — it belongs to the device, not the user.
+    /// Conversions already tracked stay deduplicated.
+    func resetUser() {
+        guard var current = model else { return }
+        current.numVisits = 0
+        current.userId = nil
+        current.suid = nil
+        current.firstVisit = nil
+        current.lastVisit = nil
+        current.sessionId = nil
+        current.sessionExpirationDate = nil
+        current.userVars = Vars()
+        current.sessionVars = Vars()
+        current.userSegments = []
+        current.landingPage = nil
+        current.cdpMasterId = nil
+        current.cdpRfv = nil
+        current.cdpCohorts = nil
+        current.cdpCacheSessionId = nil
+        model = current
+        previousVisit = nil
     }
 
     private func parseCdpCohorts(_ json: String?) -> [Int]? {

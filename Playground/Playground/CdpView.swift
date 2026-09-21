@@ -88,15 +88,33 @@ struct CdpView: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .keyboardType(.emailAddress)
-                Button("cdpDoIdentityLink (email, deterministic)") {
+                Button("setIdentity (email, deterministic)") {
                     let value = linkValue.trimmingCharacters(in: .whitespaces)
                     guard !value.isEmpty else { return }
-                    cdp.cdpDoIdentityLink(type: "email", value: value, isDeterministic: true)
-                    status("cdpDoIdentityLink(email, \(value))")
-                    refreshLater()
+                    // setIdentity completes once the link round-trip is done.
+                    cdp.setIdentity(type: CdpIdentityTypes.email, value: value, isDeterministic: true) {
+                        DispatchQueue.main.async {
+                            status("setIdentity(email, \(value)) → linked")
+                            refreshIdentity()
+                        }
+                    }
+                    status("setIdentity(email, \(value))…")
                 }
                 .buttonStyle(CdpButton(color: .purple))
             }
+
+            Button("Reset user (sign-out)") {
+                // Rotates the visitor locally at once; the completion follows the bounded remote tail.
+                tracker.resetUser {
+                    DispatchQueue.main.async {
+                        status("resetUser → done (master-less until the next page)")
+                        refreshIdentity()
+                    }
+                }
+                status("resetUser…")
+                refreshIdentity()
+            }
+            .buttonStyle(CdpButton(color: .red))
         }
     }
 
@@ -203,14 +221,14 @@ struct CdpView: View {
     // MARK: - Helpers
 
     private func refreshIdentity() {
-        let data = cdp.getCdpData()
+        let data = cdp.getUserProfile()
         let rfv = data.rfv.map { "rfv=\($0.rfv) r=\($0.r) f=\($0.f) v=\($0.v)" } ?? "rfv=nil"
         identitySummary = """
         master_id: \(data.masterId ?? "nil")
         \(rfv)
-        cohorts: \(data.cohorts)
+        cohorts: \(data.cohorts)  fresh: \(data.identityFresh)
         """
-        segmentsSummary = "local: \(cdp.getCdpSegments())"
+        segmentsSummary = "local: \(cdp.getCdpSegments())\nserver: \(cdp.listServerSegments())\nuseg: \(tracker.getUserSegments())"
     }
 
     /// Identity/link/segment calls are async; refresh after a short delay so the UI shows

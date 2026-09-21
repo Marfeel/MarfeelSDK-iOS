@@ -24,6 +24,7 @@ struct IngestTrackInfo: Encodable {
         case cdpMasterId = "cdp_mid"
         case cdpRfv = "cdp_rfv"
         case cdpCohorts = "cdp_cohorts"
+        case cdpFresh = "cdp_fresh"
     }
     
     private var trackInfo = TrackInfo()
@@ -50,6 +51,8 @@ struct IngestTrackInfo: Encodable {
     var cdpMasterId: String?
     var cdpRfv: String?
     var cdpCohorts: String?
+    /// `"1"` only when this process resolved the identity itself; absent must read as not-fresh.
+    var cdpFresh: String?
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -74,6 +77,7 @@ struct IngestTrackInfo: Encodable {
         try container.encodeIfPresent(cdpMasterId, forKey: .cdpMasterId)
         try container.encodeIfPresent(cdpRfv, forKey: .cdpRfv)
         try container.encodeIfPresent(cdpCohorts, forKey: .cdpCohorts)
+        try container.encodeIfPresent(cdpFresh, forKey: .cdpFresh)
     }
 }
 

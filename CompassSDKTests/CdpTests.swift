@@ -148,15 +148,27 @@ final class CdpTests: XCTestCase {
 
         func cdpReadMasterId() -> String? { masterId }
         func cdpWriteMasterId(_ id: String) -> String? { let old = masterId; masterId = id; return old }
+        func cdpClearMasterId() { masterId = nil }
         func cdpReadCachedIdentity(sessionId: String) -> CdpCachedIdentity? { nil }
         func cdpWriteCachedIdentity(rfv: CdpRfv?, cohorts: [Int], sessionId: String) {}
+        func cdpClearCachedIdentity() {}
         var cdpLegacySegments: [String] { legacySegments }
         func cdpWriteLegacySegments(_ segments: [String]) { legacySegments = segments }
     }
 
+    private func makeManager(host: MockCdpHost, segmentsStore: CdpSegmentsStore) -> CdpManager {
+        return CdpManager(
+            api: CdpApiClient(),
+            host: host,
+            segmentsStore: segmentsStore,
+            serverSegmentsStore: CdpServerSegmentsStore(defaults: defaults),
+            serverPropertiesStore: CdpServerPropertiesStore(defaults: defaults),
+            consentMemory: CdpConsentMemoryStore(defaults: defaults)
+        )
+    }
+
     private func makeManager(enabled: Bool = true, consent: Bool? = true, account: Int? = 123, masterId: String?, segmentsStore: CdpSegmentsStore) -> CdpManager {
-        let host = MockCdpHost(enabled: enabled, consent: consent, account: account, masterId: masterId)
-        return CdpManager(api: CdpApiClient(), host: host, segmentsStore: segmentsStore)
+        return makeManager(host: MockCdpHost(enabled: enabled, consent: consent, account: account, masterId: masterId), segmentsStore: segmentsStore)
     }
 
     func testSegmentsWrittenLocallyToLocalBucketWithoutMasterId() {
@@ -180,7 +192,7 @@ final class CdpTests: XCTestCase {
         host.legacySegments = ["sports_fan", "premium"]
         // A segment already in the CDP store (e.g. set via addCdpSegment before resolve).
         store.write(account: "123", masterId: "mid-1", value: ["premium", "newsletter"])
-        let manager = CdpManager(api: CdpApiClient(), host: host, segmentsStore: store)
+        let manager = makeManager(host: host, segmentsStore: store)
 
         manager.mergeLegacySegments()
 
@@ -199,7 +211,7 @@ final class CdpTests: XCTestCase {
         let store = CdpSegmentsStore(defaults: defaults)
         let host = MockCdpHost(enabled: true, consent: true, account: 123, masterId: nil)
         host.legacySegments = ["sports_fan"]
-        let manager = CdpManager(api: CdpApiClient(), host: host, segmentsStore: store)
+        let manager = makeManager(host: host, segmentsStore: store)
 
         manager.mergeLegacySegments()
 
@@ -223,10 +235,9 @@ final class CdpTests: XCTestCase {
     func testGetDataDisabledReturnsEmpty() {
         let store = CdpSegmentsStore(defaults: defaults)
         let manager = makeManager(enabled: false, masterId: "mid", segmentsStore: store)
-        let data = manager.getData()
+        let data = manager.getUserProfile()
         XCTAssertNil(data.masterId)
         XCTAssertNil(data.rfv)
         XCTAssertEqual(data.cohorts, [])
     }
 }
-</content>

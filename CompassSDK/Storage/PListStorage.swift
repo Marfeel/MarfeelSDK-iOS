@@ -32,7 +32,7 @@ extension PListStorage {
             return
         }
         
-        try? data.write(to: path)
+        try? data.write(to: path, options: .atomic)
     }
     
     func remove(filename: String) {
