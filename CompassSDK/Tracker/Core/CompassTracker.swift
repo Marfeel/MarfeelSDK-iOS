@@ -132,14 +132,13 @@ public protocol CompassTracking: AnyObject {
     /// Synchronously — before this call returns — the site user id is dropped, a new
     /// internal user id, first visit and session are minted, user vars and segments are
     /// emptied and the whole local CDP state (master_id, cached rfv/cohorts, mirrors,
-    /// meters, anonymous consent memory) is wiped. `completion` fires once the
-    /// best-effort remote CDP reset settles, bounded to five seconds. It never fails and
+    /// meters, anonymous consent memory) is wiped. `completion` fires on the **main
+    /// queue** once the best-effort remote CDP reset settles, bounded to five seconds, so
+    /// it is safe to navigate or update UI from it. It never fails and
     /// never re-resolves identity: the next `trackNewPage` does. The current page keeps
     /// its page id, so a sign-out that stays on screen should be followed by a new
     /// `trackNewPage` / `trackScreen`. Concurrent calls share one run.
     func resetUser(completion: (() -> Void)?)
-    @available(*, deprecated, renamed: "resetUser(completion:)")
-    func resetIdentity(completion: (() -> Void)?)
     func setConsent(_ hasConsent: Bool)
     func getUserId() -> String
     func getSessionId() -> String
@@ -517,12 +516,11 @@ extension CompassTracker: CompassTracking {
     public func getUserVars(completion: @escaping ([String: String]) -> Void) { userData.vars(completion: completion) }
 
     public func resetUser(completion: (() -> Void)?) {
-        userResetter.reset(completion: completion)
-    }
-
-    @available(*, deprecated, renamed: "resetUser(completion:)")
-    public func resetIdentity(completion: (() -> Void)?) {
-        resetUser(completion: completion)
+        guard let completion = completion else {
+            userResetter.reset()
+            return
+        }
+        userResetter.reset { DispatchQueue.main.async(execute: completion) }
     }
 
     /// The synchronous half of `resetUser()`. Order matters: the CDP wipe reads the live

@@ -122,6 +122,17 @@ final class CdpManagerIdentityTests: XCTestCase {
         XCTAssertEqual(host.masterId, UUID_B)
     }
 
+    func testLinkWithAnEmptyValueOrTypeIsSkippedWithoutTouchingTheNetworkOrCache() {
+        env.warmVisitor()
+
+        waitFor { done in self.manager.linkIdentity(type: CdpIdentityTypes.registeredUserId, value: "", isDeterministic: true, completion: done) }
+        waitFor { done in self.manager.linkIdentity(type: "", value: "u@x.com", isDeterministic: true, completion: done) }
+
+        XCTAssertEqual(api.resolveParams.count, 0)
+        XCTAssertEqual(api.linkParams.count, 0)
+        XCTAssertEqual(host.cached?.rfv?.rfv, 1)
+    }
+
     // MARK: - identityFresh
 
     func testIdentityFreshStartsFalse() {
@@ -465,6 +476,30 @@ final class CdpManagerIdentityTests: XCTestCase {
         host.masterId = UUID_A
         waitFor { done in self.manager.updateProfile(["timezone": "Europe/Madrid"], completion: done) }
         XCTAssertEqual(api.updateParams.first?.properties?["timezone"], "Europe/Madrid")
+    }
+
+    func testAFailedUpdateKeepsTheCachedRfvAndCohorts() {
+        env.warmVisitor()
+
+        waitFor { done in self.manager.updateProfile(["plan": "premium"], completion: done) }
+        manager.addSegment("sports")
+        manager.drainQueueForTesting()
+        settle()
+
+        XCTAssertEqual(api.updateParams.count, 2)
+        XCTAssertEqual(host.cached?.rfv?.rfv, 1)
+        XCTAssertEqual(host.cached?.cohorts, [1])
+        XCTAssertEqual(host.masterId, UUID_A)
+    }
+
+    func testASuccessfulUpdateRefreshesTheCachedRfvAndCohorts() {
+        env.warmVisitor()
+        api.updateResponses = [identity(UUID_A, rfv: CdpRfv(rfv: 7, r: 2, f: 3, v: 4), cohorts: [9])]
+
+        waitFor { done in self.manager.updateProfile(["plan": "premium"], completion: done) }
+
+        XCTAssertEqual(host.cached?.rfv?.rfv, 7)
+        XCTAssertEqual(host.cached?.cohorts, [9])
     }
 
     func testSegmentsAreWrittenLocallyFirstThenSynced() {

@@ -261,8 +261,13 @@ internal final class CdpManager {
     /// The generation is pinned **before** the resolve: a `clearIdentity()` that lands while
     /// the link waits behind a resolve cancels the link instead of re-identifying the
     /// visitor the reset just deleted.
+    ///
+    /// An empty `type` or `value` is skipped, not posted: `setSiteUserId("")` (sent by
+    /// integrations on anonymous pageviews) and the deprecated `cdpDoIdentityLink` reach
+    /// here unvalidated, and the failed request would cache empty rfv/cohorts over the
+    /// real ones. Matches the web, which only links a truthy site user id.
     func linkIdentity(type: String, value: String, isDeterministic: Bool, completion: (() -> Void)? = nil) {
-        guard hasConsent() else { deliver(completion); return }
+        guard !type.isEmpty, !value.isEmpty, hasConsent() else { deliver(completion); return }
         let startGeneration = onQueue { generation }
         resolveIdentity { [weak self] in
             guard let self = self, startGeneration == self.generation, let siteId = self.host.cdpAccountId else { completion?(); return }
@@ -457,13 +462,7 @@ internal final class CdpManager {
             }
             let startGeneration = self.generation
             let params = CdpProfileUpdateParams(siteId: siteId, masterId: masterId, properties: properties)
-            self.api.update(params) { [weak self] response in
-                guard let self = self else { completion?(); return }
-                self.queue.async {
-                    self.applyStateLocked(response, session: self.host.cdpSessionId, startGeneration: startGeneration)
-                    completion?()
-                }
-            }
+            self.postUpdateLocked(params, startGeneration: startGeneration, completion: completion)
         }
     }
 
@@ -561,10 +560,21 @@ internal final class CdpManager {
         guard hasConsent(), let masterId = host.cdpReadMasterId(), let siteId = host.cdpAccountId else { return }
         let startGeneration = generation
         let params = CdpProfileUpdateParams(siteId: siteId, masterId: masterId, segmentsAdd: segmentsAdd, segmentsRemove: segmentsRemove)
+        postUpdateLocked(params, startGeneration: startGeneration)
+    }
+
+    /// `/update/` is only ever sent with a master, and a successful answer always echoes
+    /// one; an answer without it is the fail-open `UNKNOWN_CDP_IDENTITY` and is dropped so
+    /// a failed write (every `setUserVar`, every segment change) can't blank the cached
+    /// rfv/cohorts for the rest of the session. MUST be called on `queue`.
+    private func postUpdateLocked(_ params: CdpProfileUpdateParams, startGeneration: Int, completion: (() -> Void)? = nil) {
         api.update(params) { [weak self] response in
-            self?.queue.async {
-                guard let self = self else { return }
-                self.applyStateLocked(response, session: self.host.cdpSessionId, startGeneration: startGeneration)
+            guard let self = self else { completion?(); return }
+            self.queue.async {
+                if let masterId = response.masterId, !masterId.isEmpty {
+                    self.applyStateLocked(response, session: self.host.cdpSessionId, startGeneration: startGeneration)
+                }
+                completion?()
             }
         }
     }
