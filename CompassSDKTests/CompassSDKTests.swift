@@ -63,6 +63,14 @@ class CompassSDKTests: XCTestCase {
         sut.setConsent(true)
 
         wait(for: [expectation], timeout: 5)
+
+        // The ping loop outlives the test; detach the expectation, stop it, and let the
+        // operation already in flight land here rather than inside an unrelated test.
+        operationProvider.expectation = nil
+        sut.stopTracking()
+        let drain = XCTestExpectation(description: "drain in-flight tick")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { drain.fulfill() }
+        wait(for: [drain], timeout: 2)
     }
 
     func testGetSessionId() {

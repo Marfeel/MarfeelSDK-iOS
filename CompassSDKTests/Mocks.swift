@@ -67,6 +67,7 @@ class MockStorage: CompassStorage {
     }
 
     func addUserSegments(_ segments: [String]) {
+        userSegments = segments
     }
 
     var sessionVars = ["session": "var"]
@@ -79,6 +80,11 @@ class MockStorage: CompassStorage {
     }
 
     func addUserVar(name: String, value: String) {
+        userVars[name] = value
+    }
+
+    func removeUserVar(name: String) {
+        userVars.removeValue(forKey: name)
     }
 
     func addVisit() {
@@ -152,6 +158,27 @@ class MockStorage: CompassStorage {
         cdpRfv = rfv.flatMap { $0.encode() }.flatMap { String(data: $0, encoding: .utf8) }
         cdpCohorts = cohorts.encode().flatMap { String(data: $0, encoding: .utf8) }
         cdpCacheSessionId = sessionId
+    }
+
+    func clearCdpMasterId() { cdpMasterId = nil }
+
+    func clearCdpCachedIdentity() {
+        cdpRfv = nil
+        cdpCohorts = nil
+        cdpCacheSessionId = nil
+    }
+
+    var resetUserCalls = 0
+    func resetUser() {
+        resetUserCalls += 1
+        userId = UUID().uuidString
+        sessionId = UUID().uuidString
+        suid = nil
+        userVars = [:]
+        userSegments = []
+        landingPage = nil
+        clearCdpMasterId()
+        clearCdpCachedIdentity()
     }
 
     init() {}

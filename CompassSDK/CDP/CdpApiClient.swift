@@ -4,10 +4,12 @@
 //
 //  URLSession networking for the CDP. Mirrors CdpApiClient.kt.
 //
-//  All identity/profile calls are fail-open: any error / non-2xx / unparseable body
-//  resolves to UNKNOWN_CDP_IDENTITY rather than surfacing an error. Trailing slashes
-//  on the identity paths are part of the contract and must be preserved (so the URLs
-//  are built by string concatenation, not appendingPathComponent).
+//  Rule of thumb for failure values: calls whose response feeds the Cached Identity on
+//  success but must not poison it on failure (delete, reset, consents) complete with
+//  `nil`; resolve / link / update complete with the `UNKNOWN_CDP_IDENTITY` shape.
+//  Nothing here ever throws. Trailing slashes on the identity paths are part of the
+//  contract and must be preserved (so the URLs are built by string concatenation, not
+//  appendingPathComponent). Methods are overridable so tests can stub the transport.
 //
 
 import Foundation
@@ -40,38 +42,96 @@ internal class CdpApiClient {
     // MARK: - Identity / profile
 
     func resolve(_ params: CdpResolveParams, completion: @escaping (CdpIdentityResponse) -> Void) {
-        postIdentity(path: CDP_IDENTITY_RESOLVE_PATH, params: params, completion: completion)
+        postIdentity(path: CDP_IDENTITY_RESOLVE_PATH, body: try? JSONEncoder().encode(params), completion: completion)
     }
 
     func link(_ params: CdpLinkParams, completion: @escaping (CdpIdentityResponse) -> Void) {
-        postIdentity(path: CDP_IDENTITY_LINK_PATH, params: params, completion: completion)
+        postIdentity(path: CDP_IDENTITY_LINK_PATH, body: try? JSONEncoder().encode(params), completion: completion)
     }
 
     func update(_ params: CdpProfileUpdateParams, completion: @escaping (CdpIdentityResponse) -> Void) {
-        postIdentity(path: CDP_IDENTITY_UPDATE_PATH, params: params, completion: completion)
+        postIdentity(path: CDP_IDENTITY_UPDATE_PATH, body: try? JSONEncoder().encode(params), completion: completion)
     }
 
-    private func postIdentity<T: Encodable>(path: String, params: T, completion: @escaping (CdpIdentityResponse) -> Void) {
-        guard let url = URL(string: baseString + path), let body = try? JSONEncoder().encode(params) else {
-            completion(UNKNOWN_CDP_IDENTITY)
+    /// Nil on any failure — never `UNKNOWN_CDP_IDENTITY`, which would poison the cache.
+    func delete(_ params: CdpDeleteParams, completion: @escaping (CdpDeleteResponse?) -> Void) {
+        postJson(path: CDP_IDENTITY_DELETE_PATH, body: try? JSONEncoder().encode(params)) { root in
+            guard let root = root else { completion(nil); return }
+            completion(CdpDeleteResponse(identity: CdpIdentityResponse.parse(json: root), deleted: cdpInt(root["deleted"]) ?? 0))
+        }
+    }
+
+    /// Expires the site's server-held tracking cookies. On native there are no such
+    /// cookies to present, so this is parity plumbing — the server answers `cleared: []`.
+    /// Body is `{ site_id }` and nothing else. Nil on failure; never throws.
+    func reset(siteId: Int, completion: @escaping (CdpResetResponse?) -> Void) {
+        postJson(path: CDP_IDENTITY_RESET_PATH, body: try? JSONSerialization.data(withJSONObject: ["site_id": siteId])) { root in
+            guard let root = root else { completion(nil); return }
+            completion(CdpResetResponse(
+                reset: cdpBool(root["reset"]) ?? false,
+                siteId: cdpInt(root["site_id"]),
+                cleared: (root["cleared"] as? [Any])?.compactMap { $0 as? String } ?? []
+            ))
+        }
+    }
+
+    private func postIdentity(path: String, body: Data?, completion: @escaping (CdpIdentityResponse) -> Void) {
+        postJson(path: path, body: body) { root in
+            completion(root.map { CdpIdentityResponse.parse(json: $0) } ?? UNKNOWN_CDP_IDENTITY)
+        }
+    }
+
+    // MARK: - Consents
+
+    /// `master_id` goes out as an explicit `null` when absent; `metadata` / `timezone` /
+    /// `id_type` / `id_value` are omitted when nil. Nil on failure; never throws.
+    func recordConsent(_ params: CdpConsentRecordParams, completion: @escaping (CdpConsentRecordResponse?) -> Void) {
+        postJson(path: CDP_CONSENT_RECORD_PATH, body: try? JSONSerialization.data(withJSONObject: params.jsonBody())) { root in
+            completion(root.map { CdpConsentRecordResponse.parse(json: $0) })
+        }
+    }
+
+    /// GET catalog: `?site_id=&consent_id=&consent_version_id?=`. Completes with the items
+    /// (0 or 1; empty when the requested version is unknown), or nil on failure.
+    func fetchConsentCatalog(siteId: Int, consentId: String, versionId: String?, completion: @escaping ([CdpConsentCatalogItem]?) -> Void) {
+        guard var components = URLComponents(string: baseString + CDP_CONSENT_CATALOG_PATH) else {
+            completion(nil)
+            return
+        }
+        var items = [
+            URLQueryItem(name: "site_id", value: String(siteId)),
+            URLQueryItem(name: "consent_id", value: consentId)
+        ]
+        if let versionId = versionId { items.append(URLQueryItem(name: "consent_version_id", value: versionId)) }
+        components.queryItems = items
+        guard let url = components.url else {
+            completion(nil)
             return
         }
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = body
-        request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
 
         session.dataTask(with: request) { data, response, error in
             guard error == nil,
                   let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
                   let data = data,
-                  let parsed = CdpIdentityResponse.decode(from: data) else {
-                completion(UNKNOWN_CDP_IDENTITY)
+                  let root = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else {
+                completion(nil)
                 return
             }
-            completion(parsed)
+            guard let consents = root["consents"] as? [Any] else {
+                completion([])
+                return
+            }
+            completion(consents.compactMap { ($0 as? [String: Any]).flatMap { CdpConsentCatalogItem.parse(json: $0) } })
         }.resume()
+    }
+
+    /// A POST, unlike the catalog: the subject (master or email) stays out of URLs and logs.
+    func fetchConsentStatus(_ params: CdpConsentCheckParams, completion: @escaping (CdpConsentCheckResponse?) -> Void) {
+        postJson(path: CDP_CONSENT_CHECK_PATH, body: try? JSONSerialization.data(withJSONObject: params.jsonBody())) { root in
+            completion(root.map { CdpConsentCheckResponse.parse(json: $0, fallbackConsentId: params.consentId) })
+        }
     }
 
     // MARK: - Meters
@@ -146,6 +206,33 @@ internal class CdpApiClient {
             }
             let state = (try? JSONSerialization.jsonObject(with: data) as? [String: Any]).flatMap { $0 }.map { MeterState.from(json: $0) }
             completion(IncrementResult(status: http.statusCode, state: state))
+        }.resume()
+    }
+
+    // MARK: - Transport
+
+    /// POST a JSON body; the parsed object on 2xx, nil on transport error, non-2xx, a
+    /// non-object body or an unencodable request.
+    private func postJson(path: String, body: Data?, completion: @escaping ([String: Any]?) -> Void) {
+        guard let url = URL(string: baseString + path), let body = body else {
+            completion(nil)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = body
+        request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.addValue(userAgent, forHTTPHeaderField: "User-Agent")
+
+        session.dataTask(with: request) { data, response, error in
+            guard error == nil,
+                  let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
+                  let data = data,
+                  let root = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            completion(root)
         }.resume()
     }
 }
