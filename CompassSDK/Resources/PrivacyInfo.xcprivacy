@@ -3,20 +3,54 @@
 <plist version="1.0">
   <dict>
     <key>NSPrivacyTracking</key>
-    <true />
+    <false />
     <key>NSPrivacyTrackingDomains</key>
-    <array>
-      <string>events.newsroom.bi</string>
-    </array>
+    <array />
     <key>NSPrivacyCollectedDataTypes</key>
     <array>
       <dict>
         <key>NSPrivacyCollectedDataType</key>
         <string>NSPrivacyCollectedDataTypeProductInteraction</string>
         <key>NSPrivacyCollectedDataTypeLinked</key>
-        <false />
-        <key>NSPrivacyCollectedDataTypeTracking</key>
         <true />
+        <key>NSPrivacyCollectedDataTypeTracking</key>
+        <false />
+        <key>NSPrivacyCollectedDataTypePurposes</key>
+        <array>
+          <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+        </array>
+      </dict>
+      <dict>
+        <key>NSPrivacyCollectedDataType</key>
+        <string>NSPrivacyCollectedDataTypeDeviceID</string>
+        <key>NSPrivacyCollectedDataTypeLinked</key>
+        <true />
+        <key>NSPrivacyCollectedDataTypeTracking</key>
+        <false />
+        <key>NSPrivacyCollectedDataTypePurposes</key>
+        <array>
+          <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+        </array>
+      </dict>
+      <dict>
+        <key>NSPrivacyCollectedDataType</key>
+        <string>NSPrivacyCollectedDataTypeCoarseLocation</string>
+        <key>NSPrivacyCollectedDataTypeLinked</key>
+        <true />
+        <key>NSPrivacyCollectedDataTypeTracking</key>
+        <false />
+        <key>NSPrivacyCollectedDataTypePurposes</key>
+        <array>
+          <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+        </array>
+      </dict>
+      <dict>
+        <key>NSPrivacyCollectedDataType</key>
+        <string>NSPrivacyCollectedDataTypeUserID</string>
+        <key>NSPrivacyCollectedDataTypeLinked</key>
+        <true />
+        <key>NSPrivacyCollectedDataTypeTracking</key>
+        <false />
         <key>NSPrivacyCollectedDataTypePurposes</key>
         <array>
           <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
@@ -24,6 +58,15 @@
       </dict>
     </array>
     <key>NSPrivacyAccessedAPITypes</key>
-    <array />
+    <array>
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA92.1</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>
