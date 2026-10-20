@@ -2,7 +2,8 @@ import Foundation
 import UIKit
 
 protocol SendTikCuseCase {
-    func tik(path: String, type: ContentType, params: [String: Any])
+    /// `completion` reports whether the beacon reached a server, through the fallback endpoint included.
+    func tik(path: String, type: ContentType, params: [String: Any], completion: @escaping (_ sent: Bool) -> Void)
 }
 
 struct TikApiCall: ApiCall {
@@ -54,7 +55,7 @@ final class SendTik: SendTikCuseCase {
         self.fallbackDuration = fallbackDuration
     }
 
-    func tik(path: String, type: ContentType, params: [String: Any]) {
+    func tik(path: String, type: ContentType, params: [String: Any], completion: @escaping (_ sent: Bool) -> Void) {
         performTrackedCall(
             name: "SendTik.primary",
             path: path,
@@ -62,14 +63,19 @@ final class SendTik: SendTikCuseCase {
             params: params,
             timeout: 10
         ) { [weak self] error in
-            guard let self = self else { return }
-
-            if error != nil,
-               self.getOrigin() == .primary,
-               self.fallbackUrl != nil {
-                self.activateFallback()
-                self.performFallback(path: path, type: type, params: params)
+            guard error != nil else {
+                completion(true)
+                return
             }
+            guard let self = self,
+                  self.getOrigin() == .primary,
+                  self.fallbackUrl != nil else {
+                completion(false)
+                return
+            }
+
+            self.activateFallback()
+            self.performFallback(path: path, type: type, params: params, completion: completion)
         }
     }
 
@@ -124,7 +130,7 @@ final class SendTik: SendTikCuseCase {
         }
     }
 
-    private func performFallback(path: String, type: ContentType, params: [String: Any]) {
+    private func performFallback(path: String, type: ContentType, params: [String: Any], completion: @escaping (_ sent: Bool) -> Void) {
         var fallbackTaskID: UIBackgroundTaskIdentifier = .invalid
         fallbackTaskID = application.beginBackgroundTask(withName: "SendTik.fallback") {
             if fallbackTaskID != .invalid {
@@ -136,7 +142,8 @@ final class SendTik: SendTikCuseCase {
         let fallbackCall = makeApiCall(path: path, type: type, params: params)
 
         DispatchQueue.global().async {
-            self.apiRouter.call(from: fallbackCall) { _ in
+            self.apiRouter.call(from: fallbackCall) { error in
+                completion(error == nil)
             }
         }
 

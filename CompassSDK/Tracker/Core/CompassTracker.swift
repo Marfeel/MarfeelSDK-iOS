@@ -50,6 +50,32 @@ struct Conversion {
     let id: String?
     let value: String?
     let meta: [[String]]?
+    /// The page it was tracked on, so that a later page sending it does not get the credit.
+    var pageId: String? = nil
+}
+
+/// A conversion waiting to be sent. It leaves the queue only once a beacon carrying it
+/// reaches the server; `sending` keeps a second beacon from picking it up meanwhile.
+private struct PendingConversion {
+    let key = UUID()
+    let conversion: Conversion
+    var sending = false
+}
+
+/// A page as it was when it was left, kept while conversions tracked on it are pending.
+/// Their beacons carry it instead of the current page and continue its tick sequence.
+struct ClosedPage {
+    let trackInfo: IngestTrackInfo
+    let pageVars: [String: String]
+    let pageMetrics: [String: Int]
+    var nextTick: Int
+}
+
+private struct TikRequest {
+    let conversion: Conversion?
+    let conversionKey: UUID?
+    let closedPage: ClosedPage?
+    let tick: Int
 }
 
 extension UserType: RawRepresentable, Codable {
@@ -295,7 +321,11 @@ public class CompassTracker: Tracker {
 
     private var scrollView: UIScrollView?
 
-    private var newConversions = [Conversion]()
+    private var pendingConversions = [PendingConversion]()
+
+    private var closedPages = [String: ClosedPage]()
+
+    private let conversionsLock = NSLock()
     
     private var pageVars = [String: String]()
     
@@ -418,25 +448,46 @@ extension CompassTracker: CompassTracking {
     }
 
     public func trackConversion(conversion: String) {
-        newConversions.append(Conversion(conversion: conversion, initiator: nil, id: nil, value: nil, meta: nil))
+        enqueueConversion(Conversion(conversion: conversion, initiator: nil, id: nil, value: nil, meta: nil))
     }
 
     public func trackConversion(conversion: String, options: ConversionOptions) {
         let conversionId = getConversionId(options: options)
 
-        if storage.shouldTrackConversion(conversion, id: conversionId) {
-            storage.addTrackedConversion(conversion, id: conversionId)
+        let enqueued = enqueueConversion(Conversion(
+            conversion: conversion,
+            initiator: options.initiator,
+            id: conversionId,
+            value: options.value,
+            meta: convertMetaToArray(options.meta)
+        ))
 
-            newConversions.append(Conversion(
-                conversion: conversion,
-                initiator: options.initiator,
-                id: conversionId,
-                value: options.value,
-                meta: convertMetaToArray(options.meta)
-            ))
-        } else if let conversionId = conversionId {
+        if !enqueued, let conversionId = conversionId {
             setPageVar(name: "ios-duplicatedConversion", value: "\(conversion):\(conversionId)")
         }
+    }
+
+    /// Queues `conversion` on the current page unless one with the same name and id was
+    /// already sent or is waiting to be. It is only marked as tracked once it is sent.
+    @discardableResult
+    private func enqueueConversion(_ conversion: Conversion) -> Bool {
+        var conversion = conversion
+        conversion.pageId = trackInfo.pageId
+
+        conversionsLock.lock()
+        defer { conversionsLock.unlock() }
+
+        if let id = conversion.id {
+            let isPending = pendingConversions.contains {
+                $0.conversion.conversion == conversion.conversion && $0.conversion.id == id
+            }
+            guard !isPending, storage.shouldTrackConversion(conversion.conversion, id: id) else {
+                return false
+            }
+        }
+
+        pendingConversions.append(PendingConversion(conversion: conversion))
+        return true
     }
 
     private func convertMetaToArray(_ meta: [String: String]?) -> [[String]]? {
@@ -585,16 +636,10 @@ extension CompassTracker: CompassTracking {
     }
 }
 
-extension CompassTracker: ConversionsProvider {
-    func getConversions(_ completion: @escaping ([Conversion]) -> ()) {
-        completion(newConversions)
-        newConversions = [Conversion]()
-    }
-}
-
 internal extension CompassTracker {
-    func getTrackingData(for conversion: Conversion? = nil, tick: Int? = 0, _ completion: @escaping (IngestTrackInfo) -> ()) {
-        let trackInfoCopy = self.trackInfo
+    /// With a `closedPage` the beacon describes that page, not the current one.
+    func getTrackingData(for conversion: Conversion? = nil, tick: Int? = 0, closedPage: ClosedPage? = nil, _ completion: @escaping (IngestTrackInfo) -> ()) {
+        let trackInfoCopy = closedPage?.trackInfo ?? self.trackInfo
 
         getScrollPercent { [weak self] scrollPercent in
             guard let self = self else {
@@ -604,7 +649,8 @@ internal extension CompassTracker {
 
             var finalTrackInfo = trackInfoCopy
 
-            if let scrollPercent = scrollPercent, scrollPercent > (finalTrackInfo.scrollPercent ?? 0) {
+            // The scroll view now belongs to the current page.
+            if closedPage == nil, let scrollPercent = scrollPercent, scrollPercent > (finalTrackInfo.scrollPercent ?? 0) {
                 finalTrackInfo.scrollPercent = scrollPercent
             }
 
@@ -626,8 +672,8 @@ internal extension CompassTracker {
                 finalTrackInfo.userSegments = userData.segments()
                 finalTrackInfo.userVars = userData.vars()
                 finalTrackInfo.sessionVars = storage.sessionVars
-                finalTrackInfo.pageVars = pageVars
-                finalTrackInfo.pageMetrics = pageMetrics
+                finalTrackInfo.pageVars = closedPage?.pageVars ?? pageVars
+                finalTrackInfo.pageMetrics = closedPage?.pageMetrics ?? pageMetrics
                 finalTrackInfo.hasConsent = storage.hasConsent
                 finalTrackInfo.landingPage = storage.landingPage
                 finalTrackInfo.tik = tick!
@@ -703,52 +749,125 @@ extension CompassTracker: CdpHost {
 private extension CompassTracker {
     func doTik() {
         guard trackInfo.pageUrl != nil else { return }
-        
-        getConversions { [weak self] conversions in
-            guard let self = self else { return }
-            
-            let dispatchDate = Date(timeIntervalSinceNow: deadline)
-            
-            let dispatchGroup = DispatchGroup()
-            
-            if conversions.isEmpty {
-                dispatchGroup.enter()
-                createOperation(conversion: nil, dispatchDate: dispatchDate, dispatchGroup: dispatchGroup)
-            } else {
-                for conversion in conversions {
-                    dispatchGroup.enter()
-                    createOperation(conversion: conversion, dispatchDate: dispatchDate, dispatchGroup: dispatchGroup)
-                }
-            }
-            
-            dispatchGroup.notify(queue: .main) {
-                self.doTik()
-            }
-        }
-    }
-    
-    private func createOperation(conversion: Conversion?, dispatchDate: Date, dispatchGroup: DispatchGroup) {
+
         let operation = tikOperationFactory.buildOperation(
             dataBuilder: { [self] (completion) in
                 DispatchQueue.global(qos: .utility).async {
-                    self.getTrackingData(for: conversion, tick: self.tick, completion)
-                    self.tick += 1
+                    self.buildTik(completion)
                 }
             },
-            dispatchDate: dispatchDate,
+            dispatchDate: Date(timeIntervalSinceNow: deadline),
             path: TIK_PATH,
             contentType: ContentType.FORM
         )
-        
-        observeFinish(for: operation) {
-            dispatchGroup.leave()
+
+        observeFinish(for: operation) { [weak self] in
+            DispatchQueue.main.async {
+                self?.doTik()
+            }
         }
         operationQueue.addOperation(operation)
+    }
+
+    /// Reads the pending conversions when the tik fires, not when it is scheduled, so a page
+    /// change cancelling it never drops one: a conversion stays queued until its beacon is sent.
+    private func buildTik(_ completion: @escaping DataBuilderCompletion) {
+        let requests = claimTikRequests()
+        let group = DispatchGroup()
+        let payloadsLock = NSLock()
+        var payloads = [TikPayload?](repeating: nil, count: requests.count)
+
+        for (index, request) in requests.enumerated() {
+            group.enter()
+            getTrackingData(for: request.conversion, tick: request.tick, closedPage: request.closedPage) { [weak self] trackInfo in
+                let onResult = request.conversionKey.map { key in
+                    { (sent: Bool) -> Void in self?.settleConversion(key, sent: sent) }
+                }
+
+                payloadsLock.lock()
+                payloads[index] = TikPayload(data: trackInfo, onResult: onResult)
+                payloadsLock.unlock()
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .global(qos: .utility)) {
+            completion(payloads.compactMap { $0 })
+        }
+    }
+
+    /// One beacon per pending conversion not already being sent, plus the plain ping unless a
+    /// conversion of the current page carries it.
+    private func claimTikRequests() -> [TikRequest] {
+        let currentPageId = trackInfo.pageId
+
+        conversionsLock.lock()
+        defer { conversionsLock.unlock() }
+
+        var requests = [TikRequest]()
+
+        for index in pendingConversions.indices where !pendingConversions[index].sending {
+            pendingConversions[index].sending = true
+            let pending = pendingConversions[index]
+
+            if let pageId = pending.conversion.pageId, pageId != currentPageId, let closedPage = closedPages[pageId] {
+                requests.append(TikRequest(conversion: pending.conversion, conversionKey: pending.key, closedPage: closedPage, tick: closedPage.nextTick))
+                closedPages[pageId]?.nextTick += 1
+            } else {
+                requests.append(TikRequest(conversion: pending.conversion, conversionKey: pending.key, closedPage: nil, tick: tick))
+                tick += 1
+            }
+        }
+
+        if !requests.contains(where: { $0.closedPage == nil }) {
+            requests.append(TikRequest(conversion: nil, conversionKey: nil, closedPage: nil, tick: tick))
+            tick += 1
+        }
+
+        return requests
+    }
+
+    /// A sent conversion leaves the queue and is marked as tracked; an unsent one is retried
+    /// by the next tik.
+    private func settleConversion(_ key: UUID, sent: Bool) {
+        conversionsLock.lock()
+        defer { conversionsLock.unlock() }
+
+        guard let index = pendingConversions.firstIndex(where: { $0.key == key }) else { return }
+
+        guard sent else {
+            pendingConversions[index].sending = false
+            return
+        }
+
+        let conversion = pendingConversions.remove(at: index).conversion
+        if let id = conversion.id {
+            storage.addTrackedConversion(conversion.conversion, id: id)
+        }
+        closedPages = closedPages.filter { pageId, _ in
+            pendingConversions.contains { $0.conversion.pageId == pageId }
+        }
+    }
+
+    /// Keeps the page being left while conversions tracked on it are pending.
+    private func closeCurrentPage() {
+        guard let pageId = trackInfo.pageId else { return }
+
+        conversionsLock.lock()
+        defer { conversionsLock.unlock() }
+
+        guard closedPages[pageId] == nil,
+              pendingConversions.contains(where: { $0.conversion.pageId == pageId }) else { return }
+
+        var pageTrackInfo = trackInfo
+        pageTrackInfo.pageEndDate = Date()
+        closedPages[pageId] = ClosedPage(trackInfo: pageTrackInfo, pageVars: pageVars, pageMetrics: pageMetrics, nextTick: tick)
     }
 
     func restart(pageName: String?, rs: String? = nil) {
         stopObserving()
         operationQueue.operations.forEach{ $0.cancel() }
+        closeCurrentPage()
         trackInfo.pageUrl = pageName
         trackInfo.recirculationSource = rs
         pageVars.removeAll()

@@ -11,10 +11,14 @@ protocol ScrollPercentProvider: AnyObject {
     func getScrollPercent(_ completion: @escaping (Float?) -> ())
 }
 
-protocol ConversionsProvider: AnyObject {
-    func getConversions(_ completion: @escaping ([Conversion]) -> ())
+/// One beacon of a tik. `onResult` is called exactly once: with whether the beacon reached
+/// a server, or with `false` when the operation was cancelled before sending it.
+struct TikPayload {
+    let data: Encodable
+    var onResult: ((_ sent: Bool) -> Void)? = nil
 }
-typealias DataBuilderCompletion = (_ res: Encodable) -> Void
+
+typealias DataBuilderCompletion = (_ res: [TikPayload]) -> Void
 typealias DataBuilder = (_ completion: @escaping DataBuilderCompletion) -> Void
 
 class TikOperation: Operation, @unchecked Sendable {
@@ -91,16 +95,17 @@ class TikOperation: Operation, @unchecked Sendable {
                 return
             }
             
-            let track = { [weak self] (data: Encodable?) in
+            let track = { [weak self] (payloads: [TikPayload]) in
                 guard let self = self, !self.isCancelled else {
+                    payloads.forEach { $0.onResult?(false) }
                     self?.finish()
                     return
                 }
                 
-                let params = data?.params
-                
-                if let params = params {
-                    self.tikUseCase.tik(path: self.path, type: self.contentType, params: params)
+                for payload in payloads {
+                    self.tikUseCase.tik(path: self.path, type: self.contentType, params: payload.data.params) { sent in
+                        payload.onResult?(sent)
+                    }
                 }
                 self.finish()
             }

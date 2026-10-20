@@ -29,8 +29,10 @@ struct IngestTrackInfo: Encodable {
     
     private var trackInfo = TrackInfo()
     var tik = 0
+    /// When the page was left; a beacon sent after that keeps reporting its time on page up to then.
+    var pageEndDate: Date?
     private var visitDuration: Int64? {
-        Int64((trackInfo.currentDate?.timeStamp ?? 0) - (trackInfo.startPageTimeStamp ?? 0))
+        Int64(((pageEndDate ?? trackInfo.currentDate)?.timeStamp ?? 0) - (trackInfo.startPageTimeStamp ?? 0))
     }
     var conversions: [String]? {
         didSet {

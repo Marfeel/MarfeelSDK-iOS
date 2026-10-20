@@ -110,12 +110,12 @@ private extension CompassTrackerMultimedia {
                     self?.getCachedRfv { rfv in
                         let finalTrackInfo = trackInfo
 
-                        completion(MultimediaTrackInfo(
+                        completion([TikPayload(data: MultimediaTrackInfo(
                             trackInfo: finalTrackInfo,
                             rfv: rfv,
                             item: item,
                             tik: tik
-                        ))
+                        ))])
                     }
                 },
                 dispatchDate: dispatchDate,

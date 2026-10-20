@@ -52,6 +52,7 @@ protocol ApiRouting: AnyObject {
 
 enum ApiRputerError: Error {
     case unableToBuildRequest, unableToParseResponse
+    case unsuccessfulResponse(statusCode: Int)
 }
 
 class ApiRouter {
@@ -87,6 +88,10 @@ extension ApiRouter: ApiRouting {
             return
         }
         session.dataTask(with: request) { (data, response, error) in
+            if error == nil, let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
+                completion(ApiRputerError.unsuccessfulResponse(statusCode: response.statusCode))
+                return
+            }
             completion(error)
         }.resume()
     }
