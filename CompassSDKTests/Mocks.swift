@@ -23,26 +23,40 @@ class MockOperation: Operation {
     }
     
     private var runing: Bool = false {
-        didSet {
+        willSet {
             willChangeValue(forKey: "isFinished")
             willChangeValue(forKey: "isExecuting")
+        }
+        didSet {
             didChangeValue(forKey: "isFinished")
             didChangeValue(forKey: "isExecuting")
         }
     }
-    
+    private var delivered = false
+
     override var isAsynchronous: Bool {true}
     
-    override var isFinished: Bool {!runing}
+    // Not finished before it starts, so `restart()` still finds and cancels it.
+    override var isFinished: Bool {delivered}
     
     override var isExecuting: Bool {runing}
     
     override func start() {
-        let onData = { [self] (data: Encodable) in
-            print(data.jsonEncode()!)
+        runing = true
+        let onData = { [self] (payloads: [TikPayload]) in
+            delivered = true
             runing = false
 
-            expectation?(data)
+            guard !isCancelled else {
+                payloads.forEach { $0.onResult?(false) }
+                return
+            }
+
+            for payload in payloads {
+                print(payload.data.jsonEncode()!)
+                expectation?(payload.data)
+                payload.onResult?(true)
+            }
         }
         dataBuilder(onData)
     }

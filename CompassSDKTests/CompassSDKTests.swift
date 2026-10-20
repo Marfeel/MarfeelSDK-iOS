@@ -39,12 +39,16 @@ class CompassSDKTests: XCTestCase {
 
         wait(for: [expectation], timeout: 5)
         
+        // Each conversion travels in its own beacon.
         expectation = XCTestExpectation()
+        expectation.expectedFulfillmentCount = 2
         operationProvider.expectation = { (data) in
             let ingestData = data as! IngestTrackInfo
-            
-            XCTAssertEqual(ingestData.conversions, ["First conversion", "Second conversion"])
-            XCTAssertEqual(ingestData.pageUrl, "https://marfeelwhois.mrf.io/dynamic/0/screen%20name")
+            guard let conversions = ingestData.conversions else { return }
+
+            XCTAssertEqual(conversions.count, 1)
+            XCTAssertTrue(["First conversion", "Second conversion"].contains(conversions[0]))
+            XCTAssertEqual(ingestData.pageUrl, "http://localhost/test2")
             XCTAssertEqual(ingestData.siteUserId, "testUser1")
             XCTAssertEqual(ingestData.userType?.rawValue, 9)
             XCTAssertEqual(ingestData.userId, "userIdFromStorage")
@@ -57,7 +61,7 @@ class CompassSDKTests: XCTestCase {
             expectation.fulfill()
         }
 
-        sut.trackScreen("screen name")
+        sut.trackNewPage(url: URL(string: "http://localhost/test2")!)
         sut.trackConversion(conversion: "First conversion")
         sut.trackConversion(conversion: "Second conversion")
         sut.setConsent(true)

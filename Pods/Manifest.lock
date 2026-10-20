@@ -1,5 +1,5 @@
 PODS:
-  - MarfeelSDK-iOS (2.18.14)
+  - MarfeelSDK-iOS (2.18.16)
   - SwiftUIIntrospect (1.2.0)
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  MarfeelSDK-iOS: 62c3acd42d433722379c8712f71cb4ba45577de4
+  MarfeelSDK-iOS: 6938e23a066f870e0809ed439fadff1bdbd4e74d
   SwiftUIIntrospect: 35fbc9ae46c869ae7290afdecf6f70c2b8c86b13
 
 PODFILE CHECKSUM: e920ba50a10ffb55ddf90460357520dd74e13f8d
