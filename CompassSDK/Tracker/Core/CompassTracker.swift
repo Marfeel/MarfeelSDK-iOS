@@ -83,9 +83,8 @@ extension UserType: RawRepresentable, Codable {
 
     public init?(rawValue: Int) {
         switch rawValue {
-            case 0:
-                self = .unknown
-            case 1:
+            // 0 and 1 are both anonymous; 1 is the legacy value, 0 is what the web sends.
+            case 0, 1:
                 self = .anonymous
             case 2:
                 self = .logged
@@ -101,7 +100,7 @@ extension UserType: RawRepresentable, Codable {
             case .unknown:
               return 0
             case .anonymous:
-              return 1
+              return 0
             case .logged:
               return 2
             case .paid:

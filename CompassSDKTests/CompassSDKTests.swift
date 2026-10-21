@@ -82,6 +82,14 @@ class CompassSDKTests: XCTestCase {
         XCTAssertEqual(sut.getSessionId(), "sessionIdFromStorage")
     }
 
+    func testUserTypeRawValues() {
+        XCTAssertEqual(UserType.anonymous.rawValue, 0)
+        XCTAssertEqual(UserType.logged.rawValue, 2)
+        XCTAssertEqual(UserType.paid.rawValue, 3)
+        XCTAssertEqual(UserType(rawValue: 0)?.rawValue, UserType.anonymous.rawValue)
+        XCTAssertEqual(UserType(rawValue: 1)?.rawValue, UserType.anonymous.rawValue)
+    }
+
     func testShouldFetchRFV() {
         let expectation = XCTestExpectation()
         let sut = GetRFV(apiRouter: MockApiRouterRfv(expect: {(apiCall) in
