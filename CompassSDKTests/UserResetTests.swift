@@ -259,3 +259,63 @@ final class CdpPublicSurfaceTests: XCTestCase {
         XCTAssertNotNil(tracker.getUserId())
     }
 }
+
+/// Ids must be lowercase, like Android's: Croupier keys profiles and rfv by the lowercase id.
+final class StorageIdCasingTests: XCTestCase {
+    private let upperUserId = "3F2504E0-4F89-11D3-9A0C-0305E82C3301"
+    private let upperSessionId = "6BA7B810-9DAD-11D1-80B4-00C04FD430C8"
+
+    override func setUp() {
+        super.setUp()
+        let storage = PListCompassStorage()
+        storage.resetUser()
+        storage.setConsent(true)
+    }
+
+    private func persistLegacyModel(sessionExpiration: Date = Date().addingTimeInterval(600)) {
+        var legacy = PListCompassStorage.Model.empty
+        legacy.userId = upperUserId
+        legacy.suid = "Site-User-ABC"
+        legacy.sessionId = upperSessionId
+        legacy.sessionExpirationDate = sessionExpiration
+        legacy.hasConsent = true
+        legacy.cdpRfv = CdpRfv(rfv: 1, r: 1, f: 1, v: 1).encode().flatMap { String(data: $0, encoding: .utf8) }
+        legacy.cdpCohorts = "[1]"
+        legacy.cdpCacheSessionId = upperSessionId
+        PListCompassStorage().persist(filename: Store.v2.rawValue, values: legacy)
+    }
+
+    func testNewIdsAreLowercase() {
+        let storage = PListCompassStorage()
+        storage.resetUser()
+        XCTAssertEqual(storage.userId, storage.userId.lowercased())
+        XCTAssertEqual(storage.sessionId, storage.sessionId.lowercased())
+        XCTAssertNotNil(UUID(uuidString: storage.userId))
+    }
+
+    func testStoredUppercaseIdsAreReturnedLowercaseKeepingTheSameIdentity() {
+        persistLegacyModel()
+        let storage = PListCompassStorage()
+        XCTAssertEqual(storage.userId, upperUserId.lowercased())
+        XCTAssertEqual(storage.sessionId, upperSessionId.lowercased())
+    }
+
+    func testTheNormalisationIsPersisted() {
+        persistLegacyModel()
+        _ = PListCompassStorage()
+        let stored = PListCompassStorage().load(Store.v2.rawValue)
+        XCTAssertEqual(stored?.userId, upperUserId.lowercased())
+        XCTAssertEqual(stored?.sessionId, upperSessionId.lowercased())
+    }
+
+    func testTheSessionTaggedCdpCacheStillMatchesAfterNormalisation() {
+        persistLegacyModel()
+        let storage = PListCompassStorage()
+        XCTAssertNotNil(storage.readCdpCachedIdentity(sessionId: storage.sessionId))
+    }
+
+    func testTheRegisteredUserIdIsLeftUntouched() {
+        persistLegacyModel()
+        XCTAssertEqual(PListCompassStorage().suid, "Site-User-ABC")
+    }
+}

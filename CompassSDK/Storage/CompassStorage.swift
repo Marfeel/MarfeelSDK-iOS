@@ -69,7 +69,7 @@ class PListCompassStorage: PListStorage {
     }
 
     init() {
-        self.model = loadModel() ?? .empty
+        self.model = loadModel().map(Self.lowercasingIds) ?? .empty
     }
     
     private func loadModel() -> Model? {
@@ -84,6 +84,23 @@ class PListCompassStorage: PListStorage {
         (modelV1.userId, modelV1.suid) = (modelV1.suid, modelV1.userId)
         
         return modelV1
+    }
+
+    /// Older SDK versions minted uppercase ids (`UUID().uuidString`) while Android and the
+    /// rest of the platform key readers by the lowercase form. Stored ids are normalised on
+    /// load (and persisted by the `model` setter) so existing readers keep their identity.
+    /// `cdpCacheSessionId` follows `sessionId` so the session-tagged CDP cache still matches.
+    /// `suid` is the publisher's registered user id and is left untouched.
+    private static func lowercasingIds(_ model: Model) -> Model {
+        var model = model
+        model.userId = model.userId?.lowercased()
+        model.sessionId = model.sessionId?.lowercased()
+        model.cdpCacheSessionId = model.cdpCacheSessionId?.lowercased()
+        return model
+    }
+
+    private static func newId() -> String {
+        UUID().uuidString.lowercased()
     }
 
     /// The model is read and written from several queues (main, the ingest operations, the
@@ -113,7 +130,7 @@ class PListCompassStorage: PListStorage {
 extension PListCompassStorage: CompassStorage {
     var sessionId: String {
         guard let sessionId = model?.sessionId, let expirationDate = model?.sessionExpirationDate, Date() < expirationDate else {
-            let sessionId = UUID().uuidString
+            let sessionId = Self.newId()
             model?.sessionId = sessionId
             model?.sessionExpirationDate = Date().adding(minutes: 30)
             model?.sessionVars = Vars()
@@ -138,7 +155,7 @@ extension PListCompassStorage: CompassStorage {
 
     var userId: String {
         guard let userId = model?.userId else {
-            let userId = UUID().uuidString
+            let userId = Self.newId()
 
             model?.userId = userId
 

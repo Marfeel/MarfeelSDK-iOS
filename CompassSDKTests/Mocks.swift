@@ -185,8 +185,8 @@ class MockStorage: CompassStorage {
     var resetUserCalls = 0
     func resetUser() {
         resetUserCalls += 1
-        userId = UUID().uuidString
-        sessionId = UUID().uuidString
+        userId = UUID().uuidString.lowercased()
+        sessionId = UUID().uuidString.lowercased()
         suid = nil
         userVars = [:]
         userSegments = []
