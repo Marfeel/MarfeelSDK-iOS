@@ -12,7 +12,7 @@ In a `Package.swift` manifest:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Marfeel/MarfeelSDK-iOS", from: "2.18.19")
+    .package(url: "https://github.com/Marfeel/MarfeelSDK-iOS", from: "2.18.20")
 ],
 targets: [
     .target(
@@ -31,7 +31,7 @@ The [CocoaPods trunk becomes read-only on December 2, 2026](https://blog.cocoapo
 If you can't switch yet, point your Podfile at a git tag:
 
 ```ruby
-pod 'MarfeelSDK-iOS', :git => 'https://github.com/Marfeel/MarfeelSDK-iOS.git', :tag => '2.18.19'
+pod 'MarfeelSDK-iOS', :git => 'https://github.com/Marfeel/MarfeelSDK-iOS.git', :tag => '2.18.20'
 ```
 
 ## Releasing
