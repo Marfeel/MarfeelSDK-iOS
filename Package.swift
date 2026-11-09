@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -21,13 +21,14 @@ let package = Package(
         .target(
             name: "MarfeelSDK-iOS",
             path: "CompassSDK",
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "CLAUDE.md"],
+            resources: [.copy("Resources/PrivacyInfo.xcprivacy")]
         ),
         .testTarget(
             name: "MarfeelSDK-iOSTests",
             dependencies: ["MarfeelSDK-iOS"],
             path: "CompassSDKTests",
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "Resources"]
         ),
     ]
 )
