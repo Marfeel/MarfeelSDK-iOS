@@ -1,5 +1,5 @@
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 class WholeModuleAugmenterTests: XCTestCase {
     private var pageUrl: String? = "https://page-1"
@@ -69,5 +69,27 @@ class WholeModuleAugmenterTests: XCTestCase {
         let original = module("mod-a", positions: [0, 1, 42])
         let result = augmenter.onEligible([original])
         XCTAssertEqual(original.links.map { $0.url }, Array(result[0].links.dropLast()).map { $0.url })
+    }
+
+    func testEligibleAugmentationPreservesTestVersion() {
+        let original = RecirculationModule(
+            name: "mod-a",
+            links: [RecirculationLink(url: "https://a/0", position: 0)],
+            testVersion: "control"
+        )
+        let result = augmenter.onEligible([original])
+        XCTAssertEqual("control", result[0].testVersion)
+    }
+
+    func testImpressionAugmentationPreservesTestVersion() {
+        _ = augmenter.onEligible([module("mod-a")])
+        let original = RecirculationModule(
+            name: "mod-a",
+            links: [RecirculationLink(url: "https://a/0", position: 0)],
+            testVersion: "Original"
+        )
+        let result = augmenter.onImpression(original)
+        XCTAssertTrue(result.links.contains { $0.position == 255 })
+        XCTAssertEqual("Original", result.testVersion)
     }
 }

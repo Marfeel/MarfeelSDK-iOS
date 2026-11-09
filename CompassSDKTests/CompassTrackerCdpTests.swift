@@ -9,7 +9,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 final class CompassTrackerCdpTests: XCTestCase {
     private var api: MockCdpApi!

@@ -14,7 +14,9 @@ public class Experience {
     public let filters: [ExperienceFilter]?
     public let rawJson: [String: Any]
     public internal(set) var resolvedContent: String?
+    public internal(set) var experimentation: Experimentation?
 
+    internal let experiment: ExperienceExperiment?
     internal var contentResolver: ContentResolver?
 
     internal init(
@@ -29,7 +31,8 @@ public class Experience {
         strategy: String?,
         selectors: [ExperienceSelector]?,
         filters: [ExperienceFilter]?,
-        rawJson: [String: Any]
+        rawJson: [String: Any],
+        experiment: ExperienceExperiment? = nil
     ) {
         self.id = id
         self.name = name
@@ -43,6 +46,8 @@ public class Experience {
         self.selectors = selectors
         self.filters = filters
         self.rawJson = rawJson
+        self.experiment = experiment
+        self.experimentation = nil
         self.resolvedContent = nil
         self.contentResolver = nil
     }

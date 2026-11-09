@@ -2,15 +2,25 @@ import Foundation
 
 internal class ExperimentManager {
     private static let storageKey = "CompassExperiments"
-    private static let filterPrefix = "mrf_exp_"
 
     private let defaults: UserDefaults
     private let random: () -> Double
+    private let evaluator: ExperimentEvaluator
+    private let userIdProvider: () -> String?
+    private let siteUserIdProvider: () -> String?
     private let queue = DispatchQueue(label: "com.marfeel.experiments", attributes: .concurrent)
 
-    init(defaults: UserDefaults = .standard, random: @escaping () -> Double = { Double.random(in: 0..<1) }) {
+    init(
+        defaults: UserDefaults = .standard,
+        random: @escaping () -> Double = { Double.random(in: 0..<1) },
+        userIdProvider: @escaping () -> String? = { CompassTracker.shared.experiencesUserId },
+        siteUserIdProvider: @escaping () -> String? = { CompassTracker.shared.experiencesRegisteredUserId }
+    ) {
         self.defaults = defaults
         self.random = random
+        self.evaluator = ExperimentEvaluator(random: random)
+        self.userIdProvider = userIdProvider
+        self.siteUserIdProvider = siteUserIdProvider
     }
 
     func handleExperimentGroups(_ groups: [String: Any]?) {
@@ -44,26 +54,13 @@ internal class ExperimentManager {
         }
     }
 
-    func filterByExperiments(_ experiences: [Experience]) -> [Experience] {
-        let assignments = getAssignments()
-        return experiences.filter { experience in
-            guard let filters = experience.filters else { return true }
-            let experimentFilters = filters.filter { $0.key.hasPrefix(ExperimentManager.filterPrefix) }
-            if experimentFilters.isEmpty { return true }
-
-            return experimentFilters.allSatisfy { filter in
-                let groupId = String(filter.key.dropFirst(ExperimentManager.filterPrefix.count))
-                guard let assignedVariant = assignments[groupId] else { return false }
-                switch filter.operator {
-                case .equals:
-                    return filter.values.contains(assignedVariant)
-                case .notEquals:
-                    return !filter.values.contains(assignedVariant)
-                default:
-                    return true
-                }
-            }
-        }
+    /// Applies the web SDK A/B semantics: keeps winners and the control arm (tagged with
+    /// `experimentation`), drops the losing variants.
+    func evaluate(_ experiences: [Experience]) -> [Experience] {
+        let userId = [userIdProvider(), siteUserIdProvider()]
+            .compactMap { $0 }
+            .first { !$0.isEmpty }
+        return evaluator.evaluate(experiences, assignments: getAssignments(), userId: userId)
     }
 
     func getAssignments() -> [String: String] {

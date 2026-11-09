@@ -304,18 +304,24 @@ struct ExperiencesView: View {
                         experiences.map { exp in
                             let familyTag = exp.family.map { " family=\($0.rawValue)" } ?? ""
                             let resolved = exp.resolvedContent.map { " [resolved: \(String($0.prefix(100)))]" } ?? ""
-                            return "- [\(exp.type.rawValue)] \(exp.name)\(familyTag)\(resolved)"
+                            return "- [\(exp.type.rawValue)] \(exp.name)\(familyTag)\(experimentationTag(exp))\(resolved)"
                         }.joined(separator: "\n")
                 } else {
                     resultText = "Found \(experiences.count) experiences:\n" +
                         experiences.map { exp in
                             let familyTag = exp.family.map { " family=\($0.rawValue)" } ?? ""
-                            return "- [\(exp.type.rawValue)] \(exp.name)\(familyTag) (id=\(exp.id))"
+                            return "- [\(exp.type.rawValue)] \(exp.name)\(familyTag)\(experimentationTag(exp)) (id=\(exp.id))"
                         }.joined(separator: "\n")
                 }
                 isLoading = false
             }
         }
+    }
+
+    private func experimentationTag(_ experience: Experience) -> String {
+        guard let experimentation = experience.experimentation else { return "" }
+        let arm = experimentation.isControl ? "control" : "test"
+        return " ab=\(arm) tv=\(experimentation.name)"
     }
 }
 

@@ -8,7 +8,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 final class StubURLProtocol: URLProtocol {
     struct Recorded {

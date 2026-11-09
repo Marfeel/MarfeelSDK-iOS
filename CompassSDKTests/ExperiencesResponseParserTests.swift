@@ -1,5 +1,5 @@
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 class ExperiencesResponseParserTests: XCTestCase {
     private let parser = ExperiencesResponseParser()
@@ -250,5 +250,64 @@ class ExperiencesResponseParserTests: XCTestCase {
         XCTAssertEqual(1, filters.count)
         XCTAssertEqual("url", filters[0].key)
         XCTAssertEqual(.equals, filters[0].operator)
+    }
+
+    // MARK: - Experiment
+
+    private func parseSingleAction(_ action: [String: Any]) -> Experience {
+        let json: [String: Any] = ["inline": ["actions": ["action": action]]]
+        return parser.parse(json).experiences.first!
+    }
+
+    func testParsesStandaloneRequestExperiment() {
+        let experience = parseSingleAction([
+            "id": "IL_1",
+            "experiment": ["type": "REQUEST", "weight": 30]
+        ])
+        XCTAssertEqual(.request, experience.experiment?.type)
+        XCTAssertEqual(30, experience.experiment?.weight)
+        XCTAssertNil(experience.experiment?.groupId)
+    }
+
+    func testParsesStandaloneUserExperimentWithDecimalWeight() {
+        let experience = parseSingleAction([
+            "id": "IL_1~v1",
+            "experiment": ["type": "USER", "weight": 12.5]
+        ])
+        XCTAssertEqual(.user, experience.experiment?.type)
+        XCTAssertEqual(12.5, experience.experiment?.weight)
+    }
+
+    func testStandaloneExperimentDoesNotAddExperimentFilter() {
+        let experience = parseSingleAction([
+            "id": "IL_1",
+            "experiment": ["type": "REQUEST", "weight": 30]
+        ])
+        XCTAssertNil(experience.filters)
+    }
+
+    func testParsesTestGroupExperimentAndKeepsExperimentFilter() {
+        let experience = parseSingleAction([
+            "id": "IL_1",
+            "experiment": ["type": "GROUP", "groupId": "g1", "variantIds": ["va", "vb"]]
+        ])
+        XCTAssertEqual(.testGroup, experience.experiment?.type)
+        XCTAssertEqual("g1", experience.experiment?.groupId)
+        XCTAssertEqual(["va", "vb"], experience.experiment?.variantIds)
+        XCTAssertEqual("mrf_exp_g1", experience.filters?.first?.key)
+    }
+
+    func testUnknownExperimentTypeIsIgnored() {
+        let experience = parseSingleAction([
+            "id": "IL_1",
+            "experiment": ["type": "SOMETHING", "weight": 30]
+        ])
+        XCTAssertNil(experience.experiment)
+    }
+
+    func testMissingExperimentIsNil() {
+        let experience = parseSingleAction(["id": "IL_1"])
+        XCTAssertNil(experience.experiment)
+        XCTAssertNil(experience.experimentation)
     }
 }

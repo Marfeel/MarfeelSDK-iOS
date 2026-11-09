@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 typealias Expectation = (Encodable) -> ()
 

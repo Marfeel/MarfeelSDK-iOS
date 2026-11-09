@@ -37,10 +37,15 @@ internal class ExperiencesTracker: ExperiencesTracking {
     private let frequencyCapManager: FrequencyCapManager
     private let readEditorialsManager: ReadEditorialsManager
     private let apiClient: ExperiencesApiClient
-    private let recirculationTracker: RecirculationTracking
+    private let recirculationTracker: RecirculationTracker
 
     private let targetingQueue = DispatchQueue(label: "com.marfeel.experiences.targeting", attributes: .concurrent)
     private var _customTargeting: [String: String] = [:]
+
+    // Experimentation of fetched experiences, so tracking calls made with a rebuilt
+    // Experience (e.g. from the Flutter / React Native bridges) still send the test version.
+    private let experimentationQueue = DispatchQueue(label: "com.marfeel.experiences.experimentation", attributes: .concurrent)
+    private var _experimentationById: [String: Experimentation] = [:]
 
     private let fetchQueue = DispatchQueue(label: "com.marfeel.experiences.fetch", qos: .userInitiated)
 
@@ -61,7 +66,7 @@ internal class ExperiencesTracker: ExperiencesTracking {
             frequencyCapManager: frequencyCapManager,
             readEditorialsManager: readEditorialsManager
         )
-        self.recirculationTracker = Recirculation.shared
+        self.recirculationTracker = Recirculation.tracker
     }
 
     func addTargeting(key: String, value: String) {
@@ -105,7 +110,8 @@ internal class ExperiencesTracker: ExperiencesTracking {
 
                 self.experimentManager.handleExperimentGroups(parseResult.experimentGroups)
 
-                var experiences = self.experimentManager.filterByExperiments(parseResult.experiences)
+                var experiences = self.experimentManager.evaluate(parseResult.experiences)
+                self.storeExperimentation(experiences)
 
                 if let filterByType = filterByType {
                     experiences = experiences.filter { $0.type == filterByType }
@@ -152,10 +158,39 @@ internal class ExperiencesTracker: ExperiencesTracking {
         fetchQueue.asyncAfter(deadline: .now() + ExperiencesTracker.resolveTimeoutSeconds, execute: finish)
     }
 
+    private func storeExperimentation(_ experiences: [Experience]) {
+        let entries = experiences.compactMap { experience in
+            experience.experimentation.map { (experience.id, $0) }
+        }
+        if entries.isEmpty { return }
+        experimentationQueue.sync(flags: .barrier) {
+            for (id, experimentation) in entries {
+                _experimentationById[id] = experimentation
+            }
+        }
+    }
+
+    private func testVersion(for experience: Experience) -> String? {
+        if let experimentation = experience.experimentation {
+            return experimentation.name
+        }
+        return experimentationQueue.sync { _experimentationById[experience.id]?.name }
+    }
+
+    /// Same module name as the web SDK (`data-mrf-recirculation`): the base experience id,
+    /// shared by every arm of an A/B test so they can be compared.
+    private func moduleName(for experience: Experience) -> String {
+        return ExperimentEvaluator.baseExperienceId(experience.id)
+    }
+
     func trackImpression(experience: Experience, links: [RecirculationLink]) {
         frequencyCapManager.trackImpression(experienceId: experience.id)
         if !links.isEmpty {
-            recirculationTracker.trackImpression(name: experience.name, links: links)
+            recirculationTracker.trackImpression(
+                name: moduleName(for: experience),
+                links: links,
+                testVersion: testVersion(for: experience)
+            )
         }
     }
 
@@ -168,11 +203,19 @@ internal class ExperiencesTracker: ExperiencesTracking {
     }
 
     func trackEligible(experience: Experience, links: [RecirculationLink]) {
-        recirculationTracker.trackEligible(name: experience.name, links: links)
+        recirculationTracker.trackEligible(
+            name: moduleName(for: experience),
+            links: links,
+            testVersion: testVersion(for: experience)
+        )
     }
 
     func trackClick(experience: Experience, link: RecirculationLink) {
-        recirculationTracker.trackClick(name: experience.name, link: link)
+        recirculationTracker.trackClick(
+            name: moduleName(for: experience),
+            link: link,
+            testVersion: testVersion(for: experience)
+        )
     }
 
     func clearFrequencyCaps() {
