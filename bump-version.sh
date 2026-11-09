@@ -85,6 +85,8 @@ fi
 # Check if the changes were successful
 if [ $? -eq 0 ]; then
   echo "Version updated successfully in podspec, Info.plist and SDKVersion.swift"
+  echo "Next: merge to master, then tag the merge commit and push the tag:"
+  echo "  git tag $NEW_VERSION && git push origin $NEW_VERSION"
 else
   echo "Failed to update version in podspec or Info.plist"
   exit 1
