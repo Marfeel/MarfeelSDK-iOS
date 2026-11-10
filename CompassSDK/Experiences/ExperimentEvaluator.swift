@@ -269,8 +269,18 @@ internal final class ExperimentEvaluator {
     }
 }
 
-/// Must stay in lockstep with the web SDK `deterministic.ts` (hash version 1).
+internal struct WeightedVariant {
+    let id: String
+    let weight: Double
+}
+
+/// Must stay in lockstep with the web SDK `deterministic.ts` and Croupier `DeterministicHash`,
+/// which CompassMiddleware also recomputes (`experimentFallback.ts`) for readers without a stored
+/// `mrfExperiment_<groupId>` user var.
 internal enum DeterministicHash {
+    static let mixedHashVersion = 2
+    private static let unsignedIntRange = 4_294_967_296.0
+
     private static let table: [UInt32] = (0..<256).map { index -> UInt32 in
         var value = UInt32(index)
         for _ in 0..<8 {
@@ -287,7 +297,43 @@ internal enum DeterministicHash {
         return crc ^ 0xFFFF_FFFF
     }
 
+    static func fmix32(_ hash: UInt32) -> UInt32 {
+        var mixed = hash
+        mixed ^= mixed >> 16
+        mixed = mixed &* 0x85EB_CA6B
+        mixed ^= mixed >> 13
+        mixed = mixed &* 0xC2B2_AE35
+        mixed ^= mixed >> 16
+        return mixed
+    }
+
+    /// `[0, 1)` value of `key`: plain CRC32 for hash version 1 (or none), CRC32 + `fmix32` from 2.
+    static func fraction(_ key: String, hashVersion: Int? = nil) -> Double {
+        let crc = crc32(key)
+        let hash = (hashVersion ?? 1) >= mixedHashVersion ? fmix32(crc) : crc
+        return Double(hash) / unsignedIntRange
+    }
+
+    /// Standalone USER experiments: always hash version 1, as the web SDK does.
     static func seededPercentage(userId: String, seed: String) -> Double {
-        return Double(crc32("\(seed):\(userId)")) / 4_294_967_296.0 * 100
+        return fraction("\(seed):\(userId)") * 100
+    }
+
+    /// Test-group variant for `userId`, the same pick as web `selectVariant` and the
+    /// CompassMiddleware fallback. Nil when no variant has a positive weight.
+    static func selectVariant(_ variants: [WeightedVariant], userId: String, seed: String, hashVersion: Int?) -> String? {
+        let weighted = variants.filter { $0.weight > 0 }
+        let totalWeight = weighted.reduce(0) { $0 + $1.weight }
+        guard !weighted.isEmpty, totalWeight > 0 else { return nil }
+
+        let value = fraction("\(seed):\(userId)", hashVersion: hashVersion) * totalWeight
+        var accumulated = 0.0
+
+        for variant in weighted {
+            accumulated += variant.weight
+            if value < accumulated { return variant.id }
+        }
+
+        return weighted.last?.id
     }
 }

@@ -4,12 +4,41 @@ import XCTest
 class ExperimentManagerTests: XCTestCase {
     private var defaults: UserDefaults!
     private var manager: ExperimentManager!
+    private var userVars: [String: String] = [:]
+    private var userVarWrites: [(name: String, value: String)] = []
+
+    private let seedA = "eFmyf219Q3qh6OzYsZOdyw"
+    private let mixedUid = "4a4ffef6-8d7e-4484-9fd4-7a3abd4c7bb0"
 
     override func setUp() {
         super.setUp()
         defaults = UserDefaults(suiteName: "ExperimentManagerTests")!
         defaults.removePersistentDomain(forName: "ExperimentManagerTests")
-        manager = ExperimentManager(defaults: defaults, userIdProvider: { nil }, siteUserIdProvider: { nil })
+        userVars = [:]
+        userVarWrites = []
+        manager = makeManager()
+    }
+
+    private func makeManager(
+        userId: String? = nil,
+        siteUserId: String? = nil,
+        random: @escaping () -> Double = { Double.random(in: 0..<1) }
+    ) -> ExperimentManager {
+        return ExperimentManager(
+            defaults: defaults,
+            random: random,
+            userIdProvider: { userId },
+            siteUserIdProvider: { siteUserId },
+            readUserVars: { [unowned self] in self.userVars },
+            writeUserVar: { [unowned self] name, value in
+                self.userVars[name] = value
+                self.userVarWrites.append((name, value))
+            }
+        )
+    }
+
+    private func failingRandom() -> () -> Double {
+        return { XCTFail("random must not be used"); return 0 }
     }
 
     private func makeExperimentGroups() -> [String: Any] {
@@ -23,6 +52,28 @@ class ExperimentManagerTests: XCTestCase {
                 ]
             ] as [String: Any]
         ]
+    }
+
+    private func makeGroups(
+        key: String,
+        id: String?,
+        hashVersion: Int? = nil,
+        variants: [(String, Any)]
+    ) -> [String: Any] {
+        var group: [String: Any] = [
+            "name": key,
+            "variants": variants.map { ["id": $0.0, "name": $0.0, "weight": $0.1] as [String: Any] }
+        ]
+        if let id = id { group["id"] = id }
+        if let hashVersion = hashVersion { group["hashVersion"] = hashVersion }
+        return [key: group]
+    }
+
+    private func hashedTestGroupVariant(_ userId: String) -> String {
+        return DeterministicHash.selectVariant(
+            [WeightedVariant(id: "variant_a", weight: 50), WeightedVariant(id: "variant_b", weight: 50)],
+            userId: userId, seed: "testGroup", hashVersion: nil
+        )!
     }
 
     private func makeExperience(
@@ -47,6 +98,8 @@ class ExperimentManagerTests: XCTestCase {
         return ExperienceExperiment(type: .user, weight: weight, groupId: nil, variantIds: nil)
     }
 
+    // MARK: - Assignment
+
     func testHandleExperimentGroupsAssignsVariant() {
         manager.handleExperimentGroups(makeExperimentGroups())
         let assignments = manager.getAssignments()
@@ -62,23 +115,155 @@ class ExperimentManagerTests: XCTestCase {
         XCTAssertEqual(first, second)
     }
 
-    func testHandleExperimentGroupsWithSeededRandomIsDeterministic() {
-        var callCount = 0
-        let seededRandom: () -> Double = {
-            callCount += 1
-            return 0.25
-        }
-        let manager1 = ExperimentManager(defaults: defaults, random: seededRandom)
+    func testHandleExperimentGroupsWithoutUserIdUsesSeededRandom() {
+        let seededRandom: () -> Double = { 0.25 }
+        let manager1 = makeManager(random: seededRandom)
         manager1.handleExperimentGroups(makeExperimentGroups())
         let assignment1 = manager1.getAssignments()["testGroup"]
 
         manager1.clear()
-        let manager2 = ExperimentManager(defaults: defaults, random: seededRandom)
+        let manager2 = makeManager(random: seededRandom)
         manager2.handleExperimentGroups(makeExperimentGroups())
         let assignment2 = manager2.getAssignments()["testGroup"]
 
+        XCTAssertEqual("variant_a", assignment1)
         XCTAssertEqual(assignment1, assignment2)
     }
+
+    func testHandleExperimentGroupsHashesWithUserId() {
+        let manager = makeManager(userId: "user-1", random: failingRandom())
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(hashedTestGroupVariant("user-1"), manager.getAssignments()["testGroup"])
+    }
+
+    func testHandleExperimentGroupsFallsBackToSiteUserIdWhenUserIdIsEmpty() {
+        let manager = makeManager(userId: "", siteUserId: "site-user", random: failingRandom())
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(hashedTestGroupVariant("site-user"), manager.getAssignments()["testGroup"])
+    }
+
+    func testHandleExperimentGroupsHonoursHashVersion() {
+        let variants: [(String, Any)] = [("1", 50), ("2", 50)]
+        let legacy = makeManager(userId: mixedUid, random: failingRandom())
+        legacy.handleExperimentGroups(makeGroups(key: "group", id: seedA, variants: variants))
+        XCTAssertEqual("2", legacy.getAssignments()["group"])
+
+        legacy.clear()
+        let mixed = makeManager(userId: mixedUid, random: failingRandom())
+        mixed.handleExperimentGroups(makeGroups(key: "group", id: seedA, hashVersion: 2, variants: variants))
+        XCTAssertEqual("1", mixed.getAssignments()["group"])
+    }
+
+    func testHandleExperimentGroupsUsesGroupKeyAsSeedWithoutId() {
+        let manager = makeManager(userId: mixedUid, random: failingRandom())
+
+        manager.handleExperimentGroups(makeGroups(key: seedA, id: nil, hashVersion: 2, variants: [("1", 50), ("2", 50)]))
+
+        XCTAssertEqual("1", manager.getAssignments()[seedA])
+    }
+
+    func testHandleExperimentGroupsAcceptsDecimalWeights() {
+        let manager = makeManager(userId: "user-1", random: failingRandom())
+
+        manager.handleExperimentGroups(makeGroups(key: "group", id: "group", variants: [("a", 33.3), ("b", 66.7)]))
+
+        let expected = DeterministicHash.selectVariant(
+            [WeightedVariant(id: "a", weight: 33.3), WeightedVariant(id: "b", weight: 66.7)],
+            userId: "user-1", seed: "group", hashVersion: nil
+        )
+        XCTAssertEqual(expected, manager.getAssignments()["group"])
+    }
+
+    func testHandleExperimentGroupsKeepsStoredAssignmentOverHash() {
+        let manager = makeManager(userId: "user-1", random: failingRandom())
+        let notHashed = hashedTestGroupVariant("user-1") == "variant_a" ? "variant_b" : "variant_a"
+        manager.setAssignment(groupId: "testGroup", variantId: notHashed)
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(notHashed, manager.getAssignments()["testGroup"])
+    }
+
+    func testHandleExperimentGroupsRehashesWhenStoredVariantIsGone() {
+        let manager = makeManager(userId: "user-1", random: failingRandom())
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_removed")
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(hashedTestGroupVariant("user-1"), manager.getAssignments()["testGroup"])
+    }
+
+    func testHandleExperimentGroupsRehashesWhenStoredVariantHasNoWeight() {
+        let manager = makeManager(userId: "user-1", random: failingRandom())
+        manager.setAssignment(groupId: "group", variantId: "paused")
+
+        manager.handleExperimentGroups(makeGroups(key: "group", id: "group", variants: [("paused", 0), ("live", 100)]))
+
+        XCTAssertEqual("live", manager.getAssignments()["group"])
+    }
+
+    func testHandleExperimentGroupsDropsGroupsMissingFromResponse() {
+        manager.setAssignment(groupId: "finishedGroup", variantId: "v1")
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        let assignments = manager.getAssignments()
+        XCTAssertNil(assignments["finishedGroup"])
+        XCTAssertNotNil(assignments["testGroup"])
+    }
+
+    func testHandleExperimentGroupsWithoutGroupsKeepsAssignments() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+
+        manager.handleExperimentGroups(nil)
+
+        XCTAssertEqual(["testGroup": "variant_a"], manager.getAssignments())
+    }
+
+    // MARK: - User var
+
+    func testHandleExperimentGroupsWritesAssignmentToUserVar() {
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(manager.getAssignments()["testGroup"], userVars["mrfExperiment_testGroup"])
+    }
+
+    func testHandleExperimentGroupsWritesKeptAssignmentToUserVar() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_b")
+        userVars = [:]
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual("variant_b", userVars["mrfExperiment_testGroup"])
+    }
+
+    func testHandleExperimentGroupsDoesNotRewriteUnchangedUserVar() {
+        manager.handleExperimentGroups(makeExperimentGroups())
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual(1, userVarWrites.count)
+    }
+
+    func testHandleExperimentGroupsOverwritesStaleUserVar() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+        userVars["mrfExperiment_testGroup"] = "stale"
+
+        manager.handleExperimentGroups(makeExperimentGroups())
+
+        XCTAssertEqual("variant_a", userVars["mrfExperiment_testGroup"])
+    }
+
+    func testSetAssignmentWritesUserVar() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_b")
+
+        XCTAssertEqual("variant_b", userVars["mrfExperiment_testGroup"])
+    }
+
+    // MARK: - Evaluation
 
     func testEvaluateKeepsAssignedVariantAndDropsLoserOnSameSlot() {
         manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
@@ -139,12 +324,7 @@ class ExperimentManagerTests: XCTestCase {
     }
 
     func testEvaluateHashesUserExperimentsWithUserId() {
-        let manager = ExperimentManager(
-            defaults: defaults,
-            random: { XCTFail("random must not be used"); return 0 },
-            userIdProvider: { "user-1" },
-            siteUserIdProvider: { "site-user" }
-        )
+        let manager = makeManager(userId: "user-1", siteUserId: "site-user", random: failingRandom())
         let percentage = DeterministicHash.seededPercentage(userId: "user-1", seed: "A")
 
         let result = manager.evaluate([
@@ -156,12 +336,7 @@ class ExperimentManagerTests: XCTestCase {
     }
 
     func testEvaluateFallsBackToSiteUserIdWhenUserIdIsEmpty() {
-        let manager = ExperimentManager(
-            defaults: defaults,
-            random: { XCTFail("random must not be used"); return 0 },
-            userIdProvider: { "" },
-            siteUserIdProvider: { "site-user" }
-        )
+        let manager = makeManager(userId: "", siteUserId: "site-user", random: failingRandom())
         let percentage = DeterministicHash.seededPercentage(userId: "site-user", seed: "A")
 
         let result = manager.evaluate([
@@ -171,6 +346,8 @@ class ExperimentManagerTests: XCTestCase {
 
         XCTAssertEqual([percentage <= 50 ? "A" : "A~v1"], result.map { $0.id })
     }
+
+    // MARK: - Manual assignment and clear
 
     func testSetAssignmentWritesGivenVariant() {
         manager.setAssignment(groupId: "testGroup", variantId: "variant_b")
@@ -198,13 +375,22 @@ class ExperimentManagerTests: XCTestCase {
         XCTAssertEqual(0, manager.getAssignments().count)
     }
 
-    func testHandleAfterClearReassigns() {
+    func testClearStoredAssignmentsRemovesAssignments() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+
+        ExperimentManager.clearStoredAssignments(defaults)
+
+        XCTAssertTrue(manager.getAssignments().isEmpty)
+    }
+
+    func testHandleAfterClearReassignsFromNewUserId() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+        ExperimentManager.clearStoredAssignments(defaults)
+        let manager = makeManager(userId: "user-2", random: failingRandom())
+
         manager.handleExperimentGroups(makeExperimentGroups())
-        let first = manager.getAssignments()["testGroup"]
-        manager.clear()
-        manager.handleExperimentGroups(makeExperimentGroups())
-        XCTAssertNotNil(manager.getAssignments()["testGroup"])
-        XCTAssertTrue(["variant_a", "variant_b"].contains(first!))
+
+        XCTAssertEqual(hashedTestGroupVariant("user-2"), manager.getAssignments()["testGroup"])
     }
 
     func testGetTargetingEntriesReturnsAssignments() {
