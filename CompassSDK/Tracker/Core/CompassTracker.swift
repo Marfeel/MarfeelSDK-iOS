@@ -584,6 +584,8 @@ extension CompassTracker: CompassTracking {
             resetStorage: { [self] in
                 storage.resetUser()
                 storage.addVisit()
+                // Test-group variants are hashed from the user id, so the new visitor is re-assigned.
+                ExperimentManager.clearStoredAssignments()
             },
             rebootstrapTrackInfo: { [self] in
                 // Read (and mint) the storage values first — file I/O — then mutate only the

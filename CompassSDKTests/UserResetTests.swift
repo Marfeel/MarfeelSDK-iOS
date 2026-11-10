@@ -319,3 +319,31 @@ final class StorageIdCasingTests: XCTestCase {
         XCTAssertEqual(PListCompassStorage().suid, "Site-User-ABC")
     }
 }
+
+/// `resetUser()` must forget test-group assignments: they are hashed from the user id,
+/// so the rotated visitor is re-assigned on the next fetch.
+final class UserResetExperimentAssignmentsTests: XCTestCase {
+    private func standardManager() -> ExperimentManager {
+        return ExperimentManager(
+            defaults: .standard,
+            userIdProvider: { nil },
+            siteUserIdProvider: { nil },
+            readUserVars: { [:] },
+            writeUserVar: { _, _ in }
+        )
+    }
+
+    override func tearDown() {
+        ExperimentManager.clearStoredAssignments()
+        super.tearDown()
+    }
+
+    func testResetUserClearsExperimentAssignments() {
+        standardManager().setAssignment(groupId: "testGroup", variantId: "variant_a")
+        XCTAssertFalse(standardManager().getAssignments().isEmpty)
+
+        CompassTracker.shared.resetUser(completion: nil)
+
+        XCTAssertTrue(standardManager().getAssignments().isEmpty)
+    }
+}

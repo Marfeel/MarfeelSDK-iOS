@@ -324,4 +324,54 @@ class ExperimentEvaluatorTests: XCTestCase {
             accuracy: 1e-9
         )
     }
+
+    // MARK: - DeterministicHash (vectors shared with Croupier `DeterministicHashTest` and web `deterministic.test.ts`)
+
+    func testHashMatchesCroupierLegacyVectors() {
+        XCTAssertEqual(3_129_066_013, DeterministicHash.crc32("seed:user"))
+        XCTAssertEqual(0.7285424538422376, DeterministicHash.fraction("seed:user"), accuracy: 1e-15)
+        XCTAssertEqual(72.85424538422376, DeterministicHash.seededPercentage(userId: "user", seed: "seed"), accuracy: 1e-12)
+    }
+
+    func testHashMatchesCroupierMixedVectors() {
+        XCTAssertEqual(18_576_395, DeterministicHash.fmix32(DeterministicHash.crc32("seed:user")))
+        XCTAssertEqual(0.0043251540046185255, DeterministicHash.fraction("seed:user", hashVersion: 2), accuracy: 1e-15)
+        XCTAssertEqual(0.9152210694737732, DeterministicHash.fraction("grüpo:üser-🎯", hashVersion: 2), accuracy: 1e-15)
+    }
+
+    func testHashVersionOneAndNilKeepTheLegacyHash() {
+        XCTAssertEqual(DeterministicHash.fraction("seed:user"), DeterministicHash.fraction("seed:user", hashVersion: 1))
+    }
+
+    func testSelectVariantMatchesWebLegacyVectors() {
+        let variants = [WeightedVariant(id: "variant-a", weight: 50), WeightedVariant(id: "variant-b", weight: 50)]
+
+        XCTAssertEqual("variant-a", DeterministicHash.selectVariant(variants, userId: "user-1", seed: "group-a", hashVersion: nil))
+        XCTAssertEqual("variant-b", DeterministicHash.selectVariant(variants, userId: "user-2", seed: "group-a", hashVersion: nil))
+    }
+
+    func testSelectVariantMixedHashDecouplesEqualLengthSeeds() {
+        let uid = "4a4ffef6-8d7e-4484-9fd4-7a3abd4c7bb0"
+        let variants = [WeightedVariant(id: "1", weight: 50), WeightedVariant(id: "2", weight: 50)]
+        let seedA = "eFmyf219Q3qh6OzYsZOdyw"
+        let seedB = "HfdplrMXRIKhGtvBUUZOoQ"
+
+        XCTAssertEqual("2", DeterministicHash.selectVariant(variants, userId: uid, seed: seedA, hashVersion: nil))
+        XCTAssertEqual("2", DeterministicHash.selectVariant(variants, userId: uid, seed: seedB, hashVersion: nil))
+        XCTAssertEqual("1", DeterministicHash.selectVariant(variants, userId: uid, seed: seedA, hashVersion: 2))
+        XCTAssertEqual("2", DeterministicHash.selectVariant(variants, userId: uid, seed: seedB, hashVersion: 2))
+    }
+
+    func testSelectVariantReturnsNilWithoutWeightedVariants() {
+        XCTAssertNil(DeterministicHash.selectVariant([], userId: "user-1", seed: "group-a", hashVersion: nil))
+        XCTAssertNil(DeterministicHash.selectVariant(
+            [WeightedVariant(id: "variant-a", weight: 0)], userId: "user-1", seed: "group-a", hashVersion: nil
+        ))
+    }
+
+    func testSelectVariantSkipsZeroWeightVariants() {
+        let variants = [WeightedVariant(id: "off", weight: 0), WeightedVariant(id: "on", weight: 33.3)]
+
+        XCTAssertEqual("on", DeterministicHash.selectVariant(variants, userId: "user-1", seed: "group-a", hashVersion: 2))
+    }
 }
