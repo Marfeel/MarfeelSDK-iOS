@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 class CompassSDKMultimediaTests: XCTestCase {
     

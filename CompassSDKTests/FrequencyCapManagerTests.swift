@@ -1,5 +1,5 @@
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 class FrequencyCapManagerTests: XCTestCase {
     private var defaults: UserDefaults!

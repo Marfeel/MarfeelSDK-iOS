@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 final class CdpManagerIdentityTests: XCTestCase {
     private var env: CdpTestEnv!

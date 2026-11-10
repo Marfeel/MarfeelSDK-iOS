@@ -21,7 +21,11 @@ internal class WholeModuleAugmenter {
         return modules.map { module in
             if moduleStates[module.name] == nil {
                 moduleStates[module.name] = false
-                return RecirculationModule(name: module.name, links: module.links + [WholeModuleAugmenter.wholeModuleLink()])
+                return RecirculationModule(
+                    name: module.name,
+                    links: module.links + [WholeModuleAugmenter.wholeModuleLink()],
+                    testVersion: module.testVersion
+                )
             }
             return module
         }
@@ -34,7 +38,11 @@ internal class WholeModuleAugmenter {
 
         if moduleStates[module.name] == false {
             moduleStates[module.name] = true
-            return RecirculationModule(name: module.name, links: module.links + [WholeModuleAugmenter.wholeModuleLink()])
+            return RecirculationModule(
+                    name: module.name,
+                    links: module.links + [WholeModuleAugmenter.wholeModuleLink()],
+                    testVersion: module.testVersion
+                )
         }
         return module
     }

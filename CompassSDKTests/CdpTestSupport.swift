@@ -9,7 +9,7 @@
 
 import Foundation
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 let UUID_A = "550E8400-E29B-41D4-A716-446655440000"
 let UUID_B = "550E8400-E29B-41D4-A716-446655440001"

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 final class SegmentOwnershipTests: XCTestCase {
     private let hundred = (1...100).map { "s\($0)" }

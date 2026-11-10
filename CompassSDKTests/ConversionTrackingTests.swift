@@ -4,7 +4,7 @@
 //
 
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 /// Records every beacon and answers it as `respond` decides; `nil` holds the answer until
 /// `release` is called, leaving the beacon in flight.

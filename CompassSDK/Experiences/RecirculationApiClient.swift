@@ -17,14 +17,7 @@ internal class RecirculationApiClient {
         let tracker = CompassTracker.shared
         let storage = tracker
 
-        let modulesJson: [[String: Any]] = modules.map { module in
-            [
-                "n": module.name,
-                "e": module.links.map { link in
-                    ["url": link.url, "p": String(link.position)]
-                }
-            ]
-        }
+        let modulesJson = RecirculationApiClient.modulesPayload(modules)
 
         guard let modulesData = try? JSONSerialization.data(withJSONObject: modulesJson),
               let modulesString = String(data: modulesData, encoding: .utf8) else { return }
@@ -66,6 +59,22 @@ internal class RecirculationApiClient {
         session.dataTask(with: request) { _, _, _ in
             // Fire-and-forget
         }.resume()
+    }
+
+    static func modulesPayload(_ modules: [RecirculationModule]) -> [[String: Any]] {
+        return modules.map { module in
+            [
+                "n": module.name,
+                "e": module.links.map { link -> [String: Any] in
+                    var linkJson: [String: Any] = ["url": link.url, "p": String(link.position)]
+                    if let testVersion = module.testVersion {
+                        linkJson["tv"] = testVersion
+                        linkJson["meta"] = ["tv": testVersion]
+                    }
+                    return linkJson
+                }
+            ]
+        }
     }
 
     private func percentEncode(_ string: String) -> String {

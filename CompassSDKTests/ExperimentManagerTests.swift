@@ -1,5 +1,5 @@
 import XCTest
-@testable import CompassSDK
+@testable import MarfeelSDK_iOS
 
 class ExperimentManagerTests: XCTestCase {
     private var defaults: UserDefaults!
@@ -9,7 +9,7 @@ class ExperimentManagerTests: XCTestCase {
         super.setUp()
         defaults = UserDefaults(suiteName: "ExperimentManagerTests")!
         defaults.removePersistentDomain(forName: "ExperimentManagerTests")
-        manager = ExperimentManager(defaults: defaults)
+        manager = ExperimentManager(defaults: defaults, userIdProvider: { nil }, siteUserIdProvider: { nil })
     }
 
     private func makeExperimentGroups() -> [String: Any] {
@@ -25,12 +25,26 @@ class ExperimentManagerTests: XCTestCase {
         ]
     }
 
-    private func makeExperience(id: String, filters: [ExperienceFilter]? = nil) -> Experience {
+    private func makeExperience(
+        id: String,
+        experiment: ExperienceExperiment? = nil,
+        selector: String? = nil
+    ) -> Experience {
         return Experience(
             id: id, name: id, type: .inline, family: nil,
             placement: nil, contentUrl: nil, contentType: .unknown,
-            features: nil, strategy: nil, selectors: nil, filters: filters, rawJson: [:]
+            features: nil, strategy: nil,
+            selectors: selector.map { [ExperienceSelector(selector: $0, strategy: "")] },
+            filters: nil, rawJson: [:], experiment: experiment
         )
+    }
+
+    private func testGroup(_ variantId: String) -> ExperienceExperiment {
+        return ExperienceExperiment(type: .testGroup, weight: nil, groupId: "testGroup", variantIds: [variantId])
+    }
+
+    private func user(_ weight: Double) -> ExperienceExperiment {
+        return ExperienceExperiment(type: .user, weight: weight, groupId: nil, variantIds: nil)
     }
 
     func testHandleExperimentGroupsAssignsVariant() {
@@ -66,66 +80,96 @@ class ExperimentManagerTests: XCTestCase {
         XCTAssertEqual(assignment1, assignment2)
     }
 
-    func testFilterByExperimentsKeepsMatchingFilter() {
-        manager.handleExperimentGroups(makeExperimentGroups())
-        let assignedVariant = manager.getAssignments()["testGroup"]!
+    func testEvaluateKeepsAssignedVariantAndDropsLoserOnSameSlot() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+        let experiences = [
+            makeExperience(id: "exp_a", experiment: testGroup("variant_a"), selector: "#slot"),
+            makeExperience(id: "exp_b", experiment: testGroup("variant_b"), selector: "#slot"),
+        ]
 
-        let experience = makeExperience(
-            id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .equals, values: [assignedVariant])]
-        )
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(1, filtered.count)
+        let result = manager.evaluate(experiences)
+
+        XCTAssertEqual(["exp_a"], result.map { $0.id })
+        XCTAssertEqual(Experimentation(isControl: false, name: "variant_a"), result[0].experimentation)
     }
 
-    func testFilterByExperimentsDropsNonMatchingFilter() {
-        manager.handleExperimentGroups(makeExperimentGroups())
-        let experience = makeExperience(
-            id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .equals, values: ["nonexistent"])]
-        )
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(0, filtered.count)
+    func testEvaluateMarksLoserOnOtherSlotAsControl() {
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+        let experiences = [
+            makeExperience(id: "exp_a", experiment: testGroup("variant_a"), selector: "#slot-1"),
+            makeExperience(id: "exp_b", experiment: testGroup("variant_b"), selector: "#slot-2"),
+        ]
+
+        let result = manager.evaluate(experiences)
+
+        XCTAssertEqual(["exp_a", "exp_b"], result.map { $0.id })
+        XCTAssertEqual(Experimentation(isControl: true, name: "variant_a"), result[1].experimentation)
     }
 
-    func testFilterByExperimentsKeepsExperienceWithNoFilters() {
-        let experience = makeExperience(id: "exp1")
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(1, filtered.count)
-    }
-
-    func testFilterByExperimentsKeepsNonExperimentFilters() {
-        let experience = makeExperience(
-            id: "exp1",
-            filters: [ExperienceFilter(key: "url", operator: .equals, values: ["something.com"])]
-        )
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(1, filtered.count)
-    }
-
-    func testFilterByExperimentsNotEqualsKeepsWhenDiffers() {
+    func testEvaluateUsesAssignmentsFromHandleExperimentGroups() {
         manager.handleExperimentGroups(makeExperimentGroups())
         let assigned = manager.getAssignments()["testGroup"]!
-        let other = assigned == "variant_a" ? "variant_b" : "variant_a"
+        let experiences = [
+            makeExperience(id: "exp_a", experiment: testGroup("variant_a"), selector: "#slot"),
+            makeExperience(id: "exp_b", experiment: testGroup("variant_b"), selector: "#slot"),
+        ]
 
-        let experience = makeExperience(
-            id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .notEquals, values: [other])]
-        )
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(1, filtered.count)
+        let result = manager.evaluate(experiences)
+
+        XCTAssertEqual(1, result.count)
+        XCTAssertEqual(assigned, result[0].experimentation?.name)
     }
 
-    func testFilterByExperimentsNotEqualsDropsWhenMatches() {
-        manager.handleExperimentGroups(makeExperimentGroups())
-        let assigned = manager.getAssignments()["testGroup"]!
+    func testEvaluateKeepsTestGroupUnmarkedWithoutAssignment() {
+        let experiences = [
+            makeExperience(id: "exp_a", experiment: testGroup("variant_a"), selector: "#slot"),
+            makeExperience(id: "exp_b", experiment: testGroup("variant_b"), selector: "#slot"),
+        ]
 
-        let experience = makeExperience(
-            id: "exp1",
-            filters: [ExperienceFilter(key: "mrf_exp_testGroup", operator: .notEquals, values: [assigned])]
+        let result = manager.evaluate(experiences)
+
+        XCTAssertEqual(2, result.count)
+        XCTAssertTrue(result.allSatisfy { $0.experimentation == nil })
+    }
+
+    func testEvaluateKeepsExperienceWithoutExperiment() {
+        let result = manager.evaluate([makeExperience(id: "exp1")])
+        XCTAssertEqual(1, result.count)
+        XCTAssertNil(result[0].experimentation)
+    }
+
+    func testEvaluateHashesUserExperimentsWithUserId() {
+        let manager = ExperimentManager(
+            defaults: defaults,
+            random: { XCTFail("random must not be used"); return 0 },
+            userIdProvider: { "user-1" },
+            siteUserIdProvider: { "site-user" }
         )
-        let filtered = manager.filterByExperiments([experience])
-        XCTAssertEqual(0, filtered.count)
+        let percentage = DeterministicHash.seededPercentage(userId: "user-1", seed: "A")
+
+        let result = manager.evaluate([
+            makeExperience(id: "A", experiment: user(50)),
+            makeExperience(id: "A~v1", experiment: user(50)),
+        ])
+
+        XCTAssertEqual([percentage <= 50 ? "A" : "A~v1"], result.map { $0.id })
+    }
+
+    func testEvaluateFallsBackToSiteUserIdWhenUserIdIsEmpty() {
+        let manager = ExperimentManager(
+            defaults: defaults,
+            random: { XCTFail("random must not be used"); return 0 },
+            userIdProvider: { "" },
+            siteUserIdProvider: { "site-user" }
+        )
+        let percentage = DeterministicHash.seededPercentage(userId: "site-user", seed: "A")
+
+        let result = manager.evaluate([
+            makeExperience(id: "A", experiment: user(50)),
+            makeExperience(id: "A~v1", experiment: user(50)),
+        ])
+
+        XCTAssertEqual([percentage <= 50 ? "A" : "A~v1"], result.map { $0.id })
     }
 
     func testSetAssignmentWritesGivenVariant() {

@@ -69,7 +69,8 @@ internal class ExperiencesResponseParser {
             strategy: action["strategy"] as? String,
             selectors: parseSelectors(action),
             filters: parseFilters(action),
-            rawJson: action
+            rawJson: action,
+            experiment: parseExperiment(action["experiment"] as? [String: Any])
         )
         experience.contentResolver = contentResolver
         return experience
@@ -145,6 +146,18 @@ internal class ExperiencesResponseParser {
             key: "mrf_exp_\(groupId)",
             operator: .equals,
             values: variantIds
+        )
+    }
+
+    private func parseExperiment(_ experiment: [String: Any]?) -> ExperienceExperiment? {
+        guard let experiment = experiment,
+              let typeKey = experiment["type"] as? String,
+              let type = ExperimentType(rawValue: typeKey) else { return nil }
+        return ExperienceExperiment(
+            type: type,
+            weight: (experiment["weight"] as? NSNumber)?.doubleValue,
+            groupId: experiment["groupId"] as? String,
+            variantIds: experiment["variantIds"] as? [String]
         )
     }
 

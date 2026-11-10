@@ -8,7 +8,8 @@ public protocol RecirculationTracking {
 }
 
 public class Recirculation {
-    public static let shared: RecirculationTracking = RecirculationTracker()
+    internal static let tracker = RecirculationTracker()
+    public static let shared: RecirculationTracking = tracker
 }
 
 internal class RecirculationTracker: RecirculationTracking {
@@ -24,19 +25,11 @@ internal class RecirculationTracker: RecirculationTracking {
     }
 
     func trackEligible(name: String, links: [RecirculationLink]) {
-        let module = RecirculationModule(name: name, links: links)
-        let augmented = augmenter.onEligible([module])
-        sendQueue.async { [weak self] in
-            self?.apiClient.send(eventType: "elegible", modules: augmented)
-        }
+        trackEligible(name: name, links: links, testVersion: nil)
     }
 
     func trackImpression(name: String, links: [RecirculationLink]) {
-        let module = RecirculationModule(name: name, links: links)
-        let augmented = augmenter.onImpression(module)
-        sendQueue.async { [weak self] in
-            self?.apiClient.send(eventType: "impression", modules: [augmented])
-        }
+        trackImpression(name: name, links: links, testVersion: nil)
     }
 
     func trackImpression(name: String, link: RecirculationLink) {
@@ -44,7 +37,27 @@ internal class RecirculationTracker: RecirculationTracking {
     }
 
     func trackClick(name: String, link: RecirculationLink) {
-        let module = RecirculationModule(name: name, links: [link])
+        trackClick(name: name, link: link, testVersion: nil)
+    }
+
+    func trackEligible(name: String, links: [RecirculationLink], testVersion: String?) {
+        let module = RecirculationModule(name: name, links: links, testVersion: testVersion)
+        let augmented = augmenter.onEligible([module])
+        sendQueue.async { [weak self] in
+            self?.apiClient.send(eventType: "elegible", modules: augmented)
+        }
+    }
+
+    func trackImpression(name: String, links: [RecirculationLink], testVersion: String?) {
+        let module = RecirculationModule(name: name, links: links, testVersion: testVersion)
+        let augmented = augmenter.onImpression(module)
+        sendQueue.async { [weak self] in
+            self?.apiClient.send(eventType: "impression", modules: [augmented])
+        }
+    }
+
+    func trackClick(name: String, link: RecirculationLink, testVersion: String?) {
+        let module = RecirculationModule(name: name, links: [link], testVersion: testVersion)
         sendQueue.async { [weak self] in
             self?.apiClient.send(eventType: "click", modules: [module])
         }
