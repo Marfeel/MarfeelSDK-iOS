@@ -6,6 +6,7 @@ class ExperimentManagerTests: XCTestCase {
     private var manager: ExperimentManager!
     private var userVars: [String: String] = [:]
     private var userVarWrites: [(name: String, value: String)] = []
+    private var userVarRemovals: [String] = []
 
     private let seedA = "eFmyf219Q3qh6OzYsZOdyw"
     private let mixedUid = "4a4ffef6-8d7e-4484-9fd4-7a3abd4c7bb0"
@@ -16,6 +17,7 @@ class ExperimentManagerTests: XCTestCase {
         defaults.removePersistentDomain(forName: "ExperimentManagerTests")
         userVars = [:]
         userVarWrites = []
+        userVarRemovals = []
         manager = makeManager()
     }
 
@@ -33,8 +35,39 @@ class ExperimentManagerTests: XCTestCase {
             writeUserVar: { [unowned self] name, value in
                 self.userVars[name] = value
                 self.userVarWrites.append((name, value))
+            },
+            removeUserVar: { [unowned self] name in
+                self.userVars[name] = nil
+                self.userVarRemovals.append(name)
             }
         )
+    }
+
+    /// A `testGroup` assigned by the `plan` user var. Variants carry no weight, as the backend allows.
+    private func makeUserVarGroups(
+        mapping: [(String, String)] = [("premium", "variant_a"), ("free", "variant_b"), ("trial", "variant_b")],
+        fallback: String? = nil
+    ) -> [String: Any] {
+        var group: [String: Any] = [
+            "id": "testGroup",
+            "name": "Test Group",
+            "source": "USER_VAR",
+            "userVarKey": "plan",
+            "userVarMapping": mapping.map { ["value": $0.0, "variantId": $0.1] },
+            "variants": [
+                ["id": "variant_a", "name": "variant_a"],
+                ["id": "variant_b", "name": "variant_b"],
+            ]
+        ]
+        if let fallback = fallback { group["fallbackVariantId"] = fallback }
+        return ["testGroup": group]
+    }
+
+    private func testGroupExperiences() -> [Experience] {
+        return [
+            makeExperience(id: "exp_a", experiment: testGroup("variant_a"), selector: "#a"),
+            makeExperience(id: "exp_b", experiment: testGroup("variant_b"), selector: "#b"),
+        ]
     }
 
     private func failingRandom() -> () -> Double {
@@ -397,5 +430,133 @@ class ExperimentManagerTests: XCTestCase {
         manager.handleExperimentGroups(makeExperimentGroups())
         let entries = manager.getTargetingEntries()
         XCTAssertNotNil(entries["experiment::testGroup"])
+    }
+
+    // MARK: - User-var groups
+
+    func testUserVarGroupTakesVariantMappedToUserVar() {
+        let manager = makeManager(userId: mixedUid, random: failingRandom())
+        userVars["plan"] = "trial"
+
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertEqual(["testGroup": "variant_b"], manager.getAssignments())
+        XCTAssertEqual("variant_b", userVars["mrfExperiment_testGroup"])
+    }
+
+    func testUserVarGroupFollowsCurrentValueOverStoredAssignment() {
+        userVars["plan"] = "premium"
+        manager.handleExperimentGroups(makeUserVarGroups())
+        userVars["plan"] = "free"
+
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertEqual("variant_b", manager.getAssignments()["testGroup"])
+        XCTAssertEqual("variant_b", userVars["mrfExperiment_testGroup"])
+    }
+
+    func testUserVarGroupUsesFallbackVariantForUnmappedValue() {
+        userVars["plan"] = "enterprise"
+
+        manager.handleExperimentGroups(makeUserVarGroups(fallback: "variant_a"))
+
+        XCTAssertEqual("variant_a", manager.getAssignments()["testGroup"])
+    }
+
+    func testUserVarGroupUsesFallbackVariantWhenUserVarIsMissing() {
+        manager.handleExperimentGroups(makeUserVarGroups(fallback: "variant_b"))
+
+        XCTAssertEqual("variant_b", manager.getAssignments()["testGroup"])
+    }
+
+    func testUserVarGroupWithoutValueAndFallbackLeavesReaderOutOfTest() {
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertTrue(manager.getAssignments().isEmpty)
+        XCTAssertTrue(manager.getTargetingEntries().isEmpty)
+        XCTAssertTrue(userVarWrites.isEmpty)
+    }
+
+    func testUserVarGroupComparesValuesExactly() {
+        userVars["plan"] = "Premium"
+
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertTrue(manager.getAssignments().isEmpty)
+    }
+
+    func testUserVarGroupIgnoresMappingToVariantNotInGroup() {
+        userVars["plan"] = "premium"
+
+        manager.handleExperimentGroups(makeUserVarGroups(mapping: [("premium", "variant_z")]))
+
+        XCTAssertTrue(manager.getAssignments().isEmpty)
+    }
+
+    func testUserVarGroupRemovesRecordedVariantWhenReaderDropsOut() {
+        userVars["plan"] = "premium"
+        manager.handleExperimentGroups(makeUserVarGroups())
+        userVars["plan"] = nil
+
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertNil(userVars["mrfExperiment_testGroup"])
+        XCTAssertEqual(["mrfExperiment_testGroup"], userVarRemovals)
+    }
+
+    func testUserVarGroupDoesNotRemoveUserVarNeverRecorded() {
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        XCTAssertTrue(userVarRemovals.isEmpty)
+    }
+
+    func testExplicitMarfeelSourceKeepsHashAssignment() {
+        let manager = makeManager(userId: mixedUid, random: failingRandom())
+        userVars["plan"] = "premium"
+        var groups = makeExperimentGroups()
+        var group = groups["testGroup"] as! [String: Any]
+        group["source"] = "MARFEEL"
+        groups["testGroup"] = group
+
+        manager.handleExperimentGroups(groups)
+
+        XCTAssertEqual(hashedTestGroupVariant(mixedUid), manager.getAssignments()["testGroup"])
+    }
+
+    func testEvaluateServesVariantMappedToUserVar() {
+        userVars["plan"] = "premium"
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        let result = manager.evaluate(testGroupExperiences())
+
+        XCTAssertEqual(["exp_a", "exp_b"], result.map { $0.id })
+        XCTAssertEqual(Experimentation(isControl: false, name: "variant_a"), result[0].experimentation)
+        XCTAssertEqual(Experimentation(isControl: true, name: "variant_a"), result[1].experimentation)
+    }
+
+    func testEvaluateDropsEveryExperienceOfGroupReaderIsOutOf() {
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        let result = manager.evaluate(testGroupExperiences() + [makeExperience(id: "plain")])
+
+        XCTAssertEqual(["plain"], result.map { $0.id })
+    }
+
+    func testEvaluateServesGroupAgainOnceUserVarIsSet() {
+        manager.handleExperimentGroups(makeUserVarGroups())
+        userVars["plan"] = "free"
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        let result = manager.evaluate(testGroupExperiences())
+
+        XCTAssertEqual(Experimentation(isControl: false, name: "variant_b"), result[1].experimentation)
+    }
+
+    func testSetAssignmentPutsReaderBackInGroupTheyWereOutOf() {
+        manager.handleExperimentGroups(makeUserVarGroups())
+
+        manager.setAssignment(groupId: "testGroup", variantId: "variant_a")
+
+        XCTAssertEqual(2, manager.evaluate(testGroupExperiences()).count)
     }
 }

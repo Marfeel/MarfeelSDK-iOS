@@ -18,8 +18,10 @@ internal final class ExperimentEvaluator {
         let winners: Set<ObjectIdentifier>
         let variantId: String?
         let failOpen: Bool
+        var outOfTest = false
 
         static let open = Outcome(winners: [], variantId: nil, failOpen: true)
+        static let out = Outcome(winners: [], variantId: nil, failOpen: false, outOfTest: true)
     }
 
     private struct Evaluation {
@@ -28,6 +30,7 @@ internal final class ExperimentEvaluator {
         let groupSize: Int
         let isWinner: Bool
         let name: String
+        let outOfTest: Bool
     }
 
     private let random: () -> Double
@@ -42,13 +45,22 @@ internal final class ExperimentEvaluator {
             .first.map(String.init) ?? id
     }
 
-    func evaluate(_ experiences: [Experience], assignments: [String: String], userId: String?) -> [Experience] {
-        let evaluations = evaluateExperiences(experiences, assignments: assignments, userId: userId)
+    /// - Parameter outOfTest: test groups the reader is not part of: none of their members is
+    ///   served or tagged. Unlike a group without assignment, which fails open.
+    func evaluate(
+        _ experiences: [Experience],
+        assignments: [String: String],
+        userId: String?,
+        outOfTest: Set<String> = []
+    ) -> [Experience] {
+        let evaluations = evaluateExperiences(experiences, assignments: assignments, userId: userId, outOfTest: outOfTest)
         let controlIds = testGroupControlIds(experiences, evaluations)
             .union(standaloneControlIds(experiences, evaluations))
 
         return experiences.compactMap { experience in
             guard let evaluation = evaluations[ObjectIdentifier(experience)] else { return experience }
+
+            if evaluation.outOfTest { return nil }
 
             if evaluation.isWinner {
                 experience.experimentation = Experimentation(isControl: false, name: evaluation.name)
@@ -70,7 +82,8 @@ internal final class ExperimentEvaluator {
     private func evaluateExperiences(
         _ experiences: [Experience],
         assignments: [String: String],
-        userId: String?
+        userId: String?,
+        outOfTest: Set<String>
     ) -> [ObjectIdentifier: Evaluation] {
         // One draw per evaluation shared by every REQUEST group, taken only when needed.
         var requestDraw: Double?
@@ -83,7 +96,7 @@ internal final class ExperimentEvaluator {
         var evaluations: [ObjectIdentifier: Evaluation] = [:]
 
         for group in groupExperiences(experiences) {
-            let outcome = pickOutcome(group, assignments: assignments, userId: userId, request: request)
+            let outcome = pickOutcome(group, assignments: assignments, userId: userId, outOfTest: outOfTest, request: request)
             if outcome.failOpen { continue }
 
             for member in group.members {
@@ -93,7 +106,8 @@ internal final class ExperimentEvaluator {
                     groupKey: group.groupKey,
                     groupSize: group.members.count,
                     isWinner: isWinner,
-                    name: resolveName(member, group: group, isWinner: isWinner, variantId: outcome.variantId)
+                    name: resolveName(member, group: group, isWinner: isWinner, variantId: outcome.variantId),
+                    outOfTest: outcome.outOfTest
                 )
             }
         }
@@ -132,11 +146,12 @@ internal final class ExperimentEvaluator {
         _ group: Group,
         assignments: [String: String],
         userId: String?,
+        outOfTest: Set<String>,
         request: () -> Double
     ) -> Outcome {
         switch group.type {
         case .testGroup:
-            return pickTestGroupOutcome(group, assignments: assignments)
+            return pickTestGroupOutcome(group, assignments: assignments, outOfTest: outOfTest)
         case .request:
             return pickStandaloneOutcome(group, randomValue: request())
         case .user:
@@ -144,7 +159,9 @@ internal final class ExperimentEvaluator {
         }
     }
 
-    private func pickTestGroupOutcome(_ group: Group, assignments: [String: String]) -> Outcome {
+    private func pickTestGroupOutcome(_ group: Group, assignments: [String: String], outOfTest: Set<String>) -> Outcome {
+        if outOfTest.contains(group.groupKey) { return .out }
+
         guard let variantId = assignments[group.groupKey] else { return .open }
 
         let winners = group.members

@@ -374,4 +374,38 @@ class ExperimentEvaluatorTests: XCTestCase {
 
         XCTAssertEqual("on", DeterministicHash.selectVariant(variants, userId: "user-1", seed: "group-a", hashVersion: 2))
     }
+
+    // MARK: - Out of test
+
+    func testOutOfTestGroupDropsEveryMemberAndKeepsNoControl() {
+        let a = makeExperience(id: "X", experiment: testGroup("g", ["va"]), selector: "#s1")
+        let b = makeExperience(id: "Y", experiment: testGroup("g", ["vb"]), selector: "#s2")
+
+        let result = evaluator(random: 0.5).evaluate([a, b], assignments: [:], userId: nil, outOfTest: ["g"])
+
+        XCTAssertTrue(result.isEmpty)
+    }
+
+    func testOutOfTestWinsOverStoredAssignment() {
+        let a = makeExperience(id: "X", experiment: testGroup("g", ["va"]), selector: "#s1")
+
+        let result = evaluator(random: 0.5).evaluate([a], assignments: ["g": "va"], userId: nil, outOfTest: ["g"])
+
+        XCTAssertTrue(result.isEmpty)
+    }
+
+    func testOutOfTestGroupLeavesOtherGroupsAndPlainExperiencesAlone() {
+        let out = makeExperience(id: "X", experiment: testGroup("g", ["va"]), selector: "#s1")
+        let assigned = makeExperience(id: "Y", experiment: testGroup("h", ["va"]), selector: "#s1")
+        let open = makeExperience(id: "Z", experiment: testGroup("open", ["va"]), selector: "#s1")
+        let plain = makeExperience(id: "plain", experiment: nil)
+
+        let result = evaluator(random: 0.5).evaluate(
+            [out, assigned, open, plain], assignments: ["h": "va"], userId: nil, outOfTest: ["g"]
+        )
+
+        XCTAssertEqual(["Y", "Z", "plain"], ids(result))
+        XCTAssertEqual(Experimentation(isControl: false, name: "va"), result[0].experimentation)
+        XCTAssertNil(result[1].experimentation)
+    }
 }

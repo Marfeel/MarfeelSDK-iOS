@@ -527,6 +527,12 @@ extension CompassTracker: CompassTracking {
         writeUserVar(name: name, value: value)
     }
 
+    /// Removes a device-owned user var. Internal: the experiment manager drops
+    /// `mrfExperiment_<groupId>` through it when a reader leaves a user-var test group.
+    func removeUserVar(name: String) {
+        writeUserVar(name: name, value: nil)
+    }
+
     /// The one write path for device-owned user vars: persists, then pushes the owned set
     /// to the CDP profile (debounced). A nil `value` removes the var.
     private func writeUserVar(name: String, value: String?) {
