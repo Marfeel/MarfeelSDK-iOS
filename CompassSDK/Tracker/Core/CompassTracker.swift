@@ -203,6 +203,8 @@ public class CompassTracker: Tracker {
 
         if enableCdp {
             tracker.cdpFacade.start()
+            // `setSiteUserId` does not link while the CDP is disabled, so a login set before `initialize` is linked here.
+            tracker.cdpFacade.relinkSiteUserId(tracker.trackInfo.siteUserId)
         }
     }
     
@@ -624,7 +626,10 @@ extension CompassTracker: CompassTracking {
     
     public func setConsent(_ hasConsent: Bool) {
         storage.setConsent(hasConsent)
-        if config.cdpEnabled { cdpFacade.onConsentChanged() }
+        if config.cdpEnabled {
+            cdpFacade.onConsentChanged()
+            cdpFacade.relinkSiteUserId(trackInfo.siteUserId)
+        }
     }
     
     public func getUserId() -> String {
@@ -902,7 +907,10 @@ private extension CompassTracker {
         
         func onAppActive(){
             doTik()
-            if config.cdpEnabled { cdpFacade.start() }
+            if config.cdpEnabled {
+                cdpFacade.start()
+                cdpFacade.relinkSiteUserId(trackInfo.siteUserId)
+            }
         }
         
         self.lifecyleNotifier.listen(onForeground: onAppActive, onBackground: onAppInactive)

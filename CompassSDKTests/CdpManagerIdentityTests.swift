@@ -133,6 +133,127 @@ final class CdpManagerIdentityTests: XCTestCase {
         XCTAssertEqual(host.cached?.rfv?.rfv, 1)
     }
 
+    // MARK: - site user id re-link
+
+    /// `relinkSiteUserId` has no completion: let the resolve → link chain drain.
+    private func relink(_ userId: String?) {
+        manager.relinkSiteUserId(userId)
+        settle()
+    }
+
+    private func setSiteUserId(_ userId: String) {
+        manager.linkSiteUserId(userId)
+        settle()
+    }
+
+    func testRelinkLinksTheIdAsADeterministicRegisteredUserIdOnTheCurrentMaster() {
+        env.warmVisitor()
+
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 1)
+        XCTAssertEqual(api.linkParams.first?.idType, CdpIdentityTypes.registeredUserId)
+        XCTAssertEqual(api.linkParams.first?.idValue, "user-1")
+        XCTAssertEqual(api.linkParams.first?.isDeterministic, true)
+        XCTAssertEqual(api.linkParams.first?.masterId, UUID_A)
+    }
+
+    func testRelinkRunsOncePerSession() {
+        env.warmVisitor()
+
+        relink("user-1")
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 1)
+    }
+
+    func testRelinkRunsAgainInANewSession() {
+        env.warmVisitor()
+        relink("user-1")
+
+        host.cdpSessionId = "session-2"
+        api.resolveResponses = [identity(UUID_A)]
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 2)
+    }
+
+    func testRelinkRunsAgainWhenTheIdChanged() {
+        env.warmVisitor()
+
+        relink("user-1")
+        relink("user-2")
+
+        XCTAssertEqual(api.linkParams.map { $0.idValue }, ["user-1", "user-2"])
+    }
+
+    func testRelinkWithoutAnIdDoesNothing() {
+        env.warmVisitor()
+
+        relink(nil)
+        relink("")
+
+        XCTAssertEqual(api.linkParams.count, 0)
+        XCTAssertEqual(api.resolveParams.count, 0)
+    }
+
+    func testRelinkWithoutConsentIsNotRecordedSoTheConsentChangeThatFollowsLinks() {
+        env.warmVisitor()
+        host.cdpConsent = false
+        relink("user-1")
+        XCTAssertEqual(api.linkParams.count, 0)
+
+        host.cdpConsent = true
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 1)
+    }
+
+    func testRelinkIsSkippedWhileTheCdpIsDisabledAndRunsOnceItIsEnabled() {
+        env.warmVisitor()
+        host.cdpEnabled = false
+        relink("user-1")
+        XCTAssertEqual(api.linkParams.count, 0)
+
+        host.cdpEnabled = true
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 1)
+    }
+
+    func testRelinkRunsAgainAfterAResetOnTheNewVisitorsMaster() {
+        env.warmVisitor()
+        relink("user-1")
+
+        manager.clearIdentity()
+        api.resolveResponses = [identity(UUID_B)]
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.map { $0.masterId }, [UUID_A, UUID_B])
+    }
+
+    func testSetSiteUserIdAlwaysLinksAndTheRelinkThatFollowsInTheSameSessionIsSkipped() {
+        env.warmVisitor()
+
+        setSiteUserId("user-1")
+        setSiteUserId("user-1")
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.count, 2)
+    }
+
+    func testSetSiteUserIdWithoutConsentIsLinkedByTheRelinkOnceConsentArrives() {
+        env.warmVisitor()
+        host.cdpConsent = false
+        setSiteUserId("user-1")
+        XCTAssertEqual(api.linkParams.count, 0)
+
+        host.cdpConsent = true
+        relink("user-1")
+
+        XCTAssertEqual(api.linkParams.map { $0.idValue }, ["user-1"])
+    }
+
     // MARK: - identityFresh
 
     func testIdentityFreshStartsFalse() {

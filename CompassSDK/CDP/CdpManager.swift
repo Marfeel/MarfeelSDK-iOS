@@ -97,6 +97,16 @@ internal final class CdpManager {
     private var identityResolved = false
     private var oneShotCallback: (() -> Void)?
 
+    /// A site user id link is repeated when the session, the reset generation or the id changes.
+    private struct SiteUserIdLink: Equatable {
+        let sessionId: String
+        let generation: Int
+        let userId: String
+    }
+    /// The last site user id link started, so `relinkSiteUserId` links once per session.
+    /// MUST be touched on `queue`.
+    private var siteUserIdLink: SiteUserIdLink?
+
     /// Server Segments for the current master: `server − owned`. MUST be touched on `queue`.
     private var serverSegmentsLocked: [String] = []
     /// Server Properties for the current master, values always strings. MUST be touched on `queue`.
@@ -289,6 +299,36 @@ internal final class CdpManager {
                     completion?()
                 }
             }
+        }
+    }
+
+    /// `setSiteUserId`: always links, so the host can repeat the call to retry.
+    func linkSiteUserId(_ userId: String) {
+        guard recordSiteUserIdLink(userId, onlyIfNew: false) else { return }
+        linkIdentity(type: CdpIdentityTypes.registeredUserId, value: userId, isDeterministic: true)
+    }
+
+    /// Links the site user id again, at most once per session (and per process, the memo
+    /// is in memory). `setSiteUserId` alone leaves a reader anonymous when it was called
+    /// before the CDP was enabled, when consent was missing, or when that one request
+    /// failed. Matches the web, which links the stored id at each new visit and when
+    /// personalization consent arrives.
+    ///
+    /// A call without consent is not recorded, so the consent change that follows links.
+    func relinkSiteUserId(_ userId: String?) {
+        guard let userId = userId, recordSiteUserIdLink(userId, onlyIfNew: true) else { return }
+        linkIdentity(type: CdpIdentityTypes.registeredUserId, value: userId, isDeterministic: true)
+    }
+
+    /// False when there is nothing to link, or when `onlyIfNew` and this link already ran.
+    private func recordSiteUserIdLink(_ userId: String, onlyIfNew: Bool) -> Bool {
+        guard !userId.isEmpty, hasConsent() else { return false }
+        let session = host.cdpSessionId
+        return onQueue {
+            let link = SiteUserIdLink(sessionId: session, generation: generation, userId: userId)
+            if onlyIfNew && siteUserIdLink == link { return false }
+            siteUserIdLink = link
+            return true
         }
     }
 
