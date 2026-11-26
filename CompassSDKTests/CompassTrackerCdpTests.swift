@@ -18,6 +18,7 @@ final class CompassTrackerCdpTests: XCTestCase {
     private var suiteName: String!
     private var defaults: UserDefaults!
     private var cdp: CdpTracker!
+    private var lifecycle: MockLifecycleNotifier!
     private var tracker: CompassTracker!
 
     override func setUp() {
@@ -32,10 +33,12 @@ final class CompassTrackerCdpTests: XCTestCase {
         config = TrackingConfig()
         config.override(accountId: 456, pageTechnology: nil, endpoint: nil)
         config.cdpEnabled = true
+        lifecycle = MockLifecycleNotifier()
         tracker = CompassTracker(
             config: config,
             storage: storage,
             tikOperationFactory: MockedOperationProvider(),
+            lifecycleNotifier: lifecycle,
             cdpProvider: { [unowned self] host in
                 let cdp = CdpTracker(api: self.api, defaults: self.defaults, host: host)
                 self.cdp = cdp
@@ -179,6 +182,66 @@ final class CompassTrackerCdpTests: XCTestCase {
         XCTAssertEqual(api.linkParams.count, 1)
     }
 
+    // MARK: - site user id re-link
+
+    func testSetSiteUserIdWhileTheCdpIsDisabledIsLinkedOnTheNextForeground() {
+        config.cdpEnabled = false
+        tracker.setSiteUserId("site-user-1")
+        settle()
+        XCTAssertEqual(api.linkParams.count, 0)
+
+        config.cdpEnabled = true
+        api.resolveResponses = [CdpIdentityResponse(masterId: UUID_A, rfv: nil, cohorts: [], segments: [], properties: [:])]
+        lifecycle.onForeground?()
+        settle()
+
+        XCTAssertEqual(api.linkParams.map { $0.idValue }, ["site-user-1"])
+        XCTAssertEqual(api.linkParams.first?.idType, CdpIdentityTypes.registeredUserId)
+    }
+
+    func testForegroundsInTheSameSessionLinkTheSiteUserIdOnceAndANewSessionLinksAgain() {
+        resolved(masterId: UUID_A)
+        tracker.setSiteUserId("site-user-1")
+        settle()
+        XCTAssertEqual(api.linkParams.count, 1)
+
+        lifecycle.onForeground?()
+        lifecycle.onForeground?()
+        settle()
+        XCTAssertEqual(api.linkParams.count, 1)
+
+        storage.sessionId = "session-2"
+        storage.cdpCacheSessionId = nil
+        api.resolveResponses = [CdpIdentityResponse(masterId: UUID_A, rfv: nil, cohorts: [], segments: [], properties: [:])]
+        lifecycle.onForeground?()
+        settle()
+
+        XCTAssertEqual(api.linkParams.count, 2)
+    }
+
+    func testSetConsentLinksTheSiteUserIdThatWasSetWithoutConsent() {
+        storage.hasConsent = false
+        tracker.setSiteUserId("site-user-1")
+        settle()
+        XCTAssertEqual(api.linkParams.count, 0)
+
+        storage.hasConsent = true // `MockStorage.setConsent` does not store the value
+        api.resolveResponses = [CdpIdentityResponse(masterId: UUID_A, rfv: nil, cohorts: [], segments: [], properties: [:])]
+        tracker.setConsent(true)
+        settle()
+
+        XCTAssertEqual(api.linkParams.map { $0.idValue }, ["site-user-1"])
+    }
+
+    func testAForegroundWithoutASiteUserIdDoesNotLink() {
+        resolved(masterId: UUID_A)
+
+        lifecycle.onForeground?()
+        settle()
+
+        XCTAssertEqual(api.linkParams.count, 0)
+    }
+
     // MARK: - reset (spec A.7)
 
     func testABeaconRightAfterResetUserCarriesTheNewVisitorAndNoCdpFields() {
@@ -235,4 +298,15 @@ final class CompassTrackerCdpTests: XCTestCase {
         wait(for: [first, second], timeout: 2)
         XCTAssertEqual(api.resetSiteIds.count, 1)
     }
+}
+
+/// Captures the foreground callback so a test can fire it.
+private final class MockLifecycleNotifier: AppLifecycleNotifierUseCase {
+    var onForeground: (() -> Void)?
+
+    func listen(onForeground: @escaping () -> Void, onBackground: @escaping () -> Void) {
+        self.onForeground = onForeground
+    }
+
+    func unlisten() {}
 }

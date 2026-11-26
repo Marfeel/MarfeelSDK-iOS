@@ -292,7 +292,13 @@ internal final class CdpTracker: CdpTracking {
     }
 
     func onSiteUserId(_ userId: String) {
-        manager.linkIdentity(type: CdpIdentityTypes.registeredUserId, value: userId, isDeterministic: true)
+        manager.linkSiteUserId(userId)
+    }
+
+    /// Link the site user id again: called when the CDP starts, on each foreground and on
+    /// a consent change. The manager links at most once per session.
+    func relinkSiteUserId(_ userId: String?) {
+        manager.relinkSiteUserId(userId)
     }
 
     /// Push the device-owned user vars to the CDP profile, debounced so a burst of
